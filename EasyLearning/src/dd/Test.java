@@ -7,8 +7,7 @@ public class Test
 
 	public static void main(String[] args) throws IOException
 	{
-		// TODO Auto-generated method stub
-		CSVReader c = new CSVReader();
+		CSVReader c = new CSVReader("C:\\Users\\Alpha0\\git\\EasyLearning\\EasyLearning\\bin\\dd\\CSV\\deutsch-englisch.csv");
 	}
 
 }
