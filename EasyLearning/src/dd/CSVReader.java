@@ -21,17 +21,19 @@ public class CSVReader
 	private static final String CSV_UNTERVERZEICHNIS = "\\dd\\CSV\\";
 	private static final String STANDARD_PFAD = System.getProperty("java.class.path") + CSV_UNTERVERZEICHNIS;
 
+	
 	public CSVReader(String pfad) throws IOException
 	{
 		initialisieren(pfad);
 	}
 
+	
 	private void initialisieren(String pfad) throws IOException
 	{
 		fileReader = new FileReader(pfad);
 		bufferedReader = new BufferedReader(fileReader);
-		getKartei();
 	}
+
 	
 	public ArrayList<String> getKartei()
 	{
@@ -41,34 +43,33 @@ public class CSVReader
 			String zeile = bufferedReader.readLine();
 			if (bufferedReader.ready())
 			{
-
 				if (zeile != null)
 				{
 					karteiArray = zeile.split(";");
 					bufferedReader.close();
 					fileReader.close();
 					ArrayList<String> kartei = new ArrayList<>();
-					for (int i=0; i<karteiArray.length; i++)
-				    {kartei.add(karteiArray[i]);}
+					
+					for (int i = 0; i < karteiArray.length; i++)
+					{
+						kartei.add(karteiArray[i]);
+					}
 
 					return kartei;
 				}
 			}
-			
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
-
 	
+
 	public ArrayList<String[]> getKartenListe()
 	{
 		ArrayList<String[]> kartenListe = new ArrayList<>();
-		
 		try
 		{
 			bufferedReader.readLine(); // überspringt die erste Zeile (Kartei)
@@ -86,7 +87,6 @@ public class CSVReader
 					return kartenListe;
 				}
 			}
-
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -99,7 +99,6 @@ public class CSVReader
 	public static ArrayList<String> getExistierendeKarteien()
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-
 		File[] dateien = new File(STANDARD_PFAD).listFiles();
 
 		for (File datei : dateien)
@@ -109,6 +108,7 @@ public class CSVReader
 				interneKarteien.add(datei.getAbsolutePath());
 			}
 		}
+		
 		return interneKarteien;
 	}
 
