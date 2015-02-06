@@ -112,4 +112,79 @@ public class CSVReader
 		return interneKarteien;
 	}
 
+
+	/**
+	 * @return the csvUnterverzeichnis
+	 */
+	public static String getCsvUnterverzeichnis()
+	{
+		return CSV_UNTERVERZEICHNIS;
+	}
+
+
+	/**
+	 * @return the standardPfad
+	 */
+	public static String getStandardPfad()
+	{
+		return STANDARD_PFAD;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "CSVReader [fileReader=" + fileReader + ", bufferedReader="
+				+ bufferedReader + "]";
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bufferedReader == null) ? 0 : bufferedReader.hashCode());
+		result = prime * result
+				+ ((fileReader == null) ? 0 : fileReader.hashCode());
+		return result;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CSVReader other = (CSVReader) obj;
+		if (bufferedReader == null)
+		{
+			if (other.bufferedReader != null)
+				return false;
+		} else if (!bufferedReader.equals(other.bufferedReader))
+			return false;
+		if (fileReader == null)
+		{
+			if (other.fileReader != null)
+				return false;
+		} else if (!fileReader.equals(other.fileReader))
+			return false;
+		return true;
+	}
+	
+	
 }
