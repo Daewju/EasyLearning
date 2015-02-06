@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Damjan Djuranovic
@@ -18,24 +17,26 @@ public class CSVReader
 {
 	private FileReader fileReader;
 	private BufferedReader bufferedReader;
-	private static final String CSV_UNTERVERZEICHNIS = "\\dd\\CSV\\";
-	private static final String STANDARD_PFAD = System.getProperty("java.class.path") + CSV_UNTERVERZEICHNIS;
 
-	
 	public CSVReader(String pfad) throws IOException
 	{
 		initialisieren(pfad);
 	}
 
 	
-	private void initialisieren(String pfad) throws IOException
+	public boolean initialisieren(String pfad) throws IOException
 	{
-		fileReader = new FileReader(pfad);
-		bufferedReader = new BufferedReader(fileReader);
+		if(pfad != null)
+		{
+			fileReader = new FileReader(pfad);
+			bufferedReader = new BufferedReader(fileReader);
+			return true;
+		}
+			return false;
 	}
 
 	
-	public ArrayList<String> getKartei()
+	public ArrayList<String> readKartei()
 	{
 		String karteiArray[] = new String[0];
 		try
@@ -46,8 +47,7 @@ public class CSVReader
 				if (zeile != null)
 				{
 					karteiArray = zeile.split(";");
-					bufferedReader.close();
-					fileReader.close();
+
 					ArrayList<String> kartei = new ArrayList<>();
 					
 					for (int i = 0; i < karteiArray.length; i++)
@@ -67,12 +67,11 @@ public class CSVReader
 	}
 	
 
-	public ArrayList<String[]> getKartenListe()
+	public ArrayList<String[]> readKartenListe()
 	{
 		ArrayList<String[]> kartenListe = new ArrayList<>();
 		try
 		{
-			bufferedReader.readLine(); // überspringt die erste Zeile (Kartei)
 			while (bufferedReader.ready())
 			{
 				String zeile = bufferedReader.readLine();
@@ -80,13 +79,9 @@ public class CSVReader
 				{
 					String karte[] = zeile.split(";");
 					kartenListe.add(karte);
-				} else
-				{
-					bufferedReader.close();
-					fileReader.close();
-					return kartenListe;
 				}
 			}
+			return kartenListe;
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -96,10 +91,10 @@ public class CSVReader
 	}
 
 	
-	public static ArrayList<String> getExistierendeKarteien()
+	public static ArrayList<String> readExistierendeKarteien()
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(STANDARD_PFAD).listFiles();
+		File[] dateien = new File(getStandardPfad()).listFiles();
 
 		for (File datei : dateien)
 		{
@@ -111,79 +106,21 @@ public class CSVReader
 		
 		return interneKarteien;
 	}
-
-
-	/**
-	 * @return the csvUnterverzeichnis
-	 */
-	public static String getCsvUnterverzeichnis()
-	{
-		return CSV_UNTERVERZEICHNIS;
-	}
-
-
-	/**
-	 * @return the standardPfad
-	 */
+	
 	public static String getStandardPfad()
 	{
-		return STANDARD_PFAD;
+		File f = new File(System.getProperty("java.class.path"));
+		File dir = f.getAbsoluteFile().getParentFile();
+		String path = dir.toString();
+		return path;
 	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
+	
+	public void closeStream() throws IOException
 	{
-		return "CSVReader [fileReader=" + fileReader + ", bufferedReader="
-				+ bufferedReader + "]";
-	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((bufferedReader == null) ? 0 : bufferedReader.hashCode());
-		result = prime * result
-				+ ((fileReader == null) ? 0 : fileReader.hashCode());
-		return result;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CSVReader other = (CSVReader) obj;
-		if (bufferedReader == null)
+		if(this.fileReader != null)
 		{
-			if (other.bufferedReader != null)
-				return false;
-		} else if (!bufferedReader.equals(other.bufferedReader))
-			return false;
-		if (fileReader == null)
-		{
-			if (other.fileReader != null)
-				return false;
-		} else if (!fileReader.equals(other.fileReader))
-			return false;
-		return true;
+			this.fileReader.close();
+		}
 	}
 	
 	
