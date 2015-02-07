@@ -21,15 +21,17 @@ public class FileHandler
 {
 	private CSVReader cr;
 	private CSVWriter cw;
+	private String pfad;
 
 	public FileHandler(String pfad) throws IOException
 	{
-		cr = new CSVReader(pfad);
-		cw = new CSVWriter(pfad);
+		this.pfad = pfad;
+
 	}
 
-	public Kartei readKarteiFromFile() throws ParseException
+	public Kartei readKarteiFromFile() throws ParseException, IOException
 	{
+		cr = new CSVReader(pfad);
 		ArrayList<String> csvKartei = cr.readKartei();
 		Kartei kartei;
 		Iterator it = csvKartei.iterator();
@@ -52,10 +54,17 @@ public class FileHandler
 
 			Karte fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB,
 					fach, erstellt, bearbeitet);
-			
+
 			kartei.addKarte(fertigeKarte, fach);
 		}
+		cr.closeStream();
 		return kartei;
 	}
 
+	public boolean writeKarteiFromFile() throws ParseException, IOException
+	{
+		cw = new CSVWriter(pfad);
+		
+		return false;
+	}
 }
