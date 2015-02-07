@@ -4,7 +4,6 @@
 package dd;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,11 +35,10 @@ public class CSVReader
 	}
 
 	
-	public ArrayList<String> readKartei()
+	public ArrayList<String> readKartei() throws IOException
 	{
 		String karteiArray[] = new String[0];
-		try
-		{
+	
 			String zeile = bufferedReader.readLine();
 			if (bufferedReader.ready())
 			{
@@ -58,20 +56,14 @@ public class CSVReader
 					return kartei;
 				}
 			}
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return null;
 	}
 	
 
-	public ArrayList<String[]> readKartenListe()
+	public ArrayList<String[]> readKartenListe() throws IOException
 	{
 		ArrayList<String[]> kartenListe = new ArrayList<>();
-		try
-		{
+
 			while (bufferedReader.ready())
 			{
 				String zeile = bufferedReader.readLine();
@@ -82,38 +74,8 @@ public class CSVReader
 				}
 			}
 			return kartenListe;
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 
-	
-	public static ArrayList<String> readExistierendeKarteien()
-	{
-		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(getStandardPfad()).listFiles();
-
-		for (File datei : dateien)
-		{
-			if (datei.isFile() && datei.getName().contains(".csv"))
-			{
-				interneKarteien.add(datei.getAbsolutePath());
-			}
-		}
-		
-		return interneKarteien;
-	}
-	
-	public static String getStandardPfad()
-	{
-		File f = new File(System.getProperty("java.class.path"));
-		File dir = f.getAbsoluteFile().getParentFile();
-		String path = dir.toString();
-		return path;
-	}
 	
 	public void closeStream() throws IOException
 	{

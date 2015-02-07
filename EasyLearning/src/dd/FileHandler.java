@@ -3,6 +3,7 @@
  */
 package dd;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +16,7 @@ import mk.Karte;
 import mk.Kartei;
 
 /**
- * @author Alpha0
+ * @author Damjan Djuranovic
  *
  */
 public class FileHandler
@@ -38,7 +39,7 @@ public class FileHandler
 		cr = new CSVReader(pfad);
 		ArrayList<String> csvKartei = cr.readKartei();
 		Kartei kartei;
-		Iterator it = csvKartei.iterator();
+		Iterator<String> it = csvKartei.iterator();
 		kartei = new Kartei((String) it.next(), (String) it.next());
 		ArrayList<String[]> karten = cr.readKartenListe();
 
@@ -46,22 +47,31 @@ public class FileHandler
 		{
 			String wort = karte[0];
 			String vokabel = karte[1];
-			int aufrufe = Integer.parseInt(karte[2]);
-			int richtigB = Integer.parseInt(karte[3]);
-			int fach = Integer.parseInt(karte[4]);
-			Date erstellt = datumFormat.parse(karte[5]);
-			Date bearbeitet = datumFormat.parse(karte[6]);
+			int aufrufe;
+			int richtigB;
+			int fach;
+			Date erstellt;
+			Date bearbeitet;
 
-			Karte fertigeKarte;
 			if (fortschritt)
 			{
-				fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB,
-						fach, erstellt, bearbeitet);
+				aufrufe = Integer.parseInt(karte[2]);
+				richtigB = Integer.parseInt(karte[3]);
+				fach = Integer.parseInt(karte[4]);
+				erstellt = datumFormat.parse(karte[5]);
+				bearbeitet = datumFormat.parse(karte[6]);
 			} else
 			{
-
-				fertigeKarte = new Karte(wort, vokabel, 0, 0, 0, zeit, zeit);
+				aufrufe = 0;
+				richtigB = 0;
+				fach = 1;
+				erstellt = zeit;
+				bearbeitet = zeit;
 			}
+			Karte fertigeKarte;
+
+			fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB, fach,
+					erstellt, bearbeitet);
 
 			kartei.addKarte(fertigeKarte, fach);
 		}
@@ -93,7 +103,7 @@ public class FileHandler
 				String[] karteS = new String[7];
 				karteS[0] = k.getWort();
 				karteS[1] = k.getVokabel();
-				
+
 				if (fortschritt)
 				{
 					karteS[2] = Integer.toString(k.getAufrufe());
@@ -107,58 +117,41 @@ public class FileHandler
 				{
 					karteS[2] = "0";
 					karteS[3] = "0";
-					karteS[4] = "0";
+					karteS[4] = "1";
 					karteS[5] = datumFormat.format(zeit);
 					karteS[6] = datumFormat.format(zeit);
 				}
-				
+
 				karten.add(karteS);
 			}
 		}
+			
 		cw.writeKartenListe(karten);
 		cw.closeStream();
 	}
-
-	/**
-	 * @return the cr
-	 */
-	public CSVReader getCr()
+	
+	public static ArrayList<String> readExistierendeKarteien()
 	{
-		return cr;
+		ArrayList<String> interneKarteien = new ArrayList<String>();
+		File[] dateien = new File(getStandardPfad()).listFiles();
+
+		for (File datei : dateien)
+		{
+			if (datei.isFile() && datei.getName().contains(".csv"))
+			{
+				interneKarteien.add(datei.getAbsolutePath());
+			}
+		}
+		
+		return interneKarteien;
 	}
-
-	/**
-	 * @param cr
-	 *            the cr to set
-	 */
-	public void setCr(CSVReader cr)
+	
+	public static String getStandardPfad()
 	{
-		this.cr = cr;
-	}
-
-	/**
-	 * @return the cw
-	 */
-	public CSVWriter getCw()
-	{
-		return cw;
-	}
-
-	/**
-	 * @param cw
-	 *            the cw to set
-	 */
-	public void setCw(CSVWriter cw)
-	{
-		this.cw = cw;
-	}
-
-	/**
-	 * @return the pfad
-	 */
-	public String getPfad()
-	{
-		return pfad;
+		File f = new File(System.getProperty("java.class.path"));
+		File dir = f.getAbsoluteFile().getParentFile();
+		String path = dir.toString();
+		return path;
 	}
 
 	/**

@@ -21,7 +21,6 @@ public class CSVWriter
 	public CSVWriter(String pfad) throws IOException
 	{
 		initialisieren(pfad);
-		System.out.println(getStandardPfad());
 	}
 
 	private boolean initialisieren(String pfad) throws IOException
@@ -35,7 +34,7 @@ public class CSVWriter
 		return false;
 	}
 
-	public void writeKartei(ArrayList<String> kartei)
+	public void writeKartei(ArrayList<String> kartei) throws IOException
 	{
 		if (kartei != null)
 		{
@@ -45,20 +44,14 @@ public class CSVWriter
 				zeile += feld + ";";
 			}
 
-			try
-			{
 				bufferedWriter.write(zeile);
 				bufferedWriter.newLine();
 				bufferedWriter.flush();
-			} catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 	}
 
-	public void writeKartenListe(ArrayList<String[]> kartenListe)
+	public void writeKartenListe(ArrayList<String[]> kartenListe) throws IOException
 	{
 		if (kartenListe != null)
 		{
@@ -69,22 +62,13 @@ public class CSVWriter
 				{
 					zeile += karte[i] + ";";
 				}
-				try
-				{
-					bufferedWriter.write(zeile);
-					bufferedWriter.newLine();
-					bufferedWriter.flush();
-				} catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				bufferedWriter.write(zeile);
+				bufferedWriter.newLine();
+				bufferedWriter.flush();
 			}
-
 		}
 	}
-	
+
 	public static String getStandardPfad()
 	{
 		File f = new File(System.getProperty("java.class.path"));
