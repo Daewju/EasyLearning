@@ -24,7 +24,7 @@ public class CSVWriter
 		System.out.println(getStandardPfad());
 	}
 
-	public boolean initialisieren(String pfad) throws IOException
+	private boolean initialisieren(String pfad) throws IOException
 	{
 		if (pfad != null)
 		{

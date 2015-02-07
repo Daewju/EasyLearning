@@ -21,7 +21,7 @@ public class Test
 		
 		// Beispiel zum eine Kartei aus einer Datei zu lesen
 		FileHandler fh = new FileHandler ("C:\\Users\\Alpha0\\Desktop" + "\\testWrite.csv");
-		Kartei kartei = fh.readKarteiFromFile();
+		Kartei kartei = fh.readKarteiFromFile(true);
 	}
 
 }

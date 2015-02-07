@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 import mk.Karte;
 import mk.Kartei;
@@ -26,10 +27,10 @@ public class FileHandler
 	public FileHandler(String pfad) throws IOException
 	{
 		this.pfad = pfad;
-
 	}
+	
 
-	public Kartei readKarteiFromFile() throws ParseException, IOException
+	public Kartei readKarteiFromFile(boolean fortschritt) throws ParseException, IOException
 	{
 		cr = new CSVReader(pfad);
 		ArrayList<String> csvKartei = cr.readKartei();
@@ -45,26 +46,90 @@ public class FileHandler
 			int aufrufe = Integer.parseInt(karte[2]);
 			int richtigB = Integer.parseInt(karte[3]);
 			int fach = Integer.parseInt(karte[4]);
-			SimpleDateFormat erstelltSDF = new SimpleDateFormat(
-					"dd.MM.yyyy HH:mm:ss");
-			SimpleDateFormat bearbeitetSDF = new SimpleDateFormat(
-					"dd.MM.yyyy HH:mm:ss");
-			Date erstellt = erstelltSDF.parse(karte[5]);
-			Date bearbeitet = bearbeitetSDF.parse(karte[6]);
-
-			Karte fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB,
+			SimpleDateFormat datumFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);
+			Date erstellt = datumFormat.parse(karte[5]);
+			Date bearbeitet = datumFormat.parse(karte[6]);
+			
+			Karte fertigeKarte;	
+			if(fortschritt)
+			{
+			fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB,
 					fach, erstellt, bearbeitet);
+			}
+			else
+			{
+				Date zeit = new Date();
+				fertigeKarte = new Karte(wort, vokabel, 0, 0,
+						0, zeit, zeit);
+			}
 
 			kartei.addKarte(fertigeKarte, fach);
 		}
 		cr.closeStream();
 		return kartei;
 	}
+	
 
-	public boolean writeKarteiFromFile() throws ParseException, IOException
+	public boolean writeKarteiToFile(Kartei kartei) throws ParseException, IOException
 	{
 		cw = new CSVWriter(pfad);
 		
 		return false;
 	}
+
+
+	/**
+	 * @return the cr
+	 */
+	public CSVReader getCr()
+	{
+		return cr;
+	}
+
+
+	/**
+	 * @param cr the cr to set
+	 */
+	public void setCr(CSVReader cr)
+	{
+		this.cr = cr;
+	}
+
+
+	/**
+	 * @return the cw
+	 */
+	public CSVWriter getCw()
+	{
+		return cw;
+	}
+
+
+	/**
+	 * @param cw the cw to set
+	 */
+	public void setCw(CSVWriter cw)
+	{
+		this.cw = cw;
+	}
+
+
+	/**
+	 * @return the pfad
+	 */
+	public String getPfad()
+	{
+		return pfad;
+	}
+
+
+	/**
+	 * @param pfad the pfad to set
+	 */
+	public void setPfad(String pfad)
+	{
+		this.pfad = pfad;
+	}
+	
+	
 }
