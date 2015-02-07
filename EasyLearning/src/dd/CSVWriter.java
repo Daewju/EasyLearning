@@ -23,7 +23,7 @@ public class CSVWriter
 		initialisieren(pfad);
 	}
 
-	private boolean initialisieren(String pfad) throws IOException
+	public boolean initialisieren(String pfad) throws IOException
 	{
 		if (pfad != null)
 		{

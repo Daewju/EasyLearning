@@ -20,7 +20,7 @@ public class Test
 	//	cw.closeStream();
 		
 		// Beispiel um eine Kartei aus einer Datei zu lesen
-		FileHandler fh = new FileHandler ("C:\\Users\\Alpha0\\Desktop" + "\\neuuuuuuuuu.csv");
+		FileHandler fh = new FileHandler ("C:\\Users\\Alpha0\\Desktop" + "\\neuuuuuuuuu.cs");
 		Kartei kartei = fh.readKarteiFromFile(true);
 		fh.setPfad("C:\\Users\\Alpha0\\Desktop" + "\\testWrite.csv");
 		fh.writeKarteiToFile(kartei, true);
