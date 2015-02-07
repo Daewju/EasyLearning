@@ -1,13 +1,3 @@
-/**
- * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse FileHandler.java
- * benutzt diese Klasse, dies vereinfacht die Handhabung ungemein.
- * 
- * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
- * und generiert daraus eine ArrayList<String> für die Kartei und ArrayList<String[]>
- * für die Karten. Alle möglichen Exceptionbehandlungen werden an den Benutzer diser
- * Klasse weitergereicht. Für dieses Projekt ist der GUI-Entwickler zuständig diese 
- * zu behandeln und dem Benutzer zu visualisieren.
- */
 package dd;
 
 import java.io.BufferedReader;
@@ -16,6 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse
+ * FileHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
+ * ungemein.
+ * 
+ * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
+ * und generiert daraus eine ArrayList für die Kartei und ArrayList für die
+ * Karten. Alle möglichen Exceptionbehandlungen werden an den Benutzer diser
+ * Klasse weitergereicht. Für dieses Projekt ist der GUI-Entwickler zuständig
+ * diese zu behandeln und dem Benutzer zu visualisieren.
+ * 
  * @author Damjan Djuranovic
  * @version 1.0
  */
@@ -38,10 +38,15 @@ public class CSVReader
 	}
 
 	/**
-	 * Diese Methode wird nur vom Konstruktor verwendet.
+	 * Diese Methode wird nur vom Konstrutkor verwendet. Sie initialisiert die
+	 * Datenfelder und schmeisst eine Exception falls der Pfad nicht korrekt
+	 * formatiert ist.
 	 * 
 	 * @param pfad
-	 *            Siehe Konstruktor.
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
+	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
+	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
+	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 * @throws IOException
 	 */
 	private void initialisieren(String pfad) throws IOException
@@ -63,13 +68,13 @@ public class CSVReader
 	/**
 	 * Die Methode liest aus einer CSV die Kartei-Informationen.
 	 * 
-	 * @return Rückgabetyp ist eine ArrayLists<String>. Sollte die Datei nicht
-	 *         gelesen werden können, wird NULL zurückgegeben. Die
-	 *         ArrayList<String> enthält die beiden Datenfelder der Klasse
-	 *         Kartei als String. Sprache1 und Sprache2.
+	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht gelesen
+	 *         werden können, wird NULL zurückgegeben. Die ArrayList enthält die
+	 *         beiden Datenfelder der Klasse Kartei als String. Sprache1 und
+	 *         Sprache2.
 	 * @throws IOException
 	 */
-	public ArrayList<String> readKartei() throws IOException
+	public ArrayList<String> leseKartei() throws IOException
 	{
 		String karteiArray[] = new String[0];
 		String zeile = bufferedReader.readLine();
@@ -94,14 +99,14 @@ public class CSVReader
 	/**
 	 * Die Methode liest aus einer CSV die Karten-Informationen
 	 * 
-	 * @return Rückgabetyp ist eine ArrayList<String[]>. Sollte die Datei nicht
-	 *         glesen werden können, wird NULL zurückgeben. Die
-	 *         ArrayList<String[]> enthält die Karten, welche wiederum die
-	 *         Informationen in einem Array enhält. (Wort, Vokabel, Aufrufe,
-	 *         RichtigB, Fach, Erstetllt, Bearbeitet)
+	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht glesen
+	 *         werden können, wird NULL zurückgeben. Die ArrayList enthält die
+	 *         Karten, welche wiederum die Informationen in einem Array enhält.
+	 *         Die Reihenfolge ist folgende: Wort, Vokabel, Aufrufe, RichtigB,
+	 *         Fach, Erstetllt, Bearbeitet.
 	 * @throws IOException
 	 */
-	public ArrayList<String[]> readKartenListe() throws IOException
+	public ArrayList<String[]> leseKarten() throws IOException
 	{
 		ArrayList<String[]> kartenListe = new ArrayList<>();
 		if (bufferedReader.ready())
@@ -125,10 +130,9 @@ public class CSVReader
 	 * abgeschlossener Arbeit an den Dateien, muss der Stream zwingend
 	 * geschlossen werden.
 	 * 
-	 * @title dlfdl
 	 * @throws IOException
 	 */
-	public void closeStream() throws IOException
+	public void schliesseStream() throws IOException
 	{
 		if (this.fileReader != null)
 		{
