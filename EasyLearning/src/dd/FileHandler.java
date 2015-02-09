@@ -35,6 +35,9 @@ public class FileHandler
 	Date zeit = new Date();
 
 	/**
+	 * Dieser Konstruktor kann benutzt werden, wenn die Datei ausserhalb des
+	 * Standardpfades liegt oder liegen soll, z.B. beim Import oder Export.
+	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
@@ -44,7 +47,32 @@ public class FileHandler
 	 */
 	public FileHandler(String pfad) throws IOException
 	{
-		this.pfad = pfad;
+		if (pfad.equals(".pdf") && pfad.equals("\\"))
+		{
+			this.pfad = pfad;
+		} else
+		{
+
+			throw new IllegalArgumentException(
+					"Pfad entspricht nicht den Kriterien. Siehe Javadoc!");
+		}
+	}
+
+	/**
+	 * Dieser Konstruktor kann benutzt werden, wenn die Datei am Standardpfad
+	 * liegt oder liegen soll.
+	 * 
+	 * @param kartei
+	 *            Erwartet wird eine Kartei. Mit Hilfe der darin befindlichen
+	 *            Datenfelder Sprache und Fremdsprache wird der Pfad automatisch
+	 *            generiert.
+	 */
+	public FileHandler(Kartei kartei)
+	{
+		if (kartei != null)
+		{
+			this.pfad = getStandardPfad() + "\\" + kartei.getName() + ".csv";
+		}
 	}
 
 	/**
@@ -124,7 +152,7 @@ public class FileHandler
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public void schreibeKarteiVonDatei(Kartei kartei, boolean fortschritt)
+	public void schreibeDateiVonKartei(Kartei kartei, boolean fortschritt)
 			throws ParseException, IOException
 	{
 		cw = new CSVWriter(pfad);
