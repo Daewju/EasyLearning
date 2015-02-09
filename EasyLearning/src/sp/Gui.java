@@ -13,28 +13,31 @@ import javax.swing.JOptionPane;
 
 public class Gui extends JFrame
 {
+	private int sprachcode = 0; //nur zu Testzwecken!!
+	private Sprache sprache;
 
 	public Gui()
 	{
+		sprache = new Sprache();
 		setLayout(null); // LayoutManager verwenden
 		setVisible(true);
 		setSize(800, 600);
 		setTitle("EasyLearning");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuezeileErzeugen(this);
+		menuezeileErzeugen(this, sprachcode);
 		repaint();
-		bestaetigungsDialog(this, "Irgndetwas hat einen Fehler!");
+		
 	}
 
-	public void menuezeileErzeugen(JFrame gui)
+	public void menuezeileErzeugen(JFrame gui, int sprachcode)
 	{
 		JMenuBar menuezeile = new JMenuBar();
 		gui.setJMenuBar(menuezeile);
 
-		JMenu dateiMenue = new JMenu("Datei");
+		JMenu dateiMenue = new JMenu(Sprache.neu[sprachcode]);
 		menuezeile.add(dateiMenue);
 
-		JMenuItem neueKarteiEintrag = new JMenuItem("Neu");
+		JMenuItem neueKarteiEintrag = new JMenuItem(Sprache.neu[sprachcode]);
 		neueKarteiEintrag.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -75,31 +78,35 @@ public class Gui extends JFrame
 		dateiMenue.add(beendenEintrag);
 	}
 	
-	public void warnungsDialog(Gui gui, String text)
+	
+	
+	public void warnungsDialog(Gui gui, String titel, String text)
 	{
 		JOptionPane.showMessageDialog(gui,
 			    text,
-			    "Warnung",
+			    titel,
 			    JOptionPane.WARNING_MESSAGE);
 	}
 	
-	public void fehlerDialog(Gui gui, String text)
+	public void fehlerDialog(Gui gui, String titel, String text)
 	{
 		JOptionPane.showMessageDialog(gui,
 			    text,
-			    "Fehler",
+			    titel,
 			    JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void eingabeDialog(Gui gui, String text)
+	public void eingabeDialog(Gui gui, String titel, String text)
 	{
 		JOptionPane.showInputDialog(gui,
 			    text,
-			    "Fehler",
-			    JOptionPane.ERROR_MESSAGE);
+			    titel,
+			    JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 
+	
+	
 	public static void main(String[] args)
 	{
 		JFrame gui = new Gui();
