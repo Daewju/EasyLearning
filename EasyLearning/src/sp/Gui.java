@@ -23,6 +23,7 @@ public class Gui extends JFrame{
 	
 	}
 	
+	
 	public void menuezeileErzeugen(JFrame gui){
 		
 		JMenuBar menuezeile = new JMenuBar();
