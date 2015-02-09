@@ -2,7 +2,7 @@
  * 
  */
 package mk;
-import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -43,80 +43,45 @@ public class Kartei {
 	 * addKarte erwartet ein Objekt der Klasse Karte und einen Int Wert welcher für das Fach
 	 * steht indem das Kartenobjket eingefügt werden soll.
 	 * @return	boolean (true = erfolgreich /false = fehlgeschlagen)
-	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 * 
 	 */
-	public boolean addKarte(Karte karte, int fach) throws IOException{
+	public boolean addKarte(Karte karte, int fach) throws IllegalArgumentException{
 		Iterator<Karte> it;
-		Karte k;
 		
 		if(karte!=null && fach >=1 && fach <=6)
 		{
 			switch(fach) {
 			case 1:	it  = fach1.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
-							return fach1.add(karte);
-						}
+					if(existKarte(it, karte)){
+						return fach1.add(karte);
 					}
-				
+					break;
 			case 2: it  = fach2.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
-							return fach2.add(karte);
-						}
+					if(existKarte(it, karte)){
+						return fach2.add(karte);
 					}
-					
+					break;
 			case 3: it  = fach3.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
-							return fach3.add(karte);
-						}
+					if(existKarte(it, karte)){
+						return fach3.add(karte);
 					}
-			
+					break;
 			case 4: it  = fach4.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
-							return fach4.add(karte);
-						}
+					if(existKarte(it, karte)){
+						return fach4.add(karte);
 					}
-					
+					break;
 			case 5: it  = fach5.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
-							return fach5.add(karte);
-						}
+					if(existKarte(it, karte)){
+						return fach5.add(karte);
 					}
-					
+					break;
 			case 6: it  = fach6.iterator();
-					while(it.hasNext()){
-						k = it.next();
-						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-							throw new IllegalArgumentException("Diese Karte existiert bereits");
-						}
-						else{
+					if(existKarte(it, karte)){
 							return fach6.add(karte);
-						}
 					}
+					break;
 			}
 			
 		}
@@ -124,7 +89,15 @@ public class Kartei {
 		return false;
 	}
 	
-	
+	/**
+	 * 
+	 * @param karte
+	 * @param fach
+	 * removeKarte erwartet ein Objekt der Klasse Karte und einen Int Wert welcher für das Fach
+	 * steht indem das Kartenobjket existiert. Diese Karte wird anschliessend entfernt.
+	 * @return	boolean (true = erfolgreich /false = fehlgeschlagen)
+	 * 
+	 */
 	public boolean removeKarte(Karte karte, int fach){
 		ArrayList<Karte> f = new ArrayList<Karte>();
 			
@@ -155,6 +128,30 @@ public class Kartei {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param it
+	 * @param karte
+	 * existKarte überprüft anhand eines Iterators (it) einer ArrayList ob bereits eine Karte mit demselben Wortpaar,
+	 * wie diejenige welche als Parameter übergebenwurde, existiert. Falls schon wird eine IllegalArgumentException
+	 * geworfen. Sollte dies nicht der fall sein, wird true zurückgeliefert.
+	 * @return	boolean (true = Karte existiert nicht  /false = Karte existiert)
+	 * @throws IllegalArgumentException
+	 * 
+	 */
+	private boolean existKarte(Iterator<Karte> it, Karte karte) throws IllegalArgumentException{
+		Karte k;
+		while(it.hasNext()){
+			k = it.next();
+			if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+				throw new IllegalArgumentException("Diese Karte existiert bereits");
+			}
+			else{
+				return true;
+			}
+		}
+		return false;
+	}
 	
 
 	/**
