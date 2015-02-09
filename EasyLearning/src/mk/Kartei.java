@@ -46,72 +46,116 @@ public class Kartei {
 	 * @throws IOException
 	 */
 	public boolean addKarte(Karte karte, int fach) throws IOException{
-		boolean ret = false;
+		Iterator<Karte> it;
+		Karte k;
+		
 		if(karte!=null && fach >=1 && fach <=6)
 		{
 			switch(fach) {
-			case 1:	fach1.add(karte);
-					ret=true;
-					break;
-			case 2: fach2.add(karte);
-					ret=true;
-					break;
-			case 3: fach3.add(karte);
-					ret=true;
-					break;
-			case 4: fach4.add(karte);
-					ret=true;
-					break;
-			case 5: fach5.add(karte);
-					ret=true;
-					break;
-			case 6: fach6.add(karte);
-					ret=true;
-					break;
-			default:	ret=false;
-						break;
+			case 1:	it  = fach1.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach1.add(karte);
+						}
+					}
+				
+			case 2: it  = fach2.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach2.add(karte);
+						}
+					}
+					
+			case 3: it  = fach3.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach3.add(karte);
+						}
+					}
+			
+			case 4: it  = fach4.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach4.add(karte);
+						}
+					}
+					
+			case 5: it  = fach5.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach5.add(karte);
+						}
+					}
+					
+			case 6: it  = fach6.iterator();
+					while(it.hasNext()){
+						k = it.next();
+						if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+							throw new IllegalArgumentException("Diese Karte existiert bereits");
+						}
+						else{
+							return fach6.add(karte);
+						}
+					}
 			}
 			
 		}
-		else
-		{
-			throw new IllegalArgumentException("Die angegeben Karte oder Fach existiert nicht!");
-		}
-		return ret;
+		
+		return false;
 	}
 	
-	/**
-	*	public boolean removeKarte(Karte karte, int fach){
-	*	ArrayList<Karte> f;
-	*		
-	*		switch(fach) {
-	*		case 1:	f=fach1;
-	*				break;
-	*		case 2: f=fach2;
-	*				break;
-	*		case 3: f=fach3;
-	*				break;
-	*		case 4: f=fach4;
-	*				break;
-	*		case 5: f=fach5;
-	*				break;
-	*		case 6: f=fach6;
-	*				break;
-	*		default:
-	*				break;
-	*		}
-	*		
-	*		Iterator<Karte> it = f.iterator();
-	*		
-	*		boolean running = true;
-	*		while(running){
-	*			if(it.next().equals(karte)){
-	*				it.remove();
-	*			}
-	*		}
-	*	}
-	*
-	*/
+	
+	public boolean removeKarte(Karte karte, int fach){
+		ArrayList<Karte> f = new ArrayList<Karte>();
+			
+		switch(fach) {
+			case 1:	f=fach1;
+					break;
+			case 2: f=fach2;
+					break;
+			case 3: f=fach3;
+					break;
+			case 4: f=fach4;
+					break;
+			case 5: f=fach5;
+					break;
+			case 6: f=fach6;
+					break;
+			}
+			
+		Iterator<Karte> it = f.iterator();
+			
+		while(it.hasNext()){
+			
+			if(it.next().equals(karte)){
+				it.remove();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	
 
 	/**
 	 * @return the sprache
