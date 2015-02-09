@@ -19,8 +19,6 @@ import mk.Kartei;
  * bietet eine statische Methode um vor Erzeugung eines Objektes zu prüfen
  * welche CSV-Dateien bereits vorhanden sind. Alle möglichen
  * Exceptionbehandlungen werden an den Benutzer dieser Klasse weitergereicht.
- * Für dieses Projekt ist der GUI-Entwickler zuständig diese zu behandeln und
- * dem Benutzer zu visualisieren.
  * 
  * @author Damjan Djuranovic
  *
@@ -32,9 +30,11 @@ public class FileHandler
 	private String pfad;
 	SimpleDateFormat datumFormat = new SimpleDateFormat(
 			"EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-	Date zeit = new Date();
 
 	/**
+	 * Dieser Konstruktor kann benutzt werden, wenn die Datei ausserhalb des
+	 * Standardpfades liegt oder liegen soll, z.B. beim Import oder Export.
+	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
@@ -44,7 +44,36 @@ public class FileHandler
 	 */
 	public FileHandler(String pfad) throws IOException
 	{
-		this.pfad = pfad;
+		if (pfad.equals(".pdf") && pfad.equals("\\"))
+		{
+			this.pfad = pfad;
+		} else
+		{
+			throw new IllegalArgumentException(
+					"Pfad entspricht nicht den Kriterien. Siehe Javadoc!");
+		}
+	}
+
+	/**
+	 * Dieser Konstruktor kann benutzt werden, wenn die Datei am Standardpfad
+	 * liegt oder liegen soll.
+	 * 
+	 * @param kartei
+	 *            Erwartet wird eine Kartei. Mit Hilfe der darin befindlichen
+	 *            Datenfelder Sprache und Fremdsprache wird der Pfad automatisch
+	 *            generiert.
+	 */
+	public FileHandler(Kartei kartei)
+	{
+		if (kartei != null)
+		{
+			this.pfad = getStandardPfad() + "\\" + kartei.getName() + ".csv";
+		}
+		else
+		{
+			throw new IllegalArgumentException(
+					"Kartei ist NULL!");
+		}
 	}
 
 	/**
@@ -60,8 +89,8 @@ public class FileHandler
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public Kartei leseKarteiVonDatei(boolean fortschritt)
-			throws ParseException, IOException
+	public Kartei dateiLesen(boolean fortschritt) throws ParseException,
+			IOException
 	{
 		cr = new CSVReader(pfad);
 		ArrayList<String> csvKartei = cr.leseKartei();
@@ -92,6 +121,7 @@ public class FileHandler
 
 			else
 			{
+				Date zeit = new Date();
 				aufrufe = 0;
 				richtigB = 0;
 				fach = 1;
@@ -124,7 +154,7 @@ public class FileHandler
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public void schreibeKarteiVonDatei(Kartei kartei, boolean fortschritt)
+	public void dateiSchreiben(Kartei kartei, boolean fortschritt)
 			throws ParseException, IOException
 	{
 		cw = new CSVWriter(pfad);
@@ -162,6 +192,7 @@ public class FileHandler
 
 				else
 				{
+					Date zeit = new Date();
 					karteS[2] = "0";
 					karteS[3] = "0";
 					karteS[4] = "1";
@@ -185,17 +216,26 @@ public class FileHandler
 	 * ist.
 	 * 
 	 * @return Gibt eine ArrayList mit den Pfaden zurück.
+	 * @param nurKarteiName
+	 *            "False" gibt den kompletten Pfad zurück, "True" dagegen nur
+	 *            den Titel der Kartei, z.b. "deutsch-englisch".
 	 */
-	public static ArrayList<String> leseExistierendeKarteiPfade()
+	public static ArrayList<String> leseExistierendeKarteiPfade(
+			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
 		File[] dateien = new File(getStandardPfad()).listFiles();
 
 		for (File datei : dateien)
 		{
-			if (datei.isFile() && datei.getName().contains(".csv"))
+			if (datei.isFile() && datei.getName().contains(".csv")
+					&& !nurKarteiName)
 			{
 				interneKarteien.add(datei.getAbsolutePath());
+			} else if (datei.isFile() && datei.getName().contains(".csv")
+					&& nurKarteiName)
+			{
+				interneKarteien.add(datei.getName().replaceAll(".csv", ""));
 			}
 		}
 

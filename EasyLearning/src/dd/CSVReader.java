@@ -13,8 +13,7 @@ import java.util.ArrayList;
  * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
  * und generiert daraus eine ArrayList für die Kartei und ArrayList für die
  * Karten. Alle möglichen Exceptionbehandlungen werden an den Benutzer diser
- * Klasse weitergereicht. Für dieses Projekt ist der GUI-Entwickler zuständig
- * diese zu behandeln und dem Benutzer zu visualisieren.
+ * Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
  * @version 1.0
@@ -53,7 +52,6 @@ public class CSVReader
 	{
 		if (pfad != null && pfad.contains(".csv") && pfad.contains("\\"))
 		{
-			System.out.println("Test");
 			fileReader = new FileReader(pfad);
 			bufferedReader = new BufferedReader(fileReader);
 		}
@@ -70,8 +68,8 @@ public class CSVReader
 	 * 
 	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht gelesen
 	 *         werden können, wird NULL zurückgegeben. Die ArrayList enthält die
-	 *         beiden Datenfelder der Klasse Kartei als String. Sprache1 und
-	 *         Sprache2.
+	 *         beiden Datenfelder der Klasse Kartei als String. Sprache und
+	 *         Fremdsprache.
 	 * @throws IOException
 	 */
 	public ArrayList<String> leseKartei() throws IOException

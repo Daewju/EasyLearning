@@ -6,7 +6,7 @@ package mk;
 import java.util.Date;
 
 /**
- * @author marko
+ * @author marko hallo
  *
  */
 public class Karte {
@@ -24,7 +24,7 @@ public class Karte {
 		this.vokabel = vokabel;
 		this.aufrufe = 0;
 		this.richtigB = 0;
-		this.fach = 0;
+		this.fach = 1;
 		this.erstellt = new Date();
 		this.bearbeitet = new Date();
 	}
@@ -135,6 +135,66 @@ public class Karte {
 	 */
 	public void setBearbeitet(Date bearbeitet) {
 		this.bearbeitet = bearbeitet;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + aufrufe;
+		result = prime * result
+				+ ((bearbeitet == null) ? 0 : bearbeitet.hashCode());
+		result = prime * result
+				+ ((erstellt == null) ? 0 : erstellt.hashCode());
+		result = prime * result + fach;
+		result = prime * result + richtigB;
+		result = prime * result + ((vokabel == null) ? 0 : vokabel.hashCode());
+		result = prime * result + ((wort == null) ? 0 : wort.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Karte other = (Karte) obj;
+		if (aufrufe != other.aufrufe)
+			return false;
+		if (bearbeitet == null) {
+			if (other.bearbeitet != null)
+				return false;
+		} else if (!bearbeitet.equals(other.bearbeitet))
+			return false;
+		if (erstellt == null) {
+			if (other.erstellt != null)
+				return false;
+		} else if (!erstellt.equals(other.erstellt))
+			return false;
+		if (fach != other.fach)
+			return false;
+		if (richtigB != other.richtigB)
+			return false;
+		if (vokabel == null) {
+			if (other.vokabel != null)
+				return false;
+		} else if (!vokabel.equals(other.vokabel))
+			return false;
+		if (wort == null) {
+			if (other.wort != null)
+				return false;
+		} else if (!wort.equals(other.wort))
+			return false;
+		return true;
 	}
 	
 	
