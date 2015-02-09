@@ -19,8 +19,6 @@ import mk.Kartei;
  * bietet eine statische Methode um vor Erzeugung eines Objektes zu prüfen
  * welche CSV-Dateien bereits vorhanden sind. Alle möglichen
  * Exceptionbehandlungen werden an den Benutzer dieser Klasse weitergereicht.
- * Für dieses Projekt ist der GUI-Entwickler zuständig diese zu behandeln und
- * dem Benutzer zu visualisieren.
  * 
  * @author Damjan Djuranovic
  *
@@ -51,7 +49,6 @@ public class FileHandler
 			this.pfad = pfad;
 		} else
 		{
-
 			throw new IllegalArgumentException(
 					"Pfad entspricht nicht den Kriterien. Siehe Javadoc!");
 		}
@@ -71,6 +68,11 @@ public class FileHandler
 		if (kartei != null)
 		{
 			this.pfad = getStandardPfad() + "\\" + kartei.getName() + ".csv";
+		}
+		else
+		{
+			throw new IllegalArgumentException(
+					"Kartei ist NULL!");
 		}
 	}
 

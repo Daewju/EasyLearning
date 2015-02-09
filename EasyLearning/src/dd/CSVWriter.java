@@ -13,9 +13,7 @@ import java.util.ArrayList;
  * Die Klasse schreibt in eine CSV mit einer ArrayList als Input. Die oberste
  * Zeile beschreibt die Kartei. Die darauf folgenden Zeilen beschreiben jeweils
  * eine Karte die einer Kartei angehört. Alle möglichen Exceptionbehandlungen
- * werden an den Benutzer dieser Klasse weitergereicht. Für dieses Projekt ist
- * der GUI-Entwickler zuständig diese zu behandeln und dem Benutzer zu
- * visualisieren.
+ * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
  * @version 1.0
@@ -70,9 +68,9 @@ public class CSVWriter
 	 * Infomationen über diese speichert.
 	 * 
 	 * @param kartei
-	 *            Es wird eine ArrayList mit folgenden Strings erwartet.
-	 *            Sprache und Fremdsprache. Als Parameter muss eine Kartei
-	 *            übergeben werden.
+	 *            Es wird eine ArrayList mit folgenden Strings erwartet. Sprache
+	 *            und Fremdsprache. Als Parameter muss eine Kartei übergeben
+	 *            werden.
 	 * @throws IOException
 	 */
 	public void schreibeKartei(ArrayList<String> kartei) throws IOException

@@ -13,8 +13,7 @@ import java.util.ArrayList;
  * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
  * und generiert daraus eine ArrayList für die Kartei und ArrayList für die
  * Karten. Alle möglichen Exceptionbehandlungen werden an den Benutzer diser
- * Klasse weitergereicht. Für dieses Projekt ist der GUI-Entwickler zuständig
- * diese zu behandeln und dem Benutzer zu visualisieren.
+ * Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
  * @version 1.0
