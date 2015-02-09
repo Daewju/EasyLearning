@@ -2,7 +2,9 @@
  * 
  */
 package mk;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author marko
@@ -34,7 +36,16 @@ public class Kartei {
 		
 	}
 	
-	public boolean addKarte(Karte karte, int fach){
+	/**
+	 * 
+	 * @param karte
+	 * @param fach
+	 * addKarte erwartet ein Objekt der Klasse Karte und einen Int Wert welcher für das Fach
+	 * steht indem das Kartenobjket eingefügt werden soll.
+	 * @return	boolean (true = erfolgreich /false = fehlgeschlagen)
+	 * @throws IOException
+	 */
+	public boolean addKarte(Karte karte, int fach) throws IOException{
 		boolean ret = false;
 		if(karte!=null && fach >=1 && fach <=6)
 		{
@@ -60,9 +71,46 @@ public class Kartei {
 			default:	ret=false;
 						break;
 			}
+			
+		}
+		else
+		{
+			throw new IllegalArgumentException("Die angegeben Karte oder Fach existiert nicht!");
 		}
 		return ret;
 	}
+	
+	/**
+	*	public boolean removeKarte(Karte karte, int fach){
+	*	ArrayList<Karte> f;
+	*		
+	*		switch(fach) {
+	*		case 1:	f=fach1;
+	*				break;
+	*		case 2: f=fach2;
+	*				break;
+	*		case 3: f=fach3;
+	*				break;
+	*		case 4: f=fach4;
+	*				break;
+	*		case 5: f=fach5;
+	*				break;
+	*		case 6: f=fach6;
+	*				break;
+	*		default:
+	*				break;
+	*		}
+	*		
+	*		Iterator<Karte> it = f.iterator();
+	*		
+	*		boolean running = true;
+	*		while(running){
+	*			if(it.next().equals(karte)){
+	*				it.remove();
+	*			}
+	*		}
+	*	}
+	*/
 
 	/**
 	 * @return the sprache
