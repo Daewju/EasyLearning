@@ -6,7 +6,7 @@ package mk;
 import java.util.Date;
 
 /**
- * @author marko
+ * @author marko hallo
  *
  */
 public class Karte {
