@@ -71,7 +71,7 @@ public class CSVWriter
 	 * 
 	 * @param kartei
 	 *            Es wird eine ArrayList mit folgenden Strings erwartet.
-	 *            Sprache1 und Sprache2. Als Parameter muss eine Kartei
+	 *            Sprache und Fremdsprache. Als Parameter muss eine Kartei
 	 *            übergeben werden.
 	 * @throws IOException
 	 */

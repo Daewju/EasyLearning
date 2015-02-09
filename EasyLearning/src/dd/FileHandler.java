@@ -32,7 +32,6 @@ public class FileHandler
 	private String pfad;
 	SimpleDateFormat datumFormat = new SimpleDateFormat(
 			"EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-	Date zeit = new Date();
 
 	/**
 	 * Dieser Konstruktor kann benutzt werden, wenn die Datei ausserhalb des
@@ -88,8 +87,8 @@ public class FileHandler
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public Kartei leseKarteiVonDatei(boolean fortschritt)
-			throws ParseException, IOException
+	public Kartei dateiLesen(boolean fortschritt) throws ParseException,
+			IOException
 	{
 		cr = new CSVReader(pfad);
 		ArrayList<String> csvKartei = cr.leseKartei();
@@ -120,6 +119,7 @@ public class FileHandler
 
 			else
 			{
+				Date zeit = new Date();
 				aufrufe = 0;
 				richtigB = 0;
 				fach = 1;
@@ -152,7 +152,7 @@ public class FileHandler
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	public void schreibeDateiVonKartei(Kartei kartei, boolean fortschritt)
+	public void dateiSchreiben(Kartei kartei, boolean fortschritt)
 			throws ParseException, IOException
 	{
 		cw = new CSVWriter(pfad);
@@ -190,6 +190,7 @@ public class FileHandler
 
 				else
 				{
+					Date zeit = new Date();
 					karteS[2] = "0";
 					karteS[3] = "0";
 					karteS[4] = "1";
@@ -213,17 +214,26 @@ public class FileHandler
 	 * ist.
 	 * 
 	 * @return Gibt eine ArrayList mit den Pfaden zurück.
+	 * @param nurKarteiName
+	 *            "False" gibt den kompletten Pfad zurück, "True" dagegen nur
+	 *            den Titel der Kartei, z.b. "deutsch-englisch".
 	 */
-	public static ArrayList<String> leseExistierendeKarteiPfade()
+	public static ArrayList<String> leseExistierendeKarteiPfade(
+			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
 		File[] dateien = new File(getStandardPfad()).listFiles();
 
 		for (File datei : dateien)
 		{
-			if (datei.isFile() && datei.getName().contains(".csv"))
+			if (datei.isFile() && datei.getName().contains(".csv")
+					&& !nurKarteiName)
 			{
 				interneKarteien.add(datei.getAbsolutePath());
+			} else if (datei.isFile() && datei.getName().contains(".csv")
+					&& nurKarteiName)
+			{
+				interneKarteien.add(datei.getName().replaceAll(".csv", ""));
 			}
 		}
 
