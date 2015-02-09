@@ -91,12 +91,13 @@ public class Gui extends JFrame
 			    JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void bestaetigungsDialog(Gui gui, String text)
+	public int bestaetigungsDialog(Gui gui, String text)
 	{
-		JOptionPane.showInternalConfirmDialog(gui,
-			    text,
-			    "Fehler",
-			    JOptionPane.INFORMATION_MESSAGE);
+		int choice = JOptionPane.showInternalConfirmDialog(this, text 
+                ,"Message", JOptionPane.WARNING_MESSAGE
+                , JOptionPane.OK_CANCEL_OPTION);
+		
+		return choice;
 	}
 
 	public static void main(String[] args)
