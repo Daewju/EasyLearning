@@ -1,9 +1,20 @@
 Datei;File;Fichier;File
 Neu;New;Nouveau;Nuovo
 Öffnen;Open;Ouverture;Apertura
-Beenden;Close;Près;Cicino;
+Speichern;Save;Sauver;Salvare
+Importieren;Import;Importazione;Importazione
+Exportieren;Export;Exportation;Esportazione
+Zurücksetzen;Reset;Remettre;Reset
+Beenden;Close;Près;Cicino
 Sprache;Language;Langue;Lingua
 Deutsch;German;Allemand;Tedesco
 Englisch;English;Anglais;Inglese
 Französisch;French;Français;Francese
 Italienisch;Italien;Italien;Italiano
+Info;Info;Infos;Informazioni
+Version;Version;Version;Versione
+Über …;About …;Sur …;Su …
+Programmierer;Developer;Promoteur;Sviluppatore
+Neue Kartei erstellen;Create a New Database;Créer une nouvelle base;Creazione di un nuovo database
+Geben Sie die Hauptsprache ein;Enter the main language;Entrez la langue principale;Immettere la lingua principale;
+Geben Sie die Fremdsprache ein;Enter the foreign language;Entrez la langue étrangère;Immettere la lingua straniera;

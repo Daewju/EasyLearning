@@ -2,6 +2,7 @@ package sp;
 
 //halloo
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ public class Gui extends JFrame
 	private int sprachcode = 0;
 	private SprachController sc;
 	private Dimension dimension;
+	private static String version = "0.1";
 
 	public Gui()
 	{
@@ -33,23 +35,22 @@ public class Gui extends JFrame
 			sc = new SprachController();
 		} catch (IOException e)
 		{
-			fehlerDialog(this,"Error!", "Code: 0001");
+			fehlerDialog("Error!", "Critital-Error of Language-File!");
 			e.printStackTrace();
 		}
-		
 		setLayout(null); // LayoutManager verwenden
-		setSize(800, 600);
-		
+		getContentPane().setBackground(new Color(40, 40, 40));
+		setSize(1024, 768);
 		// Fenster mittig plazieren
-	    dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
-	    this.setLocation(x, y);
-	    
+		dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
+		int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
+		this.setLocation(x, y);
+
 		setResizable(false);
 		setTitle("EasyLearning");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // speichern vor
+														// beenden!
 		guiNeuInitialisieren();
 	}
 
@@ -72,15 +73,19 @@ public class Gui extends JFrame
 		JMenu spracheMenue = new JMenu(sc.getSprache("Sprache", sprachcode));
 		menuezeile.add(spracheMenue);
 
+		JMenu infoMenue = new JMenu(sc.getSprache("Info", sprachcode));
+		menuezeile.add(infoMenue);
+
 		JMenuItem neueKarteiEintrag = new JMenuItem(sc.getSprache("Neu",
 				sprachcode));
 		neueKarteiEintrag.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// toDo
+				eingabeDialog(sc.getSprache("Neue Kartei erstellen", getSprachcode()),sc.getSprache("Geben Sie die Hauptsprache ein", getSprachcode()));
 			}
 		});
+		
 		dateiMenue.add(neueKarteiEintrag);
 
 		JMenuItem oeffnenEintrag = new JMenuItem(sc.getSprache("Öffnen",
@@ -93,6 +98,39 @@ public class Gui extends JFrame
 			}
 		});
 		dateiMenue.add(oeffnenEintrag);
+
+		JMenuItem speichernEintrag = new JMenuItem(sc.getSprache("Speichern",
+				sprachcode));
+		speichernEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				// toDo
+			}
+		});
+		dateiMenue.add(speichernEintrag);
+
+		JMenuItem importEintrag = new JMenuItem(sc.getSprache("Importieren",
+				sprachcode));
+		importEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				// toDo
+			}
+		});
+		dateiMenue.add(importEintrag);
+
+		JMenuItem exportEintrag = new JMenuItem(sc.getSprache("Exportieren",
+				sprachcode));
+		exportEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				// toDo
+			}
+		});
+		dateiMenue.add(exportEintrag);
 
 		JMenuItem beendenEintrag = new JMenuItem(sc.getSprache("Beenden",
 				sprachcode));
@@ -115,7 +153,7 @@ public class Gui extends JFrame
 			}
 		});
 		spracheMenue.add(deutschEintrag);
-		
+
 		JMenuItem englischEintrag = new JMenuItem(sc.getSprache("Englisch",
 				sprachcode));
 		englischEintrag.addActionListener(new ActionListener()
@@ -126,9 +164,9 @@ public class Gui extends JFrame
 			}
 		});
 		spracheMenue.add(englischEintrag);
-		
-		JMenuItem franzoesischEintrag = new JMenuItem(sc.getSprache("Französisch",
-				sprachcode));
+
+		JMenuItem franzoesischEintrag = new JMenuItem(sc.getSprache(
+				"Französisch", sprachcode));
 		franzoesischEintrag.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -137,9 +175,9 @@ public class Gui extends JFrame
 			}
 		});
 		spracheMenue.add(franzoesischEintrag);
-		
-		JMenuItem italienischEintrag = new JMenuItem(sc.getSprache("Italienisch",
-				sprachcode));
+
+		JMenuItem italienischEintrag = new JMenuItem(sc.getSprache(
+				"Italienisch", sprachcode));
 		italienischEintrag.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -148,6 +186,33 @@ public class Gui extends JFrame
 			}
 		});
 		spracheMenue.add(italienischEintrag);
+
+		JMenuItem versionEintrag = new JMenuItem(sc.getSprache("Version",
+				sprachcode));
+		versionEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				infoDialog(sc.getSprache("Version", getSprachcode()),
+						sc.getSprache("Version", getSprachcode()) + ": "
+								+ version);
+			}
+		});
+		infoMenue.add(versionEintrag);
+
+		JMenuItem ueberEintrag = new JMenuItem(sc.getSprache("Über …",
+				sprachcode));
+		ueberEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				infoDialog(
+						sc.getSprache("Über …", getSprachcode()),
+						sc.getSprache("Programmierer", getSprachcode())
+								+ ": \n\nMarko Kartelo\nDamjan Djuranovic\nSajeevan Premakumaran");
+			}
+		});
+		infoMenue.add(ueberEintrag);
 	}
 
 	/**
@@ -185,21 +250,27 @@ public class Gui extends JFrame
 		this.sc = sc;
 	}
 
-	public void warnungsDialog(Gui gui, String titel, String text)
+	public void infoDialog(String titel, String text)
 	{
-		JOptionPane.showMessageDialog(gui, text, titel,
+		JOptionPane.showMessageDialog(this, text, titel,
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void warnungsDialog(String titel, String text)
+	{
+		JOptionPane.showMessageDialog(this, text, titel,
 				JOptionPane.WARNING_MESSAGE);
 	}
 
-	public void fehlerDialog(Gui gui, String titel, String text)
+	public void fehlerDialog(String titel, String text)
 	{
-		JOptionPane.showMessageDialog(gui, text, titel,
+		JOptionPane.showMessageDialog(this, text, titel,
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void eingabeDialog(Gui gui, String titel, String text)
+	public void eingabeDialog(String titel, String text)
 	{
-		JOptionPane.showInputDialog(gui, text, titel,
+		JOptionPane.showInputDialog(this, text, titel,
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
