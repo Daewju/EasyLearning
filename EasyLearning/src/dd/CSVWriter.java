@@ -140,4 +140,90 @@ public class CSVWriter
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "CSVWriter [fileWriter=" + fileWriter + ", bufferedWriter="
+				+ bufferedWriter + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bufferedWriter == null) ? 0 : bufferedWriter.hashCode());
+		result = prime * result
+				+ ((fileWriter == null) ? 0 : fileWriter.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CSVWriter other = (CSVWriter) obj;
+		if (bufferedWriter == null)
+		{
+			if (other.bufferedWriter != null)
+				return false;
+		} else if (!bufferedWriter.equals(other.bufferedWriter))
+			return false;
+		if (fileWriter == null)
+		{
+			if (other.fileWriter != null)
+				return false;
+		} else if (!fileWriter.equals(other.fileWriter))
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return the fileWriter
+	 */
+	public FileWriter getFileWriter()
+	{
+		return fileWriter;
+	}
+
+	/**
+	 * @param fileWriter the fileWriter to set
+	 */
+	public void setFileWriter(FileWriter fileWriter)
+	{
+		this.fileWriter = fileWriter;
+	}
+
+	/**
+	 * @return the bufferedWriter
+	 */
+	public BufferedWriter getBufferedWriter()
+	{
+		return bufferedWriter;
+	}
+
+	/**
+	 * @param bufferedWriter the bufferedWriter to set
+	 */
+	public void setBufferedWriter(BufferedWriter bufferedWriter)
+	{
+		this.bufferedWriter = bufferedWriter;
+	}
+	
+
 }

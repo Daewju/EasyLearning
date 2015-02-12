@@ -65,4 +65,113 @@ public class SprachController
 		}
 		return deutsch;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "SprachController [bufferedReader=" + bufferedReader + ", cr="
+				+ cr + ", sprache=" + sprache + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bufferedReader == null) ? 0 : bufferedReader.hashCode());
+		result = prime * result + ((cr == null) ? 0 : cr.hashCode());
+		result = prime * result + ((sprache == null) ? 0 : sprache.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SprachController other = (SprachController) obj;
+		if (bufferedReader == null)
+		{
+			if (other.bufferedReader != null)
+				return false;
+		} else if (!bufferedReader.equals(other.bufferedReader))
+			return false;
+		if (cr == null)
+		{
+			if (other.cr != null)
+				return false;
+		} else if (!cr.equals(other.cr))
+			return false;
+		if (sprache == null)
+		{
+			if (other.sprache != null)
+				return false;
+		} else if (!sprache.equals(other.sprache))
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return the bufferedReader
+	 */
+	public BufferedReader getBufferedReader()
+	{
+		return bufferedReader;
+	}
+
+	/**
+	 * @param bufferedReader the bufferedReader to set
+	 */
+	public void setBufferedReader(BufferedReader bufferedReader)
+	{
+		this.bufferedReader = bufferedReader;
+	}
+
+	/**
+	 * @return the cr
+	 */
+	public CSVReader getCr()
+	{
+		return cr;
+	}
+
+	/**
+	 * @param cr the cr to set
+	 */
+	public void setCr(CSVReader cr)
+	{
+		this.cr = cr;
+	}
+
+	/**
+	 * @return the sprache
+	 */
+	public ArrayList<String[]> getSprache()
+	{
+		return sprache;
+	}
+
+	/**
+	 * @param sprache the sprache to set
+	 */
+	public void setSprache(ArrayList<String[]> sprache)
+	{
+		this.sprache = sprache;
+	}
+	
+	
 }

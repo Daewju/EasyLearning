@@ -154,5 +154,91 @@ public class CSVReader
 			this.fileReader.close();
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "CSVReader [fileReader=" + fileReader + ", bufferedReader="
+				+ bufferedReader + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bufferedReader == null) ? 0 : bufferedReader.hashCode());
+		result = prime * result
+				+ ((fileReader == null) ? 0 : fileReader.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CSVReader other = (CSVReader) obj;
+		if (bufferedReader == null)
+		{
+			if (other.bufferedReader != null)
+				return false;
+		} else if (!bufferedReader.equals(other.bufferedReader))
+			return false;
+		if (fileReader == null)
+		{
+			if (other.fileReader != null)
+				return false;
+		} else if (!fileReader.equals(other.fileReader))
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return the fileReader
+	 */
+	public FileReader getFileReader()
+	{
+		return fileReader;
+	}
+
+	/**
+	 * @param fileReader the fileReader to set
+	 */
+	public void setFileReader(FileReader fileReader)
+	{
+		this.fileReader = fileReader;
+	}
+
+	/**
+	 * @return the bufferedReader
+	 */
+	public BufferedReader getBufferedReader()
+	{
+		return bufferedReader;
+	}
+
+	/**
+	 * @param bufferedReader the bufferedReader to set
+	 */
+	public void setBufferedReader(BufferedReader bufferedReader)
+	{
+		this.bufferedReader = bufferedReader;
+	}
+	
 	
 }

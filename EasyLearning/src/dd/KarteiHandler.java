@@ -311,4 +311,136 @@ public class KarteiHandler
 			return false;
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "KarteiHandler [cr=" + cr + ", cw=" + cw + ", karteiPfad="
+				+ karteiPfad + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cr == null) ? 0 : cr.hashCode());
+		result = prime * result + ((cw == null) ? 0 : cw.hashCode());
+		result = prime * result
+				+ ((karteiPfad == null) ? 0 : karteiPfad.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		KarteiHandler other = (KarteiHandler) obj;
+		if (cr == null)
+		{
+			if (other.cr != null)
+				return false;
+		} else if (!cr.equals(other.cr))
+			return false;
+		if (cw == null)
+		{
+			if (other.cw != null)
+				return false;
+		} else if (!cw.equals(other.cw))
+			return false;
+		if (karteiPfad == null)
+		{
+			if (other.karteiPfad != null)
+				return false;
+		} else if (!karteiPfad.equals(other.karteiPfad))
+			return false;
+		return true;
+	}
+
+	/**
+	 * @return the ordner
+	 */
+	public static File getOrdner()
+	{
+		return ordner;
+	}
+
+	/**
+	 * @param ordner the ordner to set
+	 */
+	public static void setOrdner(File ordner)
+	{
+		KarteiHandler.ordner = ordner;
+	}
+
+	/**
+	 * @return the datumFormat
+	 */
+	public static SimpleDateFormat getDatumFormat()
+	{
+		return datumFormat;
+	}
+
+	/**
+	 * @param datumFormat the datumFormat to set
+	 */
+	public static void setDatumFormat(SimpleDateFormat datumFormat)
+	{
+		KarteiHandler.datumFormat = datumFormat;
+	}
+
+	/**
+	 * @return the cr
+	 */
+	public CSVReader getCr()
+	{
+		return cr;
+	}
+
+	/**
+	 * @param cr the cr to set
+	 */
+	public void setCr(CSVReader cr)
+	{
+		this.cr = cr;
+	}
+
+	/**
+	 * @return the cw
+	 */
+	public CSVWriter getCw()
+	{
+		return cw;
+	}
+
+	/**
+	 * @param cw the cw to set
+	 */
+	public void setCw(CSVWriter cw)
+	{
+		this.cw = cw;
+	}
+
+	/**
+	 * @return the karteiPfad
+	 */
+	public String getKarteiPfad()
+	{
+		return karteiPfad;
+	}
+	
 }
