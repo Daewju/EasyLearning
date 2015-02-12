@@ -13,6 +13,7 @@ import java.util.Iterator;
  * finden, wird das deutsche Wort zurückgegeben. Die CSV-Datei liegt im Ordner 'Data'
  * 
  * @author Damjan Djuranovic
+ * @version 1.1
  *
  */
 public class SprachController
@@ -25,7 +26,7 @@ public class SprachController
 	 */
 	public SprachController()
 	{
-		sprachePfad = FileHandler.getStandardPfad()
+		sprachePfad = KarteiHandler.getStandardPfad()
 				+ "\\bin\\data\\sprache.csv";
 		sprache = new ArrayList<>();
 	}

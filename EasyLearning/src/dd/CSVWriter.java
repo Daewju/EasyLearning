@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse
- * FileHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
+ * KarteiHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
  * ungemein.
  * 
  * Die Klasse schreibt in eine CSV mit einer ArrayList als Input. Die oberste
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
- * @version 1.0
+ * @version 1.1
  */
 public class CSVWriter
 {

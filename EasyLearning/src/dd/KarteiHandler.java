@@ -21,9 +21,10 @@ import mk.Kartei;
  * Exceptionbehandlungen werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
+ * @version 1.1
  *
  */
-public class FileHandler
+public class KarteiHandler
 {
 	private CSVReader cr;
 	private CSVWriter cw;
@@ -42,7 +43,7 @@ public class FileHandler
 	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 * @throws IOException
 	 */
-	public FileHandler(String karteiPfad) throws IOException
+	public KarteiHandler(String karteiPfad) throws IOException
 	{
 		if (karteiPfad.equals(".pdf") && karteiPfad.equals("\\"))
 		{
@@ -63,7 +64,7 @@ public class FileHandler
 	 *            Datenfelder Sprache und Fremdsprache wird der Pfad automatisch
 	 *            generiert.
 	 */
-	public FileHandler(Kartei kartei)
+	public KarteiHandler(Kartei kartei)
 	{
 		if (kartei != null)
 		{

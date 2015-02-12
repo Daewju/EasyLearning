@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse
- * FileHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
+ * KarteiHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
  * ungemein.
  * 
  * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
- * @version 1.0
+ * @version 1.1
  */
 public class CSVReader
 {
