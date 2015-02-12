@@ -27,7 +27,7 @@ public class FileHandler
 {
 	private CSVReader cr;
 	private CSVWriter cw;
-	private String pfad;
+	private String karteiPfad;
 	SimpleDateFormat datumFormat = new SimpleDateFormat(
 			"EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
@@ -35,18 +35,18 @@ public class FileHandler
 	 * Dieser Konstruktor kann benutzt werden, wenn die Datei ausserhalb des
 	 * Standardpfades liegt oder liegen soll, z.B. beim Import oder Export.
 	 * 
-	 * @param pfad
+	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
 	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 * @throws IOException
 	 */
-	public FileHandler(String pfad) throws IOException
+	public FileHandler(String karteiPfad) throws IOException
 	{
-		if (pfad.equals(".pdf") && pfad.equals("\\"))
+		if (karteiPfad.equals(".pdf") && karteiPfad.equals("\\"))
 		{
-			this.pfad = pfad;
+			this.karteiPfad = karteiPfad;
 		} else
 		{
 			throw new IllegalArgumentException(
@@ -67,12 +67,11 @@ public class FileHandler
 	{
 		if (kartei != null)
 		{
-			this.pfad = getStandardPfad() + "\\" + kartei.getName() + ".csv";
-		}
-		else
+			this.karteiPfad = getStandardPfad() + "\\" + kartei.getName()
+					+ ".csv";
+		} else
 		{
-			throw new IllegalArgumentException(
-					"Kartei ist NULL!");
+			throw new IllegalArgumentException("Kartei ist NULL!");
 		}
 	}
 
@@ -92,7 +91,7 @@ public class FileHandler
 	public Kartei dateiLesen(boolean fortschritt) throws ParseException,
 			IOException
 	{
-		cr = new CSVReader(pfad);
+		cr = new CSVReader(karteiPfad);
 		ArrayList<String> csvKartei = cr.leseKartei();
 		ArrayList<String[]> karten = cr.leseKarten();
 		Kartei kartei;
@@ -157,7 +156,7 @@ public class FileHandler
 	public void dateiSchreiben(Kartei kartei, boolean fortschritt)
 			throws ParseException, IOException
 	{
-		cw = new CSVWriter(pfad);
+		cw = new CSVWriter(karteiPfad);
 
 		ArrayList<String> karteiArrayList = new ArrayList<>();
 		karteiArrayList.add(kartei.getSprache());
@@ -265,7 +264,7 @@ public class FileHandler
 	 */
 	public boolean dateiBereitsVorhanden()
 	{
-		File datei = new File(pfad);
+		File datei = new File(karteiPfad);
 		if (datei.isFile())
 		{
 			return true;
@@ -279,15 +278,14 @@ public class FileHandler
 	 * Diese Methode kann benutzt werden um den Arbeitspfad dens FileHandlers zu
 	 * ändern. z.B. nachdem der Lernende die Kartei wechselt.
 	 * 
-	 * @param pfad
+	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
 	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 */
-	public void setPfad(String pfad)
+	public void setKarteiPfad(String karteiPfad)
 	{
-		this.pfad = pfad;
+		this.karteiPfad = karteiPfad;
 	}
-
 }
