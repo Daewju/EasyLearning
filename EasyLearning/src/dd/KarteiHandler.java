@@ -26,6 +26,7 @@ import mk.Kartei;
  */
 public class KarteiHandler
 {
+	File ordner;
 	private CSVReader cr;
 	private CSVWriter cw;
 	private String karteiPfad;
@@ -57,7 +58,8 @@ public class KarteiHandler
 
 	/**
 	 * Dieser Konstruktor kann benutzt werden, wenn die Datei am Standardpfad
-	 * liegt oder liegen soll.
+	 * liegt oder liegen soll. Der Standardpfad ist der Ort an dem die .jar
+	 * liegt in einem Unterordner 'Karteien'.
 	 * 
 	 * @param kartei
 	 *            Erwartet wird eine Kartei. Mit Hilfe der darin befindlichen
@@ -66,10 +68,15 @@ public class KarteiHandler
 	 */
 	public KarteiHandler(Kartei kartei)
 	{
+		ordner = new File("Karteien");
 		if (kartei != null)
 		{
-			this.karteiPfad = getStandardPfad() + "\\" + kartei.getName()
-					+ ".csv";
+			if (!ordner.exists())
+			{
+				ordner.mkdir();
+			}
+			this.karteiPfad = getStandardPfad() + "\\Karteien\\"
+					+ kartei.getName() + ".csv";
 		} else
 		{
 			throw new IllegalArgumentException("Kartei ist NULL!");
