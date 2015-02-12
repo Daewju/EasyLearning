@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse
- * KarteiHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
- * ungemein.
+ * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Um Karteien zu
+ * speichern, bitte die Klasse KarteiHandler benutzten.
  * 
  * Die Klasse schreibt in eine CSV mit einer ArrayList als Input. Die oberste
  * Zeile beschreibt die Kartei. Die darauf folgenden Zeilen beschreiben jeweils
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
- * @version 1.1
+ * @version 1.11
  */
 public class CSVWriter
 {
@@ -37,7 +36,7 @@ public class CSVWriter
 	}
 
 	/**
-	 * Diese Methode wird nur vom Konstrutkor verwendet. Sie initialisiert die
+	 * Diese Methode wird vom Konstrutkor verwendet. Sie initialisiert die
 	 * Datenfelder und schmeisst eine Exception falls der Pfad nicht korrekt
 	 * formatiert ist.
 	 * 
@@ -65,12 +64,11 @@ public class CSVWriter
 
 	/**
 	 * Diese Methode schreibt in eine CSV die erste Zeile, welche die
-	 * Infomationen über diese speichert.
+	 * Infomationen über die Kartei speichert.
 	 * 
 	 * @param kartei
 	 *            Es wird eine ArrayList mit folgenden Strings erwartet. Sprache
-	 *            und Fremdsprache. Als Parameter muss eine Kartei übergeben
-	 *            werden.
+	 *            und Fremdsprache in dieser Reihenfolge.
 	 * @throws IOException
 	 */
 	public void schreibeKartei(ArrayList<String> kartei) throws IOException

@@ -15,23 +15,23 @@ import mk.Kartei;
 /**
  * Diese Klasse wird zum lesen und schreiben von Karteien in eine CSV-Datei
  * verwendet. Jede CSV-Datei symbolisiert eine Kartei. Der Standard-Pfad der
- * Karteien liegt im gleichen Ordner wie die lauffähige JAR-Datei. Die Klasse
- * bietet eine statische Methode um vor Erzeugung eines Objektes zu prüfen
- * welche CSV-Dateien bereits vorhanden sind. Alle möglichen
- * Exceptionbehandlungen werden an den Benutzer dieser Klasse weitergereicht.
+ * Karteien liegt im Ordner 'Karteien' neben der JAR-Datei. Die Klasse bietet
+ * eine statische Methode um vor Erzeugung eines Objektes zu prüfen welche
+ * CSV-Dateien bereits vorhanden sind. Alle möglichen Exceptionbehandlungen
+ * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
- * @version 1.1
+ * @version 1.11
  *
  */
 public class KarteiHandler
 {
-	File ordner;
+	private static File ordner;
+	private static SimpleDateFormat datumFormat = new SimpleDateFormat(
+			"EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);;
 	private CSVReader cr;
 	private CSVWriter cw;
 	private String karteiPfad;
-	SimpleDateFormat datumFormat = new SimpleDateFormat(
-			"EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
 
 	/**
 	 * Dieser Konstruktor kann benutzt werden, wenn die Datei ausserhalb des
@@ -46,7 +46,7 @@ public class KarteiHandler
 	 */
 	public KarteiHandler(String karteiPfad) throws IOException
 	{
-		if (karteiPfad.equals(".pdf") && karteiPfad.equals("\\"))
+		if (karteiPfad.equals(".csv") && karteiPfad.equals("\\"))
 		{
 			this.karteiPfad = karteiPfad;
 		} else
@@ -58,26 +58,30 @@ public class KarteiHandler
 
 	/**
 	 * Dieser Konstruktor kann benutzt werden, wenn die Datei am Standardpfad
-	 * liegt oder liegen soll. Der Standardpfad ist der Ort an dem die .jar
-	 * liegt in einem Unterordner 'Karteien'.
+	 * liegt oder gespeichert werden soll. Der Standardpfad ist der Ort an dem
+	 * die .jar liegt in einem Unterordner 'Karteien'. Der Pfad kann natuerlich
+	 * spaeter auch manuell geaendert werden.
 	 * 
 	 * @param kartei
 	 *            Erwartet wird eine Kartei. Mit Hilfe der darin befindlichen
-	 *            Datenfelder Sprache und Fremdsprache wird der Pfad automatisch
-	 *            generiert.
+	 *            Datenfelder Sprache und Fremdsprache und des Standardpfades
+	 *            wird der entsprechende Pfad automatisch generiert.
 	 */
 	public KarteiHandler(Kartei kartei)
 	{
 		ordner = new File("Karteien");
+
 		if (kartei != null)
 		{
 			if (!ordner.exists())
 			{
 				ordner.mkdir();
 			}
-			this.karteiPfad = getStandardPfad() + "\\Karteien\\"
+			this.karteiPfad = getStandardPfad() + "\\" + ordner + "\\"
 					+ kartei.getName() + ".csv";
-		} else
+		}
+
+		else
 		{
 			throw new IllegalArgumentException("Kartei ist NULL!");
 		}
@@ -85,13 +89,13 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um eine komplette Kartei aus einer
-	 * CSV-Datei zu bekommen.
+	 * CSV-Datei zu laden.
 	 * 
 	 * @param fortschritt
 	 *            "True" lässt den gesamten Fortschritt des Lernenden
 	 *            importieren. "False" dagegen übernimmt nur die Wortpaare und
 	 *            setzt das Datum und die Uhrzeit auf die aktuelle Zeit.
-	 *            Ausserdem werden Alle Karten in das erste Fach gelegt.
+	 *            Ausserdem werden dann alle Karten in das erste Fach gelegt.
 	 * @return Es wird eine Kartei zurückgegeben.
 	 * @throws ParseException
 	 * @throws IOException
@@ -149,7 +153,7 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um eine komplette Kartei in eine
-	 * CSV-Datei zu schreiben
+	 * CSV-Datei zu schreiben.
 	 * 
 	 * @param kartei
 	 *            Hier wird eine Kartei als Parameter erwartet.
@@ -210,19 +214,17 @@ public class KarteiHandler
 				karten.add(karteS);
 			}
 		}
-
 		cw.schreibeKarten(karten);
 		cw.schliesseStream();
 	}
 
 	/**
 	 * Diese Methode kann benutzt werden um zu prüfe ob sich bereits Karteien im
-	 * CSV-Format im Standard-Pfad befinden. Diese Methode sollte vor der
-	 * Erzeugung des Objekts "FileHandler" geschehen um den Pfad festlegen zu
-	 * können. Das ist auch absolut kein Problem, da es eine statische Methode
-	 * ist.
+	 * CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist statisch
+	 * und benoetigt keine Instatnz von KarteiHandler.
 	 * 
-	 * @return Gibt eine ArrayList mit den Pfaden zurück.
+	 * @return Gibt eine ArrayList mit den Pfaden zurück, wahlweise der
+	 *         komplette Pfad oder nur der Name der Kartei.
 	 * @param nurKarteiName
 	 *            "False" gibt den kompletten Pfad zurück, "True" dagegen nur
 	 *            den Titel der Kartei, z.b. "deutsch-englisch".
@@ -231,7 +233,8 @@ public class KarteiHandler
 			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(getStandardPfad()).listFiles();
+		File[] dateien = new File(getStandardPfad() + "\\" + ordner + "\\")
+				.listFiles();
 
 		for (File datei : dateien)
 		{
@@ -251,9 +254,10 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um den Pfad der aktuell liegenden JAR
-	 * und damit auch der Karteien herausfinden zu können.
+	 * herausfinden zu können. Die Methode ist statisch und benoetigt keine
+	 * Instanz von KarteiHandler.
 	 * 
-	 * @return Pfad der JAR auf dem Filesystem.
+	 * @return Komplett-Pfad der JAR auf dem Filesystem.
 	 */
 	public static String getStandardPfad()
 	{
@@ -266,9 +270,10 @@ public class KarteiHandler
 	/**
 	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu überprüfen
 	 * ob eine solche CSV-Datei bereits vorhanden ist. Wäre dies nämlich so,
-	 * würde sie überschrieben werden!
+	 * würde sie dann überschrieben werden! Falls eine gleichnamige Kartei
+	 * erstellt wird, sollte dies überprüft werden.
 	 * 
-	 * @return "True" für vorhanden, "False" für nicht vorhanden.
+	 * @return "True" für bereites-vorhanden, "False" für nicht-vorhanden.
 	 */
 	public boolean dateiBereitsVorhanden()
 	{
@@ -276,24 +281,34 @@ public class KarteiHandler
 		if (datei.isFile())
 		{
 			return true;
-		} else
+		}
+
+		else
 		{
 			return false;
 		}
 	}
 
 	/**
-	 * Diese Methode kann benutzt werden um den Arbeitspfad dens FileHandlers zu
-	 * ändern. z.B. nachdem der Lernende die Kartei wechselt.
+	 * Diese Methode kann benutzt werden um den Arbeitspfad dens KarteiHandlers
+	 * zu ändern. z.B. nachdem der Lernende die Kartei wechselt.
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
 	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 * @return "True" wenn der Pfad angenommen wurde, ansonsnten "False".
 	 */
-	public void setKarteiPfad(String karteiPfad)
+	public boolean setKarteiPfad(String karteiPfad)
 	{
-		this.karteiPfad = karteiPfad;
+		if (karteiPfad.equals(".csv") && karteiPfad.equals("\\"))
+		{
+			this.karteiPfad = karteiPfad;
+			return true;
+		} else
+		{
+			return false;
+		}
 	}
 }

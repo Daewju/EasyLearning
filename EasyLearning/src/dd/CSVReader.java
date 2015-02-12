@@ -6,17 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Die Klasse
- * KarteiHandler.java benutzt diese Klasse, dies vereinfacht die Handhabung
- * ungemein.
+ * WICHTIG: Diese Klasse nur in Sonderfällen verwenden. Um Karteien zu laden,
+ * bitte die Klasse KarteiHandler benutzten. Um Sprachen zu laden, bitte die
+ * Klasse SprachController benutzen.
  * 
  * Diese Klasse liest aus einer vorhandenen CSV-Datei die jeweiligen Zeilen aus
  * und generiert daraus eine ArrayList für die Kartei und ArrayList für die
- * Karten. Alle möglichen Exceptionbehandlungen werden an den Benutzer diser
- * Klasse weitergereicht.
+ * Karten.
  * 
  * @author Damjan Djuranovic
- * @version 1.1
+ * @version 1.11
  */
 public class CSVReader
 {
@@ -24,6 +23,8 @@ public class CSVReader
 	private BufferedReader bufferedReader;
 
 	/**
+	 * Dieser Konstruktor wird vom KarteiHandler verwendet.
+	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
 	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
@@ -37,7 +38,23 @@ public class CSVReader
 	}
 
 	/**
-	 * Diese Methode wird nur vom Konstrutkor verwendet. Sie initialisiert die
+	 * Dieser Konstruktor wird vom SprachController verwendet.
+	 * 
+	 * @param bufferedReader
+	 *            Ewartet einen BufferedReader, der den Pfad der sprache.csv
+	 *            enthaelt.
+	 * @throws IOException
+	 */
+	public CSVReader(BufferedReader bufferedReader) throws IOException
+	{
+		if (bufferedReader != null)
+		{
+			this.bufferedReader = bufferedReader;
+		}
+	}
+
+	/**
+	 * Diese Methode wird vom Konstrutkor verwendet. Sie initialisiert die
 	 * Datenfelder und schmeisst eine Exception falls der Pfad nicht korrekt
 	 * formatiert ist.
 	 * 
@@ -64,7 +81,8 @@ public class CSVReader
 	}
 
 	/**
-	 * Die Methode liest aus einer CSV die Kartei-Informationen.
+	 * Die Methode liest aus einer CSV die Kartei-Informationen. In diesem
+	 * Projekt ist dies die erste Zeile.
 	 * 
 	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht gelesen
 	 *         werden können, wird NULL zurückgegeben. Die ArrayList enthält die
@@ -75,27 +93,25 @@ public class CSVReader
 	public ArrayList<String> leseKartei() throws IOException
 	{
 		String karteiArray[] = new String[0];
-		String zeile = bufferedReader.readLine();
+		String zeile;
 		ArrayList<String> kartei = new ArrayList<>();
 
-		if (bufferedReader.ready())
+		if (bufferedReader.ready()
+				&& (zeile = bufferedReader.readLine()) != null)
 		{
-			if (zeile != null)
-			{
-				karteiArray = zeile.split(";");
+			karteiArray = zeile.split(";");
 
-				for (int i = 0; i < karteiArray.length; i++)
-				{
-					kartei.add(karteiArray[i]);
-				}
-				return kartei;
+			for (int i = 0; i < karteiArray.length; i++)
+			{
+				kartei.add(karteiArray[i]);
 			}
+			return kartei;
 		}
 		return null;
 	}
 
 	/**
-	 * Die Methode liest aus einer CSV die Karten-Informationen
+	 * Die Methode liest aus einer CSV die Karten-Informationen oder Sprach-Informationen
 	 * 
 	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht glesen
 	 *         werden können, wird NULL zurückgeben. Die ArrayList enthält die
@@ -109,9 +125,10 @@ public class CSVReader
 		ArrayList<String[]> kartenListe = new ArrayList<>();
 		if (bufferedReader.ready())
 		{
-			while (bufferedReader.ready())
+			String zeile;
+			while (bufferedReader.ready()
+					&& (zeile = bufferedReader.readLine()) != null)
 			{
-				String zeile = bufferedReader.readLine();
 				if (zeile != null)
 				{
 					String karte[] = zeile.split(";");
@@ -137,5 +154,5 @@ public class CSVReader
 			this.fileReader.close();
 		}
 	}
-
+	
 }

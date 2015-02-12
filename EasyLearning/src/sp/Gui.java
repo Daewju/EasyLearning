@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -21,13 +22,20 @@ public class Gui extends JFrame
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int sprachcode = 2;
+	private int sprachcode = 0;
 	private SprachController sc;
 	private Dimension dimension;
 
 	public Gui()
 	{
-		sc = new SprachController();
+		try
+		{
+			sc = new SprachController();
+		} catch (IOException e)
+		{
+			fehlerDialog(this,"Error!", "Code: 0001");
+			e.printStackTrace();
+		}
 		
 		setLayout(null); // LayoutManager verwenden
 		setSize(800, 600);

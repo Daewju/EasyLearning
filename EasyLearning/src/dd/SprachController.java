@@ -1,48 +1,56 @@
 package dd;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Diese Klasse kann benutzt werden um die vier Sprachen aus einer CSV-Datei zu
  * lesen. Um den Code für die GUI lesbarer zu machen, wurde der SprachController
- * so implementiert, dass nur eine einzige Methode zur Verfügung steht und diese
- * nur das deutsche Wort / Satz als Parameter erwartet und den Sprachcode, der
- * für die Ausgabe dient. Sollte sich das Wort / Satz nicht in der CSV-Datei
- * finden, wird das deutsche Wort zurückgegeben. Die CSV-Datei liegt im Ordner 'Data'
+ * so implementiert, dass der deutsche String als Parameter erwartet wird.
+ * Sollte sich der String nicht in der CSV-Datei finden lassen, wird das
+ * deutsche Wort zurückgegeben um wenigstens etwas anzuzeigen. Die CSV-Datei
+ * liegt im Ordner 'Data' und kann mit dem TextEditor oder Excel editiert
+ * werden.
  * 
  * @author Damjan Djuranovic
- * @version 1.1
+ * @version 1.11
  *
  */
 public class SprachController
 {
-	private String sprachePfad;
+	private BufferedReader bufferedReader;
+	private CSVReader cr;
 	private ArrayList<String[]> sprache;
 
 	/**
-	 * Konstruktor setzt Pfad der CSV-Datei, die im Ordner 'data' liegt.
+	 * Konstruktor
+	 * 
+	 * @throws IOException
 	 */
-	public SprachController()
+	public SprachController() throws IOException
 	{
-		sprachePfad = KarteiHandler.getStandardPfad()
-				+ "\\bin\\data\\sprache.csv";
+		bufferedReader = new BufferedReader(new InputStreamReader(getClass()
+				.getResourceAsStream("/data/sprache.csv")));
+		cr = new CSVReader(bufferedReader);
 		sprache = new ArrayList<>();
+		sprache = cr.leseKarten();
+		cr.schliesseStream();
 	}
 
 	/**
-	 * @param deutsch Hier wird das deutsche Wort / Satz erwartet, Gross- und Kleinschreibung beachten, muss exakt sein!
-	 * @param sprachcode 0: Deutsch, 1: Englisch, 2: Franzoesisch, 3: Italienisch
+	 * @param deutsch
+	 *            Hier wird das deutsche Wort / Satz erwartet, Gross- und
+	 *            Kleinschreibung beachten, muss exakt sein!
+	 * @param sprachcode
+	 *            0: Deutsch, 1: Englisch, 2: Franzoesisch, 3: Italienisch
 	 * @return String in Fremdsprache
 	 */
 	public String getSprache(String deutsch, int sprachcode)
 	{
-		CSVReader cr = null;
-		try
+		if (sprache != null)
 		{
-			cr = new CSVReader(sprachePfad);
-			sprache = cr.leseKarten();
 			for (String wort[] : sprache)
 			{
 				if (deutsch != null && sprachcode >= 0 && sprachcode <= 3)
@@ -54,11 +62,7 @@ public class SprachController
 				}
 
 			}
-		} catch (IOException e)
-		{
-			e.printStackTrace();
 		}
-
 		return deutsch;
 	}
 }
