@@ -47,40 +47,12 @@ public class Kartei {
 		Iterator<Karte> it;
 
 		if(karte!=null && fach >=1 && fach <=6)				
-		{				
-			switch(fach) {			
-			case 1:	it  = fach1.iterator();		
-					if(fach1.isEmpty() || existKarte(it, karte)){ //goes into if fach is not empty or card doesnt exist	
-						return fach1.add(karte);
-					}	
-					break;	
-			case 2: it  = fach2.iterator();			
-					if(fach2.isEmpty() || existKarte(it, karte)){	
-						return fach2.add(karte);
-					}	
-					break;	
-			case 3: it  = fach3.iterator();			
-					if(fach3.isEmpty() || existKarte(it, karte)){	
-						return fach3.add(karte);
-					}		
-					break;		
-			case 4: it  = fach4.iterator();				
-					if(fach4.isEmpty() || existKarte(it, karte)){		
-						return fach4.add(karte);	
-					}		
-					break;		
-			case 5: it  = fach5.iterator();				
-					if(fach5.isEmpty() || existKarte(it, karte)){		
-						return fach5.add(karte);	
-					}		
-					break;		
-			case 6: it  = fach6.iterator();				
-					if(fach6.isEmpty() || existKarte(it, karte)){		
-							return fach6.add(karte);
-					}		
-					break;
+		{			
+			ArrayList<Karte> f = gibFach(fach);
+			it = f.iterator();
+			if(f.isEmpty() || existKarte(it, karte)){ //goes into if fach is not empty or card doesnt exist	
+				return f.add(karte);
 			}		
-
 		}			
 
 		return false;			
@@ -88,42 +60,42 @@ public class Kartei {
 
 	/**				
 	 * 				
-	 * @param karte				
-	 * @param fach				
-	 * removeKarte erwartet ein Objekt der Klasse Karte und einen Int Wert welcher für das Fach				
-	 * steht indem das Kartenobjket existiert. Diese Karte wird anschliessend entfernt.				
-	 * @return	boolean (true = erfolgreich /false = fehlgeschlagen)			
+	 * @param karte							
+	 * 		  removeKarte erwartet ein Objekt der Klasse Karte. 
+	 * 		  Diese Karte wird anschliessend aus dessen Fach entfernt.				
+	 * @return	Referenz auf Karte Objekt das aus dem Fach entfernt wurde.			
 	 * 				
 	 */				
-	public boolean removeKarte(Karte karte, int fach){				
-		ArrayList<Karte> f = new ArrayList<Karte>();			
+	public Karte removeKarte(Karte karte){
+		
+		ArrayList<Karte> f = gibFach(karte.getFach());					
+		//Iterator<Karte> it = f.iterator();	
+		int c = 0;
 
-		switch(fach) {			
-			case 1:	f=fach1;	
-					break;
-			case 2: f=fach2;		
-					break;
-			case 3: f=fach3;		
-					break;
-			case 4: f=fach4;		
-					break;
-			case 5: f=fach5;		
-					break;
-			case 6: f=fach6;		
-					break;
+		while(c<f.size()){			
+			
+			if(f.get(c).equals(karte)){
+				return f.remove(c);
 			}		
-
-		Iterator<Karte> it = f.iterator();			
-
-		while(it.hasNext()){			
-
-			if(it.next().equals(karte)){		
-				it.remove();	
-				return true;	
-			}		
+			c++;
 		}			
-		return false;			
-	}				
+		return null;			
+	}		
+	
+	/**				
+	 * 		
+	 * @param karte		
+	 * @param fach		
+	 * 		  moveKarte verschiebt die übergebene Karte in das in fach angegebene Fach.			
+	 * 		
+	 */		
+	public void moveKarte(Karte karte, int fach){
+		ArrayList<Karte> f = gibFach(fach);
+		
+		f.add(removeKarte(karte));
+		karte.setFach(fach);
+		
+	}
 
 	/**				
 	 * 		
@@ -149,7 +121,37 @@ public class Kartei {
 			}	
 		}		
 		return false;		
-	}			
+	}
+	
+	/**				
+	 * 				
+	 * @param fach		
+	 * 		  fach = gewünschte Fachnummer. Anhand dieses INT-Werts wird das
+	 * 		  entsprechende ArrayList Objekt identifiziert und zurückgeliefert.
+	 * @return	Referenz auf ArrayList Objekt (Fach1-6)
+	 * 
+	 * 		
+	 */	
+	private ArrayList<Karte> gibFach(int fach){
+		
+		ArrayList<Karte> f = new ArrayList<Karte>();			
+
+		switch(fach) {			
+			case 1:	f=fach1;	
+					break;
+			case 2: f=fach2;		
+					break;
+			case 3: f=fach3;		
+					break;
+			case 4: f=fach4;		
+					break;
+			case 5: f=fach5;		
+					break;
+			case 6: f=fach6;		
+					break;
+			}
+		return f;
+	}
 
 
 	/**			

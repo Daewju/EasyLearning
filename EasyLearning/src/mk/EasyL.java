@@ -20,6 +20,8 @@ public class EasyL {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		final Gui gui = new Gui();
+		final Test test = new Test();
+		
 
 	}
 
