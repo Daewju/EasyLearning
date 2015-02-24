@@ -86,7 +86,7 @@ public class Kartei {
 	 * 		
 	 * @param karte		
 	 * @param fach		
-	 * 		  moveKarte verschiebt die übergebene Karte in das in fach angegebene Fach.			
+	 * 		  moveKarte verschiebt das übergebene Karteobjekt in das angegebene Fach (fach).			
 	 * 		
 	 */		
 	public void moveKarte(Karte karte, int fach){
