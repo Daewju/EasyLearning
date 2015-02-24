@@ -19,10 +19,9 @@ public class Handler {
 	}
 	
 	public void empfangeEvent(ActionEvent e){
-		if(e.getSource().toString()=="Buttttttooooom"){
-			System.out.println(e.getSource().toString() + "ooh behinderte");
-		}
-		System.out.println(e.getSource().toString());
+		//if(e.getActionCommand()=="Buttttttooooom"){
+			System.out.println(e.getActionCommand() + "ooh behinderte");
+		//}
 	}
 	
 
