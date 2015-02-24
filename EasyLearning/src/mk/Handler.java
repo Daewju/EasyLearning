@@ -2,13 +2,19 @@
  * 
  */
 package mk;
-
+import sp.GuiMain;
 /**
  * @author marko
  *
  */
 public class Handler {
+	private GuiMain gui;
 	
-	//TEST TEST TEST
+	public Handler(GuiMain gui){
+		this.gui = gui;
+		
+		
+	}
+	
 
 }
