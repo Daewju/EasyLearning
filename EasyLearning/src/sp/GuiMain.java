@@ -9,13 +9,14 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
+import mk.Handler;
 import dd.SprachController;
 
 public class GuiMain extends JFrame
 {
 	private static final long serialVersionUID = 1L;
+	private Handler handler;
 	private Dimension dimension;
 	private SprachController sprachcontroller;
 	private GuiMenuebar guiMenuebar;
@@ -27,6 +28,7 @@ public class GuiMain extends JFrame
 	
 	public GuiMain()
 	{
+		handler = new Handler(this);
 		dimension = new Dimension();
 		dimension.setSize(1024, 768);
 		try
@@ -58,6 +60,8 @@ public class GuiMain extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				button.setText("Coban");
+				handler.empfangeEvent(e);
+				
 				
 			}
 		});
