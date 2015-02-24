@@ -3,11 +3,8 @@
  */
 package mk;
 
-import java.io.IOException;
-import java.text.ParseException;
-
-import dd.KarteiHandler;
 import sp.Gui;
+import dd.Test;
 
 
 

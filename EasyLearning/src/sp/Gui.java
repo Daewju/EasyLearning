@@ -1,7 +1,5 @@
 package sp;
 
-//halloo
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -25,8 +23,17 @@ public class Gui extends JFrame
 	private static final long serialVersionUID = 1L;
 	private int sprachcode = 0;
 	private SprachController sc;
-	private Dimension dimension;
+	private static Dimension dimension;
+	private final static int windowWidth = 1024;
+	private final static int windowHeight = 768;
 	private static String version = "0.1";
+	private KarteGui karte;
+	private FachGui fach1;
+	private FachGui fach2;
+	private FachGui fach3;
+	private FachGui fach4;
+	private FachGui fach5;
+	private FachGui fach6;
 
 	public Gui()
 	{
@@ -38,28 +45,50 @@ public class Gui extends JFrame
 			fehlerDialog("Error!", "Critital-Error of Language-File!");
 			e.printStackTrace();
 		}
-		setLayout(null); // LayoutManager verwenden
+		setLayout(null); 
 		getContentPane().setBackground(new Color(40, 40, 40));
-		setSize(1024, 768);
+		setSize(windowWidth, windowHeight);
 		// Fenster mittig plazieren
 		dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - this.getHeight()) / 2);
 		this.setLocation(x, y);
-
 		setResizable(false);
 		setTitle("EasyLearning");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // speichern vor
-														// beenden!
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // speichern vor										// beenden!
 		guiNeuInitialisieren();
+		
+		
+
+		
+	
 	}
 
 	public void guiNeuInitialisieren()
 	{
-
 		menuezeileErzeugen(this, sprachcode);
+		karteiInit();
 		repaint();
 		setVisible(true);
+	}
+	
+	public void karteiInit()
+	{
+		karte = new KarteGui();
+		add(karte);
+		fach1 = new FachGui(50,50,karte.getPosX(),125);
+		add(fach1);
+		fach2 = new FachGui(50,50,fach1.getNaechstePosX(),125);
+		add(fach2);
+		fach3 = new FachGui(50,50,fach2.getNaechstePosX(),125);
+		add(fach3);
+		fach4 = new FachGui(50,50,fach3.getNaechstePosX(),125);
+		add(fach4);
+		fach5 = new FachGui(50,50,fach4.getNaechstePosX(),125);
+		add(fach5);
+		fach6 = new FachGui(50,50,fach5.getNaechstePosX(),125);
+		add(fach6);
+		
 	}
 
 	public void menuezeileErzeugen(JFrame gui, int sprachcode)
@@ -82,7 +111,8 @@ public class Gui extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				eingabeDialog(sc.getSprache("Neue Kartei erstellen", getSprachcode()),sc.getSprache("Geben Sie die Hauptsprache ein", getSprachcode()));
+				karte.umdrehen(true); // zu testzwecken
+				repaint();
 			}
 		});
 		
@@ -94,7 +124,8 @@ public class Gui extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// toDo
+				karte.umdrehen(false); // zu testzwecken
+				repaint();
 			}
 		});
 		dateiMenue.add(oeffnenEintrag);
@@ -105,7 +136,8 @@ public class Gui extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				// toDo
+				karte.zuruecksetzten(); // zu testzwecken
+				repaint();
 			}
 		});
 		dateiMenue.add(speichernEintrag);
@@ -214,6 +246,7 @@ public class Gui extends JFrame
 		});
 		infoMenue.add(ueberEintrag);
 	}
+	
 
 	/**
 	 * @return the sprachcode
@@ -273,4 +306,22 @@ public class Gui extends JFrame
 		JOptionPane.showInputDialog(this, text, titel,
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	/**
+	 * @return the windowheight
+	 */
+	public static int getWindowheight()
+	{
+		return windowHeight;
+	}
+
+	/**
+	 * @return the windowwidth
+	 */
+	public static int getWindowwidth()
+	{
+		return windowWidth;
+	}
+	
+	
 }
