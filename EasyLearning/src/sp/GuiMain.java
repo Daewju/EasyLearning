@@ -24,8 +24,6 @@ public class GuiMain extends JFrame
 	private int sprachcode = 0;
 	protected static final String version = "0.1";
 	
-	private JButton button;
-	
 	public GuiMain()
 	{
 		handler = new Handler(this);
@@ -50,21 +48,6 @@ public class GuiMain extends JFrame
 		setResizable(false);
 		setTitle("EasyLearning");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		// **TEST**
-		button = new JButton("Buttttttooooon");
-		this.add(button, BorderLayout.CENTER);
-		// **TEST**
-		button.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				button.setText("Coban");
-				handler.empfangeEvent(e);
-				
-				
-			}
-		});
 		neuZeichnen();
 	}
 
