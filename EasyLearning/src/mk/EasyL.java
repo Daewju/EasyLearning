@@ -21,6 +21,7 @@ public class EasyL {
 		// TODO Auto-generated method stub
 		final Gui gui = new Gui();
 		final Test test = new Test();
+		final Handler handler = new Handler();
 		
 
 	}
