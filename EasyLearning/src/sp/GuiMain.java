@@ -3,10 +3,13 @@ package sp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 
 import dd.SprachController;
 
@@ -19,6 +22,8 @@ public class GuiMain extends JFrame
 	private GuiDialog guiDialog;
 	private int sprachcode = 0;
 	protected static final String version = "0.1";
+	
+	private JButton button;
 	
 	public GuiMain()
 	{
@@ -34,7 +39,7 @@ public class GuiMain extends JFrame
 		}
 		guiMenuebar = new GuiMenuebar(this);
 		guiDialog = new GuiDialog(this);
-		setLayout(new BorderLayout(20,20));
+		setLayout(new BorderLayout());
 		getContentPane().setBackground(new Color(40, 40, 40));
 		setSize(dimension.width, dimension.height);
 		int x = (int) ((dimension.getWidth() - this.getWidth()) / 2);
@@ -43,6 +48,19 @@ public class GuiMain extends JFrame
 		setResizable(false);
 		setTitle("EasyLearning");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// **TEST**
+		button = new JButton("Buttttttooooon");
+		this.add(button, BorderLayout.CENTER);
+		// **TEST**
+		button.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				button.setText("Coban");
+				
+			}
+		});
 		neuZeichnen();
 	}
 
