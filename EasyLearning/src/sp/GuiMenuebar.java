@@ -71,6 +71,8 @@ public class GuiMenuebar
 				guiMain.getSprachcode()));
 		aufbauen();
 		erzeugeActionListener();
+		guiMain.repaint();
+		guiMain.setVisible(true);
 	}
 
 	private void aufbauen()
@@ -148,6 +150,7 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				guiMain.setSprachcode(0);
+				init();
 			}
 		});
 
@@ -156,6 +159,7 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				guiMain.setSprachcode(1);
+				init();
 			}
 		});
 
@@ -164,6 +168,7 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				guiMain.setSprachcode(2);
+				init();
 			}
 		});
 
@@ -172,6 +177,7 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				guiMain.setSprachcode(3);
+				init();
 			}
 		});
 
