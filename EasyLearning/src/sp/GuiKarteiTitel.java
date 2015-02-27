@@ -20,7 +20,7 @@ public class GuiKarteiTitel
 		panel.setForeground(GuiMain.COLOR_BACKGROUND);
 		panel.setBackground(Color.ORANGE);
 		panel.setBorder(BorderFactory.createEmptyBorder());
-		karteiTitel = new JLabel("Kartei");
+		karteiTitel = new JLabel();
 		karteiTitel.setFont(new Font(null, Font.BOLD, 40));
 		panel.add(karteiTitel);
 	}
@@ -55,6 +55,11 @@ public class GuiKarteiTitel
 	public void setKarteiTitel(JLabel karteiTitel)
 	{
 		this.karteiTitel = karteiTitel;
+	}
+	
+	public void setzeKarteiTitelText(String titel)
+	{
+		this.karteiTitel.setText(titel);
 	}
 
 }

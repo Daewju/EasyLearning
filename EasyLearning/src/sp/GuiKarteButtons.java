@@ -104,9 +104,15 @@ public class GuiKarteButtons
 							sprachcontroller.getSprache("Vokabel",
 									GuiMain.SPRACHCODE) + ": ");
 				}
-				handler.eventNeueKarteHinzufuegen(guiMain.getGuiDialog()
-						.getHauptsprache(), guiMain.getGuiDialog()
-						.getFremdsprache());
+				if (guiMain.getGuiDialog().getHauptsprache() != null
+						&& guiMain.getGuiDialog().getFremdsprache() != null)
+				{
+					handler.eventNeueKarteHinzufuegen(guiMain.getGuiDialog()
+							.getHauptsprache(), guiMain.getGuiDialog()
+							.getFremdsprache());
+					guiMain.getGuiDialog().setHauptsprache(null);
+					guiMain.getGuiDialog().setFremdsprache(null);
+				}
 			}
 
 			@Override
@@ -130,21 +136,7 @@ public class GuiKarteButtons
 			@Override
 			public void mouseReleased(MouseEvent e)
 			{
-				buttonHinzufuegen.setIcon(new ImageIcon(bildHinzufuegen));
-				boolean ergebnis = false;
-				while (!ergebnis)
-				{
-					ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
-							sprachcontroller.getSprache("Karte hinzufügen",
-									GuiMain.SPRACHCODE),
-							sprachcontroller.getSprache("Wort",
-									GuiMain.SPRACHCODE) + ": ",
-							sprachcontroller.getSprache("Vokabel",
-									GuiMain.SPRACHCODE) + ": ");
-				}
-				handler.eventNeueKarteHinzufuegen(guiMain.getGuiDialog()
-						.getHauptsprache(), guiMain.getGuiDialog()
-						.getFremdsprache());
+				
 			}
 		});
 
@@ -191,21 +183,7 @@ public class GuiKarteButtons
 			@Override
 			public void mouseReleased(MouseEvent e)
 			{
-				buttonBearbeiten.setIcon(new ImageIcon(bildBearbeiten));
-				boolean ergebnis = false;
-				while (!ergebnis)
-				{
-					ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
-							sprachcontroller.getSprache("Karte bearbeiten",
-									GuiMain.SPRACHCODE),
-							sprachcontroller.getSprache("Wort",
-									GuiMain.SPRACHCODE) + ": ",
-							sprachcontroller.getSprache("Vokabel",
-									GuiMain.SPRACHCODE) + ": ");
-				}
-				handler.eventKarteBearbeiten(guiMain.getGuiDialog()
-						.getHauptsprache(), guiMain.getGuiDialog()
-						.getFremdsprache());
+
 			}
 
 		});
@@ -229,7 +207,7 @@ public class GuiKarteButtons
 								GuiMain.SPRACHCODE)) == 0)
 				{
 					handler.eventKarteLoeschen(guiMain.getKarteKarteiPanel()
-							.getWort());
+							.getWort().getText());
 				}
 			}
 
@@ -254,22 +232,7 @@ public class GuiKarteButtons
 			@Override
 			public void mouseReleased(MouseEvent e)
 			{
-				buttonLoeschen.setIcon(new ImageIcon(bildLoeschen));
-				if (guiMain.getGuiDialog().variableButtonsDialog(
-						new Object[]
-						{
-								sprachcontroller.getSprache("Ja",
-										GuiMain.SPRACHCODE),
-								sprachcontroller.getSprache("Nein",
-										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Karte löschen",
-								GuiMain.SPRACHCODE),
-						sprachcontroller.getSprache("Sind Sie sicher?",
-								GuiMain.SPRACHCODE)) == 0)
-				{
-					handler.eventKarteLoeschen(guiMain.getKarteKarteiPanel()
-							.getWort());
-				}
+
 			}
 
 		});
@@ -285,7 +248,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param guiMain the guiMain to set
+	 * @param guiMain
+	 *            the guiMain to set
 	 */
 	public void setGuiMain(GuiMain guiMain)
 	{
@@ -301,7 +265,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param sprachcontroller the sprachcontroller to set
+	 * @param sprachcontroller
+	 *            the sprachcontroller to set
 	 */
 	public void setSprachcontroller(SprachController sprachcontroller)
 	{
@@ -317,7 +282,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param handler the handler to set
+	 * @param handler
+	 *            the handler to set
 	 */
 	public void setHandler(Handler handler)
 	{
@@ -333,7 +299,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param hauptpanel the hauptpanel to set
+	 * @param hauptpanel
+	 *            the hauptpanel to set
 	 */
 	public void setHauptpanel(JPanel hauptpanel)
 	{
@@ -349,7 +316,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param panel the panel to set
+	 * @param panel
+	 *            the panel to set
 	 */
 	public void setPanel(JPanel panel)
 	{
@@ -365,7 +333,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildHinzufuegen the bildHinzufuegen to set
+	 * @param bildHinzufuegen
+	 *            the bildHinzufuegen to set
 	 */
 	public void setBildHinzufuegen(BufferedImage bildHinzufuegen)
 	{
@@ -381,7 +350,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildBearbeiten the bildBearbeiten to set
+	 * @param bildBearbeiten
+	 *            the bildBearbeiten to set
 	 */
 	public void setBildBearbeiten(BufferedImage bildBearbeiten)
 	{
@@ -397,7 +367,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildLoeschen the bildLoeschen to set
+	 * @param bildLoeschen
+	 *            the bildLoeschen to set
 	 */
 	public void setBildLoeschen(BufferedImage bildLoeschen)
 	{
@@ -413,7 +384,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildHinzufuegenC the bildHinzufuegenC to set
+	 * @param bildHinzufuegenC
+	 *            the bildHinzufuegenC to set
 	 */
 	public void setBildHinzufuegenC(BufferedImage bildHinzufuegenC)
 	{
@@ -429,7 +401,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildBearbeitenC the bildBearbeitenC to set
+	 * @param bildBearbeitenC
+	 *            the bildBearbeitenC to set
 	 */
 	public void setBildBearbeitenC(BufferedImage bildBearbeitenC)
 	{
@@ -445,7 +418,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildLoeschenC the bildLoeschenC to set
+	 * @param bildLoeschenC
+	 *            the bildLoeschenC to set
 	 */
 	public void setBildLoeschenC(BufferedImage bildLoeschenC)
 	{
@@ -461,7 +435,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildHinzufuegenO the bildHinzufuegenO to set
+	 * @param bildHinzufuegenO
+	 *            the bildHinzufuegenO to set
 	 */
 	public void setBildHinzufuegenO(BufferedImage bildHinzufuegenO)
 	{
@@ -477,7 +452,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildBearbeitenO the bildBearbeitenO to set
+	 * @param bildBearbeitenO
+	 *            the bildBearbeitenO to set
 	 */
 	public void setBildBearbeitenO(BufferedImage bildBearbeitenO)
 	{
@@ -493,7 +469,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param bildLoeschenO the bildLoeschenO to set
+	 * @param bildLoeschenO
+	 *            the bildLoeschenO to set
 	 */
 	public void setBildLoeschenO(BufferedImage bildLoeschenO)
 	{
@@ -509,7 +486,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param buttonHinzufuegen the buttonHinzufuegen to set
+	 * @param buttonHinzufuegen
+	 *            the buttonHinzufuegen to set
 	 */
 	public void setButtonHinzufuegen(JButton buttonHinzufuegen)
 	{
@@ -525,7 +503,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param buttonBearbeiten the buttonBearbeiten to set
+	 * @param buttonBearbeiten
+	 *            the buttonBearbeiten to set
 	 */
 	public void setButtonBearbeiten(JButton buttonBearbeiten)
 	{
@@ -541,7 +520,8 @@ public class GuiKarteButtons
 	}
 
 	/**
-	 * @param buttonLoeschen the buttonLoeschen to set
+	 * @param buttonLoeschen
+	 *            the buttonLoeschen to set
 	 */
 	public void setButtonLoeschen(JButton buttonLoeschen)
 	{

@@ -63,6 +63,7 @@ public class GuiMain extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		init();
+		versteckeAlleElemente(true);
 	}
 
 	public void init()
@@ -105,15 +106,51 @@ public class GuiMain extends JFrame
 			guiKarteiTitel.setzeKarteiTitelText(titel);
 		}
 	}
+	
+	public String getKarteiTitel()
+	{
+		return guiKarteiTitel.getKarteiTitel().getText();
+	}
 
 	public String getEingabefeld()
 	{
 		return guiEingabeFeld.getTextFeld().toString();
 	}
 
-	public void loescheEingabefeld(String text)
+	public void setEingabefeld(String text)
 	{
 		guiEingabeFeld.getTextFeld().setText(text);
+	}
+
+	public void versteckeKarte(boolean verstecken)
+	{
+		karteKarteiPanel.getPanel().setVisible(!verstecken);
+	}
+	
+	public void versteckeButtons(boolean verstecken)
+	{
+		karteButtons.getPanel().setVisible(!verstecken);
+	}
+	
+	public void versteckeKarteiTitel(boolean verstecken)
+	{
+		guiKarteiTitel.getPanel().setVisible(!verstecken);
+	}
+	
+	public void versteckeEingabefeld(boolean verstecken)
+	{
+		guiEingabeFeld.getPanel().setVisible(!verstecken);
+	}
+	
+	public void versteckeAlleElemente(boolean verstecken)
+	{
+		versteckeSmiley();
+		versteckeKarte(verstecken);
+		versteckeButtons(verstecken);
+		versteckeKarteiTitel(verstecken);
+		versteckeEingabefeld(verstecken);
+		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
+		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
 	}
 
 	/**
@@ -125,8 +162,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param sPRACHCODE
-	 *            the sPRACHCODE to set
+	 * @param sPRACHCODE the sPRACHCODE to set
 	 */
 	public static void setSPRACHCODE(int sPRACHCODE)
 	{
@@ -142,8 +178,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param handler
-	 *            the handler to set
+	 * @param handler the handler to set
 	 */
 	public void setHandler(Handler handler)
 	{
@@ -159,8 +194,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param dimension
-	 *            the dimension to set
+	 * @param dimension the dimension to set
 	 */
 	public void setDimension(Dimension dimension)
 	{
@@ -176,8 +210,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param sprachcontroller
-	 *            the sprachcontroller to set
+	 * @param sprachcontroller the sprachcontroller to set
 	 */
 	public void setSprachcontroller(SprachController sprachcontroller)
 	{
@@ -193,8 +226,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiMenuebar
-	 *            the guiMenuebar to set
+	 * @param guiMenuebar the guiMenuebar to set
 	 */
 	public void setGuiMenuebar(GuiMenuebar guiMenuebar)
 	{
@@ -210,8 +242,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiKarteiTitel
-	 *            the guiKarteiTitel to set
+	 * @param guiKarteiTitel the guiKarteiTitel to set
 	 */
 	public void setGuiKarteiTitel(GuiKarteiTitel guiKarteiTitel)
 	{
@@ -227,8 +258,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiEingabeFeld
-	 *            the guiEingabeFeld to set
+	 * @param guiEingabeFeld the guiEingabeFeld to set
 	 */
 	public void setGuiEingabeFeld(GuiEingabeFeld guiEingabeFeld)
 	{
@@ -244,8 +274,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiSmiley
-	 *            the guiSmiley to set
+	 * @param guiSmiley the guiSmiley to set
 	 */
 	public void setGuiSmiley(GuiSmiley guiSmiley)
 	{
@@ -261,8 +290,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiDialog
-	 *            the guiDialog to set
+	 * @param guiDialog the guiDialog to set
 	 */
 	public void setGuiDialog(GuiDialog guiDialog)
 	{
@@ -278,8 +306,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param karteKarteiPanel
-	 *            the karteKarteiPanel to set
+	 * @param karteKarteiPanel the karteKarteiPanel to set
 	 */
 	public void setKarteKarteiPanel(GuiKarteiKartePanel karteKarteiPanel)
 	{
@@ -295,8 +322,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param karteButtons
-	 *            the karteButtons to set
+	 * @param karteButtons the karteButtons to set
 	 */
 	public void setKarteButtons(GuiKarteButtons karteButtons)
 	{
@@ -328,11 +354,19 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @return the backgroundcolor
+	 * @return the colorBackground
 	 */
-	public static Color getBackgroundcolor()
+	public static Color getColorBackground()
 	{
 		return COLOR_BACKGROUND;
+	}
+
+	/**
+	 * @return the colorTextWhite
+	 */
+	public static Color getColorTextWhite()
+	{
+		return COLOR_TEXT_WHITE;
 	}
 
 	/**

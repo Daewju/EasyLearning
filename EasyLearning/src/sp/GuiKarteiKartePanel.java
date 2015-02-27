@@ -62,7 +62,7 @@ public class GuiKarteiKartePanel
 		faecherBez.add(fach6Bez);
 		panel.add(fach6Bez, 2, 0);
 		setzeFachBez();
-
+		setzeFachAktiv(fach1Bez);
 	}
 
 	public void setzeText(String wort)
@@ -145,9 +145,7 @@ public class GuiKarteiKartePanel
 		@Override
 		public void mouseReleased(MouseEvent e)
 		{
-			JLabel k = (JLabel) e.getSource();
-			setzeFachAktiv(k);
-			handler.eventGeheZuFach(Integer.parseInt(k.getText()));
+
 		}
 	}
 

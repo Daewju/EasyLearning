@@ -3,7 +3,7 @@ package sp;
 public interface GuiSchnittstelle
 {
 	public void eventNeueKartei(String eingabeFeldErgebnis, String eingabeFeldErgebnis2);
-	public void eventNaechsteKarte();
+	public void eventNaechsteKarte(String benutzerEingabe);
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel);
 	public void eventKarteBearbeiten(String wort, String vokabel);
 	public void eventKarteLoeschen(String wort);

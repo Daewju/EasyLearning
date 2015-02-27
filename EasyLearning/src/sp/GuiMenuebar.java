@@ -4,18 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileView;
 
@@ -128,21 +121,28 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				boolean ergebnis = false;
-					while (!ergebnis)
-					{
-						ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
-								sprachcontroller.getSprache(
-										"Geben Sie die Sprachen ein",
-										GuiMain.SPRACHCODE),
-								sprachcontroller.getSprache("Hauptsprache",
-										GuiMain.SPRACHCODE) + ": ",
-								sprachcontroller.getSprache("Fremdsprache",
-										GuiMain.SPRACHCODE) + ": ");
-					}
-					handler.eventNeueKartei(guiMain.getGuiDialog().getHauptsprache(), guiMain.getGuiDialog().getFremdsprache());
+				while (!ergebnis)
+				{
+					ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
+							sprachcontroller.getSprache(
+									"Geben Sie die Sprachen ein",
+									GuiMain.SPRACHCODE),
+							sprachcontroller.getSprache("Hauptsprache",
+									GuiMain.SPRACHCODE) + ": ",
+							sprachcontroller.getSprache("Fremdsprache",
+									GuiMain.SPRACHCODE) + ": ");
 				}
+				if (guiMain.getGuiDialog().getHauptsprache() != null
+						&& guiMain.getGuiDialog().getFremdsprache() != null)
+				{
+					handler.eventNeueKartei(guiMain.getGuiDialog()
+							.getHauptsprache(), guiMain.getGuiDialog()
+							.getFremdsprache());
+					guiMain.getGuiDialog().setHauptsprache(null);
+					guiMain.getGuiDialog().setFremdsprache(null);
+				}
+			}
 		});
-		
 
 		oeffnenEintrag.addActionListener(new ActionListener()
 		{
@@ -165,7 +165,8 @@ public class GuiMenuebar
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
 				chooser.showOpenDialog(guiMain);
-				handler.eventDateiOeffnen(chooser.getSelectedFile().getAbsolutePath());
+				handler.eventDateiOeffnen(chooser.getSelectedFile()
+						.getAbsolutePath());
 			}
 		});
 
@@ -207,10 +208,12 @@ public class GuiMenuebar
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
-						handler.eventDateiImportieren(chooser.getSelectedFile().getAbsolutePath(), true);
+						handler.eventDateiImportieren(chooser.getSelectedFile()
+								.getAbsolutePath(), true);
 					} else
 					{
-						handler.eventDateiImportieren(chooser.getSelectedFile().getAbsolutePath(), false);
+						handler.eventDateiImportieren(chooser.getSelectedFile()
+								.getAbsolutePath(), false);
 					}
 				}
 			}
@@ -228,7 +231,6 @@ public class GuiMenuebar
 				chooser.showSaveDialog(guiMain);
 				if (chooser.getSelectedFile().getAbsolutePath() != null)
 				{
-							.getAbsolutePath();
 					int fortschritt = guiMain
 							.getGuiDialog()
 							.variableButtonsDialog(
@@ -246,13 +248,14 @@ public class GuiMenuebar
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
-						handler.eventDateiExportieren(chooser.getSelectedFile().getAbsolutePath(), true);
+						handler.eventDateiExportieren(chooser.getSelectedFile()
+								.getAbsolutePath() + ".csv", true);
 					} else
 					{
-						handler.eventDateiExportieren(chooser.getSelectedFile().getAbsolutePath(), false);
+						handler.eventDateiExportieren(chooser.getSelectedFile()
+								.getAbsolutePath() + ".csv", false);
 					}
 				}
-				handler.empfangeEvent(e);
 			}
 		});
 
@@ -308,8 +311,7 @@ public class GuiMenuebar
 						sprachcontroller.getSprache("Version",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Version",
-								GuiMain.SPRACHCODE)
-								+ ": " + GuiMain.version);
+								GuiMain.SPRACHCODE) + ": " + GuiMain.version);
 			}
 		});
 
@@ -326,6 +328,363 @@ public class GuiMenuebar
 										+ ": \n\nMarko Kartelo\nDamjan Djuranovic\nSajeevan Premakumaran");
 			}
 		});
+	}
+
+	/**
+	 * @return the guiMain
+	 */
+	public GuiMain getGuiMain()
+	{
+		return guiMain;
+	}
+
+	/**
+	 * @param guiMain
+	 *            the guiMain to set
+	 */
+	public void setGuiMain(GuiMain guiMain)
+	{
+		this.guiMain = guiMain;
+	}
+
+	/**
+	 * @return the hintergrundColor
+	 */
+	public Color getHintergrundColor()
+	{
+		return hintergrundColor;
+	}
+
+	/**
+	 * @param hintergrundColor
+	 *            the hintergrundColor to set
+	 */
+	public void setHintergrundColor(Color hintergrundColor)
+	{
+		this.hintergrundColor = hintergrundColor;
+	}
+
+	/**
+	 * @return the schriftColor
+	 */
+	public Color getSchriftColor()
+	{
+		return schriftColor;
+	}
+
+	/**
+	 * @param schriftColor
+	 *            the schriftColor to set
+	 */
+	public void setSchriftColor(Color schriftColor)
+	{
+		this.schriftColor = schriftColor;
+	}
+
+	/**
+	 * @return the handler
+	 */
+	public Handler getHandler()
+	{
+		return handler;
+	}
+
+	/**
+	 * @param handler
+	 *            the handler to set
+	 */
+	public void setHandler(Handler handler)
+	{
+		this.handler = handler;
+	}
+
+	/**
+	 * @return the sprachcontroller
+	 */
+	public SprachController getSprachcontroller()
+	{
+		return sprachcontroller;
+	}
+
+	/**
+	 * @param sprachcontroller
+	 *            the sprachcontroller to set
+	 */
+	public void setSprachcontroller(SprachController sprachcontroller)
+	{
+		this.sprachcontroller = sprachcontroller;
+	}
+
+	/**
+	 * @return the menuezeile
+	 */
+	public JMenuBar getMenuezeile()
+	{
+		return menuezeile;
+	}
+
+	/**
+	 * @param menuezeile
+	 *            the menuezeile to set
+	 */
+	public void setMenuezeile(JMenuBar menuezeile)
+	{
+		this.menuezeile = menuezeile;
+	}
+
+	/**
+	 * @return the dateiMenue
+	 */
+	public JMenu getDateiMenue()
+	{
+		return dateiMenue;
+	}
+
+	/**
+	 * @param dateiMenue
+	 *            the dateiMenue to set
+	 */
+	public void setDateiMenue(JMenu dateiMenue)
+	{
+		this.dateiMenue = dateiMenue;
+	}
+
+	/**
+	 * @return the spracheMenue
+	 */
+	public JMenu getSpracheMenue()
+	{
+		return spracheMenue;
+	}
+
+	/**
+	 * @param spracheMenue
+	 *            the spracheMenue to set
+	 */
+	public void setSpracheMenue(JMenu spracheMenue)
+	{
+		this.spracheMenue = spracheMenue;
+	}
+
+	/**
+	 * @return the infoMenue
+	 */
+	public JMenu getInfoMenue()
+	{
+		return infoMenue;
+	}
+
+	/**
+	 * @param infoMenue
+	 *            the infoMenue to set
+	 */
+	public void setInfoMenue(JMenu infoMenue)
+	{
+		this.infoMenue = infoMenue;
+	}
+
+	/**
+	 * @return the neueKarteiEintrag
+	 */
+	public JMenuItem getNeueKarteiEintrag()
+	{
+		return neueKarteiEintrag;
+	}
+
+	/**
+	 * @param neueKarteiEintrag
+	 *            the neueKarteiEintrag to set
+	 */
+	public void setNeueKarteiEintrag(JMenuItem neueKarteiEintrag)
+	{
+		this.neueKarteiEintrag = neueKarteiEintrag;
+	}
+
+	/**
+	 * @return the oeffnenEintrag
+	 */
+	public JMenuItem getOeffnenEintrag()
+	{
+		return oeffnenEintrag;
+	}
+
+	/**
+	 * @param oeffnenEintrag
+	 *            the oeffnenEintrag to set
+	 */
+	public void setOeffnenEintrag(JMenuItem oeffnenEintrag)
+	{
+		this.oeffnenEintrag = oeffnenEintrag;
+	}
+
+	/**
+	 * @return the speichernEintrag
+	 */
+	public JMenuItem getSpeichernEintrag()
+	{
+		return speichernEintrag;
+	}
+
+	/**
+	 * @param speichernEintrag
+	 *            the speichernEintrag to set
+	 */
+	public void setSpeichernEintrag(JMenuItem speichernEintrag)
+	{
+		this.speichernEintrag = speichernEintrag;
+	}
+
+	/**
+	 * @return the importEintrag
+	 */
+	public JMenuItem getImportEintrag()
+	{
+		return importEintrag;
+	}
+
+	/**
+	 * @param importEintrag
+	 *            the importEintrag to set
+	 */
+	public void setImportEintrag(JMenuItem importEintrag)
+	{
+		this.importEintrag = importEintrag;
+	}
+
+	/**
+	 * @return the exportEintrag
+	 */
+	public JMenuItem getExportEintrag()
+	{
+		return exportEintrag;
+	}
+
+	/**
+	 * @param exportEintrag
+	 *            the exportEintrag to set
+	 */
+	public void setExportEintrag(JMenuItem exportEintrag)
+	{
+		this.exportEintrag = exportEintrag;
+	}
+
+	/**
+	 * @return the beendenEintrag
+	 */
+	public JMenuItem getBeendenEintrag()
+	{
+		return beendenEintrag;
+	}
+
+	/**
+	 * @param beendenEintrag
+	 *            the beendenEintrag to set
+	 */
+	public void setBeendenEintrag(JMenuItem beendenEintrag)
+	{
+		this.beendenEintrag = beendenEintrag;
+	}
+
+	/**
+	 * @return the deutschEintrag
+	 */
+	public JMenuItem getDeutschEintrag()
+	{
+		return deutschEintrag;
+	}
+
+	/**
+	 * @param deutschEintrag
+	 *            the deutschEintrag to set
+	 */
+	public void setDeutschEintrag(JMenuItem deutschEintrag)
+	{
+		this.deutschEintrag = deutschEintrag;
+	}
+
+	/**
+	 * @return the englischEintrag
+	 */
+	public JMenuItem getEnglischEintrag()
+	{
+		return englischEintrag;
+	}
+
+	/**
+	 * @param englischEintrag
+	 *            the englischEintrag to set
+	 */
+	public void setEnglischEintrag(JMenuItem englischEintrag)
+	{
+		this.englischEintrag = englischEintrag;
+	}
+
+	/**
+	 * @return the franzoesischEintrag
+	 */
+	public JMenuItem getFranzoesischEintrag()
+	{
+		return franzoesischEintrag;
+	}
+
+	/**
+	 * @param franzoesischEintrag
+	 *            the franzoesischEintrag to set
+	 */
+	public void setFranzoesischEintrag(JMenuItem franzoesischEintrag)
+	{
+		this.franzoesischEintrag = franzoesischEintrag;
+	}
+
+	/**
+	 * @return the italienischEintrag
+	 */
+	public JMenuItem getItalienischEintrag()
+	{
+		return italienischEintrag;
+	}
+
+	/**
+	 * @param italienischEintrag
+	 *            the italienischEintrag to set
+	 */
+	public void setItalienischEintrag(JMenuItem italienischEintrag)
+	{
+		this.italienischEintrag = italienischEintrag;
+	}
+
+	/**
+	 * @return the versionEintrag
+	 */
+	public JMenuItem getVersionEintrag()
+	{
+		return versionEintrag;
+	}
+
+	/**
+	 * @param versionEintrag
+	 *            the versionEintrag to set
+	 */
+	public void setVersionEintrag(JMenuItem versionEintrag)
+	{
+		this.versionEintrag = versionEintrag;
+	}
+
+	/**
+	 * @return the ueberEintrag
+	 */
+	public JMenuItem getUeberEintrag()
+	{
+		return ueberEintrag;
+	}
+
+	/**
+	 * @param ueberEintrag
+	 *            the ueberEintrag to set
+	 */
+	public void setUeberEintrag(JMenuItem ueberEintrag)
+	{
+		this.ueberEintrag = ueberEintrag;
 	}
 
 }

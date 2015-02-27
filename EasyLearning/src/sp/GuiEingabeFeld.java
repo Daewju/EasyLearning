@@ -82,7 +82,7 @@ public class GuiEingabeFeld
 			public void mouseClicked(MouseEvent arg0)
 			{
 				buttonNaechsteKarte.setIcon(new ImageIcon(bildNaechsteKarteO));
-				handler.eventNaechsteKarte();
+				handler.eventNaechsteKarte(textFeld.getText());
 			}
 
 			@Override
@@ -107,7 +107,6 @@ public class GuiEingabeFeld
 			public void mouseReleased(MouseEvent arg0)
 			{
 				buttonNaechsteKarte.setIcon(new ImageIcon(bildNaechsteKarte));
-				handler.eventNaechsteKarteButton();
 			}
 		});
 	}
