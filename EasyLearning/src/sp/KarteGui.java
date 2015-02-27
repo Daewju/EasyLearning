@@ -34,9 +34,9 @@ public class KarteGui extends Canvas
 		super();
 		this.sizeX = 500;
 		this.sizeY = 350;
-		this.posX = (Gui.getWindowwidth() / 2) - (sizeX / 2);
-		this.posY = (Gui.getWindowheight() / 2) - (sizeY / 2);
-		this.color = new Color(0, 191, 255);
+		this.posX = 155;
+		this.posY = 150;
+		this.color = Color.CYAN;
 		this.colorCorrect = new Color(0, 255, 0);
 		this.colorIncorrect = new Color(255, 0, 0);
 		setLocation(this.posX, this.posY);
@@ -58,7 +58,7 @@ public class KarteGui extends Canvas
 		this.sizeY = sizeY;
 		this.posX = posX;
 		this.posY = posY;
-		this.color = new Color(0, 191, 255);
+		this.color = Color.DARK_GRAY;
 		this.colorCorrect = new Color(0, 255, 0);
 		this.colorIncorrect = new Color(255, 0, 0);
 		setLocation(this.posX, this.posY);
@@ -89,7 +89,7 @@ public class KarteGui extends Canvas
 	 */
 	public void zuruecksetzten()
 	{
-		this.color = new Color(0, 191, 255);
+		this.color = Color.DARK_GRAY;
 		setBackground(color);
 	}
 

@@ -1,26 +1,27 @@
 package sp;
 
-import java.util.ArrayList;
-
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mk.Handler;
 import dd.SprachController;
 
 public class GuiDialog
 {
 	private GuiMain guiMain;
-	private SprachController sc;
-	private String eingabeFeldErgebnis;
-	private String eingabeFeldErgebnis2;
+	private SprachController sprachcontroller;
+	private Handler handler;
+	private String hauptsprache;
+	private String fremdsprache;
 
 	public GuiDialog(GuiMain guiMain)
 	{
 		this.guiMain = guiMain;
-		this.sc = guiMain.getSprachcontroller();
+		this.sprachcontroller = guiMain.getSprachcontroller();
+		this.handler = guiMain.getHandler();
 	}
 
 	public void infoDialog(String titel, String text)
@@ -50,68 +51,38 @@ public class GuiDialog
 		return fortschritt;
 	}
 
-	public boolean erzeugeNeuEingabeDialog(String titel, String feld1, String feld2)
+	public boolean erzeugeNeuEingabeDialog(String titel, String feld1,
+			String feld2)
 	{
-			JTextField hauptsp = new JTextField(10);
-			JTextField fremdsp = new JTextField(10);
-			JPanel panelNeu = new JPanel();
-			panelNeu.add(new JLabel(feld1));
-			panelNeu.add(hauptsp);
-			panelNeu.add(Box.createHorizontalStrut(20));
-			panelNeu.add(new JLabel(feld2));
-			panelNeu.add(fremdsp);
-			int result = JOptionPane.showConfirmDialog(guiMain, panelNeu,
-					titel, JOptionPane.OK_CANCEL_OPTION);
-			if (result == JOptionPane.OK_OPTION)
+		JTextField hauptsp = new JTextField(10);
+		JTextField fremdsp = new JTextField(10);
+		JPanel panelNeu = new JPanel();
+		panelNeu.add(new JLabel(feld1));
+		panelNeu.add(hauptsp);
+		panelNeu.add(Box.createHorizontalStrut(20));
+		panelNeu.add(new JLabel(feld2));
+		panelNeu.add(fremdsp);
+		int result = JOptionPane.showConfirmDialog(guiMain, panelNeu, titel,
+				JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION)
+		{
+			if (hauptsp.getText().trim().equals("")
+					|| fremdsp.getText().trim().equals(""))
 			{
-				if (hauptsp.getText().trim().equals("")
-						|| fremdsp.getText().trim().equals(""))
-				{
-					guiMain.getGuiDialog().fehlerDialog(
-							sc.getSprache("Fehler", guiMain.getSprachcode()),
-							sc.getSprache("Die Felder dürfen nicht leer sein",
-									guiMain.getSprachcode()));
-					return false;
-				} else
-				{
-					eingabeFeldErgebnis = hauptsp.getText().trim();
-					eingabeFeldErgebnis2= fremdsp.getText().trim();
-				}
+				guiMain.getGuiDialog().fehlerDialog(
+						sprachcontroller.getSprache("Fehler",
+								GuiMain.SPRACHCODE),
+						sprachcontroller.getSprache(
+								"Die Felder dürfen nicht leer sein",
+								GuiMain.SPRACHCODE));
+				return false;
+			} else
+			{
+				hauptsprache = hauptsp.getText().trim();
+				fremdsprache = fremdsp.getText().trim();
+			}
 		}
 		return true;
-	}
-
-
-	/**
-	 * @return the eingabeFeldErgebnis
-	 */
-	public String getEingabeFeldErgebnis()
-	{
-		return eingabeFeldErgebnis;
-	}
-
-	/**
-	 * @param eingabeFeldErgebnis the eingabeFeldErgebnis to set
-	 */
-	public void setEingabeFeldErgebnis(String eingabeFeldErgebnis)
-	{
-		this.eingabeFeldErgebnis = eingabeFeldErgebnis;
-	}
-
-	/**
-	 * @return the eingabeFeldErgebnis2
-	 */
-	public String getEingabeFeldErgebnis2()
-	{
-		return eingabeFeldErgebnis2;
-	}
-
-	/**
-	 * @param eingabeFeldErgebnis2 the eingabeFeldErgebnis2 to set
-	 */
-	public void setEingabeFeldErgebnis2(String eingabeFeldErgebnis2)
-	{
-		this.eingabeFeldErgebnis2 = eingabeFeldErgebnis2;
 	}
 
 	/**
@@ -123,7 +94,8 @@ public class GuiDialog
 	}
 
 	/**
-	 * @param guiMain the guiMain to set
+	 * @param guiMain
+	 *            the guiMain to set
 	 */
 	public void setGuiMain(GuiMain guiMain)
 	{
@@ -131,19 +103,71 @@ public class GuiDialog
 	}
 
 	/**
-	 * @return the sc
+	 * @return the sprachcontroller
 	 */
-	public SprachController getSc()
+	public SprachController getSprachcontroller()
 	{
-		return sc;
+		return sprachcontroller;
 	}
 
 	/**
-	 * @param sc the sc to set
+	 * @param sprachcontroller
+	 *            the sprachcontroller to set
 	 */
-	public void setSc(SprachController sc)
+	public void setSprachcontroller(SprachController sprachcontroller)
 	{
-		this.sc = sc;
+		this.sprachcontroller = sprachcontroller;
+	}
+
+	/**
+	 * @return the handler
+	 */
+	public Handler getHandler()
+	{
+		return handler;
+	}
+
+	/**
+	 * @param handler
+	 *            the handler to set
+	 */
+	public void setHandler(Handler handler)
+	{
+		this.handler = handler;
+	}
+
+	/**
+	 * @return the hauptsprache
+	 */
+	public String getHauptsprache()
+	{
+		return hauptsprache;
+	}
+
+	/**
+	 * @param hauptsprache
+	 *            the hauptsprache to set
+	 */
+	public void setHauptsprache(String hauptsprache)
+	{
+		this.hauptsprache = hauptsprache;
+	}
+
+	/**
+	 * @return the fremdsprache
+	 */
+	public String getFremdsprache()
+	{
+		return fremdsprache;
+	}
+
+	/**
+	 * @param fremdsprache
+	 *            the fremdsprache to set
+	 */
+	public void setFremdsprache(String fremdsprache)
+	{
+		this.fremdsprache = fremdsprache;
 	}
 
 }

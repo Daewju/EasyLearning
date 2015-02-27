@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -29,15 +30,6 @@ public class GuiMenuebar
 	private Color schriftColor;
 	private Handler handler;
 	private SprachController sprachcontroller;
-
-	// Folgende Datenfelder werden nich mehr exisitieren, sobald die Klasse
-	// Handler mit erweiterten Methoden implementiert wird.
-	private String dateiPfadImport;
-	private String dateiPfadExport;
-	private String hauptsprache;
-	private String fremdsprache;
-	private boolean fortschrittUebernehmen;
-
 	private JMenuBar menuezeile;
 	private JMenu dateiMenue;
 	private JMenu spracheMenue;
@@ -70,38 +62,38 @@ public class GuiMenuebar
 		menuezeile = new JMenuBar();
 		menuezeile.setBackground(hintergrundColor);
 		dateiMenue = new JMenu(sprachcontroller.getSprache("Datei",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		dateiMenue.setForeground(schriftColor);
 		spracheMenue = new JMenu(sprachcontroller.getSprache("Sprache",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		spracheMenue.setForeground(schriftColor);
 		infoMenue = new JMenu(sprachcontroller.getSprache("Info",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		infoMenue.setForeground(schriftColor);
 		neueKarteiEintrag = new JMenuItem(sprachcontroller.getSprache("Neu",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("Öffnen",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		speichernEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Speichern", guiMain.getSprachcode()));
+				"Speichern", GuiMain.SPRACHCODE));
 		importEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Importieren", guiMain.getSprachcode()));
+				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Exportieren", guiMain.getSprachcode()));
+				"Exportieren", GuiMain.SPRACHCODE));
 		beendenEintrag = new JMenuItem(sprachcontroller.getSprache("Beenden",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		deutschEintrag = new JMenuItem(sprachcontroller.getSprache("Deutsch",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		englischEintrag = new JMenuItem(sprachcontroller.getSprache("Englisch",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		franzoesischEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Französisch", guiMain.getSprachcode()));
+				"Französisch", GuiMain.SPRACHCODE));
 		italienischEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Italienisch", guiMain.getSprachcode()));
+				"Italienisch", GuiMain.SPRACHCODE));
 		versionEintrag = new JMenuItem(sprachcontroller.getSprache("Version",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("Über …",
-				guiMain.getSprachcode()));
+				GuiMain.SPRACHCODE));
 		aufbauen();
 		erzeugeActionListener();
 		guiMain.repaint();
@@ -112,6 +104,7 @@ public class GuiMenuebar
 	{
 		guiMain.setJMenuBar(menuezeile);
 		menuezeile.add(dateiMenue);
+		menuezeile.setBorder(BorderFactory.createEmptyBorder());
 		menuezeile.add(spracheMenue);
 		menuezeile.add(infoMenue);
 		dateiMenue.add(neueKarteiEintrag);
@@ -140,13 +133,13 @@ public class GuiMenuebar
 						ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
 								sprachcontroller.getSprache(
 										"Geben Sie die Sprachen ein",
-										guiMain.getSprachcode()),
+										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Hauptsprache",
-										guiMain.getSprachcode()) + ": ",
+										GuiMain.SPRACHCODE) + ": ",
 								sprachcontroller.getSprache("Fremdsprache",
-										guiMain.getSprachcode()) + ": ");
+										GuiMain.SPRACHCODE) + ": ");
 					}
-					handler.empfangeEvent(e);
+					handler.eventNeueKartei(guiMain.getGuiDialog().getHauptsprache(), guiMain.getGuiDialog().getFremdsprache());
 				}
 		});
 		
@@ -168,12 +161,11 @@ public class GuiMenuebar
 					}
 				});
 				chooser.setDialogTitle(sprachcontroller.getSprache("Öffnen",
-						guiMain.getSprachcode()));
+						GuiMain.SPRACHCODE));
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
 				chooser.showOpenDialog(guiMain);
-				dateiPfadImport = chooser.getSelectedFile().getAbsolutePath();
-				handler.empfangeEvent(e);
+				handler.eventDateiOeffnen(chooser.getSelectedFile().getAbsolutePath());
 			}
 		});
 
@@ -181,7 +173,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				handler.empfangeEvent(e);
+				handler.eventDateiSpeichern();
 			}
 		});
 
@@ -191,38 +183,36 @@ public class GuiMenuebar
 			{
 				JFileChooser chooser = new JFileChooser();
 				chooser.setDialogTitle(sprachcontroller.getSprache(
-						"Importieren", guiMain.getSprachcode()));
+						"Importieren", GuiMain.SPRACHCODE));
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
 				chooser.showOpenDialog(guiMain);
 				if (chooser.getSelectedFile().getAbsolutePath() != null)
 				{
-					dateiPfadImport = chooser.getSelectedFile()
-							.getAbsolutePath();
+
 					int fortschritt = guiMain
 							.getGuiDialog()
 							.variableButtonsDialog(
 									new Object[]
 									{
 											sprachcontroller.getSprache("Ja",
-													guiMain.getSprachcode()),
+													GuiMain.SPRACHCODE),
 											sprachcontroller.getSprache("Nein",
-													guiMain.getSprachcode()) },
+													GuiMain.SPRACHCODE) },
 									sprachcontroller.getSprache("Importieren",
-											guiMain.getSprachcode()),
+											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
 													"Möchten Sie den Lernfortschritt übernehmen?",
-													guiMain.getSprachcode()));
+													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
-						fortschrittUebernehmen = true;
+						handler.eventDateiImportieren(chooser.getSelectedFile().getAbsolutePath(), true);
 					} else
 					{
-						fortschrittUebernehmen = false;
+						handler.eventDateiImportieren(chooser.getSelectedFile().getAbsolutePath(), false);
 					}
 				}
-				handler.empfangeEvent(e);
 			}
 		});
 
@@ -232,13 +222,12 @@ public class GuiMenuebar
 			{
 				JFileChooser chooser = new JFileChooser();
 				chooser.setDialogTitle(sprachcontroller.getSprache(
-						"Exportieren", guiMain.getSprachcode()));
+						"Exportieren", GuiMain.SPRACHCODE));
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
 				chooser.showSaveDialog(guiMain);
 				if (chooser.getSelectedFile().getAbsolutePath() != null)
 				{
-					dateiPfadExport = chooser.getSelectedFile()
 							.getAbsolutePath();
 					int fortschritt = guiMain
 							.getGuiDialog()
@@ -246,21 +235,21 @@ public class GuiMenuebar
 									new Object[]
 									{
 											sprachcontroller.getSprache("Ja",
-													guiMain.getSprachcode()),
+													GuiMain.SPRACHCODE),
 											sprachcontroller.getSprache("Nein",
-													guiMain.getSprachcode()) },
+													GuiMain.SPRACHCODE) },
 									sprachcontroller.getSprache("Exportieren",
-											guiMain.getSprachcode()),
+											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
 													"Möchten Sie den Lernfortschritt übernehmen?",
-													guiMain.getSprachcode()));
+													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
-						fortschrittUebernehmen = true;
+						handler.eventDateiExportieren(chooser.getSelectedFile().getAbsolutePath(), true);
 					} else
 					{
-						fortschrittUebernehmen = false;
+						handler.eventDateiExportieren(chooser.getSelectedFile().getAbsolutePath(), false);
 					}
 				}
 				handler.empfangeEvent(e);
@@ -271,7 +260,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				handler.empfangeEvent(e);
+				handler.eventApplikationBeenden();
 			}
 		});
 
@@ -279,7 +268,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSprachcode(0);
+				guiMain.setSPRACHCODE(0);
 				init();
 			}
 		});
@@ -288,7 +277,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSprachcode(1);
+				guiMain.setSPRACHCODE(1);
 				init();
 			}
 		});
@@ -297,7 +286,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSprachcode(2);
+				guiMain.setSPRACHCODE(2);
 				init();
 			}
 		});
@@ -306,7 +295,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSprachcode(3);
+				guiMain.setSPRACHCODE(3);
 				init();
 			}
 		});
@@ -317,9 +306,9 @@ public class GuiMenuebar
 			{
 				guiMain.getGuiDialog().infoDialog(
 						sprachcontroller.getSprache("Version",
-								guiMain.getSprachcode()),
+								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Version",
-								guiMain.getSprachcode())
+								GuiMain.SPRACHCODE)
 								+ ": " + GuiMain.version);
 			}
 		});
@@ -331,9 +320,9 @@ public class GuiMenuebar
 				guiMain.getGuiDialog()
 						.infoDialog(
 								sprachcontroller.getSprache("Über …",
-										guiMain.getSprachcode()),
+										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Programmierer",
-										guiMain.getSprachcode())
+										GuiMain.SPRACHCODE)
 										+ ": \n\nMarko Kartelo\nDamjan Djuranovic\nSajeevan Premakumaran");
 			}
 		});

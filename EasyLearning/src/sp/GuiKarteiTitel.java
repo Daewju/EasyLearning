@@ -1,10 +1,10 @@
 package sp;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,11 +16,13 @@ public class GuiKarteiTitel
 	public GuiKarteiTitel()
 	{
 		panel = new JPanel(true);
-		panel.setPreferredSize(new Dimension(GuiMain.getWindowwidth(),75));
+		panel.setPreferredSize(new Dimension(GuiMain.WINDOWWITDH,65));
+		panel.setForeground(GuiMain.COLOR_BACKGROUND);
 		panel.setBackground(Color.ORANGE);
-		this.karteiTitel = new JLabel("Kartei");
-		this.karteiTitel.setFont(new Font(null, Font.BOLD, 50));
-		panel.add(this.karteiTitel);
+		panel.setBorder(BorderFactory.createEmptyBorder());
+		karteiTitel = new JLabel("Kartei");
+		karteiTitel.setFont(new Font(null, Font.BOLD, 40));
+		panel.add(karteiTitel);
 	}
 
 	/**
@@ -54,11 +56,5 @@ public class GuiKarteiTitel
 	{
 		this.karteiTitel = karteiTitel;
 	}
-	
-	public void setzeKarteiTitelText(String karteiTitel)
-	{
-		this.karteiTitel.setText(karteiTitel);
-	}
-	
 
 }
