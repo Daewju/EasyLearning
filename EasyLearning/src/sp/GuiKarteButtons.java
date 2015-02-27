@@ -45,7 +45,7 @@ public class GuiKarteButtons
 		handler = new Handler(guiMain);
 		hauptpanel = new JPanel(new GridBagLayout());
 		hauptpanel.setBackground(GuiMain.COLOR_BACKGROUND);
-		panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 50));
+		panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 72));
 		panel.setBackground(GuiMain.COLOR_BACKGROUND);
 		panel.setPreferredSize(new Dimension(100, 500));
 		try
