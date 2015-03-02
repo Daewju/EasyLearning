@@ -14,12 +14,12 @@ import dd.SprachController;
 public class GuiMain extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	protected static final int WINDOWWITDH = 1024;
-	protected static final int WINDOWHEIGHT = 768;
-	protected static final Color COLOR_BACKGROUND = new Color(30, 30, 30);
-	protected static final Color COLOR_TEXT_WHITE = new Color(240, 240, 240);
-	protected static final String version = "0.1";
-	protected static int SPRACHCODE = 0;
+	public static final int WINDOWWITDH = 1024;
+	public static final int WINDOWHEIGHT = 768;
+	public static final Color COLOR_BACKGROUND = new Color(30, 30, 30);
+	public static final Color COLOR_TEXT_WHITE = new Color(240, 240, 240);
+	public static final String version = "0.1";
+	public static int SPRACHCODE = 0;
 	private Handler handler;
 	private Dimension dimension;
 	private SprachController sprachcontroller;
