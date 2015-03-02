@@ -273,11 +273,14 @@ public class KarteiHandler
 	 * würde sie dann überschrieben werden! Falls eine gleichnamige Kartei
 	 * erstellt wird, sollte dies überprüft werden.
 	 * 
+	 * @param karteiPfad
+	 *            Hier wird ein voller Dateipfad verlangt
+	 * 
 	 * @return "True" für bereites-vorhanden, "False" für nicht-vorhanden.
 	 */
-	public boolean dateiBereitsVorhanden()
+	public boolean dateiBereitsVorhanden(String dateipfad)
 	{
-		File datei = new File(karteiPfad);
+		File datei = new File(dateipfad);
 		if (datei.isFile())
 		{
 			return true;
@@ -312,7 +315,9 @@ public class KarteiHandler
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -322,7 +327,9 @@ public class KarteiHandler
 				+ karteiPfad + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -337,7 +344,9 @@ public class KarteiHandler
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -380,7 +389,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param ordner the ordner to set
+	 * @param ordner
+	 *            the ordner to set
 	 */
 	public static void setOrdner(File ordner)
 	{
@@ -396,7 +406,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param datumFormat the datumFormat to set
+	 * @param datumFormat
+	 *            the datumFormat to set
 	 */
 	public static void setDatumFormat(SimpleDateFormat datumFormat)
 	{
@@ -412,7 +423,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param cr the cr to set
+	 * @param cr
+	 *            the cr to set
 	 */
 	public void setCr(CSVReader cr)
 	{
@@ -428,7 +440,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param cw the cw to set
+	 * @param cw
+	 *            the cw to set
 	 */
 	public void setCw(CSVWriter cw)
 	{
@@ -442,5 +455,5 @@ public class KarteiHandler
 	{
 		return karteiPfad;
 	}
-	
+
 }
