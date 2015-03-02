@@ -58,6 +58,7 @@ public class Handler implements GuiSchnittstelle{
 		}
 		else{
 			this.usedKartei = kartei;
+			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventDateiSpeichern();
 		}
 		
