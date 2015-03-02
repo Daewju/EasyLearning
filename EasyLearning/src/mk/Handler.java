@@ -3,6 +3,7 @@
  */
 package mk;
 import dd.KarteiHandler;
+import dd.SprachController;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.Random;
 import sp.GuiDialog;
 import sp.GuiMain;
 import sp.GuiSchnittstelle;
+
 /**
  * @author marko
  *
@@ -21,14 +23,23 @@ public class Handler implements GuiSchnittstelle{
 	private GuiMain gui;
 	private GuiDialog guiDialog;
 	private KarteiHandler kh;
+	private SprachController sc;
 	private Kartei usedKartei;
 	private Karte usedKarte;
 	private int usedFach;
 	private boolean ueberprueft;
 	
+	
 	public Handler(GuiMain gui){
 		this.gui = gui;
 		this.ueberprueft = false;
+		this.guiDialog = new GuiDialog(gui);
+		try {
+			this.sc = new SprachController();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -39,7 +50,16 @@ public class Handler implements GuiSchnittstelle{
 	{
 		gui.versteckeAlleElemente(false);
 		Kartei kartei = new Kartei(eingabeFeldErgebnis, eingabeFeldErgebnis2);
-		this.usedKartei = kartei;
+		this.kh = new KarteiHandler(kartei);
+		if(kh.dateiBereitsVorhanden()){
+			this.kh = null;
+			kartei = null;
+			guiDialog.fehlerDialog(sc.getSprache("Fehler", gui.SPRACHCODE), sc.getSprache("Kartei schon vorhanden", gui.SPRACHCODE));
+		}
+		else{
+			this.usedKartei = kartei;
+			eventDateiSpeichern();
+		}
 		
 		//System.out.println(eingabeFeldErgebnis + ", " + eingabeFeldErgebnis2);
 	}
@@ -61,29 +81,26 @@ public class Handler implements GuiSchnittstelle{
 		}
 		else{
 			gui.setSmiley(false);
-			Karte temp;
-			ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
-			Random rand = new Random();
+			
 			
 			//verschiebe Karte in Fach 1
 			this.usedKartei.moveKarte(this.usedKarte, 1);
 			
 			//hole nächste Karte
-			temp = this.usedKarte;
-			while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
-				this.usedKarte = f.get(rand.nextInt(f.size()));
-			}
+			this.usedKarte = gibNaechsteKarte();
 			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
-			gui.setWort(usedKarte.getVokabel());
+			gui.setWort(this.usedKarte.getVokabel());
 			this.ueberprueft = false;
 		}
+		eventDateiSpeichern();
 		
 	}
 
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
-		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);		
+		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);	
+		eventDateiSpeichern();
 	}
 
 	@Override
@@ -91,12 +108,24 @@ public class Handler implements GuiSchnittstelle{
 	{
 		this.usedKarte.setWort(wort);
 		this.usedKarte.setVokabel(vokabel);
+		eventDateiSpeichern();
+		gui.setWort(this.usedKarte.getVokabel());
+		
 	}
 
 	@Override
 	public void eventKarteLoeschen(String wort)
 	{
-		System.out.println(wort);
+		if(this.usedKarte == null){
+			guiDialog.fehlerDialog(sc.getSprache("Fehler",gui.SPRACHCODE), "Keine Karte zum Loeschen vorhanden.");
+		}
+		else{
+			Karte temp = gibNaechsteKarte();
+			this.usedKartei.removeKarte(this.usedKarte);
+			this.usedKarte=temp;
+			gui.setWort(this.usedKarte.getVokabel());
+		}
+		eventDateiSpeichern();
 		
 	}
 
@@ -156,6 +185,17 @@ public class Handler implements GuiSchnittstelle{
 	{
 		System.out.println("eventApplikationBeenden");
 		
+	}
+	
+	private Karte gibNaechsteKarte(){
+		Karte temp;
+		ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
+		Random rand = new Random();
+		temp = this.usedKarte;
+		while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
+			temp = f.get(rand.nextInt(f.size()));
+		}
+		return temp;
 	}
 
 }
