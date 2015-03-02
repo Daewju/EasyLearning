@@ -132,7 +132,7 @@ public class Kartei {
 	 * 
 	 * 		
 	 */	
-	private ArrayList<Karte> gibFach(int fach){
+	public ArrayList<Karte> gibFach(int fach){
 		
 		ArrayList<Karte> f = new ArrayList<Karte>();			
 
