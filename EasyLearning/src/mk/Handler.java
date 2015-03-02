@@ -40,14 +40,6 @@ public class Handler implements GuiSchnittstelle{
 		gui.versteckeAlleElemente(false);
 		Kartei kartei = new Kartei(eingabeFeldErgebnis, eingabeFeldErgebnis2);
 		this.usedKartei = kartei;
-		try {
-			kh.dateiSchreiben(kartei, true);
-		} catch (ParseException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			guiDialog.fehlerDialog("Error Kartei erstellen", "ACHTUNG: Kartei konnte nicht erstellt werden.");
-			
-		}
 		
 		//System.out.println(eingabeFeldErgebnis + ", " + eingabeFeldErgebnis2);
 	}
@@ -72,33 +64,33 @@ public class Handler implements GuiSchnittstelle{
 			Karte temp;
 			ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
 			Random rand = new Random();
-			//verschiebe Karte in Fach 1
 			
+			//verschiebe Karte in Fach 1
 			this.usedKartei.moveKarte(this.usedKarte, 1);
 			
-			
-			
-			
-			usedKarte.setAufrufe(usedKarte.getAufrufe()+1);
-			
+			//hole nächste Karte
+			temp = this.usedKarte;
+			while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
+				this.usedKarte = f.get(rand.nextInt(f.size()));
+			}
+			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
+			gui.setWort(usedKarte.getVokabel());
+			this.ueberprueft = false;
 		}
-		
-		System.out.println(benutzerEingabe);
 		
 	}
 
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
-		System.out.println(wort + ", " + vokabel);
-		
+		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);		
 	}
 
 	@Override
 	public void eventKarteBearbeiten(String wort, String vokabel)
 	{
-		System.out.println(wort + ", " + vokabel);
-		
+		this.usedKarte.setWort(wort);
+		this.usedKarte.setVokabel(vokabel);
 	}
 
 	@Override
@@ -111,7 +103,7 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventNeueKarteiHinzufuegen(String hauptsprache, String fremdsprache)
 	{
-		System.out.println(hauptsprache + ", " + fremdsprache);
+		
 		
 	}
 
@@ -148,7 +140,14 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiSpeichern()
 	{
-		System.out.println("eventDateiSpeichern");
+		try {
+			kh.dateiSchreiben(this.usedKartei, true);
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			guiDialog.fehlerDialog("Error Kartei erstellen", "ACHTUNG: Kartei konnte nicht erstellt werden.");
+			
+		}
 		
 	}
 
