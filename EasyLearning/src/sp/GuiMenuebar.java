@@ -136,8 +136,8 @@ public class GuiMenuebar
 						&& guiMain.getGuiDialog().getFremdsprache() != null)
 				{
 					handler.eventNeueKartei(guiMain.getGuiDialog()
-							.getHauptsprache(), guiMain.getGuiDialog()
-							.getFremdsprache());
+							.getHauptsprache().toUpperCase(), guiMain.getGuiDialog()
+							.getFremdsprache().toUpperCase());
 					guiMain.getGuiDialog().setHauptsprache(null);
 					guiMain.getGuiDialog().setFremdsprache(null);
 				}
