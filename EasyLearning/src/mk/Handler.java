@@ -43,7 +43,14 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 	
-
+	/**				
+	 * 				
+	 * @param eingabeFeldErgebnis
+	 * @param eingabeFeldErgebnis2							
+	 *	
+	 * @return	Referenz auf Karte Objekt das aus dem Fach entfernt wurde.			
+	 * 				
+	 */		
 	@Override
 	public void eventNeueKartei(String eingabeFeldErgebnis,
 			String eingabeFeldErgebnis2)
