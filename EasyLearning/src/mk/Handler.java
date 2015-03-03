@@ -26,7 +26,7 @@ public class Handler implements GuiSchnittstelle{
 	private SprachController sc;
 	private Kartei usedKartei;
 	private Karte usedKarte;
-	private int usedFach;
+	private ArrayList<Karte> usedFach;
 	private boolean ueberprueft;
 	
 	
@@ -49,14 +49,16 @@ public class Handler implements GuiSchnittstelle{
 			String eingabeFeldErgebnis2)
 	{
 		gui.versteckeAlleElemente(false);
+		KarteiHandler tempkh;
 		Kartei kartei = new Kartei(eingabeFeldErgebnis, eingabeFeldErgebnis2);
-		this.kh = new KarteiHandler(kartei);
-		if(kh.dateiBereitsVorhanden()){
-			this.kh = null;
+		tempkh = new KarteiHandler(kartei);
+		if(tempkh.dateiBereitsVorhanden()){
+			tempkh = null;
 			kartei = null;
 			guiDialog.fehlerDialog(sc.getSprache("Fehler", gui.SPRACHCODE), sc.getSprache("Kartei schon vorhanden", gui.SPRACHCODE));
 		}
 		else{
+			this.kh = tempkh;
 			this.usedKartei = kartei;
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventDateiSpeichern();
@@ -130,17 +132,17 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 
-	@Override
+	/*@Override
 	public void eventNeueKarteiHinzufuegen(String hauptsprache, String fremdsprache)
 	{
 		
 		
-	}
+	}*/
 
 	@Override
 	public void eventGeheZuFach(int fach)
 	{
-		System.out.println(fach);
+		this.usedFach = this.usedKartei.gibFach(fach);
 		
 	}
 
@@ -190,11 +192,11 @@ public class Handler implements GuiSchnittstelle{
 	
 	private Karte gibNaechsteKarte(){
 		Karte temp;
-		ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
+		//ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
 		Random rand = new Random();
 		temp = this.usedKarte;
 		while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
-			temp = f.get(rand.nextInt(f.size()));
+			temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
 		}
 		return temp;
 	}
