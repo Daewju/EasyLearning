@@ -46,9 +46,7 @@ public class Handler implements GuiSchnittstelle{
 	/**				
 	 * 				
 	 * @param eingabeFeldErgebnis
-	 * @param eingabeFeldErgebnis2							
-	 *	
-	 * @return	Referenz auf Karte Objekt das aus dem Fach entfernt wurde.			
+	 * @param eingabeFeldErgebnis2									
 	 * 				
 	 */		
 	@Override
@@ -85,6 +83,7 @@ public class Handler implements GuiSchnittstelle{
 			}
 			else{
 				gui.setSmiley(false);
+				gui.setWort(this.usedKarte.getWort());
 				
 			}
 			this.ueberprueft = true;
@@ -98,7 +97,6 @@ public class Handler implements GuiSchnittstelle{
 			
 			//hole nächste Karte
 			this.usedKarte = gibNaechsteKarte();
-			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
 			gui.setWort(this.usedKarte.getVokabel());
 			this.ueberprueft = false;
 		}
@@ -150,6 +148,8 @@ public class Handler implements GuiSchnittstelle{
 	public void eventGeheZuFach(int fach)
 	{
 		this.usedFach = this.usedKartei.gibFach(fach);
+		this.usedKarte = gibNaechsteKarte();
+		gui.setWort(this.usedKarte.getVokabel());
 		
 	}
 
@@ -205,6 +205,7 @@ public class Handler implements GuiSchnittstelle{
 		while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
 			temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
 		}
+		temp.setAufrufe(this.usedKarte.getAufrufe()+1);
 		return temp;
 	}
 
