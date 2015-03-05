@@ -44,12 +44,16 @@ public class KarteGui extends Canvas
 		setBackground(color);
 		addMouseListener(new MyMouseListener());
 	}
-	
+
 	/**
-	 * @param sizeX Groesse in Pixel für Horizontale
-	 * @param sizeY Groesse in Pixel für Vertikale
-	 * @param posX Position X linke-obere Ecke
-	 * @param posY Position Y linke-obere Ecke
+	 * @param sizeX
+	 *            Groesse in Pixel für Horizontale
+	 * @param sizeY
+	 *            Groesse in Pixel für Vertikale
+	 * @param posX
+	 *            Position X linke-obere Ecke
+	 * @param posY
+	 *            Position Y linke-obere Ecke
 	 */
 	public KarteGui(int sizeX, int sizeY, int posX, int posY)
 	{
@@ -66,32 +70,7 @@ public class KarteGui extends Canvas
 		setBackground(color);
 		addMouseListener(new MyMouseListener());
 	}
-	
-	/**
-	 * @param korrekteAntwort
-	 *            "True": richtige Antwort, die Karte wird grün. "False":
-	 *            falsche Antwort, die Karte wird rot.
-	 */
-	public void umdrehen(boolean korrekteAntwort)
-	{
-		if (korrekteAntwort)
-		{
-			this.color = colorCorrect;
-		} else
-		{
-			this.color = colorIncorrect;
-		}
-		setBackground(color);
-	}
-	
-	/**
-	 * Setzt die Karte wieder auf ihre Standard-Farbe zurück.
-	 */
-	public void zuruecksetzten()
-	{
-		this.color = Color.DARK_GRAY;
-		setBackground(color);
-	}
+
 
 	/**
 	 * @return the sizeX

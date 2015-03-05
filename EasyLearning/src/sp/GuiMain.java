@@ -49,7 +49,7 @@ public class GuiMain extends JFrame
 		guiEingabeFeld = new GuiEingabeFeld(this);
 		guiSmiley = new GuiSmiley();
 		guiDialog = new GuiDialog(this);
-		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50);
+		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0);
 		karteButtons = new GuiKarteButtons(this);
 		setLayout(new BorderLayout());
 		getContentPane().setBackground(COLOR_BACKGROUND);
@@ -76,6 +76,11 @@ public class GuiMain extends JFrame
 		add(karteKarteiPanel.getPanel(), BorderLayout.CENTER);
 		repaint();
 		setVisible(true);
+	}
+	
+	public void setKartenFarbe(int kartenFarbe)
+	{
+		karteKarteiPanel.setKartenFarbe(kartenFarbe);
 	}
 
 	public void setSmiley(boolean like)
@@ -369,6 +374,7 @@ public class GuiMain extends JFrame
 		return COLOR_TEXT_WHITE;
 	}
 
+	
 	/**
 	 * @return the version
 	 */

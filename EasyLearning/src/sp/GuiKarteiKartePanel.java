@@ -25,10 +25,12 @@ public class GuiKarteiKartePanel
 	private JLabel fach4Bez;
 	private JLabel fach5Bez;
 	private JLabel fach6Bez;
+	private int kartenFarbe;
 
-	public GuiKarteiKartePanel(GuiMain guiMain, int xSize, int ySize)
+	public GuiKarteiKartePanel(GuiMain guiMain, int xSize, int ySize, int kartenFarbe)
 	{
 		gui = guiMain;
+		this.kartenFarbe = kartenFarbe;
 		handler = gui.getHandler();
 		panel = new JLayeredPane();
 		faecherBez = new ArrayList<>();
@@ -108,8 +110,42 @@ public class GuiKarteiKartePanel
 				faechlein.setBackground(Color.DARK_GRAY);
 			} else
 			{
-				fach.setBackground(Color.CYAN);
+				switch (kartenFarbe)
+				{
+				case 0:
+					fach.setBackground(karte.getColor());
+					break;
+				case 1:
+					fach.setBackground(karte.getColorCorrect());
+					break;
+				case 2:
+					fach.setBackground(karte.getColorIncorrect());
+					break;
+				default:
+					fach.setBackground(karte.getColor());
+					break;
+				}
 			}
+		}
+	}
+
+	public void setKartenFarbe(int kartenFarbe)
+	{
+		this.kartenFarbe = kartenFarbe;
+		switch (kartenFarbe)
+		{
+		case 0:
+			karte.setBackground(karte.getColor());
+			break;
+		case 1:
+			karte.setBackground(karte.getColorCorrect());
+			break;
+		case 2:
+			karte.setBackground(karte.getColorIncorrect());
+			break;
+		default:
+			karte.setBackground(karte.getColor());
+			break;
 		}
 	}
 
@@ -147,6 +183,14 @@ public class GuiKarteiKartePanel
 		{
 
 		}
+	}
+
+	/**
+	 * @return the kartenFarbe 0:Standard 1:Grün() 2:Rot
+	 */
+	public int getKartenFarbe()
+	{
+		return kartenFarbe;
 	}
 
 	/**
