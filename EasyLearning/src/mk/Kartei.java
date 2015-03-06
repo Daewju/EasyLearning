@@ -49,6 +49,7 @@ public class Kartei {
 		if(karte!=null && fach >=1 && fach <=6)				
 		{			
 			ArrayList<Karte> f = gibFach(fach);
+			
 			it = f.iterator();
 			if(f.isEmpty() || existKarte(it, karte)){ //goes into if fach is not empty or card doesnt exist	
 				return f.add(karte);
