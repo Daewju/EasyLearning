@@ -25,26 +25,19 @@ public class GuiKarteiKartePanel
 	private JLabel fach4Bez;
 	private JLabel fach5Bez;
 	private JLabel fach6Bez;
-	private int kartenFarbe;
-	private Color color;
-	private Color colorCorrect;
-	private Color colorIncorrect;
+	private Color backgroundColor;
 
 	public GuiKarteiKartePanel(GuiMain guiMain, int xSize, int ySize,
-			int kartenFarbe)
+			int kartenFarbe, Color backgroundColor)
 	{
 		gui = guiMain;
-		this.color = Color.CYAN;;
-		this.colorCorrect = Color.GREEN;
-		this.colorIncorrect = Color.RED;
-		this.kartenFarbe = kartenFarbe;
 		handler = gui.getHandler();
 		panel = new JLayeredPane();
 		faecherBez = new ArrayList<>();
 		panel.setBackground(GuiMain.COLOR_BACKGROUND);
 		karte = new KarteGui(null);
-		karte.setBackground(getKartenFarbe());
-		setKartenFarbe(kartenFarbe);
+		this.backgroundColor = backgroundColor;
+		karte.setBackground(backgroundColor);
 		panel.add(karte, 1, 0);
 		this.wort = new JLabel();
 		panel.add(wort, 2, 0);
@@ -86,7 +79,7 @@ public class GuiKarteiKartePanel
 			this.wort.setSize(500, 55);
 			this.wort.setLocation(155, 295);
 			this.wort.setFont(new Font(null, Font.BOLD, schriftgroesse));
-			this.wort.setBackground(getKartenFarbe());
+			this.wort.setBackground(getBackgroundColor());
 			this.wort.setForeground(GuiMain.COLOR_BACKGROUND);
 			this.wort.setOpaque(true);
 		}
@@ -119,50 +112,29 @@ public class GuiKarteiKartePanel
 				faechlein.setBackground(Color.DARK_GRAY);
 			} else
 			{
-				switch (kartenFarbe)
-				{
-				case 0:
-					fach.setBackground(color);
-					break;
-				case 1:
-					fach.setBackground(colorCorrect);
-					break;
-				case 2:
-					fach.setBackground(colorIncorrect);
-					break;
-				default:
-					fach.setBackground(color);
-					break;
-				}
+				fach.setBackground(backgroundColor);
 			}
 		}
 	}
 
-	public void setKartenFarbe(int kartenFarbe)
+	/**
+	 * Diese Methode ändert die Farbe der Karte inkl. der Fachauswahl
+	 * 
+	 * @param color
+	 *            Ewartet ein Color Objekt
+	 */
+	public void setKartenFarbe(Color color)
 	{
-		this.kartenFarbe = kartenFarbe;
-		switch (kartenFarbe)
+		this.backgroundColor = color;
+		karte.setBackground(color);
+		for (JLabel faechlein : faecherBez)
 		{
-		case 0:
-			karte.setBackground(color);
-			break;
-		case 1:
-			karte.setBackground(colorCorrect);
-			break;
-		case 2:
-			karte.setBackground(colorIncorrect);
-			break;
-		default:
-			karte.setBackground(color);
-			break;
+			if (faechlein.getBackground() != Color.DARK_GRAY)
+			{
+				faechlein.setBackground(color);
+			}
 		}
 	}
-	
-	public Color getKartenFarbe()
-	{
-		return karte.getBackground();
-	}
-
 
 	/**
 	 * @return the gui
@@ -369,54 +341,11 @@ public class GuiKarteiKartePanel
 	}
 
 	/**
-	 * @return the color
+	 * @return the backgroundColor
 	 */
-	public Color getColor()
+	public Color getBackgroundColor()
 	{
-		return color;
-	}
-
-	/**
-	 * @param color
-	 *            the color to set
-	 */
-	public void setColor(Color color)
-	{
-		this.color = color;
-	}
-
-	/**
-	 * @return the colorCorrect
-	 */
-	public Color getColorCorrect()
-	{
-		return colorCorrect;
-	}
-
-	/**
-	 * @param colorCorrect
-	 *            the colorCorrect to set
-	 */
-	public void setColorCorrect(Color colorCorrect)
-	{
-		this.colorCorrect = colorCorrect;
-	}
-
-	/**
-	 * @return the colorIncorrect
-	 */
-	public Color getColorIncorrect()
-	{
-		return colorIncorrect;
-	}
-
-	/**
-	 * @param colorIncorrect
-	 *            the colorIncorrect to set
-	 */
-	public void setColorIncorrect(Color colorIncorrect)
-	{
-		this.colorIncorrect = colorIncorrect;
+		return backgroundColor;
 	}
 
 	/*
@@ -432,11 +361,43 @@ public class GuiKarteiKartePanel
 				+ ", faecherBez=" + faecherBez + ", fach1Bez=" + fach1Bez
 				+ ", fach2Bez=" + fach2Bez + ", fach3Bez=" + fach3Bez
 				+ ", fach4Bez=" + fach4Bez + ", fach5Bez=" + fach5Bez
-				+ ", fach6Bez=" + fach6Bez + ", kartenFarbe=" + kartenFarbe
-				+ ", color=" + color + ", colorCorrect=" + colorCorrect
-				+ ", colorIncorrect=" + colorIncorrect + "]";
+				+ ", fach6Bez=" + fach6Bez + ", backgroundColor="
+				+ backgroundColor + "]";
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((backgroundColor == null) ? 0 : backgroundColor.hashCode());
+		result = prime * result
+				+ ((fach1Bez == null) ? 0 : fach1Bez.hashCode());
+		result = prime * result
+				+ ((fach2Bez == null) ? 0 : fach2Bez.hashCode());
+		result = prime * result
+				+ ((fach3Bez == null) ? 0 : fach3Bez.hashCode());
+		result = prime * result
+				+ ((fach4Bez == null) ? 0 : fach4Bez.hashCode());
+		result = prime * result
+				+ ((fach5Bez == null) ? 0 : fach5Bez.hashCode());
+		result = prime * result
+				+ ((fach6Bez == null) ? 0 : fach6Bez.hashCode());
+		result = prime * result
+				+ ((faecherBez == null) ? 0 : faecherBez.hashCode());
+		result = prime * result + ((gui == null) ? 0 : gui.hashCode());
+		result = prime * result + ((handler == null) ? 0 : handler.hashCode());
+		result = prime * result + ((karte == null) ? 0 : karte.hashCode());
+		result = prime * result + ((panel == null) ? 0 : panel.hashCode());
+		result = prime * result + ((wort == null) ? 0 : wort.hashCode());
+		return result;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -453,23 +414,11 @@ public class GuiKarteiKartePanel
 		if (getClass() != obj.getClass())
 			return false;
 		GuiKarteiKartePanel other = (GuiKarteiKartePanel) obj;
-		if (color == null)
+		if (backgroundColor == null)
 		{
-			if (other.color != null)
+			if (other.backgroundColor != null)
 				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (colorCorrect == null)
-		{
-			if (other.colorCorrect != null)
-				return false;
-		} else if (!colorCorrect.equals(other.colorCorrect))
-			return false;
-		if (colorIncorrect == null)
-		{
-			if (other.colorIncorrect != null)
-				return false;
-		} else if (!colorIncorrect.equals(other.colorIncorrect))
+		} else if (!backgroundColor.equals(other.backgroundColor))
 			return false;
 		if (fach1Bez == null)
 		{
@@ -531,8 +480,6 @@ public class GuiKarteiKartePanel
 				return false;
 		} else if (!karte.equals(other.karte))
 			return false;
-		if (kartenFarbe != other.kartenFarbe)
-			return false;
 		if (panel == null)
 		{
 			if (other.panel != null)
@@ -547,7 +494,7 @@ public class GuiKarteiKartePanel
 			return false;
 		return true;
 	}
-	
+
 	class MyMouseListener implements MouseListener
 	{
 
