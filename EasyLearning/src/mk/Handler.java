@@ -111,8 +111,8 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
-		usedKartei.addKarte(new Karte(wort, vokabel), 1);
-		System.out.println("Karte hinzufÃ¼gen");
+		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
+
 		eventDateiSpeichern();
 	}
 
@@ -239,7 +239,7 @@ public class Handler implements GuiSchnittstelle{
 		{
 			if(!kh.loescheKartei(kh.getKarteiPfad()))
 			{
-				guiDialog.fehlerDialog("Error Kartei löschen", "ACHTUNG: Datei ist noch in Verwendung oder nicht mehr vorhanden.");
+				guiDialog.fehlerDialog("Error Kartei lï¿½schen", "ACHTUNG: Datei ist noch in Verwendung oder nicht mehr vorhanden.");
 			}
 			else
 			{
@@ -248,7 +248,7 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (IOException e)
 		{
-			guiDialog.fehlerDialog("Error Kartei löschen", "Schwerwiegender I/O-Fehler");
+			guiDialog.fehlerDialog("Error Kartei lï¿½schen", "Schwerwiegender I/O-Fehler");
 			e.printStackTrace();
 		}	
 	}
