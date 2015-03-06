@@ -1,5 +1,6 @@
 /**
  * 
+ * 
  */
 package mk;
 import dd.KarteiHandler;
@@ -114,6 +115,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
 
 		eventDateiSpeichern();
+		
 	}
 
 	@Override
