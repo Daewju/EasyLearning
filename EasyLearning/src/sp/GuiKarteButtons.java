@@ -42,7 +42,7 @@ public class GuiKarteButtons
 	{
 		guiMain = gui;
 		sprachcontroller = guiMain.getSprachcontroller();
-		handler = new Handler(guiMain);
+		handler = gui.getHandler();
 		hauptpanel = new JPanel(new GridBagLayout());
 		hauptpanel.setBackground(GuiMain.COLOR_BACKGROUND);
 		panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 72));

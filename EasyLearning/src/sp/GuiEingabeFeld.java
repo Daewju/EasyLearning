@@ -38,7 +38,7 @@ public class GuiEingabeFeld
 	{
 		guiMain = gui;
 		sprachcontroller = guiMain.getSprachcontroller();
-		handler = new Handler(guiMain);
+		handler = gui.getHandler();
 		try
 		{
 			bildNaechsteKarte = ImageIO.read(getClass().getResource(

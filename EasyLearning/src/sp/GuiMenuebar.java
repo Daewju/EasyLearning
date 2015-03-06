@@ -52,7 +52,7 @@ public class GuiMenuebar
 	{
 		hintergrundColor = new Color(83, 83, 83);
 		schriftColor = new Color(240, 240, 240);
-		this.handler = new Handler(guiMain);
+		this.handler = guiMain.getHandler();
 		this.sprachcontroller = guiMain.getSprachcontroller();
 		menuezeile = new JMenuBar();
 		menuezeile.setBackground(hintergrundColor);
