@@ -49,7 +49,7 @@ public class GuiMain extends JFrame
 		guiEingabeFeld = new GuiEingabeFeld(this);
 		guiSmiley = new GuiSmiley();
 		guiDialog = new GuiDialog(this);
-		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0);
+		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0, Color.CYAN);
 		karteButtons = new GuiKarteButtons(this);
 		setLayout(new BorderLayout());
 		getContentPane().setBackground(COLOR_BACKGROUND);
@@ -76,10 +76,29 @@ public class GuiMain extends JFrame
 		repaint();
 		setVisible(true);
 	}
-	
-	public void setKartenFarbe(int kartenFarbe)
+
+	public void versteckeAlleElemente(boolean verstecken)
 	{
-		karteKarteiPanel.setKartenFarbe(kartenFarbe);
+		versteckeSmiley();
+		versteckeKarte(verstecken);
+		versteckeButtons(verstecken);
+		versteckeKarteiTitel(verstecken);
+		versteckeEingabefeld(verstecken);
+		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
+		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
+		guiMenuebar.getLoeschenEintrag().setEnabled(!verstecken);
+	}
+
+	/**
+	 * Diese Methode ändert die Farbe der Karte inkl. der Fachauswahl
+	 * 
+	 * @param color
+	 *            Vorschlag: Standard Color.CYAN, Richtig: Color.GREEN, Falsch:
+	 *            Color.RED
+	 */
+	public void setKartenFarbe(Color color)
+	{
+		karteKarteiPanel.setKartenFarbe(color);
 	}
 
 	public void setSmiley(boolean like)
@@ -97,20 +116,20 @@ public class GuiMain extends JFrame
 		if (wort != null)
 			karteKarteiPanel.setzeText(wort);
 	}
-	
+
 	public String getWort()
 	{
 		return karteKarteiPanel.getWort().getText();
 	}
-	
+
 	public void setKarteiTitel(String titel)
 	{
-		if(titel != null)
+		if (titel != null)
 		{
 			guiKarteiTitel.setzeKarteiTitelText(titel);
 		}
 	}
-	
+
 	public String getKarteiTitel()
 	{
 		return guiKarteiTitel.getKarteiTitel().getText();
@@ -130,32 +149,20 @@ public class GuiMain extends JFrame
 	{
 		karteKarteiPanel.getPanel().setVisible(!verstecken);
 	}
-	
+
 	public void versteckeButtons(boolean verstecken)
 	{
 		karteButtons.getPanel().setVisible(!verstecken);
 	}
-	
+
 	public void versteckeKarteiTitel(boolean verstecken)
 	{
 		guiKarteiTitel.getPanel().setVisible(!verstecken);
 	}
-	
+
 	public void versteckeEingabefeld(boolean verstecken)
 	{
 		guiEingabeFeld.getPanel().setVisible(!verstecken);
-	}
-	
-	public void versteckeAlleElemente(boolean verstecken)
-	{
-		versteckeSmiley();
-		versteckeKarte(verstecken);
-		versteckeButtons(verstecken);
-		versteckeKarteiTitel(verstecken);
-		versteckeEingabefeld(verstecken);
-		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
-		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
-		guiMenuebar.getLoeschenEintrag().setEnabled(!verstecken);
 	}
 
 	/**
@@ -167,7 +174,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param sPRACHCODE the sPRACHCODE to set
+	 * @param sPRACHCODE
+	 *            the sPRACHCODE to set
 	 */
 	public static void setSPRACHCODE(int sPRACHCODE)
 	{
@@ -183,7 +191,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param handler the handler to set
+	 * @param handler
+	 *            the handler to set
 	 */
 	public void setHandler(Handler handler)
 	{
@@ -199,7 +208,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param dimension the dimension to set
+	 * @param dimension
+	 *            the dimension to set
 	 */
 	public void setDimension(Dimension dimension)
 	{
@@ -215,7 +225,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param sprachcontroller the sprachcontroller to set
+	 * @param sprachcontroller
+	 *            the sprachcontroller to set
 	 */
 	public void setSprachcontroller(SprachController sprachcontroller)
 	{
@@ -231,7 +242,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiMenuebar the guiMenuebar to set
+	 * @param guiMenuebar
+	 *            the guiMenuebar to set
 	 */
 	public void setGuiMenuebar(GuiMenuebar guiMenuebar)
 	{
@@ -247,7 +259,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiKarteiTitel the guiKarteiTitel to set
+	 * @param guiKarteiTitel
+	 *            the guiKarteiTitel to set
 	 */
 	public void setGuiKarteiTitel(GuiKarteiTitel guiKarteiTitel)
 	{
@@ -263,7 +276,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiEingabeFeld the guiEingabeFeld to set
+	 * @param guiEingabeFeld
+	 *            the guiEingabeFeld to set
 	 */
 	public void setGuiEingabeFeld(GuiEingabeFeld guiEingabeFeld)
 	{
@@ -279,7 +293,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiSmiley the guiSmiley to set
+	 * @param guiSmiley
+	 *            the guiSmiley to set
 	 */
 	public void setGuiSmiley(GuiSmiley guiSmiley)
 	{
@@ -295,7 +310,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param guiDialog the guiDialog to set
+	 * @param guiDialog
+	 *            the guiDialog to set
 	 */
 	public void setGuiDialog(GuiDialog guiDialog)
 	{
@@ -311,7 +327,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param karteKarteiPanel the karteKarteiPanel to set
+	 * @param karteKarteiPanel
+	 *            the karteKarteiPanel to set
 	 */
 	public void setKarteKarteiPanel(GuiKarteiKartePanel karteKarteiPanel)
 	{
@@ -327,7 +344,8 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @param karteButtons the karteButtons to set
+	 * @param karteButtons
+	 *            the karteButtons to set
 	 */
 	public void setKarteButtons(GuiKarteButtons karteButtons)
 	{
@@ -374,7 +392,6 @@ public class GuiMain extends JFrame
 		return COLOR_TEXT_WHITE;
 	}
 
-	
 	/**
 	 * @return the version
 	 */
@@ -398,40 +415,6 @@ public class GuiMain extends JFrame
 				+ guiSmiley + ", guiDialog=" + guiDialog
 				+ ", karteKarteiPanel=" + karteKarteiPanel + ", karteButtons="
 				+ karteButtons + "]";
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((dimension == null) ? 0 : dimension.hashCode());
-		result = prime * result
-				+ ((guiDialog == null) ? 0 : guiDialog.hashCode());
-		result = prime * result
-				+ ((guiEingabeFeld == null) ? 0 : guiEingabeFeld.hashCode());
-		result = prime * result
-				+ ((guiKarteiTitel == null) ? 0 : guiKarteiTitel.hashCode());
-		result = prime * result
-				+ ((guiMenuebar == null) ? 0 : guiMenuebar.hashCode());
-		result = prime * result
-				+ ((guiSmiley == null) ? 0 : guiSmiley.hashCode());
-		result = prime * result + ((handler == null) ? 0 : handler.hashCode());
-		result = prime * result
-				+ ((karteButtons == null) ? 0 : karteButtons.hashCode());
-		result = prime
-				* result
-				+ ((karteKarteiPanel == null) ? 0 : karteKarteiPanel.hashCode());
-		result = prime
-				* result
-				+ ((sprachcontroller == null) ? 0 : sprachcontroller.hashCode());
-		return result;
 	}
 
 	/*
