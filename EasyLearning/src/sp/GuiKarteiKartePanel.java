@@ -26,16 +26,25 @@ public class GuiKarteiKartePanel
 	private JLabel fach5Bez;
 	private JLabel fach6Bez;
 	private int kartenFarbe;
+	private Color color;
+	private Color colorCorrect;
+	private Color colorIncorrect;
 
-	public GuiKarteiKartePanel(GuiMain guiMain, int xSize, int ySize, int kartenFarbe)
+	public GuiKarteiKartePanel(GuiMain guiMain, int xSize, int ySize,
+			int kartenFarbe)
 	{
 		gui = guiMain;
+		this.color = Color.CYAN;;
+		this.colorCorrect = Color.GREEN;
+		this.colorIncorrect = Color.RED;
 		this.kartenFarbe = kartenFarbe;
 		handler = gui.getHandler();
 		panel = new JLayeredPane();
 		faecherBez = new ArrayList<>();
 		panel.setBackground(GuiMain.COLOR_BACKGROUND);
-		karte = new KarteGui();
+		karte = new KarteGui(null);
+		karte.setBackground(getKartenFarbe());
+		setKartenFarbe(kartenFarbe);
 		panel.add(karte, 1, 0);
 		this.wort = new JLabel();
 		panel.add(wort, 2, 0);
@@ -77,7 +86,7 @@ public class GuiKarteiKartePanel
 			this.wort.setSize(500, 55);
 			this.wort.setLocation(155, 295);
 			this.wort.setFont(new Font(null, Font.BOLD, schriftgroesse));
-			this.wort.setBackground(Color.CYAN);
+			this.wort.setBackground(getKartenFarbe());
 			this.wort.setForeground(GuiMain.COLOR_BACKGROUND);
 			this.wort.setOpaque(true);
 		}
@@ -94,7 +103,7 @@ public class GuiKarteiKartePanel
 			fach.setFont(new Font(null, Font.BOLD, 30));
 			fach.setHorizontalAlignment(JLabel.CENTER);
 			fach.setOpaque(true);
-			fach.setBackground(GuiMain.COLOR_BACKGROUND);
+			fach.setBackground(karte.getBackground());
 			fach.setLocation(startPosX += 88, 100);
 			i++;
 		}
@@ -113,16 +122,16 @@ public class GuiKarteiKartePanel
 				switch (kartenFarbe)
 				{
 				case 0:
-					fach.setBackground(karte.getColor());
+					fach.setBackground(color);
 					break;
 				case 1:
-					fach.setBackground(karte.getColorCorrect());
+					fach.setBackground(colorCorrect);
 					break;
 				case 2:
-					fach.setBackground(karte.getColorIncorrect());
+					fach.setBackground(colorIncorrect);
 					break;
 				default:
-					fach.setBackground(karte.getColor());
+					fach.setBackground(color);
 					break;
 				}
 			}
@@ -135,62 +144,58 @@ public class GuiKarteiKartePanel
 		switch (kartenFarbe)
 		{
 		case 0:
-			karte.setBackground(karte.getColor());
+			karte.setBackground(color);
 			break;
 		case 1:
-			karte.setBackground(karte.getColorCorrect());
+			karte.setBackground(colorCorrect);
 			break;
 		case 2:
-			karte.setBackground(karte.getColorIncorrect());
+			karte.setBackground(colorIncorrect);
 			break;
 		default:
-			karte.setBackground(karte.getColor());
+			karte.setBackground(color);
 			break;
 		}
 	}
-
-	class MyMouseListener implements MouseListener
+	
+	public Color getKartenFarbe()
 	{
+		return karte.getBackground();
+	}
 
-		@Override
-		public void mouseClicked(MouseEvent e)
-		{
-			JLabel k = (JLabel) e.getSource();
-			setzeFachAktiv(k);
-			handler.eventGeheZuFach(Integer.parseInt(k.getText()));
-		}
 
-		@Override
-		public void mouseEntered(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e)
-		{
-
-		}
+	/**
+	 * @return the gui
+	 */
+	public GuiMain getGui()
+	{
+		return gui;
 	}
 
 	/**
-	 * @return the kartenFarbe 0:Standard 1:Grün() 2:Rot
+	 * @param gui
+	 *            the gui to set
 	 */
-	public int getKartenFarbe()
+	public void setGui(GuiMain gui)
 	{
-		return kartenFarbe;
+		this.gui = gui;
+	}
+
+	/**
+	 * @return the handler
+	 */
+	public Handler getHandler()
+	{
+		return handler;
+	}
+
+	/**
+	 * @param handler
+	 *            the handler to set
+	 */
+	public void setHandler(Handler handler)
+	{
+		this.handler = handler;
 	}
 
 	/**
@@ -361,6 +366,222 @@ public class GuiKarteiKartePanel
 	public void setFach6Bez(JLabel fach6Bez)
 	{
 		this.fach6Bez = fach6Bez;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public Color getColor()
+	{
+		return color;
+	}
+
+	/**
+	 * @param color
+	 *            the color to set
+	 */
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
+
+	/**
+	 * @return the colorCorrect
+	 */
+	public Color getColorCorrect()
+	{
+		return colorCorrect;
+	}
+
+	/**
+	 * @param colorCorrect
+	 *            the colorCorrect to set
+	 */
+	public void setColorCorrect(Color colorCorrect)
+	{
+		this.colorCorrect = colorCorrect;
+	}
+
+	/**
+	 * @return the colorIncorrect
+	 */
+	public Color getColorIncorrect()
+	{
+		return colorIncorrect;
+	}
+
+	/**
+	 * @param colorIncorrect
+	 *            the colorIncorrect to set
+	 */
+	public void setColorIncorrect(Color colorIncorrect)
+	{
+		this.colorIncorrect = colorIncorrect;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "GuiKarteiKartePanel [gui=" + gui + ", handler=" + handler
+				+ ", panel=" + panel + ", karte=" + karte + ", wort=" + wort
+				+ ", faecherBez=" + faecherBez + ", fach1Bez=" + fach1Bez
+				+ ", fach2Bez=" + fach2Bez + ", fach3Bez=" + fach3Bez
+				+ ", fach4Bez=" + fach4Bez + ", fach5Bez=" + fach5Bez
+				+ ", fach6Bez=" + fach6Bez + ", kartenFarbe=" + kartenFarbe
+				+ ", color=" + color + ", colorCorrect=" + colorCorrect
+				+ ", colorIncorrect=" + colorIncorrect + "]";
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GuiKarteiKartePanel other = (GuiKarteiKartePanel) obj;
+		if (color == null)
+		{
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (colorCorrect == null)
+		{
+			if (other.colorCorrect != null)
+				return false;
+		} else if (!colorCorrect.equals(other.colorCorrect))
+			return false;
+		if (colorIncorrect == null)
+		{
+			if (other.colorIncorrect != null)
+				return false;
+		} else if (!colorIncorrect.equals(other.colorIncorrect))
+			return false;
+		if (fach1Bez == null)
+		{
+			if (other.fach1Bez != null)
+				return false;
+		} else if (!fach1Bez.equals(other.fach1Bez))
+			return false;
+		if (fach2Bez == null)
+		{
+			if (other.fach2Bez != null)
+				return false;
+		} else if (!fach2Bez.equals(other.fach2Bez))
+			return false;
+		if (fach3Bez == null)
+		{
+			if (other.fach3Bez != null)
+				return false;
+		} else if (!fach3Bez.equals(other.fach3Bez))
+			return false;
+		if (fach4Bez == null)
+		{
+			if (other.fach4Bez != null)
+				return false;
+		} else if (!fach4Bez.equals(other.fach4Bez))
+			return false;
+		if (fach5Bez == null)
+		{
+			if (other.fach5Bez != null)
+				return false;
+		} else if (!fach5Bez.equals(other.fach5Bez))
+			return false;
+		if (fach6Bez == null)
+		{
+			if (other.fach6Bez != null)
+				return false;
+		} else if (!fach6Bez.equals(other.fach6Bez))
+			return false;
+		if (faecherBez == null)
+		{
+			if (other.faecherBez != null)
+				return false;
+		} else if (!faecherBez.equals(other.faecherBez))
+			return false;
+		if (gui == null)
+		{
+			if (other.gui != null)
+				return false;
+		} else if (!gui.equals(other.gui))
+			return false;
+		if (handler == null)
+		{
+			if (other.handler != null)
+				return false;
+		} else if (!handler.equals(other.handler))
+			return false;
+		if (karte == null)
+		{
+			if (other.karte != null)
+				return false;
+		} else if (!karte.equals(other.karte))
+			return false;
+		if (kartenFarbe != other.kartenFarbe)
+			return false;
+		if (panel == null)
+		{
+			if (other.panel != null)
+				return false;
+		} else if (!panel.equals(other.panel))
+			return false;
+		if (wort == null)
+		{
+			if (other.wort != null)
+				return false;
+		} else if (!wort.equals(other.wort))
+			return false;
+		return true;
+	}
+	
+	class MyMouseListener implements MouseListener
+	{
+
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			JLabel k = (JLabel) e.getSource();
+			setzeFachAktiv(k);
+			handler.eventGeheZuFach(Integer.parseInt(k.getText()));
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e)
+		{
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e)
+		{
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e)
+		{
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e)
+		{
+
+		}
 	}
 
 }

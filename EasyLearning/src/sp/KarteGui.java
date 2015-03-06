@@ -2,8 +2,6 @@ package sp;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Diese Klasse beschreibt eine visuelle Karteikarte. Sie hat eine Grundfarbe
@@ -21,28 +19,21 @@ public class KarteGui extends Canvas
 	private int sizeY;
 	private int posX;
 	private int posY;
-	private Color color;
-	private Color colorCorrect;
-	private Color colorIncorrect;
 
 	/**
 	 * Konstruktor
 	 * 
 	 */
-	public KarteGui()
+	public KarteGui(Color color)
 	{
 		super();
 		this.sizeX = 500;
 		this.sizeY = 350;
 		this.posX = 155;
 		this.posY = 150;
-		this.color = Color.CYAN;
-		this.colorCorrect = new Color(0, 255, 0);
-		this.colorIncorrect = new Color(255, 0, 0);
 		setLocation(this.posX, this.posY);
 		setSize(sizeX, sizeY);
 		setBackground(color);
-		addMouseListener(new MyMouseListener());
 	}
 
 	/**
@@ -55,22 +46,17 @@ public class KarteGui extends Canvas
 	 * @param posY
 	 *            Position Y linke-obere Ecke
 	 */
-	public KarteGui(int sizeX, int sizeY, int posX, int posY)
+	public KarteGui(int sizeX, int sizeY, int posX, int posY, Color color)
 	{
 		super();
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.posX = posX;
 		this.posY = posY;
-		this.color = Color.DARK_GRAY;
-		this.colorCorrect = new Color(0, 255, 0);
-		this.colorIncorrect = new Color(255, 0, 0);
 		setLocation(this.posX, this.posY);
 		setSize(sizeX, sizeY);
 		setBackground(color);
-		addMouseListener(new MyMouseListener());
 	}
-
 
 	/**
 	 * @return the sizeX
@@ -141,68 +127,11 @@ public class KarteGui extends Canvas
 	}
 
 	/**
-	 * @return the color
+	 * @return the serialversionuid
 	 */
-	public Color getColor()
+	public static long getSerialversionuid()
 	{
-		return color;
-	}
-
-	/**
-	 * @param color
-	 *            the color to set
-	 */
-	public void setColor(Color color)
-	{
-		this.color = color;
-	}
-
-	/**
-	 * @return the colorCorrect
-	 */
-	public Color getColorCorrect()
-	{
-		return colorCorrect;
-	}
-
-	/**
-	 * @param colorCorrect
-	 *            the colorCorrect to set
-	 */
-	public void setColorCorrect(Color colorCorrect)
-	{
-		this.colorCorrect = colorCorrect;
-	}
-
-	/**
-	 * @return the colorIncorrect
-	 */
-	public Color getColorIncorrect()
-	{
-		return colorIncorrect;
-	}
-
-	/**
-	 * @param colorIncorrect
-	 *            the colorIncorrect to set
-	 */
-	public void setColorIncorrect(Color colorIncorrect)
-	{
-		this.colorIncorrect = colorIncorrect;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "KarteGui [sizeX=" + sizeX + ", sizeY=" + sizeY + ", posX="
-				+ posX + ", posY=" + posY + ", color=" + color
-				+ ", colorCorrect=" + colorCorrect + ", colorIncorrect="
-				+ colorIncorrect + "]";
+		return serialVersionUID;
 	}
 
 	/*
@@ -215,11 +144,6 @@ public class KarteGui extends Canvas
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result
-				+ ((colorCorrect == null) ? 0 : colorCorrect.hashCode());
-		result = prime * result
-				+ ((colorIncorrect == null) ? 0 : colorIncorrect.hashCode());
 		result = prime * result + posX;
 		result = prime * result + posY;
 		result = prime * result + sizeX;
@@ -242,24 +166,6 @@ public class KarteGui extends Canvas
 		if (getClass() != obj.getClass())
 			return false;
 		KarteGui other = (KarteGui) obj;
-		if (color == null)
-		{
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (colorCorrect == null)
-		{
-			if (other.colorCorrect != null)
-				return false;
-		} else if (!colorCorrect.equals(other.colorCorrect))
-			return false;
-		if (colorIncorrect == null)
-		{
-			if (other.colorIncorrect != null)
-				return false;
-		} else if (!colorIncorrect.equals(other.colorIncorrect))
-			return false;
 		if (posX != other.posX)
 			return false;
 		if (posY != other.posY)
@@ -271,38 +177,16 @@ public class KarteGui extends Canvas
 		return true;
 	}
 
-	class MyMouseListener implements MouseListener
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
 	{
-
-		@Override
-		public void mouseClicked(MouseEvent e)
-		{
-			KarteGui k = (KarteGui) e.getSource();
-			k.setBackground(color);
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e)
-		{
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e)
-		{
-
-		}
+		return "KarteGui [sizeX=" + sizeX + ", sizeY=" + sizeY + ", posX="
+				+ posX + ", posY=" + posY + "]";
 	}
+
 }

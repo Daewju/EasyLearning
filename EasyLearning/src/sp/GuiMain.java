@@ -61,7 +61,6 @@ public class GuiMain extends JFrame
 		setResizable(false);
 		setTitle("EasyLearning");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		init();
 		versteckeAlleElemente(true);
 	}
