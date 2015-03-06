@@ -138,9 +138,15 @@ public class CSVWriter
 		{
 			this.fileWriter.close();
 		}
+		if(this.bufferedWriter != null)
+		{
+			this.bufferedWriter.close();
+		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -150,7 +156,9 @@ public class CSVWriter
 				+ bufferedWriter + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -165,7 +173,9 @@ public class CSVWriter
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -202,7 +212,8 @@ public class CSVWriter
 	}
 
 	/**
-	 * @param fileWriter the fileWriter to set
+	 * @param fileWriter
+	 *            the fileWriter to set
 	 */
 	public void setFileWriter(FileWriter fileWriter)
 	{
@@ -218,12 +229,12 @@ public class CSVWriter
 	}
 
 	/**
-	 * @param bufferedWriter the bufferedWriter to set
+	 * @param bufferedWriter
+	 *            the bufferedWriter to set
 	 */
 	public void setBufferedWriter(BufferedWriter bufferedWriter)
 	{
 		this.bufferedWriter = bufferedWriter;
 	}
-	
 
 }

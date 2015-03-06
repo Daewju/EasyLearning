@@ -231,6 +231,28 @@ public class Handler implements GuiSchnittstelle{
 		}
 		
 	}
+	
+	@Override
+	public void eventDateiLoeschen()
+	{
+		try
+		{
+			if(!kh.loescheKartei(kh.getKarteiPfad()))
+			{
+				guiDialog.fehlerDialog("Error Kartei löschen", "ACHTUNG: Datei ist noch in Verwendung oder nicht mehr vorhanden.");
+			}
+			else
+			{
+				gui.versteckeAlleElemente(true);
+			}
+			
+		} catch (IOException e)
+		{
+			guiDialog.fehlerDialog("Error Kartei löschen", "Schwerwiegender I/O-Fehler");
+			e.printStackTrace();
+		}	
+	}
+
 
 	@Override
 	public void eventApplikationBeenden()

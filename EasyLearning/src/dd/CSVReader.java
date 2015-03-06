@@ -153,6 +153,10 @@ public class CSVReader
 		{
 			this.fileReader.close();
 		}
+		if(bufferedReader != null)
+		{
+			this.bufferedReader.close();
+		}
 	}
 
 	/* (non-Javadoc)

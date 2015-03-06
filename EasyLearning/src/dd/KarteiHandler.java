@@ -46,7 +46,7 @@ public class KarteiHandler
 	 */
 	public KarteiHandler(String karteiPfad) throws IOException
 	{
-		if (karteiPfad.equals(".csv") && karteiPfad.equals("\\"))
+		if (karteiPfad.contains(".csv") && karteiPfad.contains("\\"))
 		{
 			this.karteiPfad = karteiPfad;
 		} else
@@ -219,6 +219,35 @@ public class KarteiHandler
 	}
 
 	/**
+	 * Diese Methode löscht eine Datei
+	 * 
+	 * @param pfad
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
+	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
+	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
+	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 * @return wenn gelöscht => true, wenn nicht => false
+	 * @throws IOException
+	 */
+	public boolean loescheKartei(String pfad) throws IOException
+	{
+		if (cw != null)
+			cw.schliesseStream();
+		if (cr != null)
+			cr.schliesseStream();
+
+		File datei = new File(pfad);
+		System.out.println(pfad);
+		
+		if (datei.delete())
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Diese Methode kann benutzt werden um zu prüfe ob sich bereits Karteien im
 	 * CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist statisch
 	 * und benoetigt keine Instatnz von KarteiHandler.
@@ -302,7 +331,7 @@ public class KarteiHandler
 	 */
 	public boolean setKarteiPfad(String karteiPfad)
 	{
-		if (karteiPfad.equals(".csv") && karteiPfad.equals("\\"))
+		if (karteiPfad.contains(".csv") && karteiPfad.contains("\\"))
 		{
 			this.karteiPfad = karteiPfad;
 			return true;
@@ -312,7 +341,9 @@ public class KarteiHandler
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -322,7 +353,9 @@ public class KarteiHandler
 				+ karteiPfad + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -337,7 +370,9 @@ public class KarteiHandler
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -380,7 +415,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param ordner the ordner to set
+	 * @param ordner
+	 *            the ordner to set
 	 */
 	public static void setOrdner(File ordner)
 	{
@@ -396,7 +432,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param datumFormat the datumFormat to set
+	 * @param datumFormat
+	 *            the datumFormat to set
 	 */
 	public static void setDatumFormat(SimpleDateFormat datumFormat)
 	{
@@ -412,7 +449,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param cr the cr to set
+	 * @param cr
+	 *            the cr to set
 	 */
 	public void setCr(CSVReader cr)
 	{
@@ -428,7 +466,8 @@ public class KarteiHandler
 	}
 
 	/**
-	 * @param cw the cw to set
+	 * @param cw
+	 *            the cw to set
 	 */
 	public void setCw(CSVWriter cw)
 	{
@@ -442,5 +481,5 @@ public class KarteiHandler
 	{
 		return karteiPfad;
 	}
-	
+
 }

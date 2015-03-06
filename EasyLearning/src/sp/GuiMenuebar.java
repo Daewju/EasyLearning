@@ -30,6 +30,7 @@ public class GuiMenuebar
 	private JMenuItem neueKarteiEintrag;
 	private JMenuItem oeffnenEintrag;
 	private JMenuItem speichernEintrag;
+	private JMenuItem loeschenEintrag;
 	private JMenuItem importEintrag;
 	private JMenuItem exportEintrag;
 	private JMenuItem beendenEintrag;
@@ -69,6 +70,8 @@ public class GuiMenuebar
 				GuiMain.SPRACHCODE));
 		speichernEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Speichern", GuiMain.SPRACHCODE));
+		loeschenEintrag = new JMenuItem(sprachcontroller.getSprache(
+				"Löschen", GuiMain.SPRACHCODE));
 		importEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
@@ -103,6 +106,7 @@ public class GuiMenuebar
 		dateiMenue.add(neueKarteiEintrag);
 		dateiMenue.add(oeffnenEintrag);
 		dateiMenue.add(speichernEintrag);
+		dateiMenue.add(loeschenEintrag);
 		dateiMenue.add(importEintrag);
 		dateiMenue.add(exportEintrag);
 		dateiMenue.add(beendenEintrag);
@@ -175,6 +179,14 @@ public class GuiMenuebar
 			public void actionPerformed(ActionEvent e)
 			{
 				handler.eventDateiSpeichern();
+			}
+		});
+		
+		loeschenEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				handler.eventDateiLoeschen();
 			}
 		});
 
@@ -370,6 +382,22 @@ public class GuiMenuebar
 	public Color getSchriftColor()
 	{
 		return schriftColor;
+	}
+
+	/**
+	 * @return the loeschenEintrag
+	 */
+	public JMenuItem getLoeschenEintrag()
+	{
+		return loeschenEintrag;
+	}
+
+	/**
+	 * @param loeschenEintrag the loeschenEintrag to set
+	 */
+	public void setLoeschenEintrag(JMenuItem loeschenEintrag)
+	{
+		this.loeschenEintrag = loeschenEintrag;
 	}
 
 	/**

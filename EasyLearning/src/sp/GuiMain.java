@@ -155,6 +155,7 @@ public class GuiMain extends JFrame
 		versteckeEingabefeld(verstecken);
 		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
 		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
+		guiMenuebar.getLoeschenEintrag().setEnabled(!verstecken);
 	}
 
 	/**
