@@ -115,6 +115,7 @@ public class Kartei {
 			k = it.next();
 			if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
 				throw new IllegalArgumentException("Diese Karte existiert bereits");
+				
 			}	
 			else{	
 				return true;

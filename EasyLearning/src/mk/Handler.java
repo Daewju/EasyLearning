@@ -34,6 +34,10 @@ public class Handler implements GuiSchnittstelle{
 		this.gui = gui;
 		this.ueberprueft = false;
 		this.guiDialog = new GuiDialog(gui);
+		this.usedKartei = null;
+		this.usedKarte = null;
+		this.usedFach = null;
+		
 		try {
 			this.sc = new SprachController();
 		} catch (IOException e) {
@@ -107,7 +111,8 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
-		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);	
+		usedKartei.addKarte(new Karte(wort, vokabel), 1);
+		System.out.println("Karte hinzufügen");
 		eventDateiSpeichern();
 	}
 
@@ -156,7 +161,21 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiImportieren(String vollPfad, boolean fortschritt)
 	{
-		gui.versteckeAlleElemente(false);
+
+		try {
+			this.kh = new KarteiHandler(vollPfad);
+			this.usedKartei = this.kh.dateiLesen(fortschritt);
+			this.gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
+			this.usedFach = this.usedKartei.gibFach(1);
+			this.usedKarte = gibNaechsteKarte();
+			gui.setWort(this.usedKarte.getWort()); 
+			
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		gui.versteckeAlleElemente(false);	
 		System.out.println(vollPfad + ", " + fortschritt);
 		
 	}
@@ -164,6 +183,14 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiExportieren(String vollPfad, boolean fortschritt)
 	{
+		kh.setKarteiPfad(vollPfad);
+		try {
+			kh.dateiSchreiben(this.usedKartei, fortschritt);
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println(vollPfad + ", " + fortschritt);
 		
 	}
@@ -172,6 +199,21 @@ public class Handler implements GuiSchnittstelle{
 	public void eventDateiOeffnen(String vollPfad)
 	{
 		gui.versteckeAlleElemente(false);
+		try {
+			this.kh = new KarteiHandler(vollPfad);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.usedKartei = kh.dateiLesen(true);
+			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
 		System.out.println(vollPfad);
 		
 	}
