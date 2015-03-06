@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -186,7 +187,20 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				handler.eventDateiLoeschen();
+				if (guiMain.getGuiDialog().variableButtonsDialog(
+						new Object[]
+						{
+								sprachcontroller.getSprache("Ja",
+										GuiMain.SPRACHCODE),
+								sprachcontroller.getSprache("Nein",
+										GuiMain.SPRACHCODE) },
+						sprachcontroller.getSprache("Kartei löschen",
+								GuiMain.SPRACHCODE),
+						sprachcontroller.getSprache("Sind Sie sicher?",
+								GuiMain.SPRACHCODE)) == 0)
+				{
+					handler.eventDateiLoeschen();
+				}
 			}
 		});
 

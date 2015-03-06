@@ -237,8 +237,7 @@ public class KarteiHandler
 			cr.schliesseStream();
 
 		File datei = new File(pfad);
-		System.out.println(pfad);
-		
+
 		if (datei.delete())
 		{
 			return true;
