@@ -91,11 +91,13 @@ public class Kartei {
 	 * 		
 	 */		
 	public void moveKarte(Karte karte, int fach){
-		ArrayList<Karte> f = gibFach(fach);
 		
-		f.add(removeKarte(karte));
-		karte.setFach(fach);
-		
+		if(fach>=1 && fach<=6){
+			ArrayList<Karte> f = gibFach(fach);
+			f.add(removeKarte(karte));
+			karte.setFach(fach);
+		}
+				
 	}
 
 	/**				
