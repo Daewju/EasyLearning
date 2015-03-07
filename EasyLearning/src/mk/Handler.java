@@ -6,6 +6,7 @@ package mk;
 import dd.KarteiHandler;
 import dd.SprachController;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKartei = null;
 		this.usedKarte = null;
 		this.usedFach = null;
+		this.ueberprueft = false;
 		
 		try {
 			this.sc = new SprachController();
@@ -58,7 +60,6 @@ public class Handler implements GuiSchnittstelle{
 	public void eventNeueKartei(String eingabeFeldErgebnis,
 			String eingabeFeldErgebnis2)
 	{
-		gui.versteckeAlleElemente(false);
 		KarteiHandler tempkh;
 		Kartei kartei = new Kartei(eingabeFeldErgebnis, eingabeFeldErgebnis2);
 		tempkh = new KarteiHandler(kartei);
@@ -68,8 +69,10 @@ public class Handler implements GuiSchnittstelle{
 			guiDialog.fehlerDialog(sc.getSprache("Fehler", gui.SPRACHCODE), sc.getSprache("Kartei schon vorhanden", gui.SPRACHCODE));
 		}
 		else{
+			gui.versteckeAlleElemente(false);
 			this.kh = tempkh;
 			this.usedKartei = kartei;
+			this.usedFach = this.usedKartei.gibFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventDateiSpeichern();
 		}
@@ -85,20 +88,24 @@ public class Handler implements GuiSchnittstelle{
 			if(benutzerEingabe.equals(this.usedKarte.getWort())){
 				gui.setSmiley(true);
 				this.usedKarte.setRichtigB(this.usedKarte.getRichtigB()+1);
+				this.gui.setWort(this.usedKarte.getWort());
+				this.usedKartei.moveKarte(this.usedKarte, (this.usedKarte.getFach()+1));
+				this.gui.setEingabefeld("");
+				this.gui.setKartenFarbe(new Color(0,255,0));
 			}
 			else{
 				gui.setSmiley(false);
 				gui.setWort(this.usedKarte.getWort());
-				
+				//verschiebe Karte in Fach 1
+				this.usedKartei.moveKarte(this.usedKarte, 1);
+				this.gui.setEingabefeld("");
+				this.gui.setKartenFarbe(new Color(255,0,0));
 			}
 			this.ueberprueft = true;
 		}
 		else{
 			gui.setSmiley(false);
-			
-			
-			//verschiebe Karte in Fach 1
-			this.usedKartei.moveKarte(this.usedKarte, 1);
+			this.gui.setKartenFarbe(new Color(0,255,255));
 			
 			//hole nächste Karte
 			this.usedKarte = gibNaechsteKarte();
@@ -113,8 +120,11 @@ public class Handler implements GuiSchnittstelle{
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
 		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
-
 		eventDateiSpeichern();
+ 		if(this.usedKarte == null){
+			this.usedKarte = this.usedFach.get(0);
+			gui.setWort(this.usedKarte.getVokabel());
+		}
 		
 	}
 
