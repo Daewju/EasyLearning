@@ -127,6 +127,7 @@ public class GuiKarteiKartePanel
 	{
 		this.backgroundColor = color;
 		karte.setBackground(color);
+		wort.setBackground(color);
 		for (JLabel faechlein : faecherBez)
 		{
 			if (faechlein.getBackground() != Color.DARK_GRAY)

@@ -19,6 +19,7 @@ public class KarteGui extends Canvas
 	private int sizeY;
 	private int posX;
 	private int posY;
+	private Color color;
 
 	/**
 	 * Konstruktor
@@ -31,6 +32,7 @@ public class KarteGui extends Canvas
 		this.sizeY = 350;
 		this.posX = 155;
 		this.posY = 150;
+		this.color = color;
 		setLocation(this.posX, this.posY);
 		setSize(sizeX, sizeY);
 		setBackground(color);
@@ -124,6 +126,24 @@ public class KarteGui extends Canvas
 	public void setPosY(int posY)
 	{
 		this.posY = posY;
+	}
+
+	
+	/**
+	 * @return the color
+	 */
+	public Color getColor()
+	{
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(Color color)
+	{
+		this.color = color;
+		setBackground(color);
 	}
 
 	/**

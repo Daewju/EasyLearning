@@ -99,6 +99,7 @@ public class GuiMain extends JFrame
 	public void setKartenFarbe(Color color)
 	{
 		karteKarteiPanel.setKartenFarbe(color);
+		
 	}
 
 	public void setSmiley(boolean like)
