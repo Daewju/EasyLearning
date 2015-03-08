@@ -72,7 +72,8 @@ public class Handler implements GuiSchnittstelle{
 			gui.versteckeAlleElemente(false);
 			this.kh = tempkh;
 			this.usedKartei = kartei;
-			this.usedFach = this.usedKartei.gibFach(1);
+			//this.usedFach = this.usedKartei.gibFach(1);
+			eventGeheZuFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventDateiSpeichern();
 		}
@@ -158,9 +159,10 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventGeheZuFach(int fach)
 	{
-		this.usedFach = this.usedKartei.gibFach(fach);
-		zeigeNaechsteKarte();
-		
+		if(this.usedFach!=this.usedKartei.gibFach(fach)){
+			this.usedFach = this.usedKartei.gibFach(fach);
+			zeigeNaechsteKarte();
+		}	
 	}
 
 	@Override
@@ -171,15 +173,13 @@ public class Handler implements GuiSchnittstelle{
 			this.kh = new KarteiHandler(vollPfad);
 			this.usedKartei = this.kh.dateiLesen(fortschritt);
 			this.gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
-			this.usedFach = this.usedKartei.gibFach(1);
-			zeigeNaechsteKarte(); 
+			eventGeheZuFach(1);
+			gui.versteckeAlleElemente(false);
 			
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		gui.versteckeAlleElemente(false);	
 		System.out.println(vollPfad + ", " + fortschritt);
 		
 	}
@@ -210,9 +210,8 @@ public class Handler implements GuiSchnittstelle{
 		}
 		try {
 			this.usedKartei = kh.dateiLesen(true);
-			this.usedFach = this.usedKartei.gibFach(1);
+			eventGeheZuFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
-			zeigeNaechsteKarte();
 			gui.versteckeAlleElemente(false);
 			
 		} catch (ParseException | IOException e) {
@@ -264,7 +263,8 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventApplikationBeenden()
 	{
-		System.out.println("eventApplikationBeenden");
+		eventDateiSpeichern();
+		System.exit(0);
 		
 	}
 	
@@ -283,8 +283,14 @@ public class Handler implements GuiSchnittstelle{
 			return null;
 		}
 		else{
-			while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
+			
+			if(this.usedKarte==null){
 				temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
+			}
+			else{
+				while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
+					temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
+				}
 			}
 		}
 		temp.setAufrufe(temp.getAufrufe()+1);
