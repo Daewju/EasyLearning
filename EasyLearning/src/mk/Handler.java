@@ -101,16 +101,13 @@ public class Handler implements GuiSchnittstelle{
 				this.gui.setEingabefeld("");
 				this.gui.setKartenFarbe(new Color(255,0,0));
 			}
-			this.ueberprueft = true;
+			setUeberprueft(true);
 		}
 		else{
 			gui.setSmiley(false);
 			this.gui.setKartenFarbe(new Color(0,255,255));
-			
-			//hole nächste Karte
-			this.usedKarte = gibNaechsteKarte();
-			gui.setWort(this.usedKarte.getVokabel());
-			this.ueberprueft = false;
+			zeigeNaechsteKarte();
+			setUeberprueft(false);
 		}
 		eventDateiSpeichern();
 		
@@ -122,8 +119,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
 		eventDateiSpeichern();
  		if(this.usedKarte == null){
-			this.usedKarte = this.usedFach.get(0);
-			gui.setWort(this.usedKarte.getVokabel());
+			zeigeNaechsteKarte();
 		}
 		
 	}
@@ -145,10 +141,8 @@ public class Handler implements GuiSchnittstelle{
 			guiDialog.fehlerDialog(sc.getSprache("Fehler",gui.SPRACHCODE), "Keine Karte zum Loeschen vorhanden.");
 		}
 		else{
-			Karte temp = gibNaechsteKarte();
 			this.usedKartei.removeKarte(this.usedKarte);
-			this.usedKarte=temp;
-			gui.setWort(this.usedKarte.getVokabel());
+			zeigeNaechsteKarte();	
 		}
 		eventDateiSpeichern();
 		
@@ -165,8 +159,7 @@ public class Handler implements GuiSchnittstelle{
 	public void eventGeheZuFach(int fach)
 	{
 		this.usedFach = this.usedKartei.gibFach(fach);
-		this.usedKarte = gibNaechsteKarte();
-		gui.setWort(this.usedKarte.getVokabel());
+		zeigeNaechsteKarte();
 		
 	}
 
@@ -179,8 +172,7 @@ public class Handler implements GuiSchnittstelle{
 			this.usedKartei = this.kh.dateiLesen(fortschritt);
 			this.gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			this.usedFach = this.usedKartei.gibFach(1);
-			this.usedKarte = gibNaechsteKarte();
-			gui.setWort(this.usedKarte.getWort()); 
+			zeigeNaechsteKarte(); 
 			
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
@@ -210,7 +202,6 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiOeffnen(String vollPfad)
 	{
-		gui.versteckeAlleElemente(false);
 		try {
 			this.kh = new KarteiHandler(vollPfad);
 		} catch (IOException e) {
@@ -219,7 +210,11 @@ public class Handler implements GuiSchnittstelle{
 		}
 		try {
 			this.usedKartei = kh.dateiLesen(true);
+			this.usedFach = this.usedKartei.gibFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
+			zeigeNaechsteKarte();
+			gui.versteckeAlleElemente(false);
+			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
@@ -278,11 +273,37 @@ public class Handler implements GuiSchnittstelle{
 		//ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
 		Random rand = new Random();
 		temp = this.usedKarte;
-		while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
-			temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
+		
+		if(this.usedFach.size()==1){
+			//temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
+			temp = this.usedFach.get(0);
 		}
-		temp.setAufrufe(this.usedKarte.getAufrufe()+1);
+		else if(this.usedFach.size()==0)
+		{
+			return null;
+		}
+		else{
+			while(temp.equals(usedKarte)){ //verhindere dass zwei Mal dieselbe Karte gezogen wird
+				temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
+			}
+		}
+		temp.setAufrufe(temp.getAufrufe()+1);
 		return temp;
+	}
+	
+	private void zeigeNaechsteKarte(){
+		this.usedKarte = gibNaechsteKarte();
+		if(this.usedKarte!=null){
+			gui.setWort(this.usedKarte.getVokabel());
+		}
+		else{
+			gui.setWort("Fach ist leer");
+			System.out.println("Fach ist leer");
+		}
+	}
+	
+	public void setUeberprueft(boolean status){
+		this.ueberprueft = status;
 	}
 
 }

@@ -16,8 +16,8 @@ import mk.Kartei;
  * Diese Klasse wird zum lesen und schreiben von Karteien in eine CSV-Datei
  * verwendet. Jede CSV-Datei symbolisiert eine Kartei. Der Standard-Pfad der
  * Karteien liegt im Ordner 'Karteien' neben der JAR-Datei. Die Klasse bietet
- * eine statische Methode um vor Erzeugung eines Objektes zu prüfen welche
- * CSV-Dateien bereits vorhanden sind. Alle möglichen Exceptionbehandlungen
+ * eine statische Methode um vor Erzeugung eines Objektes zu prï¿½fen welche
+ * CSV-Dateien bereits vorhanden sind. Alle mï¿½glichen Exceptionbehandlungen
  * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
@@ -39,9 +39,9 @@ public class KarteiHandler
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
+	 *            beachten gilt, dass in Java ein "\" fï¿½r Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            ï¿½bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 * @throws IOException
 	 */
 	public KarteiHandler(String karteiPfad) throws IOException
@@ -92,11 +92,11 @@ public class KarteiHandler
 	 * CSV-Datei zu laden.
 	 * 
 	 * @param fortschritt
-	 *            "True" lässt den gesamten Fortschritt des Lernenden
-	 *            importieren. "False" dagegen übernimmt nur die Wortpaare und
+	 *            "True" lï¿½sst den gesamten Fortschritt des Lernenden
+	 *            importieren. "False" dagegen ï¿½bernimmt nur die Wortpaare und
 	 *            setzt das Datum und die Uhrzeit auf die aktuelle Zeit.
 	 *            Ausserdem werden dann alle Karten in das erste Fach gelegt.
-	 * @return Es wird eine Kartei zurückgegeben.
+	 * @return Es wird eine Kartei zurï¿½ckgegeben.
 	 * @throws ParseException
 	 * @throws IOException
 	 */
@@ -113,6 +113,7 @@ public class KarteiHandler
 
 		for (String karte[] : karten)
 		{
+
 			String wort = karte[0];
 			String vokabel = karte[1];
 			int aufrufe;
@@ -158,8 +159,8 @@ public class KarteiHandler
 	 * @param kartei
 	 *            Hier wird eine Kartei als Parameter erwartet.
 	 * @param fortschritt
-	 *            "True" lässt den gesamten Fortschritt des Lernenden in die
-	 *            CSV-Datei schreiben. "False" dagegen übernimmt nur die
+	 *            "True" lï¿½sst den gesamten Fortschritt des Lernenden in die
+	 *            CSV-Datei schreiben. "False" dagegen ï¿½bernimmt nur die
 	 *            Wortpaare und setzt das Datum und die Uhrzeit auf die aktuelle
 	 *            Zeit. Ausserdem werden Alle Karten in das erste Fach gelegt.
 	 * @throws ParseException
@@ -219,14 +220,14 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode löscht eine Datei
+	 * Diese Methode lï¿½scht eine Datei
 	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
+	 *            beachten gilt, dass in Java ein "\" fï¿½r Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
-	 * @return wenn gelöscht => true, wenn nicht => false
+	 *            ï¿½bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 * @return wenn gelï¿½scht => true, wenn nicht => false
 	 * @throws IOException
 	 */
 	public boolean loescheKartei(String pfad) throws IOException
@@ -247,14 +248,14 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode kann benutzt werden um zu prüfe ob sich bereits Karteien im
+	 * Diese Methode kann benutzt werden um zu prï¿½fe ob sich bereits Karteien im
 	 * CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist statisch
 	 * und benoetigt keine Instatnz von KarteiHandler.
 	 * 
-	 * @return Gibt eine ArrayList mit den Pfaden zurück, wahlweise der
+	 * @return Gibt eine ArrayList mit den Pfaden zurï¿½ck, wahlweise der
 	 *         komplette Pfad oder nur der Name der Kartei.
 	 * @param nurKarteiName
-	 *            "False" gibt den kompletten Pfad zurück, "True" dagegen nur
+	 *            "False" gibt den kompletten Pfad zurï¿½ck, "True" dagegen nur
 	 *            den Titel der Kartei, z.b. "deutsch-englisch".
 	 */
 	public static ArrayList<String> leseExistierendeKarteiPfade(
@@ -282,7 +283,7 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um den Pfad der aktuell liegenden JAR
-	 * herausfinden zu können. Die Methode ist statisch und benoetigt keine
+	 * herausfinden zu kï¿½nnen. Die Methode ist statisch und benoetigt keine
 	 * Instanz von KarteiHandler.
 	 * 
 	 * @return Komplett-Pfad der JAR auf dem Filesystem.
@@ -296,12 +297,12 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu überprüfen
-	 * ob eine solche CSV-Datei bereits vorhanden ist. Wäre dies nämlich so,
-	 * würde sie dann überschrieben werden! Falls eine gleichnamige Kartei
-	 * erstellt wird, sollte dies überprüft werden.
+	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu ï¿½berprï¿½fen
+	 * ob eine solche CSV-Datei bereits vorhanden ist. Wï¿½re dies nï¿½mlich so,
+	 * wï¿½rde sie dann ï¿½berschrieben werden! Falls eine gleichnamige Kartei
+	 * erstellt wird, sollte dies ï¿½berprï¿½ft werden.
 	 * 
-	 * @return "True" für bereites-vorhanden, "False" für nicht-vorhanden.
+	 * @return "True" fï¿½r bereites-vorhanden, "False" fï¿½r nicht-vorhanden.
 	 */
 	public boolean dateiBereitsVorhanden()
 	{
@@ -319,13 +320,13 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um den Arbeitspfad dens KarteiHandlers
-	 * zu ändern. z.B. nachdem der Lernende die Kartei wechselt.
+	 * zu ï¿½ndern. z.B. nachdem der Lernende die Kartei wechselt.
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
+	 *            beachten gilt, dass in Java ein "\" fï¿½r Escapen wie z.B. "\n"
 	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            ï¿½bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
 	 * @return "True" wenn der Pfad angenommen wurde, ansonsnten "False".
 	 */
 	public boolean setKarteiPfad(String karteiPfad)
