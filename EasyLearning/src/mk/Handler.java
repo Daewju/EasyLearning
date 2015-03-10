@@ -208,6 +208,7 @@ public class Handler implements GuiSchnittstelle{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(vollPfad);
 		try {
 			this.usedKartei = kh.dateiLesen(true);
 			eventGeheZuFach(1);

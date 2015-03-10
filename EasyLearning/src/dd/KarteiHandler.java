@@ -262,7 +262,7 @@ public class KarteiHandler
 			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(getStandardPfad() + "\\" + ordner + "\\")
+		File[] dateien = new File(getStandardPfad() + "//" + ordner + "//")
 				.listFiles();
 
 		for (File datei : dateien)
