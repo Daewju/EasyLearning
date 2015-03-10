@@ -90,7 +90,7 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * Diese Methode ändert die Farbe der Karte inkl. der Fachauswahl
+	 * Diese Methode ï¿½ndert die Farbe der Karte inkl. der Fachauswahl
 	 * 
 	 * @param color
 	 *            Vorschlag: Standard Color.CYAN, Richtig: Color.GREEN, Falsch:

@@ -105,11 +105,12 @@ public class Handler implements GuiSchnittstelle{
 			setUeberprueft(true);
 		}
 		else{
-			gui.setSmiley(false);
+			gui.versteckeSmiley();;
 			this.gui.setKartenFarbe(new Color(0,255,255));
 			zeigeNaechsteKarte();
 			setUeberprueft(false);
 		}
+		gui.repaint();
 		eventDateiSpeichern();
 		
 	}
