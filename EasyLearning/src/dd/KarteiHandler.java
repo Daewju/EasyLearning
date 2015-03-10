@@ -77,7 +77,7 @@ public class KarteiHandler
 			{
 				ordner.mkdir();
 			}
-			this.karteiPfad = getStandardPfad() + "\\" + ordner + "\\"
+			this.karteiPfad = getStandardPfad() + "//" + ordner + "//"
 					+ kartei.getName() + ".csv";
 		}
 
