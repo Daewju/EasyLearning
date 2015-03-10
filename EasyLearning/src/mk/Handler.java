@@ -86,17 +86,17 @@ public class Handler implements GuiSchnittstelle{
 	{
 		if(!ueberprueft){
 			
-			if(benutzerEingabe.equals(this.usedKarte.getWort())){
+			if(benutzerEingabe.equals(this.usedKarte.getVokabel())){
 				gui.setSmiley(true);
 				this.usedKarte.setRichtigB(this.usedKarte.getRichtigB()+1);
-				this.gui.setWort(this.usedKarte.getWort());
+				this.gui.setWort(this.usedKarte.getVokabel());
 				this.usedKartei.moveKarte(this.usedKarte, (this.usedKarte.getFach()+1));
 				this.gui.setEingabefeld("");
 				this.gui.setKartenFarbe(new Color(0,255,0));
 			}
 			else{
 				gui.setSmiley(false);
-				gui.setWort(this.usedKarte.getWort());
+				gui.setWort(this.usedKarte.getVokabel());
 				//verschiebe Karte in Fach 1
 				this.usedKartei.moveKarte(this.usedKarte, 1);
 				this.gui.setEingabefeld("");
@@ -131,7 +131,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKarte.setWort(wort);
 		this.usedKarte.setVokabel(vokabel);
 		eventDateiSpeichern();
-		gui.setWort(this.usedKarte.getVokabel());
+		gui.setWort(this.usedKarte.getWort());
 		
 	}
 
@@ -300,7 +300,7 @@ public class Handler implements GuiSchnittstelle{
 	private void zeigeNaechsteKarte(){
 		this.usedKarte = gibNaechsteKarte();
 		if(this.usedKarte!=null){
-			gui.setWort(this.usedKarte.getVokabel());
+			gui.setWort(this.usedKarte.getWort());
 		}
 		else{
 			gui.setWort("Fach ist leer");
