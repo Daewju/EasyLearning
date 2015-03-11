@@ -2,8 +2,6 @@ package dd;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.CodeSource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +48,7 @@ public class KarteiHandler
 	public KarteiHandler(String karteiPfad)
 	{
 		ordnerErstellen();
-		
+
 		if (karteiPfad != null)
 		{
 			this.karteiPfad = karteiPfad;
@@ -71,7 +69,7 @@ public class KarteiHandler
 	public KarteiHandler(Kartei kartei)
 	{
 		ordnerErstellen();
-		
+
 		if (kartei != null)
 		{
 			this.karteiPfad = getStandardPfad() + "/" + ordner + "/"
@@ -80,10 +78,12 @@ public class KarteiHandler
 		}
 	}
 
-	
 	/**
-	 * Diese Methode erstellt den Karteiordner falls nicht vorhanden direkt im Jar-Source-Verzeichnis
-	 * @return true wenn Ordner erstellt, false wenn Ordner nicht erstellt (bereits vorhanden).
+	 * Diese Methode erstellt den Karteiordner falls nicht vorhanden direkt im
+	 * Jar-Source-Verzeichnis
+	 * 
+	 * @return true wenn Ordner erstellt, false wenn Ordner nicht erstellt
+	 *         (bereits vorhanden).
 	 */
 	public static boolean ordnerErstellen()
 	{
@@ -96,15 +96,17 @@ public class KarteiHandler
 		}
 		return false;
 	}
-	
+
 	public static boolean ordnerLoeschen()
 	{
 		ordner = new File("Karteien");
-		
+
 		if (ordner.exists())
 		{
-			ordner.delete();
-			ordnerErstellen();
+			for (File file : ordner.listFiles())
+			{
+				file.delete();
+			}
 			return true;
 		}
 		return false;
