@@ -77,7 +77,7 @@ public class KarteiHandler
 			{
 				ordner.mkdir();
 			}
-			this.karteiPfad = getStandardPfad() + "//" + ordner + "//"
+			this.karteiPfad = getStandardPfad() + "\\" + ordner + "\\"
 					+ kartei.getName() + ".csv";
 		}
 
@@ -262,7 +262,7 @@ public class KarteiHandler
 			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(getStandardPfad() + "//" + ordner + "//")
+		File[] dateien = new File(getStandardPfad() + "\\" + ordner + "\\")
 				.listFiles();
 
 		for (File datei : dateien)
