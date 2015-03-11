@@ -102,6 +102,7 @@ public class Handler implements GuiSchnittstelle{
 				this.gui.setEingabefeld("");
 				this.gui.setKartenFarbe(new Color(255,0,0));
 			}
+			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
 			setUeberprueft(true);
 		}
 		else{
@@ -295,7 +296,7 @@ public class Handler implements GuiSchnittstelle{
 				}
 			}
 		}
-		temp.setAufrufe(temp.getAufrufe()+1);
+		//temp.setAufrufe(temp.getAufrufe()+1);
 		return temp;
 	}
 	
