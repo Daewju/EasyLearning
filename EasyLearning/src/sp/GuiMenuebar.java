@@ -155,7 +155,7 @@ public class GuiMenuebar
 			{
 				
 				final File karteiPfad = new File(KarteiHandler
-						.getStandardPfad());
+						.getStandardPfad() + "/Karteien");
 				System.out.println(karteiPfad.toString());
 				JFileChooser chooser = new JFileChooser(karteiPfad);
 				// fixiert den Ordner auf den Standard-Ordner
