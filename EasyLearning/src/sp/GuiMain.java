@@ -87,6 +87,7 @@ public class GuiMain extends JFrame
 		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
 		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
 		guiMenuebar.getLoeschenEintrag().setEnabled(!verstecken);
+		this.repaint();
 	}
 
 	/**
