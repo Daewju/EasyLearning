@@ -189,6 +189,7 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiExportieren(String vollPfad, boolean fortschritt)
 	{
+		String temp = kh.getKarteiPfad();
 		kh.setKarteiPfad(vollPfad);
 		try {
 			kh.dateiSchreiben(this.usedKartei, fortschritt);
@@ -196,7 +197,7 @@ public class Handler implements GuiSchnittstelle{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		kh.setKarteiPfad(temp);
 		System.out.println(vollPfad + ", " + fortschritt);
 		
 	}
