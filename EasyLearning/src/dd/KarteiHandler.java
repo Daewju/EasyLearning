@@ -104,6 +104,7 @@ public class KarteiHandler
 		if (ordner.exists())
 		{
 			ordner.delete();
+			ordnerErstellen();
 			return true;
 		}
 		return false;
