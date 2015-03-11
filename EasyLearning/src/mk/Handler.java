@@ -40,7 +40,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKarte = null;
 		this.usedFach = null;
 		this.ueberprueft = false;
-		
+		KarteiHandler.ordnerErstellen();
 		try {
 			this.sc = new SprachController();
 		} catch (IOException e) {
@@ -205,13 +205,7 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiOeffnen(String vollPfad)
 	{
-		try {
 			this.kh = new KarteiHandler(vollPfad);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(vollPfad);
 		try {
 			this.usedKartei = kh.dateiLesen(true);
 			eventGeheZuFach(1);
@@ -220,10 +214,8 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
 		System.out.println(vollPfad);
 		
 	}
@@ -314,6 +306,12 @@ public class Handler implements GuiSchnittstelle{
 	
 	public void setUeberprueft(boolean status){
 		this.ueberprueft = status;
+	}
+
+	@Override
+	public void eventZurücksetzen()
+	{
+		KarteiHandler.ordnerLoeschen();
 	}
 
 }

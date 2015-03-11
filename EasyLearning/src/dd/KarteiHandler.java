@@ -41,20 +41,19 @@ public class KarteiHandler
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" f�r Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            �bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            beachten gilt, dass in Java ein
+	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
+	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
+	 *            "C:\\Beispiel\\beispiel.csv".
 	 * @throws IOException
 	 */
-	public KarteiHandler(String karteiPfad) throws IOException
+	public KarteiHandler(String karteiPfad)
 	{
-		if (karteiPfad.contains(".csv"))
+		ordnerErstellen();
+		
+		if (karteiPfad != null)
 		{
 			this.karteiPfad = karteiPfad;
-		} else
-		{
-			throw new IllegalArgumentException(
-					"Pfad entspricht nicht den Kriterien. Siehe Javadoc!");
 		}
 	}
 
@@ -71,22 +70,43 @@ public class KarteiHandler
 	 */
 	public KarteiHandler(Kartei kartei)
 	{
-		ordner = new File("Karteien");
-
+		ordnerErstellen();
+		
 		if (kartei != null)
 		{
-			if (!ordner.exists())
-			{
-				ordner.mkdir();
-			}
 			this.karteiPfad = getStandardPfad() + "/" + ordner + "/"
 					+ kartei.getName() + ".csv";
-		}
 
-		else
-		{
-			throw new IllegalArgumentException("Kartei ist NULL!");
 		}
+	}
+
+	
+	/**
+	 * Diese Methode erstellt den Karteiordner falls nicht vorhanden direkt im Jar-Source-Verzeichnis
+	 * @return true wenn Ordner erstellt, false wenn Ordner nicht erstellt (bereits vorhanden).
+	 */
+	public static boolean ordnerErstellen()
+	{
+		ordner = new File("Karteien");
+
+		if (!ordner.exists())
+		{
+			ordner.mkdir();
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean ordnerLoeschen()
+	{
+		ordner = new File("Karteien");
+		
+		if (ordner.exists())
+		{
+			ordner.delete();
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -113,42 +133,45 @@ public class KarteiHandler
 
 		kartei = new Kartei((String) it.next(), (String) it.next());
 
-		for (String karte[] : karten)
+		if (karten != null)
 		{
-
-			String wort = karte[0];
-			String vokabel = karte[1];
-			int aufrufe;
-			int richtigB;
-			int fach;
-			Date erstellt;
-			Date bearbeitet;
-
-			if (fortschritt)
+			for (String karte[] : karten)
 			{
-				aufrufe = Integer.parseInt(karte[2]);
-				richtigB = Integer.parseInt(karte[3]);
-				fach = Integer.parseInt(karte[4]);
-				erstellt = datumFormat.parse(karte[5]);
-				bearbeitet = datumFormat.parse(karte[6]);
+
+				String wort = karte[0];
+				String vokabel = karte[1];
+				int aufrufe;
+				int richtigB;
+				int fach;
+				Date erstellt;
+				Date bearbeitet;
+
+				if (fortschritt)
+				{
+					aufrufe = Integer.parseInt(karte[2]);
+					richtigB = Integer.parseInt(karte[3]);
+					fach = Integer.parseInt(karte[4]);
+					erstellt = datumFormat.parse(karte[5]);
+					bearbeitet = datumFormat.parse(karte[6]);
+				}
+
+				else
+				{
+					Date zeit = new Date();
+					aufrufe = 0;
+					richtigB = 0;
+					fach = 1;
+					erstellt = zeit;
+					bearbeitet = zeit;
+				}
+
+				Karte fertigeKarte;
+
+				fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB,
+						fach, erstellt, bearbeitet);
+
+				kartei.addKarte(fertigeKarte, fach);
 			}
-
-			else
-			{
-				Date zeit = new Date();
-				aufrufe = 0;
-				richtigB = 0;
-				fach = 1;
-				erstellt = zeit;
-				bearbeitet = zeit;
-			}
-
-			Karte fertigeKarte;
-
-			fertigeKarte = new Karte(wort, vokabel, aufrufe, richtigB, fach,
-					erstellt, bearbeitet);
-
-			kartei.addKarte(fertigeKarte, fach);
 		}
 		cr.schliesseStream();
 		return kartei;
@@ -226,9 +249,10 @@ public class KarteiHandler
 	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" f�r Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            �bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            beachten gilt, dass in Java ein
+	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
+	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
+	 *            "C:\\Beispiel\\beispiel.csv".
 	 * @return wenn gel�scht => true, wenn nicht => false
 	 * @throws IOException
 	 */
@@ -250,9 +274,9 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode kann benutzt werden um zu pr�fe ob sich bereits Karteien im
-	 * CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist statisch
-	 * und benoetigt keine Instatnz von KarteiHandler.
+	 * Diese Methode kann benutzt werden um zu pr�fe ob sich bereits Karteien
+	 * im CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist
+	 * statisch und benoetigt keine Instatnz von KarteiHandler.
 	 * 
 	 * @return Gibt eine ArrayList mit den Pfaden zur�ck, wahlweise der
 	 *         komplette Pfad oder nur der Name der Kartei.
@@ -295,15 +319,14 @@ public class KarteiHandler
 		File f = new File(System.getProperty("java.class.path"));
 		File dir = f.getAbsoluteFile().getParentFile();
 		String path = dir.toString();
-		return path; 
+		return path;
 	}
 
-
 	/**
-	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu �berpr�fen
-	 * ob eine solche CSV-Datei bereits vorhanden ist. W�re dies n�mlich so,
-	 * w�rde sie dann �berschrieben werden! Falls eine gleichnamige Kartei
-	 * erstellt wird, sollte dies �berpr�ft werden.
+	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu
+	 * �berpr�fen ob eine solche CSV-Datei bereits vorhanden ist. W�re
+	 * dies n�mlich so, w�rde sie dann �berschrieben werden! Falls eine
+	 * gleichnamige Kartei erstellt wird, sollte dies �berpr�ft werden.
 	 * 
 	 * @return "True" f�r bereites-vorhanden, "False" f�r nicht-vorhanden.
 	 */
@@ -327,9 +350,10 @@ public class KarteiHandler
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" f�r Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            �bergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            beachten gilt, dass in Java ein
+	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
+	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
+	 *            "C:\\Beispiel\\beispiel.csv".
 	 * @return "True" wenn der Pfad angenommen wurde, ansonsnten "False".
 	 */
 	public boolean setKarteiPfad(String karteiPfad)

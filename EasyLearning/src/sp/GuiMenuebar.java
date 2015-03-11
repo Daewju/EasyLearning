@@ -34,6 +34,7 @@ public class GuiMenuebar
 	private JMenuItem loeschenEintrag;
 	private JMenuItem importEintrag;
 	private JMenuItem exportEintrag;
+	private JMenuItem resetEintrag;
 	private JMenuItem beendenEintrag;
 	private JMenuItem deutschEintrag;
 	private JMenuItem englischEintrag;
@@ -77,6 +78,8 @@ public class GuiMenuebar
 				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Exportieren", GuiMain.SPRACHCODE));
+		resetEintrag = new JMenuItem(sprachcontroller.getSprache(
+				"Zurücksetzen", GuiMain.SPRACHCODE));
 		beendenEintrag = new JMenuItem(sprachcontroller.getSprache("Beenden",
 				GuiMain.SPRACHCODE));
 		deutschEintrag = new JMenuItem(sprachcontroller.getSprache("Deutsch",
@@ -110,6 +113,7 @@ public class GuiMenuebar
 		dateiMenue.add(loeschenEintrag);
 		dateiMenue.add(importEintrag);
 		dateiMenue.add(exportEintrag);
+		dateiMenue.add(resetEintrag);
 		dateiMenue.add(beendenEintrag);
 		spracheMenue.add(deutschEintrag);
 		spracheMenue.add(englischEintrag);
@@ -156,7 +160,6 @@ public class GuiMenuebar
 				
 				final File karteiPfad = new File(KarteiHandler
 						.getStandardPfad() + "/Karteien");
-				System.out.println(karteiPfad.toString());
 				JFileChooser chooser = new JFileChooser(karteiPfad);
 				// fixiert den Ordner auf den Standard-Ordner
 				chooser.setFileView(new FileView()
@@ -283,6 +286,28 @@ public class GuiMenuebar
 						handler.eventDateiExportieren(chooser.getSelectedFile()
 								.getAbsolutePath() + ".csv", false);
 					}
+				}
+			}
+		});
+		
+		
+		resetEintrag.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				if (guiMain.getGuiDialog().variableButtonsDialog(
+						new Object[]
+						{
+								sprachcontroller.getSprache("Ja",
+										GuiMain.SPRACHCODE),
+								sprachcontroller.getSprache("Nein",
+										GuiMain.SPRACHCODE) },
+						sprachcontroller.getSprache("Zurücksetzen",
+								GuiMain.SPRACHCODE),
+						sprachcontroller.getSprache("Sind Sie sicher?",
+								GuiMain.SPRACHCODE)) == 0)
+				{
+					handler.eventZurücksetzen();
 				}
 			}
 		});
