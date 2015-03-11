@@ -3,6 +3,7 @@ package dd;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.CodeSource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -294,7 +295,7 @@ public class KarteiHandler
 		File f = new File(System.getProperty("java.class.path"));
 		File dir = f.getAbsoluteFile().getParentFile();
 		String path = dir.toString();
-		return path;
+		return path; 
 	}
 
 
