@@ -67,7 +67,7 @@ public class CSVReader
 	 */
 	private void initialisieren(String pfad) throws IOException
 	{
-		if (pfad != null && pfad.contains(".csv") && pfad.contains("\\"))
+		if (pfad != null && pfad.contains(".csv"))
 		{
 			fileReader = new FileReader(pfad);
 			bufferedReader = new BufferedReader(fileReader);

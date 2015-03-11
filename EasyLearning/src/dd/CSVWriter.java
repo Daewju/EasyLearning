@@ -49,7 +49,7 @@ public class CSVWriter
 	 */
 	private void initialisieren(String pfad) throws IOException
 	{
-		if (pfad != null && pfad.contains(".csv") && pfad.contains("\\"))
+		if (pfad != null && pfad.contains(".csv"))
 		{
 			fileWriter = new FileWriter(pfad);
 			bufferedWriter = new BufferedWriter(fileWriter);

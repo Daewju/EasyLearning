@@ -48,7 +48,7 @@ public class KarteiHandler
 	 */
 	public KarteiHandler(String karteiPfad) throws IOException
 	{
-		if (karteiPfad.contains(".csv") && karteiPfad.contains("\\"))
+		if (karteiPfad.contains(".csv"))
 		{
 			this.karteiPfad = karteiPfad;
 		} else
@@ -79,7 +79,7 @@ public class KarteiHandler
 			{
 				ordner.mkdir();
 			}
-			this.karteiPfad = getStandardPfad() + "\\" + ordner + "\\"
+			this.karteiPfad = getStandardPfad() + "/" + ordner + "/"
 					+ kartei.getName() + ".csv";
 		}
 
@@ -264,7 +264,7 @@ public class KarteiHandler
 			boolean nurKarteiName)
 	{
 		ArrayList<String> interneKarteien = new ArrayList<String>();
-		File[] dateien = new File(getStandardPfad() + "\\" + ordner + "\\")
+		File[] dateien = new File(getStandardPfad() + "/" + ordner + "/")
 				.listFiles();
 
 		for (File datei : dateien)
@@ -334,7 +334,7 @@ public class KarteiHandler
 	 */
 	public boolean setKarteiPfad(String karteiPfad)
 	{
-		if (karteiPfad.contains(".csv") && karteiPfad.contains("\\"))
+		if (karteiPfad.contains(".csv"))
 		{
 			this.karteiPfad = karteiPfad;
 			return true;
