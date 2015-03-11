@@ -2,6 +2,7 @@ package dd;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -295,6 +296,7 @@ public class KarteiHandler
 		String path = dir.toString();
 		return path;
 	}
+
 
 	/**
 	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu �berpr�fen
