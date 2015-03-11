@@ -151,6 +151,7 @@ public class GuiMenuebar
 					guiMain.getGuiDialog().setFremdsprache(null);
 				}
 			}
+			
 		});
 
 		oeffnenEintrag.addActionListener(new ActionListener()
@@ -324,7 +325,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSPRACHCODE(0);
+				GuiMain.setSPRACHCODE(0);
 				init();
 			}
 		});
@@ -333,7 +334,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSPRACHCODE(1);
+				GuiMain.setSPRACHCODE(1);
 				init();
 			}
 		});
@@ -342,7 +343,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSPRACHCODE(2);
+				GuiMain.setSPRACHCODE(2);
 				init();
 			}
 		});
@@ -351,7 +352,7 @@ public class GuiMenuebar
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				guiMain.setSPRACHCODE(3);
+				GuiMain.setSPRACHCODE(3);
 				init();
 			}
 		});

@@ -7,7 +7,6 @@ import dd.KarteiHandler;
 import dd.SprachController;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -312,6 +311,7 @@ public class Handler implements GuiSchnittstelle{
 	public void eventZurücksetzen()
 	{
 		KarteiHandler.ordnerLoeschen();
+		gui.versteckeAlleElemente(true);
 	}
 
 }
