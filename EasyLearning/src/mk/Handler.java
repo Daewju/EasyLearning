@@ -308,7 +308,7 @@ public class Handler implements GuiSchnittstelle{
 	}
 
 	@Override
-	public void eventZurücksetzen()
+	public void eventZuruecksetzen()
 	{
 		KarteiHandler.ordnerLoeschen();
 		gui.versteckeAlleElemente(true);

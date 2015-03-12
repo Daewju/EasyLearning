@@ -10,7 +10,7 @@ public interface GuiSchnittstelle
 	public void eventGeheZuFach(int fach);
 	public void eventDateiImportieren(String vollPfad, boolean fortschritt);
 	public void eventDateiExportieren(String vollPfad, boolean fortschritt);
-	public void eventZurücksetzen();
+	public void eventZuruecksetzen();
 	public void eventDateiOeffnen(String vollPfad);
 	public void eventDateiSpeichern();
 	public void eventDateiLoeschen();
