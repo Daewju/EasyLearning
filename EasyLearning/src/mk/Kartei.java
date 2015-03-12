@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;	
 
 /**	
- * @author marko	
- *	
+ * 	Diese Klasse spiegelt die eigentliche Kartei wieder in welcher die Lernkarten verwaltet und 
+ * 	abgelegt werden. Die Karten werden dabei in sechs ArrayList Objekten verwaltet. Wobei jede 
+ * 	ArrayList fuer ein Fach der Kartei steht (Fach 1-6).
+ * 	Neben den Karten enthaelt jede Kartei die Information, welche Sprachen behandelt werden.
+ * 
+ *	@author marko	
+ *	@version 1.1	
  */	
 public class Kartei {	
 
@@ -34,14 +39,16 @@ public class Kartei {
 	}	
 
 	/**	
-	 * 	
-	 * @param karte	
-	 * @param fach	
-	 * addKarte erwartet ein Objekt der Klasse Karte und einen Int Wert welcher für das Fach	
-	 * steht indem das Kartenobjket eingefügt werden soll.	
+	 * Fuegt ein Objekt der Klasse Karte einem Fach der aktuellen Kartei hinzu. Das Ziel-Fach wird
+	 * ueber den Parameter "fach" festgelegt.
+	 * 
+	 * @param	karte	Referenz auf Karten-Objekt welches dem Fach hinzugefuegt werden soll.
+	 * 		  		
+	 * @param 	fach	INT-Wert welches der Fachnummer entspricht,
+	 * 					in der die Karte hinzugefuegt werden soll. (z.B. 3 = Fach 3.)	  		
+	 * 		  		
 	 * @return	boolean (true = erfolgreich /false = fehlgeschlagen)
-	 * @throws IllegalArgumentException	
-	 * 	
+	 * @throws 	IllegalArgumentException	
 	 */	
 	public boolean addKarte(Karte karte, int fach) throws IllegalArgumentException{	
 		Iterator<Karte> it;
@@ -60,12 +67,13 @@ public class Kartei {
 	}				
 
 	/**				
-	 * 				
-	 * @param karte							
-	 * 		  removeKarte erwartet ein Objekt der Klasse Karte. 
-	 * 		  Diese Karte wird anschliessend aus dessen Fach entfernt.				
-	 * @return	Referenz auf Karte Objekt das aus dem Fach entfernt wurde.			
-	 * 				
+	 * Entfernt ein bestimmtes Karten-Objekt aus dem Fach in dem sich dieses momentan befindet. 
+	 * Als Rueckgabe wird das zuvor entfernte Karten-Objekt zurueckgegeben.
+	 * 			
+	 * @param 	karte	Erwartet wird eine Referenz auf das Karten-Objekt
+	 * 					welches geloescht/entfernt werden soll.							 	
+	 * 		
+	 * @return	Referenz auf Karten-Objekt das aus dem Fach entfernt wurde.						
 	 */				
 	public Karte removeKarte(Karte karte){
 		
@@ -84,11 +92,13 @@ public class Kartei {
 	}		
 	
 	/**				
-	 * 		
-	 * @param karte		
-	 * @param fach		
-	 * 		  moveKarte verschiebt das übergebene Karteobjekt in das angegebene Fach (fach).			
-	 * 		
+	 * Verschiebt uebergebenes Objekt der Klasse Karte in das im Parameter "fach" angegeben Fach der aktuellen Kartei.		
+	 * 
+	 * @param 	karte	Erwartet wird eine Referenz auf das Karten-Objekt welches
+	 * 					verschoben werden soll.
+	 * 						
+	 * @param 	fach	INT-Wert welcher f�r die Fachnummer steht in welches die
+	 * 					Karte verschoben wird. (z.B. 3 = Fach 3)	  			
 	 */		
 	public void moveKarte(Karte karte, int fach){
 		
@@ -101,15 +111,14 @@ public class Kartei {
 	}
 
 	/**				
-	 * 		
-	 * @param it		
-	 * @param karte		
-	 * existKarte überprüft anhand eines Iterators (it) einer ArrayList ob bereits eine Karte mit demselben Wortpaar,		
-	 * wie diejenige welche als Parameter übergebenwurde, existiert. Falls schon wird eine IllegalArgumentException		
-	 * geworfen. Sollte dies nicht der fall sein, wird true zurückgeliefert.		
+	 * Ueberprueft ob bereits eine Karte mit demselben Wortpaar in der Kartei existiert.
+	 *  	
+	 * @param it	
+	 * 					
+	 * @param	karte	Objekt der Klasse Karte welches geprueft werden soll.		
+	 * 				
 	 * @return	boolean (true = Karte existiert nicht  /false = Karte existiert)	
 	 * @throws IllegalArgumentException		
-	 * 		
 	 */		
 	private boolean existKarte(Iterator<Karte> it, Karte karte) throws IllegalArgumentException{		
 		Karte k;	
@@ -128,13 +137,12 @@ public class Kartei {
 	}
 	
 	/**				
+	 * Gibt anahand eines INT-Wertes, welcher der Fachnummer entspricht, das entsprechende Fach als ArrayList-Objekt zurueck.
 	 * 				
-	 * @param fach		
-	 * 		  fach = gewünschte Fachnummer. Anhand dieses INT-Werts wird das
-	 * 		  entsprechende ArrayList Objekt identifiziert und zurückgeliefert.
-	 * @return	Referenz auf ArrayList Objekt (Fach1-6)
-	 * 
-	 * 		
+	 * @param 	fach		
+	 * 		 		Erwartet wird gewuenschte Fachnummer. Anhand dieses INT-Werts wird das
+	 * 		  		entsprechende ArrayList Objekt identifiziert und zurueckgeliefert.
+	 * @return	Referenz zu ArrayList Objekt des gewuenschten Fachs	
 	 */	
 	public ArrayList<Karte> gibFach(int fach){
 		
