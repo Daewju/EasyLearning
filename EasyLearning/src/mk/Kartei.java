@@ -51,14 +51,12 @@ public class Kartei {
 	 * @throws 	IllegalArgumentException	
 	 */	
 	public boolean addKarte(Karte karte, int fach) throws IllegalArgumentException{	
-		Iterator<Karte> it;
-
+		
 		if(karte!=null && fach >=1 && fach <=6)				
 		{			
 			ArrayList<Karte> f = gibFach(fach);
 			
-			it = f.iterator();
-			if(f.isEmpty() || existKarte(it, karte)){ //goes into if fach is not empty or card doesnt exist	
+			if(f.isEmpty() || existKarte(karte)){ //goes into if fach is not empty or card doesnt exist	
 				return f.add(karte);
 			}		
 		}			
@@ -97,7 +95,7 @@ public class Kartei {
 	 * @param 	karte	Erwartet wird eine Referenz auf das Karten-Objekt welches
 	 * 					verschoben werden soll.
 	 * 						
-	 * @param 	fach	INT-Wert welcher für die Fachnummer steht in welches die
+	 * @param 	fach	INT-Wert welcher fï¿½r die Fachnummer steht in welches die
 	 * 					Karte verschoben wird. (z.B. 3 = Fach 3)	  			
 	 */		
 	public void moveKarte(Karte karte, int fach){
@@ -120,20 +118,19 @@ public class Kartei {
 	 * @return	boolean (true = Karte existiert nicht  /false = Karte existiert)	
 	 * @throws IllegalArgumentException		
 	 */		
-	private boolean existKarte(Iterator<Karte> it, Karte karte) throws IllegalArgumentException{		
-		Karte k;	
-
-		while(it.hasNext()){	
-			k = it.next();
-			if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-				throw new IllegalArgumentException("Diese Karte existiert bereits");
-				
+	private boolean existKarte(Karte karte) throws IllegalArgumentException{		
+		Karte k;
+		Iterator<Karte> it;
+		for(int i=1;i<7;i++){
+			it=gibFach(i).iterator();
+			while(it.hasNext()){
+				k = it.next();
+				if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
+					throw new IllegalArgumentException("Diese Karte existiert bereits");
+				}		
 			}	
-			else{	
-				return true;
-			}	
-		}		
-		return false;		
+		}
+		return true;		
 	}
 	
 	/**				
