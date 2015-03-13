@@ -56,9 +56,10 @@ public class Kartei {
 		{			
 			ArrayList<Karte> f = gibFach(fach);
 			
-			if(f.isEmpty() || existKarte(karte)){ //goes into if fach is not empty or card doesnt exist	
-				return f.add(karte);
-			}		
+				if((fach1.isEmpty() && fach2.isEmpty() && fach3.isEmpty() && fach4.isEmpty() && fach5.isEmpty() && fach6.isEmpty()) || existKarte(karte)){ //goes into if fach is not empty or card doesnt exist	
+					return f.add(karte);
+				}
+
 		}			
 
 		return false;			
@@ -109,16 +110,14 @@ public class Kartei {
 	}
 
 	/**				
-	 * Ueberprueft ob bereits eine Karte mit demselben Wortpaar in der Kartei existiert.
-	 *  	
-	 * @param it	
+	 * Ueberprueft ob bereits eine Karte mit demselben Wortpaar in der Kartei existiert.		
 	 * 					
 	 * @param	karte	Objekt der Klasse Karte welches geprueft werden soll.		
 	 * 				
 	 * @return	boolean (true = Karte existiert nicht  /false = Karte existiert)	
 	 * @throws IllegalArgumentException		
 	 */		
-	private boolean existKarte(Karte karte) throws IllegalArgumentException{		
+	private boolean existKarte(Karte karte){		
 		Karte k;
 		Iterator<Karte> it;
 		for(int i=1;i<7;i++){
@@ -126,7 +125,7 @@ public class Kartei {
 			while(it.hasNext()){
 				k = it.next();
 				if(k.getWort().equals(karte.getWort()) && k.getVokabel().equals(karte.getVokabel())){
-					throw new IllegalArgumentException("Diese Karte existiert bereits");
+					throw new IllegalArgumentException("card exists");
 				}		
 			}	
 		}

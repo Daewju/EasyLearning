@@ -118,10 +118,15 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
-		this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
-		eventDateiSpeichern();
- 		if(this.usedKarte == null){
-			zeigeNaechsteKarte();
+		try{
+			this.usedKartei.addKarte(new Karte(wort, vokabel), 1);
+			eventDateiSpeichern();
+	 		if(this.usedKarte == null){
+				zeigeNaechsteKarte();
+			}
+		}
+		catch(IllegalArgumentException e){
+			guiDialog.fehlerDialog("Error", "Karte existiert bereits");
 		}
 		
 	}
