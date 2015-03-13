@@ -86,27 +86,27 @@ public class Handler implements GuiSchnittstelle{
 		if(!ueberprueft){
 			
 			if(benutzerEingabe.equals(this.usedKarte.getVokabel())){
-				gui.setSmiley(true);
+				this.gui.setSmiley(true);
 				this.usedKarte.setRichtigB(this.usedKarte.getRichtigB()+1);
 				this.gui.setWort(this.usedKarte.getVokabel());
 				this.usedKartei.moveKarte(this.usedKarte, (this.usedKarte.getFach()+1));
 				this.gui.setEingabefeld("");
-				this.gui.setKartenFarbe(new Color(0,255,0));
+				this.gui.setKartenFarbe(gibFarbe("r"));
 			}
 			else{
-				gui.setSmiley(false);
-				gui.setWort(this.usedKarte.getVokabel());
+				this.gui.setSmiley(false);
+				this.gui.setWort(this.usedKarte.getVokabel());
 				//verschiebe Karte in Fach 1
 				this.usedKartei.moveKarte(this.usedKarte, 1);
 				this.gui.setEingabefeld("");
-				this.gui.setKartenFarbe(new Color(255,0,0));
+				this.gui.setKartenFarbe(gibFarbe("f"));
 			}
 			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
 			setUeberprueft(true);
 		}
 		else{
-			gui.versteckeSmiley();;
-			this.gui.setKartenFarbe(new Color(0,255,255));
+			this.gui.versteckeSmiley();;
+			this.gui.setKartenFarbe(gibFarbe("d"));
 			zeigeNaechsteKarte();
 			setUeberprueft(false);
 		}
@@ -168,6 +168,9 @@ public class Handler implements GuiSchnittstelle{
 		if(this.usedFach!=this.usedKartei.gibFach(fach)){
 			this.usedFach = this.usedKartei.gibFach(fach);
 			zeigeNaechsteKarte();
+			this.gui.versteckeSmiley();;
+			this.gui.setKartenFarbe(gibFarbe("d"));
+			this.gui.repaint();
 		}	
 	}
 
@@ -232,7 +235,7 @@ public class Handler implements GuiSchnittstelle{
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			guiDialog.fehlerDialog("Error Kartei erstellen", "ACHTUNG: Kartei konnte nicht erstellt werden.");
+			guiDialog.fehlerDialog(sc.getSprache("Fehler",gui.SPRACHCODE), "ACHTUNG: Kartei konnte nicht erstellt werden.");
 			
 		}
 		
@@ -303,8 +306,7 @@ public class Handler implements GuiSchnittstelle{
 			gui.setWort(this.usedKarte.getWort());
 		}
 		else{
-			gui.setWort("Fach ist leer");
-			System.out.println("Fach ist leer");
+			gui.setWort(sc.getSprache("Fach ist leer",gui.SPRACHCODE));
 		}
 	}
 	
@@ -317,6 +319,18 @@ public class Handler implements GuiSchnittstelle{
 	{
 		KarteiHandler.ordnerLoeschen();
 		gui.versteckeAlleElemente(true);
+	}
+	
+	private Color gibFarbe(String farbe){
+		switch(farbe){
+			case "r": 	return new Color(0,255,0);
+						
+			case "f":	return new Color(255,0,0);
+						
+			case "d":	return new Color(0,255,255);
+						
+			default:	return new Color(0,255,255);
+		}
 	}
 
 }
