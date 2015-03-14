@@ -17,6 +17,12 @@ import sp.GuiMain;
 import sp.GuiSchnittstelle;
 
 /**
+ * Diese Klasse koordiniert alle Aktionen und Mutationen welche an den 
+ * Karteien,Karten & Fächern während der Laufzeit vorgenommen werden.
+ * Dazu gehört auch die Abwicklung aller Userinputs und Outputs.
+ * Wobei die Logik auf dem System von Sebastian Leitner aufbaut.
+ * 
+ * 
  * @author marko
  *
  */
