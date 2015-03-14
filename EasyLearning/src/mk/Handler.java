@@ -266,7 +266,9 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventApplikationBeenden()
 	{
-		eventDateiSpeichern();
+		if(this.kh!=null){
+			eventDateiSpeichern();
+		}
 		System.exit(0);
 		
 	}
