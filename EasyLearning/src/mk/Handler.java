@@ -8,6 +8,7 @@ import dd.SprachController;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,6 +16,8 @@ import java.util.Random;
 import sp.GuiDialog;
 import sp.GuiMain;
 import sp.GuiSchnittstelle;
+import sp.GuiSmileyStatistik;
+import sp.GuiStatistik;
 
 /**
  * Diese Klasse koordiniert alle Aktionen und Mutationen welche an den 
@@ -71,7 +74,7 @@ public class Handler implements GuiSchnittstelle{
 		if(tempkh.dateiBereitsVorhanden()){
 			tempkh = null;
 			kartei = null;
-			guiDialog.fehlerDialog(sc.getSprache("Fehler", gui.SPRACHCODE), sc.getSprache("Kartei schon vorhanden", gui.SPRACHCODE));
+			guiDialog.fehlerDialog(sc.getSprache("Fehler", GuiMain.SPRACHCODE), sc.getSprache("Kartei schon vorhanden", GuiMain.SPRACHCODE));
 		}
 		else{
 			gui.versteckeAlleElemente(false);
@@ -113,6 +116,7 @@ public class Handler implements GuiSchnittstelle{
 		else{
 			this.gui.versteckeSmiley();;
 			this.gui.setKartenFarbe(gibFarbe("d"));
+			this.gui.setEingabefeld("");
 			zeigeNaechsteKarte();
 			setUeberprueft(false);
 		}
@@ -132,7 +136,7 @@ public class Handler implements GuiSchnittstelle{
 			}
 		}
 		catch(IllegalArgumentException e){
-			guiDialog.infoDialog(sc.getSprache("Info",gui.SPRACHCODE), sc.getSprache("Karte bereits vorhanden",gui.SPRACHCODE));
+			guiDialog.infoDialog(sc.getSprache("Info",GuiMain.SPRACHCODE), sc.getSprache("Karte bereits vorhanden",GuiMain.SPRACHCODE));
 			
 		}
 		
@@ -152,7 +156,7 @@ public class Handler implements GuiSchnittstelle{
 	public void eventKarteLoeschen(String wort)
 	{
 		if(this.usedKarte == null){
-			guiDialog.infoDialog(sc.getSprache("Info",gui.SPRACHCODE), sc.getSprache("Keine Karte zum Loeschen vorhanden",gui.SPRACHCODE));
+			guiDialog.infoDialog(sc.getSprache("Info",GuiMain.SPRACHCODE), sc.getSprache("Keine Karte zum Loeschen vorhanden",GuiMain.SPRACHCODE));
 		}
 		else{
 			this.usedKartei.removeKarte(this.usedKarte);
@@ -199,7 +203,7 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
-			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}
 		System.out.println(vollPfad + ", " + fortschritt);
@@ -215,12 +219,11 @@ public class Handler implements GuiSchnittstelle{
 			kh.dateiSchreiben(this.usedKartei, fortschritt);
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
-			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}
 		kh.setKarteiPfad(temp);
 		System.out.println(vollPfad + ", " + fortschritt);
-		
 	}
 
 	@Override
@@ -229,17 +232,16 @@ public class Handler implements GuiSchnittstelle{
 			this.kh = new KarteiHandler(vollPfad);
 		try {
 			this.usedKartei = kh.dateiLesen(true);
+			gui.versteckeAlleElemente(false);
 			eventGeheZuFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
-			gui.versteckeAlleElemente(false);
+			
 			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
-			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}
-		System.out.println(vollPfad);
-		
 	}
 
 	@Override
@@ -250,7 +252,7 @@ public class Handler implements GuiSchnittstelle{
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			
 		}
 		
@@ -263,7 +265,7 @@ public class Handler implements GuiSchnittstelle{
 		{
 			if(!kh.loescheKartei(kh.getKarteiPfad()))
 			{
-				guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Datei ist noch in Verwendung oder nicht mehr vorhanden",gui.SPRACHCODE));
+				guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Datei ist noch in Verwendung oder nicht mehr vorhanden",GuiMain.SPRACHCODE));
 			}
 			else
 			{
@@ -272,14 +274,14 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (IOException e)
 		{
-			this.guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
+			this.guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}	
 	}
 	
 	@Override
 	public void eventSpracheUmgestellt(){
-		this.gui.setWort(this.sc.getSprache("Fach ist leer",gui.SPRACHCODE));
+		this.gui.setWort(this.sc.getSprache("Fach ist leer",GuiMain.SPRACHCODE));
 	}
 
 
@@ -326,10 +328,25 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKarte = gibNaechsteKarte();
 		if(this.usedKarte!=null){
 			this.gui.setWort(this.usedKarte.getWort());
+			
+			GuiStatistik statistik = gui.getguiSmileyStatistik().getGuiStatistik();
+			Double rp = (double)(this.usedKarte.getRichtigB()*100)/this.usedKarte.getAufrufe();
+			NumberFormat n = NumberFormat.getInstance();
+			n.setMaximumFractionDigits(2);
+			
+			statistik.setStatistik( ""+this.usedFach.size(),
+									""+this.usedKarte.getAufrufe(),
+									""+n.format(rp)+"%",
+									""+this.usedKarte.getErstellt().toGMTString(),
+									""+this.usedKarte.getBearbeitet().toGMTString()
+									);
+			this.gui.versteckeStatistik(true);
 		}
 		else{
-			this.gui.setWort(sc.getSprache("Fach ist leer",gui.SPRACHCODE));
+			this.gui.setWort(sc.getSprache("Fach ist leer",GuiMain.SPRACHCODE));
+			this.gui.versteckeStatistik(false);
 		}
+		
 	}
 	
 	public void setUeberprueft(boolean status){
