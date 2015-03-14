@@ -178,10 +178,15 @@ public class Handler implements GuiSchnittstelle{
 	@Override
 	public void eventDateiImportieren(String vollPfad, boolean fortschritt)
 	{
-
+		
 		try {
+			//read desired Kartei file
 			this.kh = new KarteiHandler(vollPfad);
 			this.usedKartei = this.kh.dateiLesen(fortschritt);
+			//create Kartei file at default folder
+			this.kh = new KarteiHandler(this.usedKartei);
+			this.kh.dateiSchreiben(this.usedKartei, fortschritt);
+			
 			this.gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventGeheZuFach(1);
 			gui.versteckeAlleElemente(false);
