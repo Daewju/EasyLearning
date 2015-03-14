@@ -4,14 +4,18 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
+import dd.SprachController;
+
 public class GuiSmileyStatistik extends JPanel{
 	private GuiSmiley guiSmiley;
 	private GuiStatistik guiStatistik;
+	private SprachController sc;
 	
-	public GuiSmileyStatistik(){
+	public GuiSmileyStatistik(SprachController sc){
 
 		this.guiSmiley = new GuiSmiley();
-		this.guiStatistik = new GuiStatistik();
+		this.sc = sc;
+		this.guiStatistik = new GuiStatistik(sc);
 		this.guiStatistik.setStatistik("0","0", "0", "a", "b");
 		this.setLayout(new GridLayout(2,1));
 		this.add(guiSmiley);

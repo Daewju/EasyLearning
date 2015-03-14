@@ -47,7 +47,7 @@ public class GuiMain extends JFrame
 		guiMenuebar = new GuiMenuebar(this);
 		guiKarteiTitel = new GuiKarteiTitel();
 		guiEingabeFeld = new GuiEingabeFeld(this);
-		guiSmileyStatistik = new GuiSmileyStatistik();
+		guiSmileyStatistik = new GuiSmileyStatistik(sprachcontroller);
 		guiDialog = new GuiDialog(this);
 		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0, Color.CYAN);
 		karteButtons = new GuiKarteButtons(this);
@@ -114,6 +114,10 @@ public class GuiMain extends JFrame
 		guiSmileyStatistik.getGuiSmiley().versteckeSmiley();
 	}
 	
+	/**
+	 * Diese Methode kann benutzt werden um die Statistik ein- und auszublenden
+	 * @param anzeigen true=anzeigen, false=verstecken
+	 */
 	public void versteckeStatistik(boolean anzeigen)
 	{
 		guiSmileyStatistik.getGuiStatistik().setVisible(anzeigen);

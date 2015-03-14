@@ -330,6 +330,8 @@ public class GuiMenuebar
 			{
 				GuiMain.setSPRACHCODE(0);
 				init();
+				guiMain.getguiSmileyStatistik().getGuiStatistik().anzeigeAktualisieren();;
+
 			}
 		});
 
@@ -339,6 +341,8 @@ public class GuiMenuebar
 			{
 				GuiMain.setSPRACHCODE(1);
 				init();
+				guiMain.getguiSmileyStatistik().getGuiStatistik().anzeigeAktualisieren();;
+
 			}
 		});
 
@@ -348,6 +352,8 @@ public class GuiMenuebar
 			{
 				GuiMain.setSPRACHCODE(2);
 				init();
+				guiMain.getguiSmileyStatistik().getGuiStatistik().anzeigeAktualisieren();;
+
 			}
 		});
 
@@ -357,6 +363,8 @@ public class GuiMenuebar
 			{
 				GuiMain.setSPRACHCODE(3);
 				init();
+				guiMain.getguiSmileyStatistik().getGuiStatistik().anzeigeAktualisieren();;
+
 			}
 		});
 

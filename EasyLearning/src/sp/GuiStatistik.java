@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dd.SprachController;
+
 public class GuiStatistik extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -28,9 +30,9 @@ public class GuiStatistik extends JPanel {
 	private JLabel bearbeitet;
 	private JLabel bearbeitetWert;
 	private JLabel zwischenZeile;
-	
+	private SprachController sc;
 
-	public GuiStatistik(){
+	public GuiStatistik(SprachController sc){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(50,50));
 		this.anzahlKarten = "0";
@@ -46,15 +48,24 @@ public class GuiStatistik extends JPanel {
 		this.bearbeitet = new JLabel();
 		this.bearbeitetWert = new JLabel();
 		this.zwischenZeile = new JLabel();
-
-		
+		this.sc = sc;
 	}
 	
 	public void setStatistik(String anzahlKarten, String anzahlAufrufe, String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet){
 		this.setBackground(GuiMain.COLOR_BACKGROUND);
+		this.anzahlKarten = anzahlKarten;
+		this.anzahlAufrufe = anzahlAufrufe;
+		this.anzahlKorrekt = anzahlKorrekt;
+		this.datumErstellt = datumErstellt;
+		this.zuletztBearbeitet = zuletztBearbeitet;
+		anzeigeAktualisieren();
+	}
+	
+	public void anzeigeAktualisieren()
+	{
 		karten.setFont(new Font(null, Font.BOLD, 20));
 		karten.setForeground(GuiMain.COLOR_TEXT_WHITE);
-		karten.setText("Karten: " + anzahlKarten);
+		karten.setText(sc.getSprache("Karten im Fach", GuiMain.SPRACHCODE) +": " + anzahlKarten);
 		aufrufe.setFont(new Font(null, Font.BOLD, 20));
 		aufrufe.setForeground(GuiMain.COLOR_TEXT_WHITE);
 		aufrufe.setText("Aufrufe: " + anzahlAufrufe);
@@ -75,8 +86,6 @@ public class GuiStatistik extends JPanel {
 		bearbeitetWert.setText(zuletztBearbeitet);
 		zwischenZeile.setText(" ");
 		
-		this.add(karten);
-		this.add(zwischenZeile);
 		this.add(aufrufe);
 		this.add(zwischenZeile);
 		this.add(korrekt);
@@ -86,7 +95,8 @@ public class GuiStatistik extends JPanel {
 		this.add(zwischenZeile);
 		this.add(bearbeitet);
 		this.add(bearbeitetWert);
+		this.add(karten);
+		this.add(zwischenZeile);
 		this.repaint();
 	}
-	
 }
