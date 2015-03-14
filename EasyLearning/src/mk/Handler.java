@@ -126,7 +126,8 @@ public class Handler implements GuiSchnittstelle{
 			}
 		}
 		catch(IllegalArgumentException e){
-			guiDialog.fehlerDialog("Error", "Karte existiert bereits");
+			guiDialog.infoDialog(sc.getSprache("Info",gui.SPRACHCODE), sc.getSprache("Karte bereits vorhanden",gui.SPRACHCODE));
+			
 		}
 		
 	}
@@ -145,7 +146,7 @@ public class Handler implements GuiSchnittstelle{
 	public void eventKarteLoeschen(String wort)
 	{
 		if(this.usedKarte == null){
-			guiDialog.fehlerDialog(sc.getSprache("Fehler",gui.SPRACHCODE), "Keine Karte zum Loeschen vorhanden.");
+			guiDialog.infoDialog(sc.getSprache("Info",gui.SPRACHCODE), sc.getSprache("Keine Karte zum Loeschen vorhanden",gui.SPRACHCODE));
 		}
 		else{
 			this.usedKartei.removeKarte(this.usedKarte);
@@ -187,6 +188,7 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
 			e.printStackTrace();
 		}
 		System.out.println(vollPfad + ", " + fortschritt);
@@ -202,6 +204,7 @@ public class Handler implements GuiSchnittstelle{
 			kh.dateiSchreiben(this.usedKartei, fortschritt);
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
 			e.printStackTrace();
 		}
 		kh.setKarteiPfad(temp);
@@ -221,6 +224,7 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
 			e.printStackTrace();
 		}
 		System.out.println(vollPfad);
@@ -235,7 +239,7 @@ public class Handler implements GuiSchnittstelle{
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			guiDialog.fehlerDialog(sc.getSprache("Fehler",gui.SPRACHCODE), "ACHTUNG: Kartei konnte nicht erstellt werden.");
+			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
 			
 		}
 		
@@ -248,7 +252,7 @@ public class Handler implements GuiSchnittstelle{
 		{
 			if(!kh.loescheKartei(kh.getKarteiPfad()))
 			{
-				guiDialog.fehlerDialog("Error Kartei l�schen", "ACHTUNG: Datei ist noch in Verwendung oder nicht mehr vorhanden.");
+				guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Datei ist noch in Verwendung oder nicht mehr vorhanden",gui.SPRACHCODE));
 			}
 			else
 			{
@@ -257,9 +261,14 @@ public class Handler implements GuiSchnittstelle{
 			
 		} catch (IOException e)
 		{
-			guiDialog.fehlerDialog("Error Kartei l�schen", "Schwerwiegender I/O-Fehler");
+			this.guiDialog.fehlerDialog(this.sc.getSprache("Fehler",gui.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",gui.SPRACHCODE));
 			e.printStackTrace();
 		}	
+	}
+	
+	@Override
+	public void eventSpracheUmgestellt(){
+		this.gui.setWort(this.sc.getSprache("Fach ist leer",gui.SPRACHCODE));
 	}
 
 
@@ -305,10 +314,10 @@ public class Handler implements GuiSchnittstelle{
 	private void zeigeNaechsteKarte(){
 		this.usedKarte = gibNaechsteKarte();
 		if(this.usedKarte!=null){
-			gui.setWort(this.usedKarte.getWort());
+			this.gui.setWort(this.usedKarte.getWort());
 		}
 		else{
-			gui.setWort(sc.getSprache("Fach ist leer",gui.SPRACHCODE));
+			this.gui.setWort(sc.getSprache("Fach ist leer",gui.SPRACHCODE));
 		}
 	}
 	
@@ -335,4 +344,47 @@ public class Handler implements GuiSchnittstelle{
 		}
 	}
 
+	/**
+	 * @return the usedKartei
+	 */
+	public Kartei getUsedKartei() {
+		return usedKartei;
+	}
+
+	/**
+	 * @param usedKartei the usedKartei to set
+	 */
+	public void setUsedKartei(Kartei usedKartei) {
+		this.usedKartei = usedKartei;
+	}
+
+	/**
+	 * @return the usedKarte
+	 */
+	public Karte getUsedKarte() {
+		return usedKarte;
+	}
+
+	/**
+	 * @param usedKarte the usedKarte to set
+	 */
+	public void setUsedKarte(Karte usedKarte) {
+		this.usedKarte = usedKarte;
+	}
+
+	/**
+	 * @return the usedFach
+	 */
+	public ArrayList<Karte> getUsedFach() {
+		return usedFach;
+	}
+
+	/**
+	 * @param usedFach the usedFach to set
+	 */
+	public void setUsedFach(ArrayList<Karte> usedFach) {
+		this.usedFach = usedFach;
+	}
+
+	
 }

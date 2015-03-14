@@ -97,6 +97,9 @@ public class GuiMenuebar
 		aufbauen();
 		erzeugeActionListener();
 		guiMain.repaint();
+		if(handler.getUsedKartei()!=null){
+			handler.eventSpracheUmgestellt();
+		}
 		guiMain.setVisible(true);
 	}
 

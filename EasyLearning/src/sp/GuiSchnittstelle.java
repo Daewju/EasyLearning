@@ -15,4 +15,5 @@ public interface GuiSchnittstelle
 	public void eventDateiSpeichern();
 	public void eventDateiLoeschen();
 	public void eventApplikationBeenden();
+	public void eventSpracheUmgestellt();
 }
