@@ -26,7 +26,7 @@ public class GuiMain extends JFrame
 	private GuiMenuebar guiMenuebar;
 	private GuiKarteiTitel guiKarteiTitel;
 	private GuiEingabeFeld guiEingabeFeld;
-	private GuiSmiley guiSmiley;
+	private GuiSmileyStatistik guiSmileyStatistik;
 	private GuiDialog guiDialog;
 	private GuiKarteiKartePanel karteKarteiPanel;
 	private GuiKarteButtons karteButtons;
@@ -47,7 +47,7 @@ public class GuiMain extends JFrame
 		guiMenuebar = new GuiMenuebar(this);
 		guiKarteiTitel = new GuiKarteiTitel();
 		guiEingabeFeld = new GuiEingabeFeld(this);
-		guiSmiley = new GuiSmiley();
+		guiSmileyStatistik = new GuiSmileyStatistik();
 		guiDialog = new GuiDialog(this);
 		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0, Color.CYAN);
 		karteButtons = new GuiKarteButtons(this);
@@ -69,7 +69,7 @@ public class GuiMain extends JFrame
 	{
 		guiMenuebar.init();
 		add(guiKarteiTitel.getPanel(), BorderLayout.NORTH);
-		add(guiSmiley, BorderLayout.EAST);
+		add(guiSmileyStatistik, BorderLayout.EAST);
 		add(guiEingabeFeld.getPanel(), BorderLayout.SOUTH);
 		add(karteButtons.getPanel(), BorderLayout.WEST);
 		add(karteKarteiPanel.getPanel(), BorderLayout.CENTER);
@@ -84,6 +84,7 @@ public class GuiMain extends JFrame
 		versteckeButtons(verstecken);
 		versteckeKarteiTitel(verstecken);
 		versteckeEingabefeld(verstecken);
+		versteckeStatistik(!verstecken);
 		guiMenuebar.getSpeichernEintrag().setEnabled(!verstecken);
 		guiMenuebar.getExportEintrag().setEnabled(!verstecken);
 		guiMenuebar.getLoeschenEintrag().setEnabled(!verstecken);
@@ -105,12 +106,17 @@ public class GuiMain extends JFrame
 
 	public void setSmiley(boolean like)
 	{
-		guiSmiley.setSmiley(like);
+		guiSmileyStatistik.getGuiSmiley().setSmiley(like);
 	}
 
 	public void versteckeSmiley()
 	{
-		guiSmiley.versteckeSmiley();
+		guiSmileyStatistik.getGuiSmiley().versteckeSmiley();
+	}
+	
+	public void versteckeStatistik(boolean anzeigen)
+	{
+		guiSmileyStatistik.getGuiStatistik().setVisible(anzeigen);
 	}
 
 	public void setWort(String wort)
@@ -287,20 +293,20 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * @return the guiSmiley
+	 * @return the guiSmileyStatistik
 	 */
-	public GuiSmiley getGuiSmiley()
+	public GuiSmileyStatistik getguiSmileyStatistik()
 	{
-		return guiSmiley;
+		return guiSmileyStatistik;
 	}
 
 	/**
-	 * @param guiSmiley
-	 *            the guiSmiley to set
+	 * @param guiSmileyStatistik
+	 *            the guiSmileyStatistik to set
 	 */
-	public void setGuiSmiley(GuiSmiley guiSmiley)
+	public void setguiSmileyStatistik(GuiSmileyStatistik guiSmileyStatistik)
 	{
-		this.guiSmiley = guiSmiley;
+		this.guiSmileyStatistik = guiSmileyStatistik;
 	}
 
 	/**
@@ -413,8 +419,8 @@ public class GuiMain extends JFrame
 		return "GuiMain [handler=" + handler + ", dimension=" + dimension
 				+ ", sprachcontroller=" + sprachcontroller + ", guiMenuebar="
 				+ guiMenuebar + ", guiKarteiTitel=" + guiKarteiTitel
-				+ ", guiEingabeFeld=" + guiEingabeFeld + ", guiSmiley="
-				+ guiSmiley + ", guiDialog=" + guiDialog
+				+ ", guiEingabeFeld=" + guiEingabeFeld + ", guiSmileyStatistik="
+				+ guiSmileyStatistik + ", guiDialog=" + guiDialog
 				+ ", karteKarteiPanel=" + karteKarteiPanel + ", karteButtons="
 				+ karteButtons + "]";
 	}
@@ -464,11 +470,11 @@ public class GuiMain extends JFrame
 				return false;
 		} else if (!guiMenuebar.equals(other.guiMenuebar))
 			return false;
-		if (guiSmiley == null)
+		if (guiSmileyStatistik == null)
 		{
-			if (other.guiSmiley != null)
+			if (other.guiSmileyStatistik != null)
 				return false;
-		} else if (!guiSmiley.equals(other.guiSmiley))
+		} else if (!guiSmileyStatistik.equals(other.guiSmileyStatistik))
 			return false;
 		if (handler == null)
 		{
