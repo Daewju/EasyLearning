@@ -24,10 +24,7 @@ public class CSVWriter
 
 	/**
 	 * @param pfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @throws IOException
 	 */
 	public CSVWriter(String pfad) throws IOException
@@ -41,10 +38,7 @@ public class CSVWriter
 	 * formatiert ist.
 	 * 
 	 * @param pfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @throws IOException
 	 */
 	private void initialisieren(String pfad) throws IOException

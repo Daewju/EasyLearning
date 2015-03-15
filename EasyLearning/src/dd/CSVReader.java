@@ -26,10 +26,7 @@ public class CSVReader
 	 * Dieser Konstruktor wird vom KarteiHandler verwendet.
 	 * 
 	 * @param pfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @throws IOException
 	 */
 	public CSVReader(String pfad) throws IOException
@@ -59,10 +56,7 @@ public class CSVReader
 	 * formatiert ist.
 	 * 
 	 * @param pfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein "\" für Escapen wie z.B. "\n"
-	 *            gedacht ist. Daher muss ein Pfad mit doppeltem Backslash
-	 *            übergeben werden. Beispiel: "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @throws IOException
 	 */
 	private void initialisieren(String pfad) throws IOException

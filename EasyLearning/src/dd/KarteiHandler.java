@@ -38,11 +38,7 @@ public class KarteiHandler
 	 * Standardpfades liegt oder liegen soll, z.B. beim Import oder Export.
 	 * 
 	 * @param karteiPfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein
-	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
-	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
-	 *            "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @throws IOException
 	 */
 	public KarteiHandler(String karteiPfad)
@@ -251,11 +247,7 @@ public class KarteiHandler
 	 * Diese Methode l�scht eine Datei
 	 * 
 	 * @param pfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein
-	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
-	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
-	 *            "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @return wenn gel�scht => true, wenn nicht => false
 	 * @throws IOException
 	 */
@@ -352,11 +344,7 @@ public class KarteiHandler
 	 * zu �ndern. z.B. nachdem der Lernende die Kartei wechselt.
 	 * 
 	 * @param karteiPfad
-	 *            Erwartet wird ein kompletter Pfad des Datentyps String. Zu
-	 *            beachten gilt, dass in Java ein
-	 *            "\" f�r Escapen wie z.B. "\n" gedacht ist. Daher muss ein
-	 *            Pfad mit doppeltem Backslash �bergeben werden. Beispiel:
-	 *            "C:\\Beispiel\\beispiel.csv".
+	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
 	 * @return "True" wenn der Pfad angenommen wurde, ansonsnten "False".
 	 */
 	public boolean setKarteiPfad(String karteiPfad)
