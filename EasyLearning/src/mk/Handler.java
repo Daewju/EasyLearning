@@ -126,6 +126,7 @@ public class Handler implements GuiSchnittstelle{
 				this.usedKartei.moveKarte(this.usedKarte, 1);
 				this.gui.setKartenFarbe(gibFarbe("f"));
 			}
+			this.gui.versteckeStatistik(false);
 			this.gui.setEingabefeld("");
 			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
 			this.usedKarte.setBearbeitet(new Date());
@@ -138,7 +139,7 @@ public class Handler implements GuiSchnittstelle{
 			zeigeNaechsteKarte();
 			setUeberprueft(false);
 		}
-		this.gui.versteckeStatistik(false);
+		
 		gui.repaint();
 		eventDateiSpeichern();
 		
@@ -361,18 +362,7 @@ public class Handler implements GuiSchnittstelle{
 		this.usedKarte = gibNaechsteKarte();
 		if(this.usedKarte!=null){
 			this.gui.setWort(this.usedKarte.getWort());
-			
-			GuiStatistik statistik = gui.getguiSmileyStatistik().getGuiStatistik();
-	
-			NumberFormat n = NumberFormat.getInstance();
-			n.setMaximumFractionDigits(2);
-			
-			statistik.setStatistik( ""+this.usedFach.size(),
-									""+this.usedKarte.getAufrufe(),
-									""+n.format((double)(this.usedKarte.getRichtigB()*100)/this.usedKarte.getAufrufe())+"%",
-									dateToString(this.usedKarte.getErstellt()),
-									dateToString(this.usedKarte.getBearbeitet())
-									);
+			erzeugeStatistik(this.usedKarte);
 			this.gui.versteckeStatistik(true);
 		}
 		else{
@@ -403,6 +393,28 @@ public class Handler implements GuiSchnittstelle{
 						
 			default:	return new Color(0,255,255);
 		}
+	}
+	
+	private void erzeugeStatistik(Karte karte){
+		GuiStatistik statistik = gui.getguiSmileyStatistik().getGuiStatistik();
+		Double temp;
+		if(karte.getAufrufe()==0){
+			temp=0.0;
+		}
+		else{
+			temp=(double)(karte.getRichtigB()*100)/karte.getAufrufe();
+		}
+		
+		
+		NumberFormat n = NumberFormat.getInstance();
+		n.setMaximumFractionDigits(2);
+		
+		statistik.setStatistik( ""+this.usedFach.size(),
+								""+karte.getAufrufe(),
+								""+n.format(temp)+"%",
+								dateToString(karte.getErstellt()),
+								dateToString(karte.getBearbeitet())
+								);
 	}
 	
 	private String dateToString(Date date) throws NullPointerException{
