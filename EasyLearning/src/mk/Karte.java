@@ -6,8 +6,14 @@ package mk;
 import java.util.Date;
 
 /**
+ * Stellt eine Lernkarteikarte wie sie im üblichen bekannt ist. Bestehend aus einem
+ * Wort auf der Vorderseite und einer zu lernenden Vokabel auf der Rückseite.
+ * Zusaetzlich enthaelt jede Karte Metainformationen von sich, sprich: Wie oft wurde sie 
+ * aufgerufen, wie oft wurde sie richtig beantwortet, wann wurde sie erstellt und zuletzt
+ * bearbeitet.
+ * 
  * @author marko hallo
- *
+ * @version 1.0
  */
 public class Karte {
 	private String wort;
@@ -18,7 +24,14 @@ public class Karte {
 	private Date erstellt;
 	private Date bearbeitet;
 	
-	
+	/**
+	 * Dieser Konstruktor wird verwendet um eine neue Karte anzulegen. 
+	 * Wort und Vokabel der Karte werden ueber Parameter ueberliefert.
+	 * Alle anderen Datenfelder werden mit Standardwerten initialisiert.
+	 * 
+	 * @param wort	Wort auf der Vorderseite der Kartei als String
+	 * @param vokabel	entsprechende Vokabel als String
+	 */
 	public Karte(String wort, String vokabel){
 		this.wort = wort;
 		this.vokabel = vokabel;
@@ -28,7 +41,20 @@ public class Karte {
 		this.erstellt = new Date();
 		this.bearbeitet = new Date();
 	}
-	
+	/**
+	 * Dieser Konstruktor kann verwendet werden um bestehende Karten aus einer CSV Datei
+	 * anzulegen. Diese besitzen bereits Informationen und duerfen deshalb nicht
+	 * mit Standardwerten initialisert werden.
+	 * Alle Werte werden als Parameter verlangt.
+	 * 
+	 * @param wort	Wort auf der Vorderseite der Kartei als String
+	 * @param vokabel	entsprechende Vokabel von wort als String
+	 * @param aufrufe	Anzahl Aufrufe der Karte als int
+	 * @param richtigB	Anzahl richtig beantwortet als int
+	 * @param fach	Fachnummer in der sich die Karte befindet als int
+	 * @param erstellt	Datum der Erstellung als Date Objekt
+	 * @param bearbeitet	Datum der letzten Bearbeitung als Date Objekt
+	 */
 	public Karte(String wort, String vokabel, int aufrufe, int richtigB, int fach, Date erstellt, Date bearbeitet){
 		this.wort = wort;
 		this.vokabel = vokabel;
@@ -136,6 +162,16 @@ public class Karte {
 	public void setBearbeitet(Date bearbeitet) {
 		this.bearbeitet = bearbeitet;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Karte [wort=" + wort + ", vokabel=" + vokabel + ", aufrufe="
+				+ aufrufe + ", richtigB=" + richtigB + ", fach=" + fach
+				+ ", erstellt=" + erstellt + ", bearbeitet=" + bearbeitet + "]";
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -196,7 +232,4 @@ public class Karte {
 			return false;
 		return true;
 	}
-	
-	
-
 }

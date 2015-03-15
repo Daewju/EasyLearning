@@ -10,7 +10,7 @@ import java.util.Iterator;
  * 	Neben den Karten enthaelt jede Kartei die Information, welche Sprachen behandelt werden.
  * 
  *	@author marko	
- *	@version 1.1	
+ *	@version 1.0	
  */	
 public class Kartei {	
 
@@ -24,7 +24,13 @@ public class Kartei {
 	private ArrayList<Karte> fach5;	
 	private ArrayList<Karte> fach6;	
 
-
+/**
+ * Erezeugt eine Instanz von Kartei mit sechs leeren Faechern. Die Sprachen 
+ * werden ueber Parameter festgelegt.
+ * 
+ * @param sprache	Hauptsprache der Kartei als String
+ * @param fremdsprache	Fremdsprache die gelernt werden soll als String
+ */
 	public Kartei(String sprache, String fremdsprache){	
 		this.sprache = sprache;
 		this.fremdsprache = fremdsprache;
@@ -77,7 +83,6 @@ public class Kartei {
 	public Karte removeKarte(Karte karte){
 		
 		ArrayList<Karte> f = gibFach(karte.getFach());					
-		//Iterator<Karte> it = f.iterator();	
 		int c = 0;
 
 		while(c<f.size()){			
@@ -211,7 +216,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach1	
+	 * @return Referenz auf ArrayList Fach1	
 	 */	
 	public ArrayList<Karte> getFach1()	
 	{	
@@ -219,7 +224,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach1 the fach1 to set	
+	 * @param fach1 ArrayList Objekt auf welches fach1 zeigen soll.	
 	 */	
 	public void setFach1(ArrayList<Karte> fach1)	
 	{	
@@ -227,7 +232,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach2	
+	 * @return Referenz auf ArrayList Fach2	
 	 */	
 	public ArrayList<Karte> getFach2()	
 	{	
@@ -235,7 +240,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach2 the fach2 to set	
+	 * @param fach2 ArrayList Objekt auf welches fach2 zeigen soll.	
 	 */	
 	public void setFach2(ArrayList<Karte> fach2)	
 	{	
@@ -243,7 +248,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach3	
+	 * @return Referenz auf ArrayList Fach3	
 	 */	
 	public ArrayList<Karte> getFach3()	
 	{	
@@ -251,7 +256,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach3 the fach3 to set	
+	 * @param fach3 ArrayList Objekt auf welches fach3 zeigen soll.	
 	 */	
 	public void setFach3(ArrayList<Karte> fach3)	
 	{	
@@ -259,7 +264,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach4	
+	 * @return Referenz auf ArrayList Fach4	
 	 */	
 	public ArrayList<Karte> getFach4()	
 	{	
@@ -267,7 +272,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach4 the fach4 to set	
+	 * @param fach4 ArrayList Objekt auf welches fach4 zeigen soll.	
 	 */	
 	public void setFach4(ArrayList<Karte> fach4)	
 	{	
@@ -275,7 +280,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach5	
+	 * @return Referenz auf ArrayList Fach5	
 	 */	
 	public ArrayList<Karte> getFach5()	
 	{	
@@ -283,7 +288,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach5 the fach5 to set	
+	 * @param fach5 ArrayList Objekt auf welches fach5 zeigen soll.	
 	 */	
 	public void setFach5(ArrayList<Karte> fach5)	
 	{	
@@ -291,7 +296,7 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @return the fach6	
+	 * @return Referenz auf ArrayList Fach6	
 	 */	
 	public ArrayList<Karte> getFach6()	
 	{	
@@ -299,13 +304,105 @@ public class Kartei {
 	}	
 
 	/**	
-	 * @param fach6 the fach6 to set	
+	 * @param fach6 ArrayList Objekt auf welches fach6 zeigen soll.	
 	 */	
 	public void setFach6(ArrayList<Karte> fach6)	
 	{	
 		this.fach6 = fach6;
-	}	
+	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Kartei [sprache=" + sprache + ", fremdsprache=" + fremdsprache
+				+ ", name=" + name + ", fach1=" + fach1 + ", fach2=" + fach2
+				+ ", fach3=" + fach3 + ", fach4=" + fach4 + ", fach5=" + fach5
+				+ ", fach6=" + fach6 + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fach1 == null) ? 0 : fach1.hashCode());
+		result = prime * result + ((fach2 == null) ? 0 : fach2.hashCode());
+		result = prime * result + ((fach3 == null) ? 0 : fach3.hashCode());
+		result = prime * result + ((fach4 == null) ? 0 : fach4.hashCode());
+		result = prime * result + ((fach5 == null) ? 0 : fach5.hashCode());
+		result = prime * result + ((fach6 == null) ? 0 : fach6.hashCode());
+		result = prime * result
+				+ ((fremdsprache == null) ? 0 : fremdsprache.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((sprache == null) ? 0 : sprache.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Kartei other = (Kartei) obj;
+		if (fach1 == null) {
+			if (other.fach1 != null)
+				return false;
+		} else if (!fach1.equals(other.fach1))
+			return false;
+		if (fach2 == null) {
+			if (other.fach2 != null)
+				return false;
+		} else if (!fach2.equals(other.fach2))
+			return false;
+		if (fach3 == null) {
+			if (other.fach3 != null)
+				return false;
+		} else if (!fach3.equals(other.fach3))
+			return false;
+		if (fach4 == null) {
+			if (other.fach4 != null)
+				return false;
+		} else if (!fach4.equals(other.fach4))
+			return false;
+		if (fach5 == null) {
+			if (other.fach5 != null)
+				return false;
+		} else if (!fach5.equals(other.fach5))
+			return false;
+		if (fach6 == null) {
+			if (other.fach6 != null)
+				return false;
+		} else if (!fach6.equals(other.fach6))
+			return false;
+		if (fremdsprache == null) {
+			if (other.fremdsprache != null)
+				return false;
+		} else if (!fremdsprache.equals(other.fremdsprache))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (sprache == null) {
+			if (other.sprache != null)
+				return false;
+		} else if (!sprache.equals(other.sprache))
+			return false;
+		return true;
+	}	
+	
+	
 
 
 }		

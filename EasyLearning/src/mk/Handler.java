@@ -28,7 +28,7 @@ import sp.GuiStatistik;
  * 
  * 
  * @author marko
- *
+ * @version 1.0
  */
 public class Handler implements GuiSchnittstelle{
 	private GuiMain gui;
@@ -43,7 +43,7 @@ public class Handler implements GuiSchnittstelle{
 	/**
 	 * Initialisiert einen Objetkt von Handler.
 	 * Der Konstruktor verlangt eine Referenz auf ein GuiMain Objekt um
-	 * spaeter mit die Komponenten der Gui ansprechen zu koennen.
+	 * spaeter die Komponenten der Gui ansprechen zu koennen.
 	 * 
 	 * @param gui	Referenz auf Objekt der Klasse GuiMain
 	 */
@@ -374,7 +374,6 @@ public class Handler implements GuiSchnittstelle{
 		temp = this.usedKarte;
 		
 		if(this.usedFach.size()==1){
-			//temp = this.usedFach.get(rand.nextInt(this.usedFach.size()));
 			temp = this.usedFach.get(0);
 		}
 		else if(this.usedFach.size()==0)
