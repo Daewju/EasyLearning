@@ -1,5 +1,11 @@
 package sp;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public interface GuiSchnittstelle
 {
 	public void eventNeueKartei(String eingabeFeldErgebnis, String eingabeFeldErgebnis2);

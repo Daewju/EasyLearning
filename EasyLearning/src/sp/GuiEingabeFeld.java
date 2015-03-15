@@ -20,7 +20,14 @@ import javax.swing.JTextField;
 
 import mk.Handler;
 import dd.SprachController;
-
+/**
+ * Diese Klasse wird für die Eingabe der Vokabeln benötigt. 
+ * Es wird auf der guiMain ein JPanel, ein Eingabefeld und ein Button gezeichnet
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.3
+ *
+ */
 public class GuiEingabeFeld
 {
 	private GuiMain guiMain;
@@ -34,6 +41,11 @@ public class GuiEingabeFeld
 	private JPanel panel;
 	private JTextField textFeld;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param gui als Parameter wird ein guiMain erwartet
+	 */
 	public GuiEingabeFeld(GuiMain gui)
 	{
 		guiMain = gui;
@@ -73,6 +85,9 @@ public class GuiEingabeFeld
 		setActionListener();
 	}
 
+	/**
+	 * Diese Methode added den Actionlistener für den Button
+	 */
 	public void setActionListener()
 	{
 		buttonNaechsteKarte.addMouseListener(new MouseListener()

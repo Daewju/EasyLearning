@@ -5,7 +5,13 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import dd.SprachController;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Damjan & Sajeevan
+ * @version 1.11
+ *
+ */
 public class GuiSmileyStatistik extends JPanel{
 	private GuiSmiley guiSmiley;
 	private GuiStatistik guiStatistik;

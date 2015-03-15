@@ -11,7 +11,13 @@ import javax.swing.JFrame;
 
 import mk.Handler;
 import dd.SprachController;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public class GuiMain extends JFrame
 {
 	private static final long serialVersionUID = 1L;

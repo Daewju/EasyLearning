@@ -8,7 +8,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public class GuiSmiley extends JPanel
 {
 
@@ -16,7 +22,10 @@ public class GuiSmiley extends JPanel
 	private BufferedImage smileyLike;
 	private BufferedImage smileyDislike;
 	private BufferedImage smiley;
-
+	/**
+	 * Konstruktor
+	 * 
+	 */
 	public GuiSmiley()
 	{
 		setLayout(null);

@@ -10,7 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dd.SprachController;
-
+/**
+ * Diese Klasse gibt die Statistik mit folgenden Angaben aus. 
+ * Anzahl Aufrufe 
+ * 
+ * 
+ * @author Damjan & Sajeevan
+ * @version 1.11
+ *
+ */
 public class GuiStatistik extends JPanel {
 
 	private static final long serialVersionUID = 1L;

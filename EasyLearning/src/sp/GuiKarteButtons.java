@@ -17,7 +17,13 @@ import javax.swing.JPanel;
 
 import mk.Handler;
 import dd.SprachController;
-
+/**
+ * Diese Klasse erzeugt auf der guiMain die Buttons fÃ¼r die Kartenbearbeitung
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.2
+ *
+ */
 public class GuiKarteButtons
 {
 	private GuiMain guiMain;
@@ -38,6 +44,11 @@ public class GuiKarteButtons
 	private JButton buttonBearbeiten;
 	private JButton buttonLoeschen;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param als Parameter wird die guiMain erwartet
+	 */
 	public GuiKarteButtons(GuiMain gui)
 	{
 		guiMain = gui;
@@ -97,7 +108,7 @@ public class GuiKarteButtons
 				while (!ergebnis)
 				{
 					ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
-							sprachcontroller.getSprache("Karte hinzufügen",
+							sprachcontroller.getSprache("Karte hinzufÃ¼gen",
 									GuiMain.SPRACHCODE),
 							sprachcontroller.getSprache("Wort",
 									GuiMain.SPRACHCODE) + ": ",
@@ -201,7 +212,7 @@ public class GuiKarteButtons
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Karte löschen",
+						sprachcontroller.getSprache("Karte lÃ¶schen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)

@@ -8,7 +8,13 @@ import javax.swing.JTextField;
 
 import mk.Handler;
 import dd.SprachController;
-
+/**
+ * Diese Klasse definiert verschiedene Dialoge für Fehlermeldungen oder Eingaben.
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.5
+ *
+ */
 public class GuiDialog
 {
 	private GuiMain guiMain;
@@ -17,6 +23,11 @@ public class GuiDialog
 	private String hauptsprache;
 	private String fremdsprache;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param guiMain als Parameter wird eine guiMain erwartet
+	 */
 	public GuiDialog(GuiMain guiMain)
 	{
 		this.guiMain = guiMain;
@@ -24,24 +35,50 @@ public class GuiDialog
 		this.handler = guiMain.getHandler();
 	}
 
+	/**
+	 * Diese Methode erzeugt ein Infodialog auf guiMain
+	 * 
+	 * @param titel erwartet wird ein String und setzt den Titel des Dialoges
+	 * @param text erwartet wird ein String und setzt die Beschreibung in den Dialog
+	 */
 	public void infoDialog(String titel, String text)
 	{
 		JOptionPane.showMessageDialog(guiMain, text, titel,
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Diese Methode erzeugt ein Warunungsdialog auf guiMain
+	 * 
+	 * @param titel erwartet wird ein String und setzt den Titel des Dialoges
+	 * @param text erwartet wird ein String und setzt die Beschreibung in den Dialog
+	 */
 	public void warnungsDialog(String titel, String text)
 	{
 		JOptionPane.showMessageDialog(guiMain, text, titel,
 				JOptionPane.WARNING_MESSAGE);
 	}
 
+	/**
+	 * Diese Methode erzeugt ein Fehlerdialog auf guiMain
+	 * 
+	 * @param titel erwartet wird ein String und setzt den Titel des Dialoges
+	 * @param text erwartet wird ein String und setzt die Beschreibung in den Dialog
+	 */
 	public void fehlerDialog(String titel, String text)
 	{
 		JOptionPane.showMessageDialog(guiMain, text, titel,
 				JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Diese Methode erzeugt ein Dialog mit mehreren Auswahlmöglichkeiten 
+	 * 
+	 * @param optionen erwartet wird ein Object-Array
+	 * @param titel erwartet wird ein String und setzt den Titel des Dialoges
+	 * @param text erwartet wird ein String und setzt die Beschreibung in den Dialog
+	 * @return gibt einen Intwert zurück die die Reihenfolge der Buttons definiert
+	 */
 	public int variableButtonsDialog(Object[] optionen, String titel,
 			String text)
 	{
@@ -51,6 +88,14 @@ public class GuiDialog
 		return fortschritt;
 	}
 
+	/**
+	 * Diese Methode erzeugt ein Dialog um dem Benutzer zwei verschieden Eingaben zu ermöglichen
+	 * 
+	 * @param titel erwartet wird ein String und setzt den Titel des Dialoges
+	 * @param feld1 erwartet wird ein String für die bezeichnung des ersten Eingabefeldes
+	 * @param feld2 erwartet wird ein String für die bezeichnung des zweiten Eingabefeldes
+	 * @return true wenn die Eingabe die Erwartungen erfüllt, false wenn die Eingabe die Erwartungen nicht erfüllt
+	 */
 	public boolean erzeugeNeuEingabeDialog(String titel, String feld1,
 			String feld2)
 	{
@@ -73,7 +118,7 @@ public class GuiDialog
 						sprachcontroller.getSprache("Fehler",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache(
-								"Die Felder d�rfen nicht leer sein",
+								"Die Felder dürfen nicht leer sein",
 								GuiMain.SPRACHCODE));
 				return false;
 			} else

@@ -7,7 +7,13 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public class GuiKarteiTitel
 {
 	private JPanel panel;

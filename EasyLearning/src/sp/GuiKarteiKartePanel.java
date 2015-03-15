@@ -10,7 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 import mk.Handler;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public class GuiKarteiKartePanel
 {
 	private GuiMain gui;
@@ -120,7 +126,7 @@ public class GuiKarteiKartePanel
 	}
 
 	/**
-	 * Diese Methode ändert die Farbe der Karte inkl. der Fachauswahl
+	 * Diese Methode ï¿½ndert die Farbe der Karte inkl. der Fachauswahl
 	 * 
 	 * @param color
 	 *            Ewartet ein Color Objekt

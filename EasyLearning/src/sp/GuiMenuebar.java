@@ -16,7 +16,13 @@ import javax.swing.filechooser.FileView;
 import mk.Handler;
 import dd.KarteiHandler;
 import dd.SprachController;
-
+/**
+ * Diese Klasse 
+ * 
+ * @author Sajeevan & Damjan
+ * @version 1.11
+ *
+ */
 public class GuiMenuebar
 {
 	private GuiMain guiMain;
@@ -68,18 +74,18 @@ public class GuiMenuebar
 		infoMenue.setForeground(schriftColor);
 		neueKarteiEintrag = new JMenuItem(sprachcontroller.getSprache("Neu",
 				GuiMain.SPRACHCODE));
-		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("Öffnen",
+		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("ï¿½ffnen",
 				GuiMain.SPRACHCODE));
 		speichernEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Speichern", GuiMain.SPRACHCODE));
 		loeschenEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Löschen", GuiMain.SPRACHCODE));
+				"Lï¿½schen", GuiMain.SPRACHCODE));
 		importEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Exportieren", GuiMain.SPRACHCODE));
 		resetEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Zurücksetzen", GuiMain.SPRACHCODE));
+				"Zurï¿½cksetzen", GuiMain.SPRACHCODE));
 		beendenEintrag = new JMenuItem(sprachcontroller.getSprache("Beenden",
 				GuiMain.SPRACHCODE));
 		deutschEintrag = new JMenuItem(sprachcontroller.getSprache("Deutsch",
@@ -87,12 +93,12 @@ public class GuiMenuebar
 		englischEintrag = new JMenuItem(sprachcontroller.getSprache("Englisch",
 				GuiMain.SPRACHCODE));
 		franzoesischEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Französisch", GuiMain.SPRACHCODE));
+				"Franzï¿½sisch", GuiMain.SPRACHCODE));
 		italienischEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Italienisch", GuiMain.SPRACHCODE));
 		versionEintrag = new JMenuItem(sprachcontroller.getSprache("Version",
 				GuiMain.SPRACHCODE));
-		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("Über …",
+		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("ï¿½ber ï¿½",
 				GuiMain.SPRACHCODE));
 		aufbauen();
 		erzeugeActionListener();
@@ -174,7 +180,7 @@ public class GuiMenuebar
 						return karteiPfad.equals(f);
 					}
 				});
-				chooser.setDialogTitle(sprachcontroller.getSprache("Öffnen",
+				chooser.setDialogTitle(sprachcontroller.getSprache("ï¿½ffnen",
 						GuiMain.SPRACHCODE));
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
@@ -203,7 +209,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Kartei löschen",
+						sprachcontroller.getSprache("Kartei lï¿½schen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -239,7 +245,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"Möchten Sie den Lernfortschritt übernehmen?",
+													"Mï¿½chten Sie den Lernfortschritt ï¿½bernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -279,7 +285,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"Möchten Sie den Lernfortschritt übernehmen?",
+													"Mï¿½chten Sie den Lernfortschritt ï¿½bernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -306,7 +312,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Zurücksetzen",
+						sprachcontroller.getSprache("Zurï¿½cksetzen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -386,7 +392,7 @@ public class GuiMenuebar
 			{
 				guiMain.getGuiDialog()
 						.infoDialog(
-								sprachcontroller.getSprache("Über …",
+								sprachcontroller.getSprache("ï¿½ber ï¿½",
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Programmierer",
 										GuiMain.SPRACHCODE)
