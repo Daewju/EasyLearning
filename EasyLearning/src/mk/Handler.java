@@ -422,7 +422,10 @@ public class Handler implements GuiSchnittstelle{
 	public void setUeberprueft(boolean status){
 		this.ueberprueft = status;
 	}
-
+	
+	/**
+	 * Setzt das Karteikartensystem zurueck und loescht somit alle enthaltenen Sprachkarteien.
+	 */
 	@Override
 	public void eventZuruecksetzen()
 	{
@@ -430,6 +433,14 @@ public class Handler implements GuiSchnittstelle{
 		gui.versteckeAlleElemente(true);
 	}
 	
+	/**
+	 * Liefert ein Objekt vom Typ Color zurueck. Fuer die farbe "r","f" und "d" sind Farbecodes vordefiniert.
+	 * Wobei "r" fuer right(Gruen), "f" fuer false(Rot) und "d" fuer defautl(Cyan) steht. Falls der farbe mit 
+	 * keinem der erwaehnten Strings uebereinstimmt wird die Farbe Cyan zureckgeliefert. 
+	 * 
+	 * @param farbe	Erwartet wird Farbzustand der Karte als String (r=right, f=false,d=standard)
+	 * @return	Objekt der Klasse Color
+	 */
 	private Color gibFarbe(String farbe){
 		switch(farbe){
 			case "r": 	return new Color(0,255,0);
@@ -442,6 +453,15 @@ public class Handler implements GuiSchnittstelle{
 		}
 	}
 	
+	/**
+	 * Erstellt die Statistik fuer das uebergebene Kartenobjekt und sorgt dafuer, dass
+	 * dieses auf der GUI angezeigt wird.
+	 * Statistik besteht aus der Information wieviele Aufrufe die Karte bereits hatte,
+	 * davon korrekt beantwortet wurde in %, Erstellungsdatum der Karte, Datum der letzten
+	 * Bearbeitung und der anzahl Karten im aktuellen Fach.
+	 * 
+	 * @param karte	Karte von derjenigen die Statistik erzeugt werden soll.
+	 */
 	private void erzeugeStatistik(Karte karte){
 		GuiStatistik statistik = gui.getguiSmileyStatistik().getGuiStatistik();
 		Double temp;
@@ -464,6 +484,14 @@ public class Handler implements GuiSchnittstelle{
 								);
 	}
 	
+	/**
+	 * Erzeugt aus den Informationen eines Date Objekts einen String mit 
+	 * folgendem Syntax: "dd.mm.yyyy  hh:mm"
+	 * 
+	 * @param	date	zu bearbeitendes Date Objekt
+	 * @return	"dd.mm.yyyy  hh:mm" als String
+	 * @throws NullPointerException
+	 */
 	private String dateToString(Date date) throws NullPointerException{
 		
 		if(date!=null){
