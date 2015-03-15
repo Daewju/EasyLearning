@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 /**
- * Diese Klasse 
+ * Diese Klasse erzeugt JPanel mit einem Smiley
  * 
  * @author Sajeevan & Damjan
  * @version 1.11
@@ -43,6 +43,9 @@ public class GuiSmiley extends JPanel
 		}
 	}
 
+	/**
+	 * @param richtig true = lächelndes Smiley, false = trauriges Smiley
+	 */
 	public void setSmiley(boolean richtig)
 	{
 		if (richtig)
@@ -54,6 +57,9 @@ public class GuiSmiley extends JPanel
 		}
 	}
 
+	/**
+	 * Diese Methode versteckt das Smiley
+	 */
 	public void versteckeSmiley()
 	{
 

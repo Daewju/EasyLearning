@@ -17,10 +17,10 @@ import mk.Handler;
 import dd.KarteiHandler;
 import dd.SprachController;
 /**
- * Diese Klasse 
+ * Diese Klasse erzeugt die JMenuebar auf der guiMain
  * 
  * @author Sajeevan & Damjan
- * @version 1.11
+ * @version 1.1
  *
  */
 public class GuiMenuebar
@@ -49,12 +49,20 @@ public class GuiMenuebar
 	private JMenuItem versionEintrag;
 	private JMenuItem ueberEintrag;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param guiMain als Paramater wird die guiMain erwartet
+	 */
 	public GuiMenuebar(GuiMain guiMain)
 	{
 		this.guiMain = guiMain;
 		init();
 	}
 
+	/**
+	 * Diese Methode initialisiert alle Datenfelder
+	 */
 	public void init()
 	{
 		hintergrundColor = new Color(83, 83, 83);
@@ -74,18 +82,18 @@ public class GuiMenuebar
 		infoMenue.setForeground(schriftColor);
 		neueKarteiEintrag = new JMenuItem(sprachcontroller.getSprache("Neu",
 				GuiMain.SPRACHCODE));
-		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("�ffnen",
+		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("Öffnen",
 				GuiMain.SPRACHCODE));
 		speichernEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Speichern", GuiMain.SPRACHCODE));
 		loeschenEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"L�schen", GuiMain.SPRACHCODE));
+				"Löschen", GuiMain.SPRACHCODE));
 		importEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Exportieren", GuiMain.SPRACHCODE));
 		resetEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Zur�cksetzen", GuiMain.SPRACHCODE));
+				"Zurücksetzen", GuiMain.SPRACHCODE));
 		beendenEintrag = new JMenuItem(sprachcontroller.getSprache("Beenden",
 				GuiMain.SPRACHCODE));
 		deutschEintrag = new JMenuItem(sprachcontroller.getSprache("Deutsch",
@@ -93,12 +101,12 @@ public class GuiMenuebar
 		englischEintrag = new JMenuItem(sprachcontroller.getSprache("Englisch",
 				GuiMain.SPRACHCODE));
 		franzoesischEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Franz�sisch", GuiMain.SPRACHCODE));
+				"Französisch", GuiMain.SPRACHCODE));
 		italienischEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Italienisch", GuiMain.SPRACHCODE));
 		versionEintrag = new JMenuItem(sprachcontroller.getSprache("Version",
 				GuiMain.SPRACHCODE));
-		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("�ber �",
+		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("Über …",
 				GuiMain.SPRACHCODE));
 		aufbauen();
 		erzeugeActionListener();
@@ -109,6 +117,9 @@ public class GuiMenuebar
 		guiMain.setVisible(true);
 	}
 
+	/**
+	 * Diese Methode added alle JMenuItems in die JMenu, die wiederum in die JMenuBar geadded werden
+	 */
 	private void aufbauen()
 	{
 		guiMain.setJMenuBar(menuezeile);
@@ -132,6 +143,9 @@ public class GuiMenuebar
 		infoMenue.add(ueberEintrag);
 	}
 
+	/**
+	 * Diese Methode erzeugt alle ActionListener für die JMenuItems
+	 */
 	private void erzeugeActionListener()
 	{
 		neueKarteiEintrag.addActionListener(new ActionListener()
@@ -209,7 +223,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Kartei l�schen",
+						sprachcontroller.getSprache("Kartei löschen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -245,7 +259,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"M�chten Sie den Lernfortschritt �bernehmen?",
+													"Möchten Sie den Lernfortschritt übernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -285,7 +299,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"M�chten Sie den Lernfortschritt �bernehmen?",
+													"Möchten Sie den Lernfortschritt Übernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -312,7 +326,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Zur�cksetzen",
+						sprachcontroller.getSprache("Zurücksetzen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -392,7 +406,7 @@ public class GuiMenuebar
 			{
 				guiMain.getGuiDialog()
 						.infoDialog(
-								sprachcontroller.getSprache("�ber �",
+								sprachcontroller.getSprache("Über …",
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Programmierer",
 										GuiMain.SPRACHCODE)

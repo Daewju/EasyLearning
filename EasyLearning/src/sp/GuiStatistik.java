@@ -10,13 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dd.SprachController;
+
 /**
- * Diese Klasse gibt die Statistik mit folgenden Angaben aus. 
- * Anzahl Aufrufe 
+ * Diese Klasse gibt die Statistik mit folgenden Angaben aus. Anzahl Aufrufe
  * 
  * 
  * @author Damjan & Sajeevan
- * @version 1.11
+ * @version 1.6
  *
  */
 public class GuiStatistik extends JPanel {
@@ -39,9 +39,15 @@ public class GuiStatistik extends JPanel {
 	private ArrayList<JLabel> zwischenzeilen;
 	private SprachController sc;
 
-	public GuiStatistik(SprachController sc){
+	/**
+	 * Konstruktor
+	 * 
+	 * @param sc
+	 *            als Parameter wird der SprachController erwartet
+	 */
+	public GuiStatistik(SprachController sc) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setPreferredSize(new Dimension(200,0));
+		setPreferredSize(new Dimension(200, 0));
 		this.sc = sc;
 		anzahlKarten = "0";
 		anzahlAufrufe = "0";
@@ -57,15 +63,30 @@ public class GuiStatistik extends JPanel {
 		bearbeitetWert = new JLabel();
 		titel = new JLabel();
 		zwischenzeilen = new ArrayList<>();
-		for(int i=0; i<5; i++)
-		{
+		for (int i = 0; i < 5; i++) {
 			JLabel zwischenzeile = new JLabel(" ");
 			zwischenzeile.setFont(new Font(null, Font.BOLD, 5));
 			zwischenzeilen.add(zwischenzeile);
 		}
 	}
-	
-	public void setStatistik(String anzahlKarten, String anzahlAufrufe, String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet){
+
+	/**
+	 * Als Parameter werden alle Werte als String erwartet und auf das JPanel
+	 * gezeichnet.
+	 * 
+	 * @param anzahlKarten
+	 *            Anzahl Karten
+	 * @param anzahlAufrufe
+	 *            Anzahl Aufrufe
+	 * @param anzahlKorrekt
+	 *            Prozentwert der korrekten Aufrufe
+	 * @param datumErstellt
+	 *            Datum erstellt
+	 * @param zuletztBearbeitet
+	 *            Datum bearbeitet
+	 */
+	public void setStatistik(String anzahlKarten, String anzahlAufrufe,
+			String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet) {
 		setBackground(GuiMain.COLOR_BACKGROUND);
 		this.anzahlKarten = anzahlKarten;
 		this.anzahlAufrufe = anzahlAufrufe;
@@ -74,29 +95,35 @@ public class GuiStatistik extends JPanel {
 		this.zuletztBearbeitet = zuletztBearbeitet;
 		anzeigeAktualisieren();
 	}
-	
-	public void anzeigeAktualisieren()
-	{
+
+	/**
+	 * Diese Methode setzt alle JLabels neu aufgrund der Datenfelder
+	 */
+	public void anzeigeAktualisieren() {
 		titel.setFont(new Font(null, Font.BOLD, 21));
 		titel.setForeground(Color.ORANGE);
 		karten.setFont(new Font(null, Font.BOLD, 16));
 		karten.setForeground(Color.CYAN);
-		karten.setText(sc.getSprache("Karten im Fach", GuiMain.SPRACHCODE) +": " + anzahlKarten);
+		karten.setText(sc.getSprache("Karten im Fach", GuiMain.SPRACHCODE)
+				+ ": " + anzahlKarten);
 		aufrufe.setFont(new Font(null, Font.BOLD, 16));
 		aufrufe.setForeground(Color.CYAN);
-		aufrufe.setText(sc.getSprache("Aufrufe", GuiMain.SPRACHCODE) +": " + anzahlAufrufe);
+		aufrufe.setText(sc.getSprache("Aufrufe", GuiMain.SPRACHCODE) + ": "
+				+ anzahlAufrufe);
 		korrekt.setFont(new Font(null, Font.BOLD, 16));
 		korrekt.setForeground(Color.CYAN);
-		korrekt.setText(sc.getSprache("Korrekt", GuiMain.SPRACHCODE) +": " + anzahlKorrekt);
+		korrekt.setText(sc.getSprache("Korrekt", GuiMain.SPRACHCODE) + ": "
+				+ anzahlKorrekt);
 		erstellt.setFont(new Font(null, Font.BOLD, 16));
 		erstellt.setForeground(Color.CYAN);
-		erstellt.setText(sc.getSprache("Erstellt", GuiMain.SPRACHCODE) +": ");
-		erstelltWert.setFont(new Font(null, Font.BOLD,16));
+		erstellt.setText(sc.getSprache("Erstellt", GuiMain.SPRACHCODE) + ": ");
+		erstelltWert.setFont(new Font(null, Font.BOLD, 16));
 		erstelltWert.setForeground(Color.CYAN);
 		erstelltWert.setText(datumErstellt);
 		bearbeitet.setFont(new Font(null, Font.BOLD, 16));
 		bearbeitet.setForeground(Color.CYAN);
-		bearbeitet.setText(sc.getSprache("Bearbeitet", GuiMain.SPRACHCODE) +": ");
+		bearbeitet.setText(sc.getSprache("Bearbeitet", GuiMain.SPRACHCODE)
+				+ ": ");
 		bearbeitetWert.setFont(new Font(null, Font.BOLD, 16));
 		bearbeitetWert.setForeground(Color.CYAN);
 		bearbeitetWert.setText(zuletztBearbeitet);

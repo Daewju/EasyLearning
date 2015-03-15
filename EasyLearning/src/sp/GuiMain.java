@@ -6,20 +6,21 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-
 import javax.swing.JFrame;
 
 import mk.Handler;
 import dd.SprachController;
+
 /**
- * Diese Klasse 
+ * Diese Klasse erzeugt das Fenster als JFrame und erzeugt alle anderen Panels,
+ * die dargestellt werden. Diese Klasse ist die Hauptklasse der GUI. Alle
+ * wichtigen Interaktionen mit der Gui können über diese Klasse gesteuert werden
  * 
  * @author Sajeevan & Damjan
  * @version 1.11
  *
  */
-public class GuiMain extends JFrame
-{
+public class GuiMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static final int WINDOWWITDH = 1024;
 	public static final int WINDOWHEIGHT = 768;
@@ -38,15 +39,15 @@ public class GuiMain extends JFrame
 	private GuiKarteiKartePanel karteKarteiPanel;
 	private GuiKarteButtons karteButtons;
 
-	public GuiMain()
-	{
+	/**
+	 * Konstruktor
+	 */
+	public GuiMain() {
 		handler = new Handler(this);
 		dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		try
-		{
+		try {
 			sprachcontroller = new SprachController();
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			guiDialog.fehlerDialog("Error!",
 					"Critital-Error with Language-File!");
 			e.printStackTrace();
@@ -56,7 +57,7 @@ public class GuiMain extends JFrame
 		guiEingabeFeld = new GuiEingabeFeld(this);
 		guiSmileyStatistik = new GuiSmileyStatistik(sprachcontroller);
 		guiDialog = new GuiDialog(this);
-		karteKarteiPanel = new GuiKarteiKartePanel(this, 60, 50, 0, Color.CYAN);
+		karteKarteiPanel = new GuiKarteiKartePanel(this, Color.CYAN);
 		karteButtons = new GuiKarteButtons(this);
 		setLayout(new BorderLayout());
 		getContentPane().setBackground(COLOR_BACKGROUND);
@@ -72,8 +73,11 @@ public class GuiMain extends JFrame
 		versteckeAlleElemente(true);
 	}
 
-	public void init()
-	{
+	/**
+	 * Diese Methode setzt die verschiedenen Panels in das BorderLayout und
+	 * zeichnet das JFrame neu
+	 */
+	public void init() {
 		guiMenuebar.init();
 		add(guiKarteiTitel.getPanel(), BorderLayout.NORTH);
 		add(guiSmileyStatistik, BorderLayout.EAST);
@@ -84,8 +88,13 @@ public class GuiMain extends JFrame
 		setVisible(true);
 	}
 
-	public void versteckeAlleElemente(boolean verstecken)
-	{
+	/**
+	 * Diese Methode versteckt alle Elemente auf dem JFrame
+	 * 
+	 * @param verstecken
+	 *            true = versteckt, false = angezeigt
+	 */
+	public void versteckeAlleElemente(boolean verstecken) {
 		versteckeSmiley();
 		versteckeKarte(verstecken);
 		versteckeButtons(verstecken);
@@ -99,96 +108,124 @@ public class GuiMain extends JFrame
 	}
 
 	/**
-	 * Diese Methode �ndert die Farbe der Karte inkl. der Fachauswahl
+	 * Diese Methode ändert die Farbe der Karte inkl. der Fachauswahl
 	 * 
 	 * @param color
 	 *            Vorschlag: Standard Color.CYAN, Richtig: Color.GREEN, Falsch:
 	 *            Color.RED
 	 */
-	public void setKartenFarbe(Color color)
-	{
+	public void setKartenFarbe(Color color) {
 		karteKarteiPanel.setKartenFarbe(color);
-		
+
 	}
 
-	public void setSmiley(boolean like)
-	{
+	/**
+	 * Diese Methode setzt entweder ein lächelndes oder trauriges Smiley
+	 * 
+	 * @param like
+	 *            true = setzt lächelndes Smiley, false = setzt trauriges Smiley
+	 */
+	public void setSmiley(boolean like) {
 		guiSmileyStatistik.getGuiSmiley().setSmiley(like);
 	}
 
-	public void versteckeSmiley()
-	{
+	/**
+	 * Diese Methode versteckt das Smiley
+	 */
+	public void versteckeSmiley() {
 		guiSmileyStatistik.getGuiSmiley().versteckeSmiley();
 	}
-	
+
 	/**
 	 * Diese Methode kann benutzt werden um die Statistik ein- und auszublenden
-	 * @param anzeigen true=anzeigen, false=verstecken
+	 * 
+	 * @param anzeigen
+	 *            true=anzeigen, false=verstecken
 	 */
-	public void versteckeStatistik(boolean anzeigen)
-	{
+	public void versteckeStatistik(boolean anzeigen) {
 		guiSmileyStatistik.getGuiStatistik().setVisible(anzeigen);
 	}
 
-	public void setWort(String wort)
-	{
+	public void setWort(String wort) {
 		if (wort != null)
 			karteKarteiPanel.setzeText(wort);
 	}
 
-	public String getWort()
-	{
+	/**
+	 * @return Den String der Karte
+	 */
+	public String getWort() {
 		return karteKarteiPanel.getWort().getText();
 	}
 
-	public void setKarteiTitel(String titel)
-	{
-		if (titel != null)
-		{
+	/**
+	 * @param titel
+	 *            setzt den Titel der Kartei
+	 */
+	public void setKarteiTitel(String titel) {
+		if (titel != null) {
 			guiKarteiTitel.setzeKarteiTitelText(titel);
 		}
 	}
 
-	public String getKarteiTitel()
-	{
+	/**
+	 * @return gibt den Titel der Kartei zurück
+	 */
+	public String getKarteiTitel() {
 		return guiKarteiTitel.getKarteiTitel().getText();
 	}
 
-	public String getEingabefeld()
-	{
+	/**
+	 * @return gibt die Eingabe des Benutzers als String zurück
+	 */
+	public String getEingabefeld() {
 		return guiEingabeFeld.getTextFeld().toString();
 	}
 
-	public void setEingabefeld(String text)
-	{
+	/**
+	 * @param text
+	 *            erwartet einen String um das Eingabefeld zu modifizieren
+	 */
+	public void setEingabefeld(String text) {
 		guiEingabeFeld.getTextFeld().setText(text);
 	}
 
-	public void versteckeKarte(boolean verstecken)
-	{
+	/**
+	 * @param verstecken
+	 *            true = versteckt, false = sichtbar
+	 */
+	public void versteckeKarte(boolean verstecken) {
 		karteKarteiPanel.getPanel().setVisible(!verstecken);
 	}
 
-	public void versteckeButtons(boolean verstecken)
-	{
+	/**
+	 * @param verstecken
+	 *            true = versteckt, false = sichtbar
+	 */
+	public void versteckeButtons(boolean verstecken) {
 		karteButtons.getPanel().setVisible(!verstecken);
 	}
 
-	public void versteckeKarteiTitel(boolean verstecken)
-	{
+	/**
+	 * @param verstecken
+	 *            true = versteckt, false = sichtbar
+	 */
+	public void versteckeKarteiTitel(boolean verstecken) {
 		guiKarteiTitel.getPanel().setVisible(!verstecken);
 	}
 
-	public void versteckeEingabefeld(boolean verstecken)
-	{
+	/**
+	 * @param verstecken
+	 *            true = versteckt, false = sichtbar
+	 */
+	public void versteckeEingabefeld(boolean verstecken) {
 		guiEingabeFeld.getPanel().setVisible(!verstecken);
 	}
 
 	/**
 	 * @return the sPRACHCODE
 	 */
-	public static int getSPRACHCODE()
-	{
+	public static int getSPRACHCODE() {
 		return SPRACHCODE;
 	}
 
@@ -196,16 +233,14 @@ public class GuiMain extends JFrame
 	 * @param sPRACHCODE
 	 *            the sPRACHCODE to set
 	 */
-	public static void setSPRACHCODE(int sPRACHCODE)
-	{
+	public static void setSPRACHCODE(int sPRACHCODE) {
 		SPRACHCODE = sPRACHCODE;
 	}
 
 	/**
 	 * @return the handler
 	 */
-	public Handler getHandler()
-	{
+	public Handler getHandler() {
 		return handler;
 	}
 
@@ -213,16 +248,14 @@ public class GuiMain extends JFrame
 	 * @param handler
 	 *            the handler to set
 	 */
-	public void setHandler(Handler handler)
-	{
+	public void setHandler(Handler handler) {
 		this.handler = handler;
 	}
 
 	/**
 	 * @return the dimension
 	 */
-	public Dimension getDimension()
-	{
+	public Dimension getDimension() {
 		return dimension;
 	}
 
@@ -230,16 +263,14 @@ public class GuiMain extends JFrame
 	 * @param dimension
 	 *            the dimension to set
 	 */
-	public void setDimension(Dimension dimension)
-	{
+	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
 	}
 
 	/**
 	 * @return the sprachcontroller
 	 */
-	public SprachController getSprachcontroller()
-	{
+	public SprachController getSprachcontroller() {
 		return sprachcontroller;
 	}
 
@@ -247,16 +278,14 @@ public class GuiMain extends JFrame
 	 * @param sprachcontroller
 	 *            the sprachcontroller to set
 	 */
-	public void setSprachcontroller(SprachController sprachcontroller)
-	{
+	public void setSprachcontroller(SprachController sprachcontroller) {
 		this.sprachcontroller = sprachcontroller;
 	}
 
 	/**
 	 * @return the guiMenuebar
 	 */
-	public GuiMenuebar getGuiMenuebar()
-	{
+	public GuiMenuebar getGuiMenuebar() {
 		return guiMenuebar;
 	}
 
@@ -264,16 +293,14 @@ public class GuiMain extends JFrame
 	 * @param guiMenuebar
 	 *            the guiMenuebar to set
 	 */
-	public void setGuiMenuebar(GuiMenuebar guiMenuebar)
-	{
+	public void setGuiMenuebar(GuiMenuebar guiMenuebar) {
 		this.guiMenuebar = guiMenuebar;
 	}
 
 	/**
 	 * @return the guiKarteiTitel
 	 */
-	public GuiKarteiTitel getGuiKarteiTitel()
-	{
+	public GuiKarteiTitel getGuiKarteiTitel() {
 		return guiKarteiTitel;
 	}
 
@@ -281,16 +308,14 @@ public class GuiMain extends JFrame
 	 * @param guiKarteiTitel
 	 *            the guiKarteiTitel to set
 	 */
-	public void setGuiKarteiTitel(GuiKarteiTitel guiKarteiTitel)
-	{
+	public void setGuiKarteiTitel(GuiKarteiTitel guiKarteiTitel) {
 		this.guiKarteiTitel = guiKarteiTitel;
 	}
 
 	/**
 	 * @return the guiEingabeFeld
 	 */
-	public GuiEingabeFeld getGuiEingabeFeld()
-	{
+	public GuiEingabeFeld getGuiEingabeFeld() {
 		return guiEingabeFeld;
 	}
 
@@ -298,16 +323,14 @@ public class GuiMain extends JFrame
 	 * @param guiEingabeFeld
 	 *            the guiEingabeFeld to set
 	 */
-	public void setGuiEingabeFeld(GuiEingabeFeld guiEingabeFeld)
-	{
+	public void setGuiEingabeFeld(GuiEingabeFeld guiEingabeFeld) {
 		this.guiEingabeFeld = guiEingabeFeld;
 	}
 
 	/**
 	 * @return the guiSmileyStatistik
 	 */
-	public GuiSmileyStatistik getguiSmileyStatistik()
-	{
+	public GuiSmileyStatistik getguiSmileyStatistik() {
 		return guiSmileyStatistik;
 	}
 
@@ -315,16 +338,14 @@ public class GuiMain extends JFrame
 	 * @param guiSmileyStatistik
 	 *            the guiSmileyStatistik to set
 	 */
-	public void setguiSmileyStatistik(GuiSmileyStatistik guiSmileyStatistik)
-	{
+	public void setguiSmileyStatistik(GuiSmileyStatistik guiSmileyStatistik) {
 		this.guiSmileyStatistik = guiSmileyStatistik;
 	}
 
 	/**
 	 * @return the guiDialog
 	 */
-	public GuiDialog getGuiDialog()
-	{
+	public GuiDialog getGuiDialog() {
 		return guiDialog;
 	}
 
@@ -332,16 +353,14 @@ public class GuiMain extends JFrame
 	 * @param guiDialog
 	 *            the guiDialog to set
 	 */
-	public void setGuiDialog(GuiDialog guiDialog)
-	{
+	public void setGuiDialog(GuiDialog guiDialog) {
 		this.guiDialog = guiDialog;
 	}
 
 	/**
 	 * @return the karteKarteiPanel
 	 */
-	public GuiKarteiKartePanel getKarteKarteiPanel()
-	{
+	public GuiKarteiKartePanel getKarteKarteiPanel() {
 		return karteKarteiPanel;
 	}
 
@@ -349,16 +368,14 @@ public class GuiMain extends JFrame
 	 * @param karteKarteiPanel
 	 *            the karteKarteiPanel to set
 	 */
-	public void setKarteKarteiPanel(GuiKarteiKartePanel karteKarteiPanel)
-	{
+	public void setKarteKarteiPanel(GuiKarteiKartePanel karteKarteiPanel) {
 		this.karteKarteiPanel = karteKarteiPanel;
 	}
 
 	/**
 	 * @return the karteButtons
 	 */
-	public GuiKarteButtons getKarteButtons()
-	{
+	public GuiKarteButtons getKarteButtons() {
 		return karteButtons;
 	}
 
@@ -366,56 +383,49 @@ public class GuiMain extends JFrame
 	 * @param karteButtons
 	 *            the karteButtons to set
 	 */
-	public void setKarteButtons(GuiKarteButtons karteButtons)
-	{
+	public void setKarteButtons(GuiKarteButtons karteButtons) {
 		this.karteButtons = karteButtons;
 	}
 
 	/**
 	 * @return the serialversionuid
 	 */
-	public static long getSerialversionuid()
-	{
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	/**
 	 * @return the windowwitdh
 	 */
-	public static int getWindowwitdh()
-	{
+	public static int getWindowwitdh() {
 		return WINDOWWITDH;
 	}
 
 	/**
 	 * @return the windowheight
 	 */
-	public static int getWindowheight()
-	{
+	public static int getWindowheight() {
 		return WINDOWHEIGHT;
 	}
 
 	/**
 	 * @return the colorBackground
 	 */
-	public static Color getColorBackground()
-	{
+	public static Color getColorBackground() {
 		return COLOR_BACKGROUND;
 	}
 
 	/**
 	 * @return the colorTextWhite
 	 */
-	public static Color getColorTextWhite()
-	{
+	public static Color getColorTextWhite() {
 		return COLOR_TEXT_WHITE;
 	}
 
 	/**
 	 * @return the version
 	 */
-	public static String getVersion()
-	{
+	public static String getVersion() {
 		return version;
 	}
 
@@ -425,15 +435,14 @@ public class GuiMain extends JFrame
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "GuiMain [handler=" + handler + ", dimension=" + dimension
 				+ ", sprachcontroller=" + sprachcontroller + ", guiMenuebar="
 				+ guiMenuebar + ", guiKarteiTitel=" + guiKarteiTitel
-				+ ", guiEingabeFeld=" + guiEingabeFeld + ", guiSmileyStatistik="
-				+ guiSmileyStatistik + ", guiDialog=" + guiDialog
-				+ ", karteKarteiPanel=" + karteKarteiPanel + ", karteButtons="
-				+ karteButtons + "]";
+				+ ", guiEingabeFeld=" + guiEingabeFeld
+				+ ", guiSmileyStatistik=" + guiSmileyStatistik + ", guiDialog="
+				+ guiDialog + ", karteKarteiPanel=" + karteKarteiPanel
+				+ ", karteButtons=" + karteButtons + "]";
 	}
 
 	/*
@@ -442,8 +451,7 @@ public class GuiMain extends JFrame
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -451,62 +459,52 @@ public class GuiMain extends JFrame
 		if (getClass() != obj.getClass())
 			return false;
 		GuiMain other = (GuiMain) obj;
-		if (dimension == null)
-		{
+		if (dimension == null) {
 			if (other.dimension != null)
 				return false;
 		} else if (!dimension.equals(other.dimension))
 			return false;
-		if (guiDialog == null)
-		{
+		if (guiDialog == null) {
 			if (other.guiDialog != null)
 				return false;
 		} else if (!guiDialog.equals(other.guiDialog))
 			return false;
-		if (guiEingabeFeld == null)
-		{
+		if (guiEingabeFeld == null) {
 			if (other.guiEingabeFeld != null)
 				return false;
 		} else if (!guiEingabeFeld.equals(other.guiEingabeFeld))
 			return false;
-		if (guiKarteiTitel == null)
-		{
+		if (guiKarteiTitel == null) {
 			if (other.guiKarteiTitel != null)
 				return false;
 		} else if (!guiKarteiTitel.equals(other.guiKarteiTitel))
 			return false;
-		if (guiMenuebar == null)
-		{
+		if (guiMenuebar == null) {
 			if (other.guiMenuebar != null)
 				return false;
 		} else if (!guiMenuebar.equals(other.guiMenuebar))
 			return false;
-		if (guiSmileyStatistik == null)
-		{
+		if (guiSmileyStatistik == null) {
 			if (other.guiSmileyStatistik != null)
 				return false;
 		} else if (!guiSmileyStatistik.equals(other.guiSmileyStatistik))
 			return false;
-		if (handler == null)
-		{
+		if (handler == null) {
 			if (other.handler != null)
 				return false;
 		} else if (!handler.equals(other.handler))
 			return false;
-		if (karteButtons == null)
-		{
+		if (karteButtons == null) {
 			if (other.karteButtons != null)
 				return false;
 		} else if (!karteButtons.equals(other.karteButtons))
 			return false;
-		if (karteKarteiPanel == null)
-		{
+		if (karteKarteiPanel == null) {
 			if (other.karteKarteiPanel != null)
 				return false;
 		} else if (!karteKarteiPanel.equals(other.karteKarteiPanel))
 			return false;
-		if (sprachcontroller == null)
-		{
+		if (sprachcontroller == null) {
 			if (other.sprachcontroller != null)
 				return false;
 		} else if (!sprachcontroller.equals(other.sprachcontroller))

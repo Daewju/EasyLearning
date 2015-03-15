@@ -1,9 +1,9 @@
 package sp;
 /**
- * Diese Klasse 
+ * Das Interface für die Schnittstelle zwischen guiMain und Handler
  * 
  * @author Sajeevan & Damjan
- * @version 1.11
+ * @version 1.0
  *
  */
 public interface GuiSchnittstelle

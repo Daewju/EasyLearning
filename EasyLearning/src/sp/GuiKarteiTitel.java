@@ -8,10 +8,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
- * Diese Klasse 
+ * Diese Klasse erzeugt auf der guiMain ein JPanel mit dem Titel der Kartei
  * 
  * @author Sajeevan & Damjan
- * @version 1.11
+ * @version 1.2
  *
  */
 public class GuiKarteiTitel
@@ -19,6 +19,9 @@ public class GuiKarteiTitel
 	private JPanel panel;
 	private JLabel karteiTitel;
 	
+	/**
+	 * Konstruktor
+	 */
 	public GuiKarteiTitel()
 	{
 		panel = new JPanel(true);
