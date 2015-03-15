@@ -12,7 +12,7 @@ import java.util.Date;
  * aufgerufen, wie oft wurde sie richtig beantwortet, wann wurde sie erstellt und zuletzt
  * bearbeitet.
  * 
- * @author marko hallo
+ * @author marko
  * @version 1.0
  */
 public class Karte {
