@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import sp.GuiDialog;
@@ -39,7 +40,13 @@ public class Handler implements GuiSchnittstelle{
 	private ArrayList<Karte> usedFach;
 	private boolean ueberprueft;
 	
-	
+	/**
+	 * Initialisiert einen Objetkt von Handler.
+	 * Der Konstruktor verlangt eine Referenz auf ein GuiMain Objekt um
+	 * spaeter mit die Komponenten der Gui ansprechen zu koennen.
+	 * 
+	 * @param gui	Referenz auf Objekt der Klasse GuiMain
+	 */
 	public Handler(GuiMain gui){
 		this.gui = gui;
 		this.ueberprueft = false;
@@ -59,9 +66,13 @@ public class Handler implements GuiSchnittstelle{
 	}
 	
 	/**				
-	 * 				
-	 * @param eingabeFeldErgebnis
-	 * @param eingabeFeldErgebnis2									
+	 * Erstellt ein Objekt der Klasse Kartei. Der Name wird ueber die erwarteten				
+	 * Strings definiert. Dabei wird ueberprueft ob bereits eine Kartei mit selbem
+	 * Namen existiert (Wenn Ja wird neue Kartei nicht erstellt).
+	 * Die neue Kartei wird nach Erstellung sofort angezeigt und das Fach auf 1 gestellt.
+	 *  
+	 * @param eingabeFeldErgebnis	Hauptsprache der Kartei als String
+	 * @param eingabeFeldErgebnis2	Fremdsprache der Kartei als String									
 	 * 				
 	 */		
 	@Override
@@ -80,15 +91,22 @@ public class Handler implements GuiSchnittstelle{
 			gui.versteckeAlleElemente(false);
 			this.kh = tempkh;
 			this.usedKartei = kartei;
-			//this.usedFach = this.usedKartei.gibFach(1);
 			eventGeheZuFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventDateiSpeichern();
 		}
 		
-		//System.out.println(eingabeFeldErgebnis + ", " + eingabeFeldErgebnis2);
+		
 	}
-
+	/**
+	 *	Ueberprueft bei erster Ausfuehrung die Worteingabe des Users und fuehrt
+	 *	dementsprechend weitere Schritte durch. Bei zweiter Ausfuehrung (ueberprueft = true)
+	 *	wird die naechste Karte ausgegeben.
+	 *	Wort richtig >positiven Smiley anzeigen > Karte in hoeheres Fach verschieben.
+	 *	Wort falsch >negativen Smiley anzeigen > Karte in Fach 1 verschieben.
+	 *	
+	 *	@param benutzerEingabe	Eingabe des Users als String
+	 */
 	@Override
 	public void eventNaechsteKarte(String benutzerEingabe)
 	{
@@ -99,7 +117,6 @@ public class Handler implements GuiSchnittstelle{
 				this.usedKarte.setRichtigB(this.usedKarte.getRichtigB()+1);
 				this.gui.setWort(this.usedKarte.getVokabel());
 				this.usedKartei.moveKarte(this.usedKarte, (this.usedKarte.getFach()+1));
-				this.gui.setEingabefeld("");
 				this.gui.setKartenFarbe(gibFarbe("r"));
 			}
 			else{
@@ -107,10 +124,11 @@ public class Handler implements GuiSchnittstelle{
 				this.gui.setWort(this.usedKarte.getVokabel());
 				//verschiebe Karte in Fach 1
 				this.usedKartei.moveKarte(this.usedKarte, 1);
-				this.gui.setEingabefeld("");
 				this.gui.setKartenFarbe(gibFarbe("f"));
 			}
+			this.gui.setEingabefeld("");
 			this.usedKarte.setAufrufe(this.usedKarte.getAufrufe()+1);
+			this.usedKarte.setBearbeitet(new Date());
 			setUeberprueft(true);
 		}
 		else{
@@ -120,11 +138,19 @@ public class Handler implements GuiSchnittstelle{
 			zeigeNaechsteKarte();
 			setUeberprueft(false);
 		}
+		this.gui.versteckeStatistik(false);
 		gui.repaint();
 		eventDateiSpeichern();
 		
 	}
-
+	
+	/**
+	 * Erstellt eine neue Karte und fuegt diese dem Fach1 der aktuellen Kartei hinzu, 
+	 * falls dieses Wortbar nicht bereits existiert.
+	 * 
+	 * @param	wort	zu lernendes Wort als String
+	 * @param	vokabel	entsprechende Vokabel als String
+	 */
 	@Override
 	public void eventNeueKarteHinzufuegen(String wort, String vokabel)
 	{
@@ -139,9 +165,16 @@ public class Handler implements GuiSchnittstelle{
 			guiDialog.infoDialog(sc.getSprache("Info",GuiMain.SPRACHCODE), sc.getSprache("Karte bereits vorhanden",GuiMain.SPRACHCODE));
 			
 		}
-		
 	}
-
+	
+	/**
+	 *	Aendert das Wort und Vokabel einer Karte auf die ueber
+	 *	Parameter erwarteten Werte. Wobei die alten Werte
+	 *	ueberschrieben werden.
+	 *
+	 *	@param	wort	Wort neu als String
+	 *	@param	vokabel Vokabel neu als String
+	 */
 	@Override
 	public void eventKarteBearbeiten(String wort, String vokabel)
 	{
@@ -152,6 +185,12 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 
+	/**
+	 * Loescht die aktuell behandelte/angezeigte Karte aus der Kartei
+	 * und gibt daraufhin die nachste Karte aus. 
+	 * 
+	 * @param	wort	zu loeschendes Wort als String
+	 */
 	@Override
 	public void eventKarteLoeschen(String wort)
 	{
@@ -166,12 +205,6 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 
-	/*@Override
-	public void eventNeueKarteiHinzufuegen(String hauptsprache, String fremdsprache)
-	{
-		
-		
-	}*/
 
 	@Override
 	public void eventGeheZuFach(int fach)
@@ -330,15 +363,15 @@ public class Handler implements GuiSchnittstelle{
 			this.gui.setWort(this.usedKarte.getWort());
 			
 			GuiStatistik statistik = gui.getguiSmileyStatistik().getGuiStatistik();
-			Double rp = (double)(this.usedKarte.getRichtigB()*100)/this.usedKarte.getAufrufe();
+	
 			NumberFormat n = NumberFormat.getInstance();
 			n.setMaximumFractionDigits(2);
 			
 			statistik.setStatistik( ""+this.usedFach.size(),
 									""+this.usedKarte.getAufrufe(),
-									""+n.format(rp)+"%",
-									""+this.usedKarte.getErstellt().toGMTString(),
-									""+this.usedKarte.getBearbeitet().toGMTString()
+									""+n.format((double)(this.usedKarte.getRichtigB()*100)/this.usedKarte.getAufrufe())+"%",
+									dateToString(this.usedKarte.getErstellt()),
+									dateToString(this.usedKarte.getBearbeitet())
 									);
 			this.gui.versteckeStatistik(true);
 		}
@@ -369,6 +402,116 @@ public class Handler implements GuiSchnittstelle{
 			case "d":	return new Color(0,255,255);
 						
 			default:	return new Color(0,255,255);
+		}
+	}
+	
+	private String dateToString(Date date) throws NullPointerException{
+		
+		if(date!=null){
+			String datum = null;
+			
+			switch(date.getDate()){
+				case 1: datum="01";
+						break;
+				case 2: datum="02";
+						break;
+				case 3: datum="03";
+						break;
+				case 4: datum="04";
+						break;
+				case 5: datum="05";
+						break;
+				case 6: datum="06";
+						break;
+				case 7: datum="07";
+						break;
+				case 8: datum="08";
+						break;
+				case 9: datum="09";
+						break;
+				default: datum=""+date.getDate();
+						break;
+			}
+			
+			switch(date.getMonth()){
+				case 1: datum=datum+".01";
+						break;
+				case 2: datum=datum+".02";
+						break;
+				case 3: datum=datum+".03";
+						break;
+				case 4: datum=datum+".04";
+						break;
+				case 5: datum=datum+".05";
+						break;
+				case 6: datum=datum+".06";
+						break;
+				case 7: datum=datum+".07";
+						break;
+				case 8: datum=datum+".08";
+						break;
+				case 9: datum=datum+".09";
+						break;
+				default: datum=datum+"."+date.getMonth();
+						break;
+			}
+			
+			datum = datum +"."+(date.getYear()+1900)+"  ";
+			
+			switch(date.getHours()){
+				case 0: datum=datum+"00";
+						break;
+				case 1: datum=datum+"01";
+						break;
+				case 2: datum=datum+"02";
+						break;
+				case 3: datum=datum+"03";
+						break;
+				case 4: datum=datum+"04";
+						break;
+				case 5: datum=datum+"05";
+						break;
+				case 6: datum=datum+"06";
+						break;
+				case 7: datum=datum+"07";
+						break;
+				case 8: datum=datum+"08";
+						break;
+				case 9: datum=datum+"09";
+						break;
+				default: datum=datum+""+date.getHours();
+						break;
+			}
+			
+			switch(date.getMinutes()){
+				case 0: datum=datum+":00";
+						break;
+				case 1: datum=datum+":01";
+						break;
+				case 2: datum=datum+":02";
+						break;
+				case 3: datum=datum+":03";
+						break;
+				case 4: datum=datum+":04";
+						break;
+				case 5: datum=datum+":05";
+						break;
+				case 6: datum=datum+":06";
+						break;
+				case 7: datum=datum+":07";
+						break;
+				case 8: datum=datum+":08";
+						break;
+				case 9: datum=datum+":09";
+						break;
+				default: datum=datum+":"+date.getMinutes();
+						break;
+			}
+			
+			return datum;
+		}
+		else{
+			throw new NullPointerException("Date object missing");
 		}
 	}
 
