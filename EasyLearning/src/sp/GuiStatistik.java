@@ -33,7 +33,7 @@ public class GuiStatistik extends JPanel {
 
 	public GuiStatistik(SprachController sc){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setPreferredSize(new Dimension(210,0));
+		setPreferredSize(new Dimension(200,0));
 		anzahlKarten = "0";
 		anzahlAufrufe = "0";
 		anzahlKorrekt = "0";
