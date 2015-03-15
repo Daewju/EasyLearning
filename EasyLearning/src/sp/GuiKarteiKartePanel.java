@@ -96,7 +96,7 @@ public class GuiKarteiKartePanel
 			fach.setFont(new Font(null, Font.BOLD, 30));
 			fach.setHorizontalAlignment(JLabel.CENTER);
 			fach.setOpaque(true);
-			fach.setBackground(karte.getBackground());
+			fach.setForeground(Color.ORANGE);
 			fach.setLocation(startPosX += 88, 100);
 			i++;
 		}
@@ -110,9 +110,11 @@ public class GuiKarteiKartePanel
 			if (!faechlein.equals(fach))
 			{
 				faechlein.setBackground(Color.DARK_GRAY);
+				faechlein.setForeground(Color.ORANGE);
 			} else
 			{
 				fach.setBackground(backgroundColor);
+				fach.setForeground(Color.DARK_GRAY);
 			}
 		}
 	}

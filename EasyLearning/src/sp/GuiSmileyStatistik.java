@@ -16,7 +16,6 @@ public class GuiSmileyStatistik extends JPanel{
 		this.guiSmiley = new GuiSmiley();
 		this.sc = sc;
 		this.guiStatistik = new GuiStatistik(sc);
-		this.guiStatistik.setStatistik("0","0", "0", "a", "b");
 		this.setLayout(new GridLayout(2,1));
 		this.add(guiSmiley);
 		this.add(guiStatistik);

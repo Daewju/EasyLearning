@@ -1,11 +1,9 @@
 package sp;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -29,30 +27,38 @@ public class GuiStatistik extends JPanel {
 	private JLabel erstelltWert;
 	private JLabel bearbeitet;
 	private JLabel bearbeitetWert;
-	private JLabel zwischenZeile;
+	private JLabel titel;
+	private ArrayList<JLabel> zwischenzeilen;
 	private SprachController sc;
 
 	public GuiStatistik(SprachController sc){
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setPreferredSize(new Dimension(50,50));
-		this.anzahlKarten = "0";
-		this.anzahlAufrufe = "0";
-		this.anzahlKorrekt = "0";
-		this.datumErstellt = "dd.mm.yyyy hh:mm";
-		this.zuletztBearbeitet = "dd.mm.yyyy hh:mm";
-		this.karten = new JLabel();
-		this.aufrufe = new JLabel();
-		this.korrekt = new JLabel();
-		this.erstellt = new JLabel();
-		this.erstelltWert = new JLabel();
-		this.bearbeitet = new JLabel();
-		this.bearbeitetWert = new JLabel();
-		this.zwischenZeile = new JLabel();
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setPreferredSize(new Dimension(210,0));
+		anzahlKarten = "0";
+		anzahlAufrufe = "0";
+		anzahlKorrekt = "0";
+		datumErstellt = "dd.mm.yyyy hh:mm";
+		zuletztBearbeitet = "dd.mm.yyyy hh:mm";
+		karten = new JLabel();
+		aufrufe = new JLabel();
+		korrekt = new JLabel();
+		erstellt = new JLabel();
+		erstelltWert = new JLabel();
+		bearbeitet = new JLabel();
+		bearbeitetWert = new JLabel();
+		titel = new JLabel("Statistik");
 		this.sc = sc;
+		zwischenzeilen = new ArrayList<>();
+		for(int i=0; i<5; i++)
+		{
+			JLabel zwischenzeile = new JLabel(" ");
+			zwischenzeile.setFont(new Font(null, Font.BOLD, 5));
+			zwischenzeilen.add(zwischenzeile);
+		}
 	}
 	
 	public void setStatistik(String anzahlKarten, String anzahlAufrufe, String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet){
-		this.setBackground(GuiMain.COLOR_BACKGROUND);
+		setBackground(GuiMain.COLOR_BACKGROUND);
 		this.anzahlKarten = anzahlKarten;
 		this.anzahlAufrufe = anzahlAufrufe;
 		this.anzahlKorrekt = anzahlKorrekt;
@@ -63,40 +69,42 @@ public class GuiStatistik extends JPanel {
 	
 	public void anzeigeAktualisieren()
 	{
-		karten.setFont(new Font(null, Font.BOLD, 20));
-		karten.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		titel.setFont(new Font(null, Font.BOLD, 21));
+		titel.setForeground(Color.ORANGE);
+		karten.setFont(new Font(null, Font.BOLD, 16));
+		karten.setForeground(Color.CYAN);
 		karten.setText(sc.getSprache("Karten im Fach", GuiMain.SPRACHCODE) +": " + anzahlKarten);
-		aufrufe.setFont(new Font(null, Font.BOLD, 20));
-		aufrufe.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		aufrufe.setFont(new Font(null, Font.BOLD, 16));
+		aufrufe.setForeground(Color.CYAN);
 		aufrufe.setText("Aufrufe: " + anzahlAufrufe);
-		korrekt.setFont(new Font(null, Font.BOLD, 20));
-		korrekt.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		korrekt.setFont(new Font(null, Font.BOLD, 16));
+		korrekt.setForeground(Color.CYAN);
 		korrekt.setText("Korrekt: " + anzahlKorrekt);
-		erstellt.setFont(new Font(null, Font.BOLD, 20));
-		erstellt.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		erstellt.setFont(new Font(null, Font.BOLD, 16));
+		erstellt.setForeground(Color.CYAN);
 		erstellt.setText("Erstellt: ");
-		erstelltWert.setFont(new Font(null, Font.BOLD,20));
-		erstelltWert.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		erstelltWert.setFont(new Font(null, Font.BOLD,16));
+		erstelltWert.setForeground(Color.CYAN);
 		erstelltWert.setText(datumErstellt);
-		bearbeitet.setFont(new Font(null, Font.BOLD, 20));
-		bearbeitet.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		bearbeitet.setFont(new Font(null, Font.BOLD, 16));
+		bearbeitet.setForeground(Color.CYAN);
 		bearbeitet.setText("Bearbeitet: ");
-		bearbeitetWert.setFont(new Font(null, Font.BOLD, 20));
-		bearbeitetWert.setForeground(GuiMain.COLOR_TEXT_WHITE);
+		bearbeitetWert.setFont(new Font(null, Font.BOLD, 16));
+		bearbeitetWert.setForeground(Color.CYAN);
 		bearbeitetWert.setText(zuletztBearbeitet);
-		zwischenZeile.setText(" ");
-		
-		this.add(aufrufe);
-		this.add(zwischenZeile);
-		this.add(korrekt);
-		this.add(zwischenZeile);
-		this.add(erstellt);
-		this.add(erstelltWert);
-		this.add(zwischenZeile);
-		this.add(bearbeitet);
-		this.add(bearbeitetWert);
-		this.add(karten);
-		this.add(zwischenZeile);
-		this.repaint();
+		add(titel);
+		add(zwischenzeilen.get(0));
+		add(aufrufe);
+		add(zwischenzeilen.get(1));
+		add(korrekt);
+		add(zwischenzeilen.get(2));
+		add(erstellt);
+		add(erstelltWert);
+		add(zwischenzeilen.get(3));
+		add(bearbeitet);
+		add(bearbeitetWert);
+		add(zwischenzeilen.get(4));
+		add(karten);
+		repaint();
 	}
 }

@@ -18,7 +18,7 @@ public class GuiMain extends JFrame
 	public static final int WINDOWHEIGHT = 768;
 	public static final Color COLOR_BACKGROUND = new Color(30, 30, 30);
 	public static final Color COLOR_TEXT_WHITE = new Color(240, 240, 240);
-	public static final String version = "0.1";
+	public static final String version = "1.0";
 	public static int SPRACHCODE = 0;
 	private Handler handler;
 	private Dimension dimension;
