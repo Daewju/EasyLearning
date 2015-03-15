@@ -68,18 +68,18 @@ public class GuiMenuebar
 		infoMenue.setForeground(schriftColor);
 		neueKarteiEintrag = new JMenuItem(sprachcontroller.getSprache("Neu",
 				GuiMain.SPRACHCODE));
-		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("ï¿½ffnen",
+		oeffnenEintrag = new JMenuItem(sprachcontroller.getSprache("Öffnen",
 				GuiMain.SPRACHCODE));
 		speichernEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Speichern", GuiMain.SPRACHCODE));
 		loeschenEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Lï¿½schen", GuiMain.SPRACHCODE));
+				"Löschen", GuiMain.SPRACHCODE));
 		importEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Importieren", GuiMain.SPRACHCODE));
 		exportEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Exportieren", GuiMain.SPRACHCODE));
 		resetEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Zurï¿½cksetzen", GuiMain.SPRACHCODE));
+				"Zurücksetzen", GuiMain.SPRACHCODE));
 		beendenEintrag = new JMenuItem(sprachcontroller.getSprache("Beenden",
 				GuiMain.SPRACHCODE));
 		deutschEintrag = new JMenuItem(sprachcontroller.getSprache("Deutsch",
@@ -87,12 +87,12 @@ public class GuiMenuebar
 		englischEintrag = new JMenuItem(sprachcontroller.getSprache("Englisch",
 				GuiMain.SPRACHCODE));
 		franzoesischEintrag = new JMenuItem(sprachcontroller.getSprache(
-				"Franzï¿½sisch", GuiMain.SPRACHCODE));
+				"Französisch", GuiMain.SPRACHCODE));
 		italienischEintrag = new JMenuItem(sprachcontroller.getSprache(
 				"Italienisch", GuiMain.SPRACHCODE));
 		versionEintrag = new JMenuItem(sprachcontroller.getSprache("Version",
 				GuiMain.SPRACHCODE));
-		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("ï¿½ber ï¿½",
+		ueberEintrag = new JMenuItem(sprachcontroller.getSprache("Über …",
 				GuiMain.SPRACHCODE));
 		aufbauen();
 		erzeugeActionListener();
@@ -174,7 +174,7 @@ public class GuiMenuebar
 						return karteiPfad.equals(f);
 					}
 				});
-				chooser.setDialogTitle(sprachcontroller.getSprache("ï¿½ffnen",
+				chooser.setDialogTitle(sprachcontroller.getSprache("Öffnen",
 						GuiMain.SPRACHCODE));
 				chooser.setFileFilter(new FileNameExtensionFilter(".csv", "CSV"));
 				chooser.setMultiSelectionEnabled(false);
@@ -203,7 +203,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Kartei lï¿½schen",
+						sprachcontroller.getSprache("Kartei löschen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -239,7 +239,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"Mï¿½chten Sie den Lernfortschritt ï¿½bernehmen?",
+													"Möchten Sie den Lernfortschritt übernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -279,7 +279,7 @@ public class GuiMenuebar
 											GuiMain.SPRACHCODE),
 									sprachcontroller
 											.getSprache(
-													"Mï¿½chten Sie den Lernfortschritt ï¿½bernehmen?",
+													"Möchten Sie den Lernfortschritt übernehmen?",
 													GuiMain.SPRACHCODE));
 					if (fortschritt == 0)
 					{
@@ -306,7 +306,7 @@ public class GuiMenuebar
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Zurï¿½cksetzen",
+						sprachcontroller.getSprache("Zurücksetzen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -386,7 +386,7 @@ public class GuiMenuebar
 			{
 				guiMain.getGuiDialog()
 						.infoDialog(
-								sprachcontroller.getSprache("ï¿½ber ï¿½",
+								sprachcontroller.getSprache("Über …",
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Programmierer",
 										GuiMain.SPRACHCODE)
