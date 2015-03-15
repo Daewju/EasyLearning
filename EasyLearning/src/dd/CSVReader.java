@@ -105,7 +105,8 @@ public class CSVReader
 	}
 
 	/**
-	 * Die Methode liest aus einer CSV die Karten-Informationen oder Sprach-Informationen
+	 * Die Methode liest aus einer CSV die Karten-Informationen oder
+	 * Sprach-Informationen
 	 * 
 	 * @return Rückgabetyp ist eine ArrayList. Sollte die Datei nicht glesen
 	 *         werden können, wird NULL zurückgeben. Die ArrayList enthält die
@@ -147,13 +148,15 @@ public class CSVReader
 		{
 			this.fileReader.close();
 		}
-		if(bufferedReader != null)
+		if (bufferedReader != null)
 		{
 			this.bufferedReader.close();
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -163,7 +166,9 @@ public class CSVReader
 				+ bufferedReader + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -178,7 +183,9 @@ public class CSVReader
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -215,7 +222,8 @@ public class CSVReader
 	}
 
 	/**
-	 * @param fileReader the fileReader to set
+	 * @param fileReader
+	 *            the fileReader to set
 	 */
 	public void setFileReader(FileReader fileReader)
 	{
@@ -231,12 +239,12 @@ public class CSVReader
 	}
 
 	/**
-	 * @param bufferedReader the bufferedReader to set
+	 * @param bufferedReader
+	 *            the bufferedReader to set
 	 */
 	public void setBufferedReader(BufferedReader bufferedReader)
 	{
 		this.bufferedReader = bufferedReader;
 	}
-	
-	
+
 }

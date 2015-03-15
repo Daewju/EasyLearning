@@ -32,7 +32,9 @@ public class SprachController
 	public SprachController() throws IOException
 	{
 		bufferedReader = new BufferedReader(new InputStreamReader(getClass()
-				.getResourceAsStream("/data/sprache.csv"), "Cp1252")); // "Cp1252" für ANSI
+				.getResourceAsStream("/data/sprache.csv"), "Cp1252")); // "Cp1252"
+																		// für
+																		// ANSI
 		cr = new CSVReader(bufferedReader);
 		sprache = new ArrayList<>();
 		sprache = cr.leseKarten();
@@ -66,7 +68,9 @@ public class SprachController
 		return deutsch;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -76,7 +80,9 @@ public class SprachController
 				+ cr + ", sprache=" + sprache + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -91,7 +97,9 @@ public class SprachController
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -134,7 +142,8 @@ public class SprachController
 	}
 
 	/**
-	 * @param bufferedReader the bufferedReader to set
+	 * @param bufferedReader
+	 *            the bufferedReader to set
 	 */
 	public void setBufferedReader(BufferedReader bufferedReader)
 	{
@@ -150,7 +159,8 @@ public class SprachController
 	}
 
 	/**
-	 * @param cr the cr to set
+	 * @param cr
+	 *            the cr to set
 	 */
 	public void setCr(CSVReader cr)
 	{
@@ -166,12 +176,12 @@ public class SprachController
 	}
 
 	/**
-	 * @param sprache the sprache to set
+	 * @param sprache
+	 *            the sprache to set
 	 */
 	public void setSprache(ArrayList<String[]> sprache)
 	{
 		this.sprache = sprache;
 	}
-	
-	
+
 }

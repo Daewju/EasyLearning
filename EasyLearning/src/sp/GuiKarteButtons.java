@@ -17,10 +17,11 @@ import javax.swing.JPanel;
 
 import mk.Handler;
 import dd.SprachController;
+
 /**
- * Diese Klasse erzeugt auf der guiMain die Buttons fÃ¼r die Kartenbearbeitung
+ * Diese Klasse erzeugt auf der guiMain die Buttons für die Kartenbearbeitung
  * 
- * @author Sajeevan & Damjan
+ * @author Sajeevan und Damjan
  * @version 1.2
  *
  */
@@ -47,7 +48,8 @@ public class GuiKarteButtons
 	/**
 	 * Konstruktor
 	 * 
-	 * @param als Parameter wird die guiMain erwartet
+	 * @param gui
+	 *            als Parameter wird die guiMain erwartet
 	 */
 	public GuiKarteButtons(GuiMain gui)
 	{
@@ -108,7 +110,7 @@ public class GuiKarteButtons
 				while (!ergebnis)
 				{
 					ergebnis = guiMain.getGuiDialog().erzeugeNeuEingabeDialog(
-							sprachcontroller.getSprache("Karte hinzufÃ¼gen",
+							sprachcontroller.getSprache("Karte hinzufügen",
 									GuiMain.SPRACHCODE),
 							sprachcontroller.getSprache("Wort",
 									GuiMain.SPRACHCODE) + ": ",
@@ -147,7 +149,7 @@ public class GuiKarteButtons
 			@Override
 			public void mouseReleased(MouseEvent e)
 			{
-				
+
 			}
 		});
 
@@ -212,7 +214,7 @@ public class GuiKarteButtons
 										GuiMain.SPRACHCODE),
 								sprachcontroller.getSprache("Nein",
 										GuiMain.SPRACHCODE) },
-						sprachcontroller.getSprache("Karte lÃ¶schen",
+						sprachcontroller.getSprache("Karte löschen",
 								GuiMain.SPRACHCODE),
 						sprachcontroller.getSprache("Sind Sie sicher?",
 								GuiMain.SPRACHCODE)) == 0)
@@ -248,6 +250,197 @@ public class GuiKarteButtons
 
 		});
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "GuiKarteButtons [guiMain=" + guiMain + ", sprachcontroller="
+				+ sprachcontroller + ", handler=" + handler + ", hauptpanel="
+				+ hauptpanel + ", panel=" + panel + ", bildHinzufuegen="
+				+ bildHinzufuegen + ", bildBearbeiten=" + bildBearbeiten
+				+ ", bildLoeschen=" + bildLoeschen + ", bildHinzufuegenC="
+				+ bildHinzufuegenC + ", bildBearbeitenC=" + bildBearbeitenC
+				+ ", bildLoeschenC=" + bildLoeschenC + ", bildHinzufuegenO="
+				+ bildHinzufuegenO + ", bildBearbeitenO=" + bildBearbeitenO
+				+ ", bildLoeschenO=" + bildLoeschenO + ", buttonHinzufuegen="
+				+ buttonHinzufuegen + ", buttonBearbeiten=" + buttonBearbeiten
+				+ ", buttonLoeschen=" + buttonLoeschen + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((bildBearbeiten == null) ? 0 : bildBearbeiten.hashCode());
+		result = prime * result
+				+ ((bildBearbeitenC == null) ? 0 : bildBearbeitenC.hashCode());
+		result = prime * result
+				+ ((bildBearbeitenO == null) ? 0 : bildBearbeitenO.hashCode());
+		result = prime * result
+				+ ((bildHinzufuegen == null) ? 0 : bildHinzufuegen.hashCode());
+		result = prime
+				* result
+				+ ((bildHinzufuegenC == null) ? 0 : bildHinzufuegenC.hashCode());
+		result = prime
+				* result
+				+ ((bildHinzufuegenO == null) ? 0 : bildHinzufuegenO.hashCode());
+		result = prime * result
+				+ ((bildLoeschen == null) ? 0 : bildLoeschen.hashCode());
+		result = prime * result
+				+ ((bildLoeschenC == null) ? 0 : bildLoeschenC.hashCode());
+		result = prime * result
+				+ ((bildLoeschenO == null) ? 0 : bildLoeschenO.hashCode());
+		result = prime
+				* result
+				+ ((buttonBearbeiten == null) ? 0 : buttonBearbeiten.hashCode());
+		result = prime
+				* result
+				+ ((buttonHinzufuegen == null) ? 0 : buttonHinzufuegen
+						.hashCode());
+		result = prime * result
+				+ ((buttonLoeschen == null) ? 0 : buttonLoeschen.hashCode());
+		result = prime * result + ((guiMain == null) ? 0 : guiMain.hashCode());
+		result = prime * result + ((handler == null) ? 0 : handler.hashCode());
+		result = prime * result
+				+ ((hauptpanel == null) ? 0 : hauptpanel.hashCode());
+		result = prime * result + ((panel == null) ? 0 : panel.hashCode());
+		result = prime
+				* result
+				+ ((sprachcontroller == null) ? 0 : sprachcontroller.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GuiKarteButtons other = (GuiKarteButtons) obj;
+		if (bildBearbeiten == null)
+		{
+			if (other.bildBearbeiten != null)
+				return false;
+		} else if (!bildBearbeiten.equals(other.bildBearbeiten))
+			return false;
+		if (bildBearbeitenC == null)
+		{
+			if (other.bildBearbeitenC != null)
+				return false;
+		} else if (!bildBearbeitenC.equals(other.bildBearbeitenC))
+			return false;
+		if (bildBearbeitenO == null)
+		{
+			if (other.bildBearbeitenO != null)
+				return false;
+		} else if (!bildBearbeitenO.equals(other.bildBearbeitenO))
+			return false;
+		if (bildHinzufuegen == null)
+		{
+			if (other.bildHinzufuegen != null)
+				return false;
+		} else if (!bildHinzufuegen.equals(other.bildHinzufuegen))
+			return false;
+		if (bildHinzufuegenC == null)
+		{
+			if (other.bildHinzufuegenC != null)
+				return false;
+		} else if (!bildHinzufuegenC.equals(other.bildHinzufuegenC))
+			return false;
+		if (bildHinzufuegenO == null)
+		{
+			if (other.bildHinzufuegenO != null)
+				return false;
+		} else if (!bildHinzufuegenO.equals(other.bildHinzufuegenO))
+			return false;
+		if (bildLoeschen == null)
+		{
+			if (other.bildLoeschen != null)
+				return false;
+		} else if (!bildLoeschen.equals(other.bildLoeschen))
+			return false;
+		if (bildLoeschenC == null)
+		{
+			if (other.bildLoeschenC != null)
+				return false;
+		} else if (!bildLoeschenC.equals(other.bildLoeschenC))
+			return false;
+		if (bildLoeschenO == null)
+		{
+			if (other.bildLoeschenO != null)
+				return false;
+		} else if (!bildLoeschenO.equals(other.bildLoeschenO))
+			return false;
+		if (buttonBearbeiten == null)
+		{
+			if (other.buttonBearbeiten != null)
+				return false;
+		} else if (!buttonBearbeiten.equals(other.buttonBearbeiten))
+			return false;
+		if (buttonHinzufuegen == null)
+		{
+			if (other.buttonHinzufuegen != null)
+				return false;
+		} else if (!buttonHinzufuegen.equals(other.buttonHinzufuegen))
+			return false;
+		if (buttonLoeschen == null)
+		{
+			if (other.buttonLoeschen != null)
+				return false;
+		} else if (!buttonLoeschen.equals(other.buttonLoeschen))
+			return false;
+		if (guiMain == null)
+		{
+			if (other.guiMain != null)
+				return false;
+		} else if (!guiMain.equals(other.guiMain))
+			return false;
+		if (handler == null)
+		{
+			if (other.handler != null)
+				return false;
+		} else if (!handler.equals(other.handler))
+			return false;
+		if (hauptpanel == null)
+		{
+			if (other.hauptpanel != null)
+				return false;
+		} else if (!hauptpanel.equals(other.hauptpanel))
+			return false;
+		if (panel == null)
+		{
+			if (other.panel != null)
+				return false;
+		} else if (!panel.equals(other.panel))
+			return false;
+		if (sprachcontroller == null)
+		{
+			if (other.sprachcontroller != null)
+				return false;
+		} else if (!sprachcontroller.equals(other.sprachcontroller))
+			return false;
+		return true;
 	}
 
 	/**

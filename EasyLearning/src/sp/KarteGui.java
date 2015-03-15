@@ -5,7 +5,7 @@ import java.awt.Color;
 
 /**
  * Diese Klasse beschreibt eine visuelle Karteikarte. Sie hat eine Grundfarbe
- * und eine Farbe fÃ¼r die korrekte, sowie eine Farbe fÃ¼r die falsche Antwort.
+ * und eine Farbe für die korrekte, sowie eine Farbe für die falsche Antwort.
  * Eine Methode 'umdrehen' dreht die Karte um, erwartet wird ein boolean. Der
  * Text wird hier nicht angezeigt. es handelt sich um die blanke Karte.
  * 
@@ -24,6 +24,8 @@ public class KarteGui extends Canvas
 	/**
 	 * Konstruktor
 	 * 
+	 * @param color
+	 *            Farbe der Karte
 	 */
 	public KarteGui(Color color)
 	{
@@ -40,13 +42,15 @@ public class KarteGui extends Canvas
 
 	/**
 	 * @param sizeX
-	 *            Groesse in Pixel fÃ¼r Horizontale
+	 *            Groesse in Pixel für Horizontale
 	 * @param sizeY
-	 *            Groesse in Pixel fÃ¼r Vertikale
+	 *            Groesse in Pixel für Vertikale
 	 * @param posX
 	 *            Position X linke-obere Ecke
 	 * @param posY
 	 *            Position Y linke-obere Ecke
+	 * @param color
+	 *            Farbe der Karte
 	 */
 	public KarteGui(int sizeX, int sizeY, int posX, int posY, Color color)
 	{
@@ -128,7 +132,6 @@ public class KarteGui extends Canvas
 		this.posY = posY;
 	}
 
-	
 	/**
 	 * @return the color
 	 */
@@ -138,7 +141,8 @@ public class KarteGui extends Canvas
 	}
 
 	/**
-	 * @param color the color to set
+	 * @param color
+	 *            the color to set
 	 */
 	public void setColor(Color color)
 	{

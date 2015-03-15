@@ -20,11 +20,12 @@ import javax.swing.JTextField;
 
 import mk.Handler;
 import dd.SprachController;
+
 /**
- * Diese Klasse wird fÃ¼r die Eingabe der Vokabeln benÃ¶tigt. 
- * Es wird auf der guiMain ein JPanel, ein Eingabefeld und ein Button gezeichnet
+ * Diese Klasse wird für die Eingabe der Vokabeln benötigt. Es wird auf der
+ * guiMain ein JPanel, ein Eingabefeld und ein Button gezeichnet
  * 
- * @author Sajeevan & Damjan
+ * @author Sajeevan und Damjan
  * @version 1.3
  *
  */
@@ -44,7 +45,8 @@ public class GuiEingabeFeld
 	/**
 	 * Konstruktor
 	 * 
-	 * @param gui als Parameter wird ein guiMain erwartet
+	 * @param gui
+	 *            als Parameter wird ein guiMain erwartet
 	 */
 	public GuiEingabeFeld(GuiMain gui)
 	{
@@ -86,7 +88,7 @@ public class GuiEingabeFeld
 	}
 
 	/**
-	 * Diese Methode added den Actionlistener fÃ¼r den Button
+	 * Diese Methode added den Actionlistener für den Button
 	 */
 	public void setActionListener()
 	{
@@ -124,6 +126,141 @@ public class GuiEingabeFeld
 				buttonNaechsteKarte.setIcon(new ImageIcon(bildNaechsteKarte));
 			}
 		});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "GuiEingabeFeld [guiMain=" + guiMain + ", sprachcontroller="
+				+ sprachcontroller + ", handler=" + handler
+				+ ", bildNaechsteKarte=" + bildNaechsteKarte
+				+ ", bildNaechsteKarteC=" + bildNaechsteKarteC
+				+ ", bildNaechsteKarteO=" + bildNaechsteKarteO
+				+ ", buttonNaechsteKarte=" + buttonNaechsteKarte
+				+ ", hauptpanel=" + hauptpanel + ", panel=" + panel
+				+ ", textFeld=" + textFeld + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((bildNaechsteKarte == null) ? 0 : bildNaechsteKarte
+						.hashCode());
+		result = prime
+				* result
+				+ ((bildNaechsteKarteC == null) ? 0 : bildNaechsteKarteC
+						.hashCode());
+		result = prime
+				* result
+				+ ((bildNaechsteKarteO == null) ? 0 : bildNaechsteKarteO
+						.hashCode());
+		result = prime
+				* result
+				+ ((buttonNaechsteKarte == null) ? 0 : buttonNaechsteKarte
+						.hashCode());
+		result = prime * result + ((guiMain == null) ? 0 : guiMain.hashCode());
+		result = prime * result + ((handler == null) ? 0 : handler.hashCode());
+		result = prime * result
+				+ ((hauptpanel == null) ? 0 : hauptpanel.hashCode());
+		result = prime * result + ((panel == null) ? 0 : panel.hashCode());
+		result = prime
+				* result
+				+ ((sprachcontroller == null) ? 0 : sprachcontroller.hashCode());
+		result = prime * result
+				+ ((textFeld == null) ? 0 : textFeld.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GuiEingabeFeld other = (GuiEingabeFeld) obj;
+		if (bildNaechsteKarte == null)
+		{
+			if (other.bildNaechsteKarte != null)
+				return false;
+		} else if (!bildNaechsteKarte.equals(other.bildNaechsteKarte))
+			return false;
+		if (bildNaechsteKarteC == null)
+		{
+			if (other.bildNaechsteKarteC != null)
+				return false;
+		} else if (!bildNaechsteKarteC.equals(other.bildNaechsteKarteC))
+			return false;
+		if (bildNaechsteKarteO == null)
+		{
+			if (other.bildNaechsteKarteO != null)
+				return false;
+		} else if (!bildNaechsteKarteO.equals(other.bildNaechsteKarteO))
+			return false;
+		if (buttonNaechsteKarte == null)
+		{
+			if (other.buttonNaechsteKarte != null)
+				return false;
+		} else if (!buttonNaechsteKarte.equals(other.buttonNaechsteKarte))
+			return false;
+		if (guiMain == null)
+		{
+			if (other.guiMain != null)
+				return false;
+		} else if (!guiMain.equals(other.guiMain))
+			return false;
+		if (handler == null)
+		{
+			if (other.handler != null)
+				return false;
+		} else if (!handler.equals(other.handler))
+			return false;
+		if (hauptpanel == null)
+		{
+			if (other.hauptpanel != null)
+				return false;
+		} else if (!hauptpanel.equals(other.hauptpanel))
+			return false;
+		if (panel == null)
+		{
+			if (other.panel != null)
+				return false;
+		} else if (!panel.equals(other.panel))
+			return false;
+		if (sprachcontroller == null)
+		{
+			if (other.sprachcontroller != null)
+				return false;
+		} else if (!sprachcontroller.equals(other.sprachcontroller))
+			return false;
+		if (textFeld == null)
+		{
+			if (other.textFeld != null)
+				return false;
+		} else if (!textFeld.equals(other.textFeld))
+			return false;
+		return true;
 	}
 
 	/**

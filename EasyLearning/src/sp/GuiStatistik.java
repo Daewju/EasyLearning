@@ -15,11 +15,12 @@ import dd.SprachController;
  * Diese Klasse gibt die Statistik mit folgenden Angaben aus. Anzahl Aufrufe
  * 
  * 
- * @author Damjan & Sajeevan
+ * @author Damjan und Sajeevan
  * @version 1.6
  *
  */
-public class GuiStatistik extends JPanel {
+public class GuiStatistik extends JPanel
+{
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +46,8 @@ public class GuiStatistik extends JPanel {
 	 * @param sc
 	 *            als Parameter wird der SprachController erwartet
 	 */
-	public GuiStatistik(SprachController sc) {
+	public GuiStatistik(SprachController sc)
+	{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(200, 0));
 		this.sc = sc;
@@ -63,7 +65,8 @@ public class GuiStatistik extends JPanel {
 		bearbeitetWert = new JLabel();
 		titel = new JLabel();
 		zwischenzeilen = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++)
+		{
 			JLabel zwischenzeile = new JLabel(" ");
 			zwischenzeile.setFont(new Font(null, Font.BOLD, 5));
 			zwischenzeilen.add(zwischenzeile);
@@ -86,7 +89,8 @@ public class GuiStatistik extends JPanel {
 	 *            Datum bearbeitet
 	 */
 	public void setStatistik(String anzahlKarten, String anzahlAufrufe,
-			String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet) {
+			String anzahlKorrekt, String datumErstellt, String zuletztBearbeitet)
+	{
 		setBackground(GuiMain.COLOR_BACKGROUND);
 		this.anzahlKarten = anzahlKarten;
 		this.anzahlAufrufe = anzahlAufrufe;
@@ -99,7 +103,8 @@ public class GuiStatistik extends JPanel {
 	/**
 	 * Diese Methode setzt alle JLabels neu aufgrund der Datenfelder
 	 */
-	public void anzeigeAktualisieren() {
+	public void anzeigeAktualisieren()
+	{
 		titel.setFont(new Font(null, Font.BOLD, 21));
 		titel.setForeground(Color.ORANGE);
 		karten.setFont(new Font(null, Font.BOLD, 16));
@@ -143,4 +148,435 @@ public class GuiStatistik extends JPanel {
 		add(karten);
 		repaint();
 	}
+
+	/**
+	 * @return the anzahlKarten
+	 */
+	public String getAnzahlKarten()
+	{
+		return anzahlKarten;
+	}
+
+	/**
+	 * @param anzahlKarten
+	 *            the anzahlKarten to set
+	 */
+	public void setAnzahlKarten(String anzahlKarten)
+	{
+		this.anzahlKarten = anzahlKarten;
+	}
+
+	/**
+	 * @return the anzahlAufrufe
+	 */
+	public String getAnzahlAufrufe()
+	{
+		return anzahlAufrufe;
+	}
+
+	/**
+	 * @param anzahlAufrufe
+	 *            the anzahlAufrufe to set
+	 */
+	public void setAnzahlAufrufe(String anzahlAufrufe)
+	{
+		this.anzahlAufrufe = anzahlAufrufe;
+	}
+
+	/**
+	 * @return the anzahlKorrekt
+	 */
+	public String getAnzahlKorrekt()
+	{
+		return anzahlKorrekt;
+	}
+
+	/**
+	 * @param anzahlKorrekt
+	 *            the anzahlKorrekt to set
+	 */
+	public void setAnzahlKorrekt(String anzahlKorrekt)
+	{
+		this.anzahlKorrekt = anzahlKorrekt;
+	}
+
+	/**
+	 * @return the datumErstellt
+	 */
+	public String getDatumErstellt()
+	{
+		return datumErstellt;
+	}
+
+	/**
+	 * @param datumErstellt
+	 *            the datumErstellt to set
+	 */
+	public void setDatumErstellt(String datumErstellt)
+	{
+		this.datumErstellt = datumErstellt;
+	}
+
+	/**
+	 * @return the zuletztBearbeitet
+	 */
+	public String getZuletztBearbeitet()
+	{
+		return zuletztBearbeitet;
+	}
+
+	/**
+	 * @param zuletztBearbeitet
+	 *            the zuletztBearbeitet to set
+	 */
+	public void setZuletztBearbeitet(String zuletztBearbeitet)
+	{
+		this.zuletztBearbeitet = zuletztBearbeitet;
+	}
+
+	/**
+	 * @return the karten
+	 */
+	public JLabel getKarten()
+	{
+		return karten;
+	}
+
+	/**
+	 * @param karten
+	 *            the karten to set
+	 */
+	public void setKarten(JLabel karten)
+	{
+		this.karten = karten;
+	}
+
+	/**
+	 * @return the aufrufe
+	 */
+	public JLabel getAufrufe()
+	{
+		return aufrufe;
+	}
+
+	/**
+	 * @param aufrufe
+	 *            the aufrufe to set
+	 */
+	public void setAufrufe(JLabel aufrufe)
+	{
+		this.aufrufe = aufrufe;
+	}
+
+	/**
+	 * @return the korrekt
+	 */
+	public JLabel getKorrekt()
+	{
+		return korrekt;
+	}
+
+	/**
+	 * @param korrekt
+	 *            the korrekt to set
+	 */
+	public void setKorrekt(JLabel korrekt)
+	{
+		this.korrekt = korrekt;
+	}
+
+	/**
+	 * @return the erstellt
+	 */
+	public JLabel getErstellt()
+	{
+		return erstellt;
+	}
+
+	/**
+	 * @param erstellt
+	 *            the erstellt to set
+	 */
+	public void setErstellt(JLabel erstellt)
+	{
+		this.erstellt = erstellt;
+	}
+
+	/**
+	 * @return the erstelltWert
+	 */
+	public JLabel getErstelltWert()
+	{
+		return erstelltWert;
+	}
+
+	/**
+	 * @param erstelltWert
+	 *            the erstelltWert to set
+	 */
+	public void setErstelltWert(JLabel erstelltWert)
+	{
+		this.erstelltWert = erstelltWert;
+	}
+
+	/**
+	 * @return the bearbeitet
+	 */
+	public JLabel getBearbeitet()
+	{
+		return bearbeitet;
+	}
+
+	/**
+	 * @param bearbeitet
+	 *            the bearbeitet to set
+	 */
+	public void setBearbeitet(JLabel bearbeitet)
+	{
+		this.bearbeitet = bearbeitet;
+	}
+
+	/**
+	 * @return the bearbeitetWert
+	 */
+	public JLabel getBearbeitetWert()
+	{
+		return bearbeitetWert;
+	}
+
+	/**
+	 * @param bearbeitetWert
+	 *            the bearbeitetWert to set
+	 */
+	public void setBearbeitetWert(JLabel bearbeitetWert)
+	{
+		this.bearbeitetWert = bearbeitetWert;
+	}
+
+	/**
+	 * @return the titel
+	 */
+	public JLabel getTitel()
+	{
+		return titel;
+	}
+
+	/**
+	 * @param titel
+	 *            the titel to set
+	 */
+	public void setTitel(JLabel titel)
+	{
+		this.titel = titel;
+	}
+
+	/**
+	 * @return the zwischenzeilen
+	 */
+	public ArrayList<JLabel> getZwischenzeilen()
+	{
+		return zwischenzeilen;
+	}
+
+	/**
+	 * @param zwischenzeilen
+	 *            the zwischenzeilen to set
+	 */
+	public void setZwischenzeilen(ArrayList<JLabel> zwischenzeilen)
+	{
+		this.zwischenzeilen = zwischenzeilen;
+	}
+
+	/**
+	 * @return the sc
+	 */
+	public SprachController getSc()
+	{
+		return sc;
+	}
+
+	/**
+	 * @param sc
+	 *            the sc to set
+	 */
+	public void setSc(SprachController sc)
+	{
+		this.sc = sc;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid()
+	{
+		return serialVersionUID;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "GuiStatistik [anzahlKarten=" + anzahlKarten
+				+ ", anzahlAufrufe=" + anzahlAufrufe + ", anzahlKorrekt="
+				+ anzahlKorrekt + ", datumErstellt=" + datumErstellt
+				+ ", zuletztBearbeitet=" + zuletztBearbeitet + ", karten="
+				+ karten + ", aufrufe=" + aufrufe + ", korrekt=" + korrekt
+				+ ", erstellt=" + erstellt + ", erstelltWert=" + erstelltWert
+				+ ", bearbeitet=" + bearbeitet + ", bearbeitetWert="
+				+ bearbeitetWert + ", titel=" + titel + ", zwischenzeilen="
+				+ zwischenzeilen + ", sc=" + sc + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((anzahlAufrufe == null) ? 0 : anzahlAufrufe.hashCode());
+		result = prime * result
+				+ ((anzahlKarten == null) ? 0 : anzahlKarten.hashCode());
+		result = prime * result
+				+ ((anzahlKorrekt == null) ? 0 : anzahlKorrekt.hashCode());
+		result = prime * result + ((aufrufe == null) ? 0 : aufrufe.hashCode());
+		result = prime * result
+				+ ((bearbeitet == null) ? 0 : bearbeitet.hashCode());
+		result = prime * result
+				+ ((bearbeitetWert == null) ? 0 : bearbeitetWert.hashCode());
+		result = prime * result
+				+ ((datumErstellt == null) ? 0 : datumErstellt.hashCode());
+		result = prime * result
+				+ ((erstellt == null) ? 0 : erstellt.hashCode());
+		result = prime * result
+				+ ((erstelltWert == null) ? 0 : erstelltWert.hashCode());
+		result = prime * result + ((karten == null) ? 0 : karten.hashCode());
+		result = prime * result + ((korrekt == null) ? 0 : korrekt.hashCode());
+		result = prime * result + ((sc == null) ? 0 : sc.hashCode());
+		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
+		result = prime
+				* result
+				+ ((zuletztBearbeitet == null) ? 0 : zuletztBearbeitet
+						.hashCode());
+		result = prime * result
+				+ ((zwischenzeilen == null) ? 0 : zwischenzeilen.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GuiStatistik other = (GuiStatistik) obj;
+		if (anzahlAufrufe == null)
+		{
+			if (other.anzahlAufrufe != null)
+				return false;
+		} else if (!anzahlAufrufe.equals(other.anzahlAufrufe))
+			return false;
+		if (anzahlKarten == null)
+		{
+			if (other.anzahlKarten != null)
+				return false;
+		} else if (!anzahlKarten.equals(other.anzahlKarten))
+			return false;
+		if (anzahlKorrekt == null)
+		{
+			if (other.anzahlKorrekt != null)
+				return false;
+		} else if (!anzahlKorrekt.equals(other.anzahlKorrekt))
+			return false;
+		if (aufrufe == null)
+		{
+			if (other.aufrufe != null)
+				return false;
+		} else if (!aufrufe.equals(other.aufrufe))
+			return false;
+		if (bearbeitet == null)
+		{
+			if (other.bearbeitet != null)
+				return false;
+		} else if (!bearbeitet.equals(other.bearbeitet))
+			return false;
+		if (bearbeitetWert == null)
+		{
+			if (other.bearbeitetWert != null)
+				return false;
+		} else if (!bearbeitetWert.equals(other.bearbeitetWert))
+			return false;
+		if (datumErstellt == null)
+		{
+			if (other.datumErstellt != null)
+				return false;
+		} else if (!datumErstellt.equals(other.datumErstellt))
+			return false;
+		if (erstellt == null)
+		{
+			if (other.erstellt != null)
+				return false;
+		} else if (!erstellt.equals(other.erstellt))
+			return false;
+		if (erstelltWert == null)
+		{
+			if (other.erstelltWert != null)
+				return false;
+		} else if (!erstelltWert.equals(other.erstelltWert))
+			return false;
+		if (karten == null)
+		{
+			if (other.karten != null)
+				return false;
+		} else if (!karten.equals(other.karten))
+			return false;
+		if (korrekt == null)
+		{
+			if (other.korrekt != null)
+				return false;
+		} else if (!korrekt.equals(other.korrekt))
+			return false;
+		if (sc == null)
+		{
+			if (other.sc != null)
+				return false;
+		} else if (!sc.equals(other.sc))
+			return false;
+		if (titel == null)
+		{
+			if (other.titel != null)
+				return false;
+		} else if (!titel.equals(other.titel))
+			return false;
+		if (zuletztBearbeitet == null)
+		{
+			if (other.zuletztBearbeitet != null)
+				return false;
+		} else if (!zuletztBearbeitet.equals(other.zuletztBearbeitet))
+			return false;
+		if (zwischenzeilen == null)
+		{
+			if (other.zwischenzeilen != null)
+				return false;
+		} else if (!zwischenzeilen.equals(other.zwischenzeilen))
+			return false;
+		return true;
+	}
+
 }

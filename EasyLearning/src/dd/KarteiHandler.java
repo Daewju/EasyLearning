@@ -16,8 +16,8 @@ import mk.Kartei;
  * Diese Klasse wird zum lesen und schreiben von Karteien in eine CSV-Datei
  * verwendet. Jede CSV-Datei symbolisiert eine Kartei. Der Standard-Pfad der
  * Karteien liegt im Ordner 'Karteien' neben der JAR-Datei. Die Klasse bietet
- * eine statische Methode um vor Erzeugung eines Objektes zu prï¿½fen welche
- * CSV-Dateien bereits vorhanden sind. Alle mï¿½glichen Exceptionbehandlungen
+ * eine statische Methode um vor Erzeugung eines Objektes zu prüfen welche
+ * CSV-Dateien bereits vorhanden sind. Alle möglichen Exceptionbehandlungen
  * werden an den Benutzer dieser Klasse weitergereicht.
  * 
  * @author Damjan Djuranovic
@@ -39,7 +39,6 @@ public class KarteiHandler
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
-	 * @throws IOException
 	 */
 	public KarteiHandler(String karteiPfad)
 	{
@@ -113,11 +112,11 @@ public class KarteiHandler
 	 * CSV-Datei zu laden.
 	 * 
 	 * @param fortschritt
-	 *            "True" lï¿½sst den gesamten Fortschritt des Lernenden
-	 *            importieren. "False" dagegen ï¿½bernimmt nur die Wortpaare und
+	 *            "True" lässt den gesamten Fortschritt des Lernenden
+	 *            importieren. "False" dagegen übernimmt nur die Wortpaare und
 	 *            setzt das Datum und die Uhrzeit auf die aktuelle Zeit.
 	 *            Ausserdem werden dann alle Karten in das erste Fach gelegt.
-	 * @return Es wird eine Kartei zurï¿½ckgegeben.
+	 * @return Es wird eine Kartei zurückgegeben.
 	 * @throws ParseException
 	 * @throws IOException
 	 */
@@ -183,8 +182,8 @@ public class KarteiHandler
 	 * @param kartei
 	 *            Hier wird eine Kartei als Parameter erwartet.
 	 * @param fortschritt
-	 *            "True" lï¿½sst den gesamten Fortschritt des Lernenden in die
-	 *            CSV-Datei schreiben. "False" dagegen ï¿½bernimmt nur die
+	 *            "True" lässt den gesamten Fortschritt des Lernenden in die
+	 *            CSV-Datei schreiben. "False" dagegen übernimmt nur die
 	 *            Wortpaare und setzt das Datum und die Uhrzeit auf die aktuelle
 	 *            Zeit. Ausserdem werden Alle Karten in das erste Fach gelegt.
 	 * @throws ParseException
@@ -213,30 +212,37 @@ public class KarteiHandler
 		{
 			for (Karte k : fach)
 			{
-				String[] karteS = new String[7];
-				karteS[0] = k.getWort();
-				karteS[1] = k.getVokabel();
-
-				if (fortschritt)
+				if (k != null)
 				{
-					karteS[2] = Integer.toString(k.getAufrufe());
-					karteS[3] = Integer.toString(k.getRichtigB());
-					karteS[4] = Integer.toString(k.getFach());
-					karteS[5] = datumFormat.format(k.getErstellt());
-					karteS[6] = datumFormat.format(k.getBearbeitet());
-				}
+					if (!k.getWort().equals("null")
+							|| !k.getVokabel().equals("null"))
+					{
+						String[] karteS = new String[7];
+						karteS[0] = k.getWort();
+						karteS[1] = k.getVokabel();
 
-				else
-				{
-					Date zeit = new Date();
-					karteS[2] = "0";
-					karteS[3] = "0";
-					karteS[4] = "1";
-					karteS[5] = datumFormat.format(zeit);
-					karteS[6] = datumFormat.format(zeit);
-				}
+						if (fortschritt)
+						{
+							karteS[2] = Integer.toString(k.getAufrufe());
+							karteS[3] = Integer.toString(k.getRichtigB());
+							karteS[4] = Integer.toString(k.getFach());
+							karteS[5] = datumFormat.format(k.getErstellt());
+							karteS[6] = datumFormat.format(k.getBearbeitet());
+						}
 
-				karten.add(karteS);
+						else
+						{
+							Date zeit = new Date();
+							karteS[2] = "0";
+							karteS[3] = "0";
+							karteS[4] = "1";
+							karteS[5] = datumFormat.format(zeit);
+							karteS[6] = datumFormat.format(zeit);
+						}
+
+						karten.add(karteS);
+					}
+				}
 			}
 		}
 		cw.schreibeKarten(karten);
@@ -244,11 +250,11 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode lï¿½scht eine Datei
+	 * Diese Methode löscht eine Datei
 	 * 
 	 * @param pfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String.
-	 * @return wenn gelï¿½scht => true, wenn nicht => false
+	 * @return wenn gelöscht : true, wenn nicht : false
 	 * @throws IOException
 	 */
 	public boolean loescheKartei(String pfad) throws IOException
@@ -269,14 +275,14 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode kann benutzt werden um zu prï¿½fe ob sich bereits Karteien
-	 * im CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist
-	 * statisch und benoetigt keine Instatnz von KarteiHandler.
+	 * Diese Methode kann benutzt werden um zu prüfe ob sich bereits Karteien im
+	 * CSV-Format im Unterordner 'Karteien' befinden. Die Methode ist statisch
+	 * und benoetigt keine Instatnz von KarteiHandler.
 	 * 
-	 * @return Gibt eine ArrayList mit den Pfaden zurï¿½ck, wahlweise der
+	 * @return Gibt eine ArrayList mit den Pfaden zurück, wahlweise der
 	 *         komplette Pfad oder nur der Name der Kartei.
 	 * @param nurKarteiName
-	 *            "False" gibt den kompletten Pfad zurï¿½ck, "True" dagegen nur
+	 *            "False" gibt den kompletten Pfad zurück, "True" dagegen nur
 	 *            den Titel der Kartei, z.b. "deutsch-englisch".
 	 */
 	public static ArrayList<String> leseExistierendeKarteiPfade(
@@ -304,7 +310,7 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um den Pfad der aktuell liegenden JAR
-	 * herausfinden zu kï¿½nnen. Die Methode ist statisch und benoetigt keine
+	 * herausfinden zu können. Die Methode ist statisch und benoetigt keine
 	 * Instanz von KarteiHandler.
 	 * 
 	 * @return Komplett-Pfad der JAR auf dem Filesystem.
@@ -318,12 +324,12 @@ public class KarteiHandler
 	}
 
 	/**
-	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu
-	 * ï¿½berprï¿½fen ob eine solche CSV-Datei bereits vorhanden ist. Wï¿½re
-	 * dies nï¿½mlich so, wï¿½rde sie dann ï¿½berschrieben werden! Falls eine
-	 * gleichnamige Kartei erstellt wird, sollte dies ï¿½berprï¿½ft werden.
+	 * Diese Methode sollte vor jedem Schreiben benutzt werden um zu überprüfen
+	 * ob eine solche CSV-Datei bereits vorhanden ist. Währe dies nämlich so,
+	 * würde sie dann überschrieben werden! Falls eine gleichnamige Kartei
+	 * erstellt wird, sollte dies überprüft werden.
 	 * 
-	 * @return "True" fï¿½r bereites-vorhanden, "False" fï¿½r nicht-vorhanden.
+	 * @return "True" für bereites-vorhanden, "False" für nicht-vorhanden.
 	 */
 	public boolean dateiBereitsVorhanden()
 	{
@@ -341,7 +347,7 @@ public class KarteiHandler
 
 	/**
 	 * Diese Methode kann benutzt werden um den Arbeitspfad dens KarteiHandlers
-	 * zu ï¿½ndern. z.B. nachdem der Lernende die Kartei wechselt.
+	 * zu ändern. z.B. nachdem der Lernende die Kartei wechselt.
 	 * 
 	 * @param karteiPfad
 	 *            Erwartet wird ein kompletter Pfad des Datentyps String.

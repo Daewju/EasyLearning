@@ -17,12 +17,11 @@ import java.util.Random;
 import sp.GuiDialog;
 import sp.GuiMain;
 import sp.GuiSchnittstelle;
-import sp.GuiSmileyStatistik;
 import sp.GuiStatistik;
 
 /**
  * Diese Klasse koordiniert alle Aktionen und Mutationen welche an den 
- * Karteien,Karten & FÃ¤chern wÃ¤hrend der Laufzeit vorgenommen werden.
+ * Karteien,Karten und Fächern während der Laufzeit vorgenommen werden.
  * Dazu gehoert auch die Abwicklung aller Userinputs und Outputs.
  * Wobei die Logik auf dem System von Sebastian Leitner aufbaut.
  * 
@@ -102,8 +101,8 @@ public class Handler implements GuiSchnittstelle{
 	 *	Ueberprueft bei erster Ausfuehrung die Worteingabe des Users und fuehrt
 	 *	dementsprechend weitere Schritte durch. Bei zweiter Ausfuehrung (ueberprueft = true)
 	 *	wird die naechste Karte ausgegeben.
-	 *	Wort richtig >positiven Smiley anzeigen > Karte in hoeheres Fach verschieben.
-	 *	Wort falsch >negativen Smiley anzeigen > Karte in Fach 1 verschieben.
+	 *	Wort richtig : positiven Smiley anzeigen : Karte in hoeheres Fach verschieben.
+	 *	Wort falsch : negativen Smiley anzeigen : Karte in Fach 1 verschieben.
 	 *	
 	 *	@param benutzerEingabe	Eingabe des Users als String
 	 */
@@ -416,7 +415,7 @@ public class Handler implements GuiSchnittstelle{
 	/**
 	 * Setzt den Wert des Datenfelds ueberprueft auf den uebergebenen Wert.
 	 * 
-	 * @param	status	true>Karte bereits ueberprueft/ false>Karte nicht geprueft
+	 * @param	status	true : Karte bereits ueberprueft, false : Karte nicht geprueft
 	 */
 	public void setUeberprueft(boolean status){
 		this.ueberprueft = status;

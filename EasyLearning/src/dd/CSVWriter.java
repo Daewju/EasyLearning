@@ -132,7 +132,7 @@ public class CSVWriter
 		{
 			this.fileWriter.close();
 		}
-		if(this.bufferedWriter != null)
+		if (this.bufferedWriter != null)
 		{
 			this.bufferedWriter.close();
 		}

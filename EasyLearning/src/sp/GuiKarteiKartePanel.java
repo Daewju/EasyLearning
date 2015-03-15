@@ -12,13 +12,14 @@ import javax.swing.JLayeredPane;
 import mk.Handler;
 
 /**
- * Diese Klasse erzeugt auf der guiMain die Karte und F√§cher
+ * Diese Klasse erzeugt auf der guiMain die Karte und F‰cher
  * 
- * @author Sajeevan & Damjan
+ * @author Sajeevan und Damjan
  * @version 1.3
  *
  */
-public class GuiKarteiKartePanel {
+public class GuiKarteiKartePanel
+{
 	private GuiMain gui;
 	private Handler handler;
 	private JLayeredPane panel;
@@ -41,7 +42,8 @@ public class GuiKarteiKartePanel {
 	 * @param backgroundColor
 	 *            die Farbe der Karte
 	 */
-	public GuiKarteiKartePanel(GuiMain guiMain, Color backgroundColor) {
+	public GuiKarteiKartePanel(GuiMain guiMain, Color backgroundColor)
+	{
 		gui = guiMain;
 		handler = gui.getHandler();
 		panel = new JLayeredPane();
@@ -82,14 +84,16 @@ public class GuiKarteiKartePanel {
 	}
 
 	/**
-	 * Diese Methode setzt ein String auf die Karte und ver√§ndert je nach
-	 * Zeichenl√§nge die Schriftgr√∂sse automatisch
+	 * Diese Methode setzt ein String auf die Karte und ver‰ndert je nach
+	 * Zeichenl‰nge die Schriftgrˆsse automatisch
 	 * 
 	 * @param wort
 	 *            erwartet den Text als String
 	 */
-	public void setzeText(String wort) {
-		if (wort != null) {
+	public void setzeText(String wort)
+	{
+		if (wort != null)
+		{
 			int schriftgroesse = 55 - (wort.length());
 			this.wort.setText(wort);
 			this.wort.setHorizontalAlignment(JLabel.CENTER);
@@ -103,12 +107,14 @@ public class GuiKarteiKartePanel {
 	}
 
 	/**
-	 * Diese Methode erzeugt den Hintergrund und die Beschriftung der F√§cher
+	 * Diese Methode erzeugt den Hintergrund und die Beschriftung der F‰cher
 	 */
-	public void setzeFachBez() {
+	public void setzeFachBez()
+	{
 		int i = 1;
 		int startPosX = 67;
-		for (JLabel fach : faecherBez) {
+		for (JLabel fach : faecherBez)
+		{
 			fach.setText("" + i);
 			fach.setSize(60, 50);
 			fach.setFont(new Font(null, Font.BOLD, 30));
@@ -127,12 +133,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach
 	 *            erwartet wird ein fach des Objekttyps JLabel
 	 */
-	public void setzeFachAktiv(JLabel fach) {
-		for (JLabel faechlein : faecherBez) {
-			if (!faechlein.equals(fach)) {
+	public void setzeFachAktiv(JLabel fach)
+	{
+		for (JLabel faechlein : faecherBez)
+		{
+			if (!faechlein.equals(fach))
+			{
 				faechlein.setBackground(Color.DARK_GRAY);
 				faechlein.setForeground(Color.ORANGE);
-			} else {
+			} else
+			{
 				fach.setBackground(backgroundColor);
 				fach.setForeground(Color.DARK_GRAY);
 			}
@@ -140,17 +150,20 @@ public class GuiKarteiKartePanel {
 	}
 
 	/**
-	 * Diese Methode √§ndert die Farbe der Karte inkl. der Fachauswahl
+	 * Diese Methode ‰ndert die Farbe der Karte inkl. der Fachauswahl
 	 * 
 	 * @param color
 	 *            Ewartet ein Color Objekt
 	 */
-	public void setKartenFarbe(Color color) {
+	public void setKartenFarbe(Color color)
+	{
 		this.backgroundColor = color;
 		karte.setBackground(color);
 		wort.setBackground(color);
-		for (JLabel faechlein : faecherBez) {
-			if (faechlein.getBackground() != Color.DARK_GRAY) {
+		for (JLabel faechlein : faecherBez)
+		{
+			if (faechlein.getBackground() != Color.DARK_GRAY)
+			{
 				faechlein.setBackground(color);
 			}
 		}
@@ -159,7 +172,8 @@ public class GuiKarteiKartePanel {
 	/**
 	 * @return the gui
 	 */
-	public GuiMain getGui() {
+	public GuiMain getGui()
+	{
 		return gui;
 	}
 
@@ -167,14 +181,16 @@ public class GuiKarteiKartePanel {
 	 * @param gui
 	 *            the gui to set
 	 */
-	public void setGui(GuiMain gui) {
+	public void setGui(GuiMain gui)
+	{
 		this.gui = gui;
 	}
 
 	/**
 	 * @return the handler
 	 */
-	public Handler getHandler() {
+	public Handler getHandler()
+	{
 		return handler;
 	}
 
@@ -182,14 +198,16 @@ public class GuiKarteiKartePanel {
 	 * @param handler
 	 *            the handler to set
 	 */
-	public void setHandler(Handler handler) {
+	public void setHandler(Handler handler)
+	{
 		this.handler = handler;
 	}
 
 	/**
 	 * @return the panel
 	 */
-	public JLayeredPane getPanel() {
+	public JLayeredPane getPanel()
+	{
 		return panel;
 	}
 
@@ -197,14 +215,16 @@ public class GuiKarteiKartePanel {
 	 * @param panel
 	 *            the panel to set
 	 */
-	public void setPanel(JLayeredPane panel) {
+	public void setPanel(JLayeredPane panel)
+	{
 		this.panel = panel;
 	}
 
 	/**
 	 * @return the karte
 	 */
-	public KarteGui getKarte() {
+	public KarteGui getKarte()
+	{
 		return karte;
 	}
 
@@ -212,14 +232,16 @@ public class GuiKarteiKartePanel {
 	 * @param karte
 	 *            the karte to set
 	 */
-	public void setKarte(KarteGui karte) {
+	public void setKarte(KarteGui karte)
+	{
 		this.karte = karte;
 	}
 
 	/**
 	 * @return the wort
 	 */
-	public JLabel getWort() {
+	public JLabel getWort()
+	{
 		return wort;
 	}
 
@@ -227,14 +249,16 @@ public class GuiKarteiKartePanel {
 	 * @param wort
 	 *            the wort to set
 	 */
-	public void setWort(JLabel wort) {
+	public void setWort(JLabel wort)
+	{
 		this.wort = wort;
 	}
 
 	/**
 	 * @return the faecherBez
 	 */
-	public ArrayList<JLabel> getFaecherBez() {
+	public ArrayList<JLabel> getFaecherBez()
+	{
 		return faecherBez;
 	}
 
@@ -242,14 +266,16 @@ public class GuiKarteiKartePanel {
 	 * @param faecherBez
 	 *            the faecherBez to set
 	 */
-	public void setFaecherBez(ArrayList<JLabel> faecherBez) {
+	public void setFaecherBez(ArrayList<JLabel> faecherBez)
+	{
 		this.faecherBez = faecherBez;
 	}
 
 	/**
 	 * @return the fach1Bez
 	 */
-	public JLabel getFach1Bez() {
+	public JLabel getFach1Bez()
+	{
 		return fach1Bez;
 	}
 
@@ -257,14 +283,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach1Bez
 	 *            the fach1Bez to set
 	 */
-	public void setFach1Bez(JLabel fach1Bez) {
+	public void setFach1Bez(JLabel fach1Bez)
+	{
 		this.fach1Bez = fach1Bez;
 	}
 
 	/**
 	 * @return the fach2Bez
 	 */
-	public JLabel getFach2Bez() {
+	public JLabel getFach2Bez()
+	{
 		return fach2Bez;
 	}
 
@@ -272,14 +300,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach2Bez
 	 *            the fach2Bez to set
 	 */
-	public void setFach2Bez(JLabel fach2Bez) {
+	public void setFach2Bez(JLabel fach2Bez)
+	{
 		this.fach2Bez = fach2Bez;
 	}
 
 	/**
 	 * @return the fach3Bez
 	 */
-	public JLabel getFach3Bez() {
+	public JLabel getFach3Bez()
+	{
 		return fach3Bez;
 	}
 
@@ -287,14 +317,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach3Bez
 	 *            the fach3Bez to set
 	 */
-	public void setFach3Bez(JLabel fach3Bez) {
+	public void setFach3Bez(JLabel fach3Bez)
+	{
 		this.fach3Bez = fach3Bez;
 	}
 
 	/**
 	 * @return the fach4Bez
 	 */
-	public JLabel getFach4Bez() {
+	public JLabel getFach4Bez()
+	{
 		return fach4Bez;
 	}
 
@@ -302,14 +334,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach4Bez
 	 *            the fach4Bez to set
 	 */
-	public void setFach4Bez(JLabel fach4Bez) {
+	public void setFach4Bez(JLabel fach4Bez)
+	{
 		this.fach4Bez = fach4Bez;
 	}
 
 	/**
 	 * @return the fach5Bez
 	 */
-	public JLabel getFach5Bez() {
+	public JLabel getFach5Bez()
+	{
 		return fach5Bez;
 	}
 
@@ -317,14 +351,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach5Bez
 	 *            the fach5Bez to set
 	 */
-	public void setFach5Bez(JLabel fach5Bez) {
+	public void setFach5Bez(JLabel fach5Bez)
+	{
 		this.fach5Bez = fach5Bez;
 	}
 
 	/**
 	 * @return the fach6Bez
 	 */
-	public JLabel getFach6Bez() {
+	public JLabel getFach6Bez()
+	{
 		return fach6Bez;
 	}
 
@@ -332,14 +368,16 @@ public class GuiKarteiKartePanel {
 	 * @param fach6Bez
 	 *            the fach6Bez to set
 	 */
-	public void setFach6Bez(JLabel fach6Bez) {
+	public void setFach6Bez(JLabel fach6Bez)
+	{
 		this.fach6Bez = fach6Bez;
 	}
 
 	/**
 	 * @return the backgroundColor
 	 */
-	public Color getBackgroundColor() {
+	public Color getBackgroundColor()
+	{
 		return backgroundColor;
 	}
 
@@ -349,7 +387,8 @@ public class GuiKarteiKartePanel {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "GuiKarteiKartePanel [gui=" + gui + ", handler=" + handler
 				+ ", panel=" + panel + ", karte=" + karte + ", wort=" + wort
 				+ ", faecherBez=" + faecherBez + ", fach1Bez=" + fach1Bez
@@ -365,7 +404,8 @@ public class GuiKarteiKartePanel {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
@@ -398,7 +438,8 @@ public class GuiKarteiKartePanel {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -406,67 +447,80 @@ public class GuiKarteiKartePanel {
 		if (getClass() != obj.getClass())
 			return false;
 		GuiKarteiKartePanel other = (GuiKarteiKartePanel) obj;
-		if (backgroundColor == null) {
+		if (backgroundColor == null)
+		{
 			if (other.backgroundColor != null)
 				return false;
 		} else if (!backgroundColor.equals(other.backgroundColor))
 			return false;
-		if (fach1Bez == null) {
+		if (fach1Bez == null)
+		{
 			if (other.fach1Bez != null)
 				return false;
 		} else if (!fach1Bez.equals(other.fach1Bez))
 			return false;
-		if (fach2Bez == null) {
+		if (fach2Bez == null)
+		{
 			if (other.fach2Bez != null)
 				return false;
 		} else if (!fach2Bez.equals(other.fach2Bez))
 			return false;
-		if (fach3Bez == null) {
+		if (fach3Bez == null)
+		{
 			if (other.fach3Bez != null)
 				return false;
 		} else if (!fach3Bez.equals(other.fach3Bez))
 			return false;
-		if (fach4Bez == null) {
+		if (fach4Bez == null)
+		{
 			if (other.fach4Bez != null)
 				return false;
 		} else if (!fach4Bez.equals(other.fach4Bez))
 			return false;
-		if (fach5Bez == null) {
+		if (fach5Bez == null)
+		{
 			if (other.fach5Bez != null)
 				return false;
 		} else if (!fach5Bez.equals(other.fach5Bez))
 			return false;
-		if (fach6Bez == null) {
+		if (fach6Bez == null)
+		{
 			if (other.fach6Bez != null)
 				return false;
 		} else if (!fach6Bez.equals(other.fach6Bez))
 			return false;
-		if (faecherBez == null) {
+		if (faecherBez == null)
+		{
 			if (other.faecherBez != null)
 				return false;
 		} else if (!faecherBez.equals(other.faecherBez))
 			return false;
-		if (gui == null) {
+		if (gui == null)
+		{
 			if (other.gui != null)
 				return false;
 		} else if (!gui.equals(other.gui))
 			return false;
-		if (handler == null) {
+		if (handler == null)
+		{
 			if (other.handler != null)
 				return false;
 		} else if (!handler.equals(other.handler))
 			return false;
-		if (karte == null) {
+		if (karte == null)
+		{
 			if (other.karte != null)
 				return false;
 		} else if (!karte.equals(other.karte))
 			return false;
-		if (panel == null) {
+		if (panel == null)
+		{
 			if (other.panel != null)
 				return false;
 		} else if (!panel.equals(other.panel))
 			return false;
-		if (wort == null) {
+		if (wort == null)
+		{
 			if (other.wort != null)
 				return false;
 		} else if (!wort.equals(other.wort))
@@ -474,32 +528,38 @@ public class GuiKarteiKartePanel {
 		return true;
 	}
 
-	class MyMouseListener implements MouseListener {
+	class MyMouseListener implements MouseListener
+	{
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(MouseEvent e)
+		{
 			JLabel k = (JLabel) e.getSource();
 			setzeFachAktiv(k);
 			handler.eventGeheZuFach(Integer.parseInt(k.getText()));
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
+		public void mouseEntered(MouseEvent e)
+		{
 
 		}
 
 		@Override
-		public void mouseExited(MouseEvent e) {
+		public void mouseExited(MouseEvent e)
+		{
 
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(MouseEvent e)
+		{
 
 		}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void mouseReleased(MouseEvent e)
+		{
 
 		}
 	}
