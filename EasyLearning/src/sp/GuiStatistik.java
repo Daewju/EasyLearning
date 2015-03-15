@@ -34,6 +34,7 @@ public class GuiStatistik extends JPanel {
 	public GuiStatistik(SprachController sc){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(200,0));
+		this.sc = sc;
 		anzahlKarten = "0";
 		anzahlAufrufe = "0";
 		anzahlKorrekt = "0";
@@ -46,8 +47,7 @@ public class GuiStatistik extends JPanel {
 		erstelltWert = new JLabel();
 		bearbeitet = new JLabel();
 		bearbeitetWert = new JLabel();
-		titel = new JLabel("Statistik");
-		this.sc = sc;
+		titel = new JLabel();
 		zwischenzeilen = new ArrayList<>();
 		for(int i=0; i<5; i++)
 		{
@@ -76,22 +76,23 @@ public class GuiStatistik extends JPanel {
 		karten.setText(sc.getSprache("Karten im Fach", GuiMain.SPRACHCODE) +": " + anzahlKarten);
 		aufrufe.setFont(new Font(null, Font.BOLD, 16));
 		aufrufe.setForeground(Color.CYAN);
-		aufrufe.setText("Aufrufe: " + anzahlAufrufe);
+		aufrufe.setText(sc.getSprache("Aufrufe", GuiMain.SPRACHCODE) +": " + anzahlAufrufe);
 		korrekt.setFont(new Font(null, Font.BOLD, 16));
 		korrekt.setForeground(Color.CYAN);
-		korrekt.setText("Korrekt: " + anzahlKorrekt);
+		korrekt.setText(sc.getSprache("Korrekt", GuiMain.SPRACHCODE) +": " + anzahlKorrekt);
 		erstellt.setFont(new Font(null, Font.BOLD, 16));
 		erstellt.setForeground(Color.CYAN);
-		erstellt.setText("Erstellt: ");
+		erstellt.setText(sc.getSprache("Erstellt", GuiMain.SPRACHCODE) +": ");
 		erstelltWert.setFont(new Font(null, Font.BOLD,16));
 		erstelltWert.setForeground(Color.CYAN);
 		erstelltWert.setText(datumErstellt);
 		bearbeitet.setFont(new Font(null, Font.BOLD, 16));
 		bearbeitet.setForeground(Color.CYAN);
-		bearbeitet.setText("Bearbeitet: ");
+		bearbeitet.setText(sc.getSprache("Bearbeitet", GuiMain.SPRACHCODE) +": ");
 		bearbeitetWert.setFont(new Font(null, Font.BOLD, 16));
 		bearbeitetWert.setForeground(Color.CYAN);
 		bearbeitetWert.setText(zuletztBearbeitet);
+		titel.setText(sc.getSprache("Statistik", GuiMain.SPRACHCODE));
 		add(titel);
 		add(zwischenzeilen.get(0));
 		add(aufrufe);

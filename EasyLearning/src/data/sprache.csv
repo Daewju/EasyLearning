@@ -1,1 +1,49 @@
-Datei;File;Fichier;FileNeu;New;Nouveau;NuovoÖffnen;Open;Ouverture;AperturaSpeichern;Save;Sauver;SalvareImportieren;Import;Importazione;ImportazioneExportieren;Export;Exportation;EsportazioneZurücksetzen;Reset;Remettre;ResetBeenden;Close;Près;CicinoSprache;Language;Langue;LinguaDeutsch;German;Allemand;TedescoEnglisch;English;Anglais;IngleseFranzösisch;French;Français;FranceseItalienisch;Italien;Italien;ItalianoInfo;Info;Infos;InformazioniVersion;Version;Version;VersioneÜber …;About …;Sur …;Su …Programmierer;Developer;Promoteur;SviluppatoreNeue Kartei erstellen;Create a New Database;Créer une nouvelle base;Creazione di un nuovo databaseGeben Sie die Sprachen ein;Enter the languages;Entrez les langues;Inserisci le lingueHauptsprache;Main language;Langue principale;Lingua principaleFremdsprache;Foreign language;Langue étrangère;Lingua stranieraFehler;Error;Erreur;ErroreDie Felder dürfen nicht leer sein;The fields can not be empty;Les champs ne peuvent pas être vide;I campi non possono essere vuotiJa;Yes;Qui;SìNein;No;Non;NoMöchten Sie den Lernfortschritt übernehmen?;Would you like to take the learning progress?;Voulez-vous prendre le progrès de l'apprentissage?;Ti piacerebbe prendere il processo di apprendimento?OK;OK;OK;OKAbbrechen;Abort;Avorter;AbortireWort;Word;Mot;ParolaVokabel;Foreign word;Mot étranger;Parola stranieraKarte bearbeiten;Edit card;Modifier la carte;Modifica schedaKarte hinzufügen;Add map;Ajouter Carte;Aggiungi MapKarte löschen;Delete card;Effacer la carte;Cancella mappaKartei löschen;Delete Database;Effacer la base;Cancella databaseSind Sie sicher?;Are you sure?;Êtes-vous sûr?;Sei sicuro?Kartei schon vorhanden!;File already exists!;Fichier existe déjà!;Il file esiste già!Löschen;Delete;Effacer;CancellaZurücksetzen;Reset;Remettre;ResetFach ist leer;Compartment is empty;Bac est vide;Tray è vuotoSchwerwiegender I/O-Fehler;Fatal I / O error;Erreur fatale I/O;Errore fatale I/OKarte bereits vorhanden;Card already exists;Carte existe d_jˆ;Mappa esiste giˆKeine Karte zum Loeschen vorhanden;No card available for deletion;Pas de carte disponible pour la suppression;Nessuna mappa disponibile per l'eliminazioneDatei ist noch in Verwendung oder nicht mehr vorhanden;File still in use or doesn't exist anymore;Le fichier encore en usage ou ne existe plus;Il file ancora in uso o non esiste piùKarten;Cards;cartes;Cards
+Datei;File;Fichier;File
+Neu;New;Nouveau;Nuovo
+Äffnen;Open;Ouverture;Apertura
+Speichern;Save;Sauver;Salvare
+Importieren;Import;Importazione;Importazione
+Exportieren;Export;Exportation;Esportazione
+Zur™cksetzen;Reset;Remettre;Reset
+Beenden;Close;Près;Cicino
+Sprache;Language;Langue;Lingua
+Deutsch;German;Allemand;Tedesco
+Englisch;English;Anglais;Inglese
+Franz_sisch;French;Français;Francese
+Italienisch;Italien;Italien;Italiano
+Info;Info;Infos;Informazioni
+Version;Version;Version;Versione
+æber €;About €;Sur €;Su €
+Programmierer;Developer;Promoteur;Sviluppatore
+Neue Kartei erstellen;Create a New Database;Cr_er une nouvelle base;Creazione di un nuovo database
+Geben Sie die Sprachen ein;Enter the languages;Entrez les langues;Inserisci le lingue
+Hauptsprache;Main language;Langue principale;Lingua principale
+Fremdsprache;Foreign language;Langue _trangère;Lingua straniera
+Fehler;Error;Erreur;Errore
+Die Felder d™rfen nicht leer sein;The fields can not be empty;Les champs ne peuvent pas être vide;I campi non possono essere vuoti
+Ja;Yes;Qui;S–
+Nein;No;Non;No
+M_chten Sie den Lernfortschritt ™bernehmen?;Would you like to take the learning progress?;Voulez-vous prendre le progrès de l'apprentissage?;Ti piacerebbe prendere il processo di apprendimento?
+OK;OK;OK;OK
+Abbrechen;Abort;Avorter;Abortire
+Wort;Word;Mot;Parola
+Vokabel;Foreign word;Mot _tranger;Parola straniera
+Karte bearbeiten;Edit card;Modifier la carte;Modifica scheda
+Karte hinzuf™gen;Add map;Ajouter Carte;Aggiungi Map
+Karte l_schen;Delete card;Effacer la carte;Cancella mappa
+Kartei l_schen;Delete Database;Effacer la base;Cancella database
+Sind Sie sicher?;Are you sure?;_tes-vous s_r?;Sei sicuro?
+Kartei schon vorhanden!;File already exists!;Fichier existe d_j_!;Il file esiste gi_!
+L_schen;Delete;Effacer;Cancella
+Zur™cksetzen;Reset;Remettre;Reset
+Fach ist leer;Compartment is empty;Bac est vide;Tray è vuoto
+Schwerwiegender I/O-Fehler;Fatal I / O error;Erreur fatale I/O;Errore fatale I/O
+Karte bereits vorhanden;Card already exists;Carte existe d_j_;Mappa esiste gi_
+Keine Karte zum Loeschen vorhanden;No card available for deletion;Pas de carte disponible pour la suppression;Nessuna mappa disponibile per l'eliminazione
+Datei ist noch in Verwendung oder nicht mehr vorhanden;File still in use or doesn't exist anymore;Le fichier encore en usage ou ne existe plus;Il file ancora in uso o non esiste più
+Karten im Fach;Cards in trade;Fente pour carte;Carte in commercio
+Bearbeitet;Edited;Edite;Modificato
+Erstellt;Created;Etabli;Creato
+Korrekt;Correctly;Correctement;Correttamente
+Aufrufe;Views;Vues;Visualizzazioni
+Statistik;Statistics;Statistiques;Statistica
