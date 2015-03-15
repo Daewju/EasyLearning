@@ -23,7 +23,7 @@ import sp.GuiStatistik;
 /**
  * Diese Klasse koordiniert alle Aktionen und Mutationen welche an den 
  * Karteien,Karten & Fächern während der Laufzeit vorgenommen werden.
- * Dazu gehört auch die Abwicklung aller Userinputs und Outputs.
+ * Dazu gehoert auch die Abwicklung aller Userinputs und Outputs.
  * Wobei die Logik auf dem System von Sebastian Leitner aufbaut.
  * 
  * 
@@ -206,7 +206,13 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 
-
+	/*
+	 * Wechselt das momentan verwendete Fach anahand der erwarteten
+	 * Fachnummer und sorgt dafuer dass aus dem neuen Fach eine Karte
+	 * angezeigt wird.
+	 * 
+	 * @param	fach	gewuenschtes Fach (1-6) als int
+	 */
 	@Override
 	public void eventGeheZuFach(int fach)
 	{
@@ -218,7 +224,14 @@ public class Handler implements GuiSchnittstelle{
 			this.gui.repaint();
 		}	
 	}
-
+	/**
+	 * Wird verwendet um eine Kartei in das Karteikartensystem zu importieren.
+	 * Pfad zur CSV Datei sowie die Information ob der Fortschritt uebernommen werden
+	 * soll werden erwartet.
+	 * 
+	 * @param	vollPfad	Vollstaendiger Pfad zur CSV Datei der Kartei als String
+	 * @param	fortschritt	boolean (true=Fortschritt wird uebernommen / false=Fortschritt wird zurueckgesetzt)
+	 */
 	@Override
 	public void eventDateiImportieren(String vollPfad, boolean fortschritt)
 	{
@@ -230,7 +243,6 @@ public class Handler implements GuiSchnittstelle{
 			//create Kartei file at default folder
 			this.kh = new KarteiHandler(this.usedKartei);
 			this.kh.dateiSchreiben(this.usedKartei, fortschritt);
-			
 			this.gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			eventGeheZuFach(1);
 			gui.versteckeAlleElemente(false);
@@ -239,45 +251,59 @@ public class Handler implements GuiSchnittstelle{
 			// TODO Auto-generated catch block
 			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
-		}
-		System.out.println(vollPfad + ", " + fortschritt);
-		
+		}		
 	}
-
+	/**
+	 *	Erzeugt eine Kopie (Export) der aktuell bearbeitenden Kartei als CSV Datei. 
+	 *	Auf Wunsch mit oder ohne Fortschritt.
+	 *
+	 *	@param	vollPfad	Pfad als String wo die CSV Datei der Kartei abgelegt werden soll
+	 *	@param	fortschritt	(true=Fortschritt wird uebernommen / false=Fortschritt wird zurueckgesetzt)
+	 */
 	@Override
 	public void eventDateiExportieren(String vollPfad, boolean fortschritt)
 	{
-		String temp = kh.getKarteiPfad();
-		kh.setKarteiPfad(vollPfad);
+		String temp = this.kh.getKarteiPfad();
 		try {
-			kh.dateiSchreiben(this.usedKartei, fortschritt);
+			this.kh.setKarteiPfad(vollPfad);
+			this.kh.dateiSchreiben(this.usedKartei, fortschritt);
+			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
-			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
+			this.guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}
-		kh.setKarteiPfad(temp);
-		System.out.println(vollPfad + ", " + fortschritt);
+		this.kh.setKarteiPfad(temp);
 	}
 
+	/**
+	 * Stellt anhand des Pfades einer CSV Datei(Kartei), die aktuell behandelte Kartei
+	 * auf diejenige um und springt auf das Fach 1 der neuen Kartei.
+	 * 
+	 * @param	vollPfad	Vollstaendiger Pfad zur CSV Datei der Kartei als String
+	 * 
+	 */
 	@Override
 	public void eventDateiOeffnen(String vollPfad)
 	{
-			this.kh = new KarteiHandler(vollPfad);
 		try {
+			this.kh = new KarteiHandler(vollPfad);
 			this.usedKartei = kh.dateiLesen(true);
 			gui.versteckeAlleElemente(false);
 			eventGeheZuFach(1);
 			gui.setKarteiTitel(usedKartei.getSprache() + " - " + usedKartei.getFremdsprache());
 			
-			
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			guiDialog.fehlerDialog(this.sc.getSprache("Fehler",GuiMain.SPRACHCODE), this.sc.getSprache("Schwerwiegender I/O-Fehler",GuiMain.SPRACHCODE));
 			e.printStackTrace();
 		}
 	}
-
+	
+	/*
+	 * Speichert die aktuelle Kartei mit allen Fortschritten als 
+	 * CSV-Datei im Standardordner ab.
+	 */
 	@Override
 	public void eventDateiSpeichern()
 	{
@@ -292,6 +318,10 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 	
+	/**
+	 * Loescht die CSV der momentan bearbeiteten Kartei und blendet diese auf 
+	 * der GUI aus.
+	 */
 	@Override
 	public void eventDateiLoeschen()
 	{
@@ -313,25 +343,33 @@ public class Handler implements GuiSchnittstelle{
 		}	
 	}
 	
+	/**
+	 * Stellt bei Sprachumstellung der GUI die Textausgabe
+	 * bei leerem Fach um.
+	 */
 	@Override
 	public void eventSpracheUmgestellt(){
-		this.gui.setWort(this.sc.getSprache("Fach ist leer",GuiMain.SPRACHCODE));
+		if(this.usedKarte==null){
+			this.gui.setWort(this.sc.getSprache("Fach ist leer",GuiMain.SPRACHCODE));
+		}
 	}
 
-
+	/**
+	 * Schliesst die Anwendung.
+	 */
 	@Override
 	public void eventApplikationBeenden()
 	{
-		if(this.kh!=null){
-			eventDateiSpeichern();
-		}
 		System.exit(0);
-		
 	}
 	
+	/**
+	 * Gibt eine zufaellige/andere Karte aus dem aktuellen Fach zurueck.
+	 * 
+	 * @return	temp	Objekt der Klasse Karte (null falls aktuelles Fach leer ist)
+	 */
 	private Karte gibNaechsteKarte(){
 		Karte temp;
-		//ArrayList<Karte> f = this.usedKartei.gibFach(this.usedKarte.getFach());
 		Random rand = new Random();
 		temp = this.usedKarte;
 		
@@ -354,10 +392,14 @@ public class Handler implements GuiSchnittstelle{
 				}
 			}
 		}
-		//temp.setAufrufe(temp.getAufrufe()+1);
 		return temp;
 	}
 	
+	/**
+	 * Setzt den Pointer der aktuellenKarte auf eine zufaellige/andere Karte aus dem aktuellen Fach
+	 * und gibt diese anschliessend auf der GUI aus (Fach leer >aktuelle Karte = null).
+	 * Sollte das aktuelle Fach leer sein, wird der User darueber informiert.
+	 */
 	private void zeigeNaechsteKarte(){
 		this.usedKarte = gibNaechsteKarte();
 		if(this.usedKarte!=null){
@@ -372,6 +414,11 @@ public class Handler implements GuiSchnittstelle{
 		
 	}
 	
+	/**
+	 * Setzt den Wert des Datenfelds ueberprueft auf den uebergebenen Wert.
+	 * 
+	 * @param	status	true>Karte bereits ueberprueft/ false>Karte nicht geprueft
+	 */
 	public void setUeberprueft(boolean status){
 		this.ueberprueft = status;
 	}
