@@ -32,7 +32,7 @@ public class SprachController
 	public SprachController() throws IOException
 	{
 		bufferedReader = new BufferedReader(new InputStreamReader(getClass()
-				.getResourceAsStream("/data/sprache.csv")));
+				.getResourceAsStream("/data/sprache.csv"), "Cp1252"));
 		cr = new CSVReader(bufferedReader);
 		sprache = new ArrayList<>();
 		sprache = cr.leseKarten();
