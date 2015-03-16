@@ -221,6 +221,7 @@ public class Handler implements GuiSchnittstelle{
 			this.gui.versteckeSmiley();;
 			this.gui.setKartenFarbe(gibFarbe("d"));
 			this.gui.repaint();
+			setUeberprueft(false);
 		}	
 	}
 	/**
